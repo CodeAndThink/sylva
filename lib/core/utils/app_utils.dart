@@ -92,7 +92,7 @@ class AppUtils {
   //   }
   // }
 
-  static String _detectExtension(Uint8List bytes) {
+  static String detectExtension(Uint8List bytes) {
     if (bytes.length >= 3 &&
         bytes[0] == 0xFF &&
         bytes[1] == 0xD8 &&

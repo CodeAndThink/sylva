@@ -25,6 +25,15 @@ class _OnboardingChildPage extends StatefulWidget {
 class __OnboardingChildPageState extends State<_OnboardingChildPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            context.read<OnBoardCubit>().navigateToHome();
+          },
+          child: const Text('Next'),
+        ),
+      ),
+    );
   }
 }

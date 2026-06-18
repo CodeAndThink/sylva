@@ -25,6 +25,10 @@ class _SplashChildPage extends StatefulWidget {
 class __SplashChildPageState extends State<_SplashChildPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }

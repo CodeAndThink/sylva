@@ -30,7 +30,6 @@ dependencies:
   #Storage
   shared_preferences: ^2.5.5
   storage_space: ^1.2.0
-  supabase_flutter: ^2.12.2
   flutter_dotenv: ^6.0.0
   isar_community: 3.3.2
   isar_community_flutter_libs: 3.3.2
@@ -52,9 +51,7 @@ dependencies:
   native_exif: ^0.7.0
   exif: ^3.3.0
   path: ^1.9.1
-  package_info_plus: ^10.1.0
   purchases_flutter: ^10.0.1
-  google_sign_in: ^7.2.0
   url_launcher: ^6.3.2
   share_plus: ^13.1.0
   home_widget: ^0.9.2

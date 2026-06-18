@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:share_plus/share_plus.dart';
 import 'package:sylva/core/configs/app_configs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -74,23 +74,23 @@ class AppUtils {
   }
 
   /// Save image bytes to temp directory and open system share sheet
-  static Future<void> shareImage(
-    Uint8List imageBytes, {
-    String? fileName,
-  }) async {
-    try {
-      final tempDir = await getTemporaryDirectory();
-      final ext = _detectExtension(imageBytes);
-      final name =
-          fileName ??
-          'shared_image_${DateTime.now().millisecondsSinceEpoch}$ext';
-      final file = await File('${tempDir.path}/$name').create();
-      await file.writeAsBytes(imageBytes);
-      await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
-    } catch (e) {
-      debugPrint('Error sharing image: $e');
-    }
-  }
+  // static Future<void> shareImage(
+  //   Uint8List imageBytes, {
+  //   String? fileName,
+  // }) async {
+  //   try {
+  //     final tempDir = await getTemporaryDirectory();
+  //     final ext = _detectExtension(imageBytes);
+  //     final name =
+  //         fileName ??
+  //         'shared_image_${DateTime.now().millisecondsSinceEpoch}$ext';
+  //     final file = await File('${tempDir.path}/$name').create();
+  //     await file.writeAsBytes(imageBytes);
+  //     await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
+  //   } catch (e) {
+  //     debugPrint('Error sharing image: $e');
+  //   }
+  // }
 
   static String _detectExtension(Uint8List bytes) {
     if (bytes.length >= 3 &&

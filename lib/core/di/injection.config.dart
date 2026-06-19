@@ -21,7 +21,7 @@ import '../../presentation/app/theme_cubit.dart' as _i980;
 import '../services/connection_service.dart' as _i727;
 import '../services/iap_service.dart' as _i1;
 import '../services/permission_service.dart' as _i165;
-import 'register_module.dart' as _i291;
+// import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -30,15 +30,15 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final registerModule = _$RegisterModule();
+    // final registerModule = _$RegisterModule();
     // await gh.lazySingletonAsync<_i214.Isar>(
     //   () => registerModule.isar,
     //   preResolve: true,
     // );
-    await gh.lazySingletonAsync<_i460.SharedPreferences>(
-      () => registerModule.prefs,
-      preResolve: true,
-    );
+    // await gh.lazySingletonAsync<_i460.SharedPreferences>(
+    //   () => registerModule.prefs,
+    //   preResolve: true,
+    // );
     gh.lazySingleton<_i727.ConnectionService>(() => _i727.ConnectionService());
     gh.lazySingleton<_i1.IapService>(() => _i1.IapService());
     gh.lazySingleton<_i165.PermissionService>(() => _i165.PermissionService());
@@ -58,4 +58,4 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$RegisterModule extends _i291.RegisterModule {}
+// class _$RegisterModule extends _i291.RegisterModule {}

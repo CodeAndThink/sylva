@@ -33,7 +33,7 @@ class __SplashChildPageState extends State<_SplashChildPage> {
   void initState() {
     super.initState();
     _cubit = context.read<SplashCubit>();
-    _cubit.init();
+    _cubit.init(context);
   }
 
   @override

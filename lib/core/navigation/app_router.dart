@@ -4,6 +4,7 @@ import 'package:sylva/presentation/features/history/history_page.dart';
 import 'package:sylva/presentation/features/home/home_page.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
 import 'package:sylva/presentation/features/paywall/paywall_page.dart';
+import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
 
@@ -31,6 +32,9 @@ class AppRouter {
 
   static const String paywall = 'paywall';
   static const String paywallPath = '/paywall';
+
+  static const String photoPreview = 'photoPreview';
+  static const String photoPreviewPath = '/photoPreview';
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -65,6 +69,14 @@ class AppRouter {
         path: settingsPath,
         name: settings,
         builder: (context, state) => const SettingsPage(),
+      ),
+      GoRoute(
+        path: photoPreviewPath,
+        name: photoPreview,
+        builder: (context, state) {
+          final imagePath = state.extra as String;
+          return PhotoPreviewPage(imagePath: imagePath);
+        },
       ),
     ],
   );

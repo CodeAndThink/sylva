@@ -323,10 +323,10 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   size: 30,
                 ),
                 itemBuilder: (context) => [
-                  _buildTimerMenuItem(0, 'Tắt', Icons.timer_off),
-                  _buildTimerMenuItem(3, '3s', Icons.timer_3),
-                  _buildTimerMenuItem(5, '5s', Icons.timer),
-                  _buildTimerMenuItem(10, '10s', Icons.timer_10),
+                  _buildTimerMenuItem(0, Icons.timer_off),
+                  _buildTimerMenuItem(3, Icons.timer_3),
+                  _buildTimerMenuItem(5, Icons.timer),
+                  _buildTimerMenuItem(10, Icons.timer_10),
                 ],
               ),
             ],
@@ -370,26 +370,13 @@ class __HomeChildPageState extends State<_HomeChildPage>
     );
   }
 
-  PopupMenuItem<int> _buildTimerMenuItem(
-    int value,
-  ) {
+  PopupMenuItem<int> _buildTimerMenuItem(int value, IconData icon) {
     return PopupMenuItem<int>(
       value: value,
-      child:value > 0 ?  Icon(
-            Icons.,
-            color: _timerSeconds == value ? Colors.yellowAccent : Colors.white,
-          ),
-         : Text(
-            text,
-            style: TextStyle(
-              color: _timerSeconds == value
-                  ? Colors.yellowAccent
-                  : Colors.white,
-              fontWeight: _timerSeconds == value
-                  ? FontWeight.bold
-                  : FontWeight.normal,
-            ),
-          ),
+      child: Icon(
+        icon,
+        color: _timerSeconds == value ? Colors.yellowAccent : Colors.white,
+      ),
     );
   }
 }

@@ -20,7 +20,7 @@ class SplashCubit extends BaseCubit<SplashState> {
 
     final permissionService = locator<PermissionService>();
     final isGranted = await permissionService.checkCameraStatus();
-    
+
     if (!isGranted) {
       if (!context.mounted) return;
       await permissionService.requestCameraPermission(context);

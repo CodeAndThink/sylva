@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 import 'package:palette_generator_master/palette_generator_master.dart';
 import 'package:sylva/core/enums/load_status.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
@@ -47,6 +50,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       // Remove duplicates
       final uniqueColors = colors.toSet().toList();
 
+      if (uniqueColors.isEmpty) {
+        throw Exception('No colors extracted');
+      }
+
       safeEmit(
         state.copyWith(
           paletteColors: uniqueColors,
@@ -58,4 +65,94 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       safeEmit(state.copyWith(getColorStatus: LoadStatus.failure));
     }
   }
+
+  Future<void> filterColor(String imagePath, Color targetColor) async {
+    if (state.filterColorStatus.isLoading) return;
+
+    // Toggle off if the same color is tapped
+    if (state.selectedColor == targetColor) {
+      safeEmit(
+        state.copyWith(
+          selectedColor: null,
+          filteredImageBytes: null,
+          filterColorStatus: LoadStatus.initial,
+        ),
+      );
+      return;
+    }
+
+    safeEmit(
+      state.copyWith(
+        filterColorStatus: LoadStatus.loading,
+        selectedColor: targetColor,
+      ),
+    );
+
+    try {
+      final Map<String, dynamic> params = {
+        'imagePath': imagePath,
+        'targetColorValue': targetColor.value,
+        'threshold': 80.0, // RGB distance threshold
+      };
+
+      final Uint8List result = await compute(_processImageIsolate, params);
+
+      safeEmit(
+        state.copyWith(
+          filteredImageBytes: result,
+          filterColorStatus: LoadStatus.success,
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error filtering color: $e');
+      safeEmit(state.copyWith(filterColorStatus: LoadStatus.failure));
+    }
+  }
+}
+
+Uint8List _processImageIsolate(Map<String, dynamic> params) {
+  final String path = params['imagePath'];
+  final int colorValue = params['targetColorValue'];
+  final double threshold = params['threshold'];
+
+  final targetR = (colorValue >> 16) & 0xFF;
+  final targetG = (colorValue >> 8) & 0xFF;
+  final targetB = colorValue & 0xFF;
+
+  final bytes = File(path).readAsBytesSync();
+  final image = img.decodeImage(bytes);
+  if (image == null) return bytes;
+
+  // Scale down if image is too large to speed up preview processing
+  img.Image processImage = image;
+  if (image.width > 1200 || image.height > 1200) {
+    processImage = img.copyResize(image, width: 1080);
+  }
+
+  for (var pixel in processImage) {
+    final r = pixel.r;
+    final g = pixel.g;
+    final b = pixel.b;
+
+    final dist = math.sqrt(
+      math.pow(r - targetR, 2) +
+          math.pow(g - targetG, 2) +
+          math.pow(b - targetB, 2),
+    );
+
+    if (dist > threshold) {
+      // Convert to grayscale
+      final luminance = img.getLuminance(pixel);
+      pixel.r = luminance;
+      pixel.g = luminance;
+      pixel.b = luminance;
+
+      // Alternatively, make it very dark to "hide" it
+      // pixel.r = (r * 0.2).toInt();
+      // pixel.g = (g * 0.2).toInt();
+      // pixel.b = (b * 0.2).toInt();
+    }
+  }
+
+  return img.encodeJpg(processImage, quality: 85);
 }

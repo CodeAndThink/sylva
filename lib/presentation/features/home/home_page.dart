@@ -247,7 +247,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
                               width: 70,
                               height: 70,
                               decoration: BoxDecoration(
-                                color: _isCapturing ? Colors.grey : Colors.white,
+                                color: _isCapturing
+                                    ? Colors.grey
+                                    : Colors.white,
                                 shape: BoxShape.circle,
                               ),
                               child: _isCapturing

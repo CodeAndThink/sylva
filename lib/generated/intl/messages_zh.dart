@@ -82,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("外观"),
     "arrow": MessageLookupByLibrary.simpleMessage("箭头"),
+    "autoDetectColors": MessageLookupByLibrary.simpleMessage("自动检测颜色"),
     "awesome": MessageLookupByLibrary.simpleMessage("太棒了！"),
     "back": MessageLookupByLibrary.simpleMessage("返回"),
     "backgroundMode": MessageLookupByLibrary.simpleMessage("背景模式"),
@@ -273,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToChangePassword": MessageLookupByLibrary.simpleMessage(
       "无法更改密码。请重试。",
     ),
+    "failedToLoadColors": MessageLookupByLibrary.simpleMessage("加载颜色失败"),
     "failedToLoadHistory": MessageLookupByLibrary.simpleMessage("无法加载删除历史记录。"),
     "failedToLoadProfile": MessageLookupByLibrary.simpleMessage(
       "无法加载用户配置文件。请检查您的网络连接。",

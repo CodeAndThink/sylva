@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "ja",
   "appName": "Sylva",
   "@appName": {},
@@ -944,4 +944,5 @@
   "@notifScanCompleteNone": {},
   "enableNotification": "通知を有効にする",
   "enableNotificationDescription": "スキャンの進行状況と完了の通知を受け取ります。"
+,"autoDetectColors":"色を自動検出","@autoDetectColors":{},"failedToLoadColors":"色の読み込みに失敗しました","@failedToLoadColors":{}
 }

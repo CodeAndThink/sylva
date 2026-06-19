@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "en",
   "appName": "Sylva",
   "@appName": {},
@@ -953,4 +953,5 @@
   "@enableNotification": {},
   "enableNotificationDescription": "Receive scan progress and completion alerts.",
   "@enableNotificationDescription": {}
+,"autoDetectColors":"Auto Detect Colors","@autoDetectColors":{},"failedToLoadColors":"Failed to load colors","@failedToLoadColors":{}
 }

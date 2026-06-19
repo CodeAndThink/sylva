@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("外観"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),
+    "autoDetectColors": MessageLookupByLibrary.simpleMessage("色を自動検出"),
     "awesome": MessageLookupByLibrary.simpleMessage("素晴らしい！"),
     "back": MessageLookupByLibrary.simpleMessage("戻る"),
     "backgroundMode": MessageLookupByLibrary.simpleMessage("背景モード"),
@@ -312,6 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "failedToChangePassword": MessageLookupByLibrary.simpleMessage(
       "パスワードの変更に失敗しました。もう一度お試しください。",
     ),
+    "failedToLoadColors": MessageLookupByLibrary.simpleMessage("色の読み込みに失敗しました"),
     "failedToLoadHistory": MessageLookupByLibrary.simpleMessage(
       "削除履歴の読み込みに失敗しました。",
     ),

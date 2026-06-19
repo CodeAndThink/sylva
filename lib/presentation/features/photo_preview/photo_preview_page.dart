@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/color_utils.dart';
+import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_cubit.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
@@ -9,6 +10,7 @@ import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
+import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
@@ -36,30 +38,35 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   late final PhotoPreviewCubit _cubit;
   bool _showMagnifier = false;
   Offset _touchPosition = Offset.zero;
-  ValueNotifier<bool> showColorList = ValueNotifier<bool>(true);
+  late ThemeData _theme;
+  late S _l10n;
 
   @override
   void initState() {
     super.initState();
     _cubit = context.read<PhotoPreviewCubit>();
-    _cubit.extractPalette(widget.imagePath);
   }
 
   @override
   Widget build(BuildContext context) {
+    _theme = Theme.of(context);
+    _l10n = S.of(context);
     return AppScaffold(showAppBar: false, body: _buildBody());
   }
 
   Widget _buildBody() {
-    return SafeArea(
-      child: Padding(
-        padding: 12.paddingAll,
-        child: Column(
-          children: [
-            Expanded(child: _buildPhotoWidget()),
-            12.height,
-            _buildBottomActions(),
-          ],
+    return AppScaffold(
+      showAppBar: false,
+      body: SafeArea(
+        child: Padding(
+          padding: 12.paddingAll,
+          child: Column(
+            children: [
+              Expanded(child: _buildPhotoWidget()),
+              _buildColorSet(),
+              _buildBottomActions(),
+            ],
+          ),
         ),
       ),
     );
@@ -91,7 +98,12 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             child: Stack(
               children: [
                 Positioned.fill(child: _buildImage()),
-                Positioned(bottom: 12, right: 12, child: _buildColorSet()),
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  right: 8,
+                  child: _buildColorDetails(),
+                ),
                 // Filter Loading Overlay
                 _buildColorOverlay(),
                 if (_showMagnifier &&
@@ -111,6 +123,16 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       ),
                     ),
                   ),
+                Positioned(
+                  bottom: 12,
+                  right: 12,
+                  child: IconButton(
+                    onPressed: () {
+                      _cubit.extractPalette(widget.imagePath);
+                    },
+                    icon: Icon(Icons.auto_awesome, color: Colors.amberAccent),
+                  ),
+                ),
               ],
             ),
           );
@@ -123,37 +145,35 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
     return AppTransparentContainer(
       padding: EdgeInsets.zero,
       child: GestureDetector(
-        onLongPressStart: (details) {
+        onPanStart: (details) {
           setState(() {
             _showMagnifier = true;
             _touchPosition = details.localPosition;
           });
         },
-        onLongPressMoveUpdate: (details) {
+        onPanUpdate: (details) {
           setState(() {
             _touchPosition = details.localPosition;
           });
         },
-        onLongPressEnd: (details) {
+        onPanEnd: (details) {
           setState(() {
             _showMagnifier = false;
           });
         },
-        child: InteractiveViewer(
-          child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-            buildWhen: (previous, current) =>
-                current.filteredImageBytes != previous.filteredImageBytes,
-            builder: (context, state) {
-              if (state.filteredImageBytes != null) {
-                return Image.memory(
-                  state.filteredImageBytes!,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                );
-              }
-              return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
-            },
-          ),
+        child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+          buildWhen: (previous, current) =>
+              current.filteredImageBytes != previous.filteredImageBytes,
+          builder: (context, state) {
+            if (state.filteredImageBytes != null) {
+              return Image.memory(
+                state.filteredImageBytes!,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              );
+            }
+            return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
+          },
         ),
       ),
     );
@@ -167,103 +187,52 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           current.selectedColor != previous.selectedColor,
       builder: (context, state) {
         if (state.getColorStatus.isLoading) {
-          return const CircularProgressIndicator(color: Colors.white);
+          return Column(
+            children: [
+              AppTitleText(title: S.of(context).autoDetectColors),
+              SizedBox(
+                height: 80,
+                child: Center(child: const CircularProgressIndicator()),
+              ),
+            ],
+          );
         }
         if (state.getColorStatus.isFailure) {
           return Container(
             padding: 8.paddingAll,
-            color: Colors.black54,
-            child: const Text(
-              'Failed to load colors',
-              style: TextStyle(color: Colors.red),
+            child: Text(
+              S.of(context).failedToLoadColors,
+              style: const TextStyle(color: Colors.red),
             ),
           );
         }
-        return ValueListenableBuilder(
-          valueListenable: showColorList,
-          builder: (context, show, child) {
-            return Container(
-              width: 75,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.6),
-                borderRadius: 12.borderRadius,
+        if (state.paletteColors.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        return Column(
+          children: [
+            AppTitleText(title: S.of(context).autoDetectColors),
+            SizedBox(
+              height: 80,
+              child: ListView.separated(
+                itemCount: state.paletteColors.length,
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: (context, index) => 10.width,
+                itemBuilder: (context, index) {
+                  final color = state.paletteColors[index];
+                  final hex = ColorUtils.colorToHex(color: color);
+                  return PaletteColorListItem(
+                    color: color,
+                    hex: hex,
+                    isSelected: state.selectedColor == color,
+                    onTap: () {
+                      _cubit.filterColor(widget.imagePath, color);
+                    },
+                  );
+                },
               ),
-              child: AnimatedSize(
-                duration: 300.milliseconds,
-                curve: Curves.easeInOutCubic,
-                alignment: Alignment.topCenter,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (show) ...[
-                      Padding(
-                        padding: 8.paddingHorizontal.copyWith(top: 8),
-                        child: Column(
-                          spacing: 8,
-                          mainAxisSize: MainAxisSize.min,
-                          children: state.paletteColors.map((color) {
-                            final hex = ColorUtils.colorToHex(color: color);
-                            return PaletteColorListItem(
-                              color: color,
-                              hex: hex,
-                              isSelected: state.selectedColor == color,
-                              onTap: () {
-                                _cubit.filterColor(widget.imagePath, color);
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      ClipRRect(
-                        borderRadius: 12.borderRadiusBottom,
-                        child: Material(
-                          color: Colors.transparent,
-                          child: SizedBox(
-                            width: 75,
-                            child: InkWell(
-                              onTap: () {
-                                showColorList.value = false;
-                              },
-                              child: Padding(
-                                padding: 4.paddingVertical,
-                                child: const Icon(
-                                  Icons.expand_less_rounded,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ] else ...[
-                      ClipRRect(
-                        borderRadius: 12.borderRadius,
-                        child: Material(
-                          color: Colors.transparent,
-                          child: SizedBox(
-                            width: 75,
-                            child: InkWell(
-                              onTap: () {
-                                showColorList.value = true;
-                              },
-                              child: Padding(
-                                padding: 8.paddingVertical,
-                                child: const Icon(
-                                  Icons.expand_more_rounded,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            );
-          },
+            ),
+          ],
         );
       },
     );
@@ -277,15 +246,74 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         if (state.filterColorStatus.isLoading) {
           return Positioned.fill(
             child: Container(
-              color: Colors.black.withValues(alpha: 0.8),
-              child: const Center(
-                child: CircularProgressIndicator(color: Colors.white),
-              ),
+              color: Colors.black38,
+              child: const Center(child: CircularProgressIndicator()),
             ),
           );
         }
         return const SizedBox.shrink();
       },
+    );
+  }
+
+  Widget _buildColorDetails() {
+    return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+      buildWhen: (previous, current) =>
+          current.selectedColor != previous.selectedColor,
+      builder: (context, state) {
+        final color = state.selectedColor;
+        if (color == null) return const SizedBox.shrink();
+
+        return AppTransparentContainer(
+          borderRadius: 20,
+          padding: 8.paddingAll,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildColorDetailItem(
+                label: 'R',
+                value: color.red,
+                labelColor: Colors.red,
+              ),
+              _buildColorDetailItem(
+                label: 'G',
+                value: color.green,
+                labelColor: Colors.green,
+              ),
+              _buildColorDetailItem(
+                label: 'B',
+                value: color.blue,
+                labelColor: Colors.blue,
+              ),
+              _buildColorDetailItem(
+                label: 'A',
+                value: color.alpha,
+                labelColor: Theme.of(context).colorScheme.onSurface,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildColorDetailItem({
+    required String label,
+    required int value,
+    required Color labelColor,
+  }) {
+    return Row(
+      children: [
+        Container(height: 12, width: 12, color: labelColor),
+        4.width,
+        Text(
+          label,
+          style: _theme.textTheme.titleSmall?.copyWith(color: labelColor),
+        ),
+
+        4.width,
+        Text(value.toString(), style: _theme.textTheme.titleSmall),
+      ],
     );
   }
 
@@ -297,14 +325,14 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           onPressed: () {
             _cubit.navigator.safePop();
           },
-          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 36),
+          icon: const Icon(Icons.arrow_back, size: 36),
         ),
         48.width,
         IconButton(
           onPressed: () {
             _cubit.navigator.safePop();
           },
-          icon: const Icon(Icons.save, color: Colors.white, size: 36),
+          icon: const Icon(Icons.save, size: 36),
         ),
       ],
     );

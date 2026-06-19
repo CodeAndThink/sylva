@@ -19,42 +19,49 @@ class PaletteColorListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: 10.borderRadius,
-              border: Border.all(color: Colors.white, width: 1),
-            ),
-            child: isSelected
-                ? Center(
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.onSurface,
-                        borderRadius: 10.borderRadius,
-                      ),
-                      child: Icon(
-                        Icons.check_rounded,
-                        color: theme.colorScheme.surface,
-                        size: 18,
-                      ),
-                    ),
-                  )
-                : null,
+    return ClipRRect(
+      borderRadius: 10.borderRadius,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 55,
+                height: 55,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: 10.borderRadius,
+                  border: Border.all(
+                    color: theme.colorScheme.onSurface,
+                    width: 1,
+                  ),
+                ),
+                child: isSelected
+                    ? Center(
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.onSurface,
+                            borderRadius: 10.borderRadius,
+                          ),
+                          child: Icon(
+                            Icons.check_rounded,
+                            color: theme.colorScheme.surface,
+                            size: 18,
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
+              5.height,
+              Text(hex, style: theme.textTheme.bodySmall),
+            ],
           ),
-          5.height,
-          Text(
-            hex,
-            style: theme.textTheme.bodySmall?.copyWith(color: Colors.white),
-          ),
-        ],
+        ),
       ),
     );
   }

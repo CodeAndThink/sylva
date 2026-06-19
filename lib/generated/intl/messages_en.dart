@@ -98,6 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("Appearance"),
     "arrow": MessageLookupByLibrary.simpleMessage("Arrow"),
+    "autoDetectColors": MessageLookupByLibrary.simpleMessage(
+      "Auto Detect Colors",
+    ),
     "awesome": MessageLookupByLibrary.simpleMessage("Awesome!"),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "backgroundMode": MessageLookupByLibrary.simpleMessage("Background mode"),
@@ -364,6 +367,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "fade": MessageLookupByLibrary.simpleMessage("Fade"),
     "failedToChangePassword": MessageLookupByLibrary.simpleMessage(
       "Failed to change password. Please try again.",
+    ),
+    "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
+      "Failed to load colors",
     ),
     "failedToLoadHistory": MessageLookupByLibrary.simpleMessage(
       "Failed to load deletion history.",

@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "vi",
   "appName": "Sylva",
   "@appName": {},
@@ -944,4 +944,5 @@
   "@notifScanCompleteNone": {},
   "enableNotification": "Bật thông báo",
   "enableNotificationDescription": "Nhận thông báo tiến trình và kết quả quét."
+,"autoDetectColors":"Tự động phát hiện màu","@autoDetectColors":{},"failedToLoadColors":"Không thể tải màu","@failedToLoadColors":{}
 }

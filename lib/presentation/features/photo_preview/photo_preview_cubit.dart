@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:palette_generator_master/palette_generator_master.dart';
 import 'package:sylva/core/enums/load_status.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
@@ -18,6 +19,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   Future<void> extractPalette(String imagePath) async {
     if (state.getColorStatus.isLoading) return;
     safeEmit(state.copyWith(getColorStatus: LoadStatus.loading));
+    await Future.delayed(2.seconds);
     try {
       final PaletteGeneratorMaster generator =
           await PaletteGeneratorMaster.fromImageProvider(
@@ -66,7 +68,11 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     }
   }
 
-  Future<void> filterColor(String imagePath, Color targetColor) async {
+  Future<void> filterColor(
+    String imagePath,
+    Color targetColor, {
+    Color? replacementColor,
+  }) async {
     if (state.filterColorStatus.isLoading) return;
 
     // Toggle off if the same color is tapped
@@ -92,7 +98,8 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final Map<String, dynamic> params = {
         'imagePath': imagePath,
         'targetColorValue': targetColor.value,
-        'threshold': 80.0, // RGB distance threshold
+        'threshold': 30.0, // RGB distance threshold
+        'replacementColorValue': replacementColor?.value,
       };
 
       final Uint8List result = await compute(_processImageIsolate, params);
@@ -114,6 +121,7 @@ Uint8List _processImageIsolate(Map<String, dynamic> params) {
   final String path = params['imagePath'];
   final int colorValue = params['targetColorValue'];
   final double threshold = params['threshold'];
+  final int? replacementColorValue = params['replacementColorValue'];
 
   final targetR = (colorValue >> 16) & 0xFF;
   final targetG = (colorValue >> 8) & 0xFF;
@@ -141,16 +149,17 @@ Uint8List _processImageIsolate(Map<String, dynamic> params) {
     );
 
     if (dist > threshold) {
-      // Convert to grayscale
-      final luminance = img.getLuminance(pixel);
-      pixel.r = luminance;
-      pixel.g = luminance;
-      pixel.b = luminance;
-
-      // Alternatively, make it very dark to "hide" it
-      // pixel.r = (r * 0.2).toInt();
-      // pixel.g = (g * 0.2).toInt();
-      // pixel.b = (b * 0.2).toInt();
+      if (replacementColorValue != null) {
+        pixel.r = (replacementColorValue >> 16) & 0xFF;
+        pixel.g = (replacementColorValue >> 8) & 0xFF;
+        pixel.b = replacementColorValue & 0xFF;
+      } else {
+        // Convert to grayscale
+        final luminance = img.getLuminance(pixel);
+        pixel.r = luminance;
+        pixel.g = luminance;
+        pixel.b = luminance;
+      }
     }
   }
 

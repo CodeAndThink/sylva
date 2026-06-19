@@ -3583,6 +3583,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Auto Detect Colors`
+  String get autoDetectColors {
+    return Intl.message(
+      'Auto Detect Colors',
+      name: 'autoDetectColors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load colors`
+  String get failedToLoadColors {
+    return Intl.message(
+      'Failed to load colors',
+      name: 'failedToLoadColors',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

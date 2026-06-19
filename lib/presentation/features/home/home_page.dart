@@ -144,8 +144,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   void _takePicture() async {
     if (_controller == null || !_controller!.value.isInitialized) return;
-    if (_controller!.value.isTakingPicture || _isCapturing || _isCountingDown)
+    if (_controller!.value.isTakingPicture || _isCapturing || _isCountingDown) {
       return;
+    }
 
     if (_timerSeconds > 0) {
       setState(() {
@@ -195,7 +196,11 @@ class __HomeChildPageState extends State<_HomeChildPage>
         child: Padding(
           padding: 12.paddingAll,
           child: Column(
-            children: [_buildCameraPreview(), 12.height, _buildBottomActions()],
+            children: [
+              Expanded(child: _buildCameraPreview()),
+              12.height,
+              SizedBox(height: 120, child: _buildBottomActions()),
+            ],
           ),
         ),
       ),
@@ -204,34 +209,45 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   Widget _buildCameraPreview() {
     if (_isCameraInitialized && _controller != null) {
-      return Expanded(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Center(
-                child: AppTransparentContainer(
-                  padding: EdgeInsets.zero,
-                  child: GestureDetector(
-                    onScaleStart: (details) {
-                      _baseScale = _currentScale;
-                    },
-                    onScaleUpdate: (details) async {
-                      if (_controller == null || !_isCameraInitialized) {
-                        return;
-                      }
+      return Stack(
+        children: [
+          Positioned.fill(
+            child: Center(
+              child: AppTransparentContainer(
+                padding: EdgeInsets.zero,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onScaleStart: (details) {
+                    _baseScale = _currentScale;
+                  },
+                  onScaleUpdate: (details) {
+                    if (_controller == null || !_isCameraInitialized) {
+                      return;
+                    }
+                    setState(() {
                       _currentScale = (_baseScale * details.scale).clamp(
                         _minAvailableZoom,
                         _maxAvailableZoom,
                       );
-                      await _controller!.setZoomLevel(_currentScale);
-                    },
-                    child: CameraPreview(_controller!),
-                  ),
+                    });
+                    _controller!.setZoomLevel(_currentScale);
+                  },
+                  child: CameraPreview(_controller!),
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: GestureDetector(
+              onTap: () {
+                if (_controller == null || !_isCameraInitialized) return;
+                setState(() {
+                  _currentScale = 1.0;
+                  _baseScale = 1.0;
+                });
+                _controller!.setZoomLevel(1.0);
+              },
               child: Container(
                 margin: 8.paddingBottom,
                 width: 50,
@@ -241,7 +257,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   borderRadius: 25.borderRadius,
                 ),
                 child: Text(
-                  _baseScale.toString(),
+                  '${_currentScale.toStringAsFixed(1)}x',
                   textAlign: TextAlign.center,
                   style: _theme.textTheme.titleSmall?.copyWith(
                     color: Colors.white,
@@ -249,66 +265,76 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
             ),
-            if (_isCountingDown)
-              Center(
-                child: Text(
-                  _countdownSeconds.toString(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 100,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 10.0,
-                        color: Colors.black,
-                        offset: Offset(2.0, 2.0),
-                      ),
-                    ],
-                  ),
+          ),
+          if (_isCountingDown)
+            Center(
+              child: Text(
+                _countdownSeconds.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 100,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.black,
+                      offset: Offset(2.0, 2.0),
+                    ),
+                  ],
                 ),
               ),
-          ],
-        ),
+            ),
+        ],
       );
     } else {
-      return Expanded(
-        child: AppTransparentContainer(
-          child: const Center(child: CircularProgressIndicator()),
-        ),
+      return AppTransparentContainer(
+        child: const Center(child: CircularProgressIndicator()),
       );
     }
   }
 
   Widget _buildBottomActions() {
-    return AppTransparentContainer(
-      padding: 8.paddingAll,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                icon: Icon(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: AnimatedSwitcher(
+                duration: 150.milliseconds,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(scale: animation, child: child);
+                },
+                child: Icon(
                   _flashMode == FlashMode.always
                       ? Icons.flash_on
                       : Icons.flash_off,
-                  color: Colors.white,
-                  size: 30,
+                  key: ValueKey<FlashMode>(_flashMode),
+                  color: _theme.colorScheme.onSurface,
+                  size: 24,
                 ),
-                onPressed: _toggleFlash,
               ),
-              PopupMenuButton<int>(
-                initialValue: _timerSeconds,
-                color: Colors.black38,
-                shape: RoundedRectangleBorder(borderRadius: 16.borderRadius),
-                onSelected: (value) {
-                  setState(() {
-                    _timerSeconds = value;
-                  });
+              onPressed: _toggleFlash,
+            ),
+            PopupMenuButton<int>(
+              menuPadding: EdgeInsets.zero,
+              color: Colors.black38,
+              constraints: const BoxConstraints(minWidth: 48, maxWidth: 48),
+              borderRadius: 16.borderRadius,
+              shape: RoundedRectangleBorder(borderRadius: 16.borderRadius),
+              onSelected: (value) {
+                setState(() {
+                  _timerSeconds = value;
+                });
+              },
+              offset: const Offset(0, -160),
+              icon: AnimatedSwitcher(
+                duration: 150.milliseconds,
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(scale: animation, child: child);
                 },
-                position: PopupMenuPosition.over,
-                icon: Icon(
+                child: Icon(
                   _timerSeconds == 0
                       ? Icons.timer_off
                       : _timerSeconds == 3
@@ -318,64 +344,109 @@ class __HomeChildPageState extends State<_HomeChildPage>
                             .timer_10 // Giữ icon timer_10 do không có timer_5
                       : Icons.timer_10,
                   color: _timerSeconds == 0
-                      ? Colors.white
+                      ? _theme.colorScheme.onSurface
                       : Colors.yellowAccent,
-                  size: 30,
+                  size: 24,
                 ),
-                itemBuilder: (context) => [
-                  _buildTimerMenuItem(0, Icons.timer_off),
-                  _buildTimerMenuItem(3, Icons.timer_3),
-                  _buildTimerMenuItem(5, Icons.timer),
-                  _buildTimerMenuItem(10, Icons.timer_10),
-                ],
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.cameraswitch,
-                  color: Colors.white,
-                  size: 30,
+              itemBuilder: (context) => [
+                _buildTimerMenuItem(0, Icons.timer_off),
+                _buildTimerMenuItem(3, Icons.timer_3),
+                _buildTimerMenuItem(10, Icons.timer_10),
+              ],
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: _theme.colorScheme.onSurface,
+                size: 24,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            AnimatedSwitcher(
+              duration: 150.milliseconds,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
+              child: IconButton(
+                key: ValueKey<int>(_selectedCameraIndex),
+                icon: Icon(
+                  _cameras.isNotEmpty &&
+                          _cameras[_selectedCameraIndex].lensDirection ==
+                              CameraLensDirection.front
+                      ? Icons.camera_front
+                      : Icons.camera_rear,
+                  color: _theme.colorScheme.onSurface,
+                  size: 40,
                 ),
                 onPressed: _switchCamera,
               ),
-              GestureDetector(
-                onTap: _isCapturing ? null : _takePicture,
-                child: Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: _isCapturing ? Colors.grey : Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: _isCapturing
-                      ? const Center(
-                          child: CircularProgressIndicator(color: Colors.black),
-                        )
-                      : const Icon(
-                          Icons.camera_alt,
-                          color: Colors.black,
-                          size: 35,
-                        ),
+            ),
+            GestureDetector(
+              onTap: _isCapturing ? null : _takePicture,
+              child: Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: _isCapturing
+                      ? Colors.grey
+                      : _theme.colorScheme.onSurface,
+                  shape: BoxShape.circle,
                 ),
+                child: _isCapturing
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: _theme.colorScheme.surface,
+                        ),
+                      )
+                    : Icon(
+                        Icons.camera_alt,
+                        color: _theme.colorScheme.surface,
+                        size: 40,
+                      ),
               ),
-              48.width,
-            ],
-          ),
-        ],
-      ),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.color_lens,
+                color: _theme.colorScheme.onSurface,
+                size: 40,
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ],
     );
   }
 
   PopupMenuItem<int> _buildTimerMenuItem(int value, IconData icon) {
+    final isSelected = _timerSeconds == value;
     return PopupMenuItem<int>(
       value: value,
-      child: Icon(
-        icon,
-        color: _timerSeconds == value ? Colors.yellowAccent : Colors.white,
+      padding: EdgeInsets.zero,
+      child: Center(
+        child: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: isSelected ? Colors.white24 : Colors.transparent,
+            borderRadius: 10.borderRadius,
+          ),
+          child: Center(
+            child: Icon(
+              icon,
+              color: isSelected
+                  ? Colors.yellowAccent
+                  : _theme.colorScheme.onSurface,
+            ),
+          ),
+        ),
       ),
     );
   }

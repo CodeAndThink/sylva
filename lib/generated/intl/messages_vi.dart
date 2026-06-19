@@ -98,6 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("Diện mạo"),
     "arrow": MessageLookupByLibrary.simpleMessage("Mũi tên"),
+    "autoDetectColors": MessageLookupByLibrary.simpleMessage(
+      "Tự động phát hiện màu",
+    ),
     "awesome": MessageLookupByLibrary.simpleMessage("Tuyệt vời!"),
     "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
     "backgroundMode": MessageLookupByLibrary.simpleMessage("Chế độ nền"),
@@ -372,6 +375,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "fade": MessageLookupByLibrary.simpleMessage("Làm mờ dần"),
     "failedToChangePassword": MessageLookupByLibrary.simpleMessage(
       "Không thể đổi mật khẩu. Vui lòng thử lại.",
+    ),
+    "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
+      "Không thể tải màu",
     ),
     "failedToLoadHistory": MessageLookupByLibrary.simpleMessage(
       "Không thể tải lịch sử xóa.",

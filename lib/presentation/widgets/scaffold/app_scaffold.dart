@@ -43,6 +43,7 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
+      buildWhen: (previous, current) => previous.themeMode != current.themeMode,
       builder: (context, state) {
         final theme = Theme.of(context);
         final isDarkMode = theme.brightness == Brightness.dark;
@@ -69,27 +70,6 @@ class AppScaffold extends StatelessWidget {
               : null,
           body: Stack(
             children: [
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: isDarkMode
-                          ? [
-                              theme.colorScheme.surface,
-                              Color(0xFF081C1E),
-                              Color(0xFF102C33),
-                            ]
-                          : const [
-                              Color(0xFFF5FFFC),
-                              Color(0xFFE8FBF5),
-                              Color(0xFFDFF6F1),
-                            ],
-                    ),
-                  ),
-                ),
-              ),
               Positioned(
                 top: -100,
                 left: -40,

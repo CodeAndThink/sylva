@@ -85,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "すでにアカウントをお持ちですか？ ログイン",
     ),
     "appDescription": MessageLookupByLibrary.simpleMessage("写真重複クリーナー"),
-    "appName": MessageLookupByLibrary.simpleMessage("Twinfix"),
+    "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("外観"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),

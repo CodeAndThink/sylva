@@ -94,7 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appDescription": MessageLookupByLibrary.simpleMessage(
       "Photo Duplicate Cleaner",
     ),
-    "appName": MessageLookupByLibrary.simpleMessage("Twinfix"),
+    "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("Appearance"),
     "arrow": MessageLookupByLibrary.simpleMessage("Arrow"),

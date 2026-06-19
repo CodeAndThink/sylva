@@ -1,4 +1,6 @@
 PODS:
+  - camerawesome (0.0.1):
+    - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -34,6 +36,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - camerawesome (from `.symlinks/plugins/camerawesome/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - haptic_feedback (from `.symlinks/plugins/haptic_feedback/ios`)
@@ -55,6 +58,8 @@ SPEC REPOS:
     - RevenueCat
 
 EXTERNAL SOURCES:
+  camerawesome:
+    :path: ".symlinks/plugins/camerawesome/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
@@ -85,6 +90,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  camerawesome: a961fa32dafc00d2f093d824311c84f849586b58
   connectivity_plus: cb623214f4e1f6ef8fe7403d580fdad517d2f7dd
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   haptic_feedback: 1f22d7ad3abb43bb814aa42fdf548dc6d9e8245a

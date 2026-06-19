@@ -8,11 +8,7 @@ class AppState extends Equatable {
   @override
   List<Object?> get props => [isFirstTime];
 
-  AppState copyWith({
-    bool? isFirstTime,
-  }) {
-    return AppState(
-      isFirstTime: isFirstTime ?? this.isFirstTime,
-    );
+  AppState copyWith({bool? isFirstTime}) {
+    return AppState(isFirstTime: isFirstTime ?? this.isFirstTime);
   }
 }

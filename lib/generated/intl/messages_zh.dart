@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "allBadges": MessageLookupByLibrary.simpleMessage("所有徽章"),
     "alreadyHaveAccountLogin": MessageLookupByLibrary.simpleMessage("已有帐户？登录"),
     "appDescription": MessageLookupByLibrary.simpleMessage("照片重复清理工具"),
-    "appName": MessageLookupByLibrary.simpleMessage("Twinfix"),
+    "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("外观"),
     "arrow": MessageLookupByLibrary.simpleMessage("箭头"),

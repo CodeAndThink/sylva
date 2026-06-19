@@ -94,7 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "appDescription": MessageLookupByLibrary.simpleMessage(
       "Trình dọn dẹp ảnh trùng lặp",
     ),
-    "appName": MessageLookupByLibrary.simpleMessage("Twinfix"),
+    "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "appVersion": m0,
     "appearance": MessageLookupByLibrary.simpleMessage("Diện mạo"),
     "arrow": MessageLookupByLibrary.simpleMessage("Mũi tên"),

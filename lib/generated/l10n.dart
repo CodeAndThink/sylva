@@ -54,9 +54,9 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Twinfix`
+  /// `Sylva`
   String get appName {
-    return Intl.message('Twinfix', name: 'appName', desc: '', args: []);
+    return Intl.message('Sylva', name: 'appName', desc: '', args: []);
   }
 
   /// `Photo Duplicate Cleaner`

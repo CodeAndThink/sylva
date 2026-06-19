@@ -23,6 +23,7 @@ dependencies:
   responsive_framework: ^1.5.1
   shimmer: ^3.0.0
   fl_chart: ^1.2.0
+  palette_generator_master: ^1.1.0
 
   #Navigation
   go_router: ^17.2.0
@@ -63,6 +64,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  build_runner: ^2.15.0
+  injectable_generator: ^2.12.1
 
 # flutter pub run flutter_launcher_icons
 # flutter_launcher_icons:
@@ -80,6 +83,8 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/images/
+    - assets/icons/
   generate: true
 
 

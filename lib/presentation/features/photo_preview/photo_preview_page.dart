@@ -6,6 +6,7 @@ import 'package:sylva/presentation/features/photo_preview/photo_preview_cubit.da
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
+import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
@@ -89,46 +90,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             width: double.maxFinite,
             child: Stack(
               children: [
-                Positioned.fill(
-                  child: GestureDetector(
-                    onLongPressStart: (details) {
-                      setState(() {
-                        _showMagnifier = true;
-                        _touchPosition = details.localPosition;
-                      });
-                    },
-                    onLongPressMoveUpdate: (details) {
-                      setState(() {
-                        _touchPosition = details.localPosition;
-                      });
-                    },
-                    onLongPressEnd: (details) {
-                      setState(() {
-                        _showMagnifier = false;
-                      });
-                    },
-                    child: InteractiveViewer(
-                      child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-                        buildWhen: (previous, current) =>
-                            current.filteredImageBytes !=
-                            previous.filteredImageBytes,
-                        builder: (context, state) {
-                          if (state.filteredImageBytes != null) {
-                            return Image.memory(
-                              state.filteredImageBytes!,
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            );
-                          }
-                          return AppFileImage(
-                            path: widget.imagePath,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
+                Positioned.fill(child: _buildImage()),
                 Positioned(bottom: 12, right: 12, child: _buildColorSet()),
                 // Filter Loading Overlay
                 _buildColorOverlay(),
@@ -153,6 +115,46 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    return AppTransparentContainer(
+      padding: EdgeInsets.zero,
+      child: GestureDetector(
+        onLongPressStart: (details) {
+          setState(() {
+            _showMagnifier = true;
+            _touchPosition = details.localPosition;
+          });
+        },
+        onLongPressMoveUpdate: (details) {
+          setState(() {
+            _touchPosition = details.localPosition;
+          });
+        },
+        onLongPressEnd: (details) {
+          setState(() {
+            _showMagnifier = false;
+          });
+        },
+        child: InteractiveViewer(
+          child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+            buildWhen: (previous, current) =>
+                current.filteredImageBytes != previous.filteredImageBytes,
+            builder: (context, state) {
+              if (state.filteredImageBytes != null) {
+                return Image.memory(
+                  state.filteredImageBytes!,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                );
+              }
+              return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
+            },
+          ),
+        ),
       ),
     );
   }
@@ -187,7 +189,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                 borderRadius: 12.borderRadius,
               ),
               child: AnimatedSize(
-                duration: const Duration(milliseconds: 300),
+                duration: 300.milliseconds,
                 curve: Curves.easeInOutCubic,
                 alignment: Alignment.topCenter,
                 child: Column(
@@ -223,9 +225,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                               onTap: () {
                                 showColorList.value = false;
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 4.0),
-                                child: Icon(
+                              child: Padding(
+                                padding: 4.paddingVertical,
+                                child: const Icon(
                                   Icons.expand_less_rounded,
                                   color: Colors.white,
                                 ),
@@ -245,9 +247,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                               onTap: () {
                                 showColorList.value = true;
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8.0),
-                                child: Icon(
+                              child: Padding(
+                                padding: 8.paddingVertical,
+                                child: const Icon(
                                   Icons.expand_more_rounded,
                                   color: Colors.white,
                                 ),

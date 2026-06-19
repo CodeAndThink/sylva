@@ -31,6 +31,23 @@ class PaletteColorListItem extends StatelessWidget {
               borderRadius: 10.borderRadius,
               border: Border.all(color: Colors.white, width: 1),
             ),
+            child: isSelected
+                ? Center(
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.onSurface,
+                        borderRadius: 10.borderRadius,
+                      ),
+                      child: Icon(
+                        Icons.check_rounded,
+                        color: theme.colorScheme.surface,
+                        size: 18,
+                      ),
+                    ),
+                  )
+                : null,
           ),
           5.height,
           Text(

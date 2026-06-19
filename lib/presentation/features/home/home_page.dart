@@ -7,6 +7,7 @@ import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
+import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -39,6 +40,10 @@ class __HomeChildPageState extends State<_HomeChildPage>
   double _currentScale = 1.0;
   double _baseScale = 1.0;
   bool _isCapturing = false;
+  int _timerSeconds = 0; // 0 (off), 3, 5, 10
+  bool _isCountingDown = false;
+  int _countdownSeconds = 0;
+  late ThemeData _theme;
 
   @override
   void initState() {
@@ -139,7 +144,27 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   void _takePicture() async {
     if (_controller == null || !_controller!.value.isInitialized) return;
-    if (_controller!.value.isTakingPicture || _isCapturing) return;
+    if (_controller!.value.isTakingPicture || _isCapturing || _isCountingDown)
+      return;
+
+    if (_timerSeconds > 0) {
+      setState(() {
+        _isCountingDown = true;
+        _countdownSeconds = _timerSeconds;
+      });
+
+      while (_countdownSeconds > 0) {
+        await Future.delayed(const Duration(seconds: 1));
+        if (!mounted) return;
+        setState(() {
+          _countdownSeconds--;
+        });
+      }
+
+      setState(() {
+        _isCountingDown = false;
+      });
+    }
 
     setState(() {
       _isCapturing = true;
@@ -163,119 +188,208 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
+    _theme = Theme.of(context);
+    return AppScaffold(
+      showAppBar: false,
       body: SafeArea(
         child: Padding(
           padding: 12.paddingAll,
-          child: Stack(
-            children: [
-              if (_isCameraInitialized && _controller != null)
-                Positioned.fill(
-                  child: Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: GestureDetector(
-                        onScaleStart: (details) {
-                          _baseScale = _currentScale;
-                        },
-                        onScaleUpdate: (details) async {
-                          if (_controller == null || !_isCameraInitialized) {
-                            return;
-                          }
-                          _currentScale = (_baseScale * details.scale).clamp(
-                            _minAvailableZoom,
-                            _maxAvailableZoom,
-                          );
-                          await _controller!.setZoomLevel(_currentScale);
-                        },
-                        child: CameraPreview(_controller!),
-                      ),
-                    ),
-                  ),
-                )
-              else
-                const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                ),
+          child: Column(
+            children: [_buildCameraPreview(), 12.height, _buildBottomActions()],
+          ),
+        ),
+      ),
+    );
+  }
 
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
+  Widget _buildCameraPreview() {
+    if (_isCameraInitialized && _controller != null) {
+      return Expanded(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Center(
                 child: AppTransparentContainer(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              _flashMode == FlashMode.always
-                                  ? Icons.flash_on
-                                  : Icons.flash_off,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: _toggleFlash,
-                          ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.flip_camera_ios,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: _switchCamera,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.flip_camera_ios,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            onPressed: _switchCamera,
-                          ),
-                          GestureDetector(
-                            onTap: _isCapturing ? null : _takePicture,
-                            child: Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                color: _isCapturing
-                                    ? Colors.grey
-                                    : Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: _isCapturing
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  : const Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.black,
-                                      size: 35,
-                                    ),
-                            ),
-                          ),
-                          48.width,
-                        ],
+                  padding: EdgeInsets.zero,
+                  child: GestureDetector(
+                    onScaleStart: (details) {
+                      _baseScale = _currentScale;
+                    },
+                    onScaleUpdate: (details) async {
+                      if (_controller == null || !_isCameraInitialized) {
+                        return;
+                      }
+                      _currentScale = (_baseScale * details.scale).clamp(
+                        _minAvailableZoom,
+                        _maxAvailableZoom,
+                      );
+                      await _controller!.setZoomLevel(_currentScale);
+                    },
+                    child: CameraPreview(_controller!),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: 8.paddingBottom,
+                width: 50,
+                padding: 5.paddingAll,
+                decoration: BoxDecoration(
+                  color: Colors.black38,
+                  borderRadius: 25.borderRadius,
+                ),
+                child: Text(
+                  _baseScale.toString(),
+                  textAlign: TextAlign.center,
+                  style: _theme.textTheme.titleSmall?.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            if (_isCountingDown)
+              Center(
+                child: Text(
+                  _countdownSeconds.toString(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 100,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Colors.black,
+                        offset: Offset(2.0, 2.0),
                       ),
                     ],
                   ),
                 ),
               ),
+          ],
+        ),
+      );
+    } else {
+      return Expanded(
+        child: AppTransparentContainer(
+          child: const Center(child: CircularProgressIndicator()),
+        ),
+      );
+    }
+  }
+
+  Widget _buildBottomActions() {
+    return AppTransparentContainer(
+      padding: 8.paddingAll,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(
+                  _flashMode == FlashMode.always
+                      ? Icons.flash_on
+                      : Icons.flash_off,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: _toggleFlash,
+              ),
+              PopupMenuButton<int>(
+                initialValue: _timerSeconds,
+                color: Colors.black38,
+                shape: RoundedRectangleBorder(borderRadius: 16.borderRadius),
+                onSelected: (value) {
+                  setState(() {
+                    _timerSeconds = value;
+                  });
+                },
+                position: PopupMenuPosition.over,
+                icon: Icon(
+                  _timerSeconds == 0
+                      ? Icons.timer_off
+                      : _timerSeconds == 3
+                      ? Icons.timer_3
+                      : _timerSeconds == 5
+                      ? Icons
+                            .timer_10 // Giữ icon timer_10 do không có timer_5
+                      : Icons.timer_10,
+                  color: _timerSeconds == 0
+                      ? Colors.white
+                      : Colors.yellowAccent,
+                  size: 30,
+                ),
+                itemBuilder: (context) => [
+                  _buildTimerMenuItem(0, 'Tắt', Icons.timer_off),
+                  _buildTimerMenuItem(3, '3s', Icons.timer_3),
+                  _buildTimerMenuItem(5, '5s', Icons.timer),
+                  _buildTimerMenuItem(10, '10s', Icons.timer_10),
+                ],
+              ),
             ],
           ),
-        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.cameraswitch,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: _switchCamera,
+              ),
+              GestureDetector(
+                onTap: _isCapturing ? null : _takePicture,
+                child: Container(
+                  width: 70,
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: _isCapturing ? Colors.grey : Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: _isCapturing
+                      ? const Center(
+                          child: CircularProgressIndicator(color: Colors.black),
+                        )
+                      : const Icon(
+                          Icons.camera_alt,
+                          color: Colors.black,
+                          size: 35,
+                        ),
+                ),
+              ),
+              48.width,
+            ],
+          ),
+        ],
       ),
+    );
+  }
+
+  PopupMenuItem<int> _buildTimerMenuItem(
+    int value,
+  ) {
+    return PopupMenuItem<int>(
+      value: value,
+      child:value > 0 ?  Icon(
+            Icons.,
+            color: _timerSeconds == value ? Colors.yellowAccent : Colors.white,
+          ),
+         : Text(
+            text,
+            style: TextStyle(
+              color: _timerSeconds == value
+                  ? Colors.yellowAccent
+                  : Colors.white,
+              fontWeight: _timerSeconds == value
+                  ? FontWeight.bold
+                  : FontWeight.normal,
+            ),
+          ),
     );
   }
 }

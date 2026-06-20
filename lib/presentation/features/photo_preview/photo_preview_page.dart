@@ -41,10 +41,26 @@ class _PhotoPreviewChildPage extends StatefulWidget {
 
 class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   late final PhotoPreviewCubit _cubit;
-  bool _showMagnifier = false;
-  Offset _touchPosition = Offset.zero;
+  final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
+  final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
+    Offset.zero,
+  );
   late ThemeData _theme;
   final GlobalKey _imageKey = GlobalKey();
+
+  final PageController _pageController = PageController();
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<PhotoPreviewCubit>();
+    _cubit.extractPalette(imagePath: widget.imagePath);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   Future<Color?> _getColorAtPosition(Offset position) async {
     try {
@@ -52,13 +68,17 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
       if (context == null) return null;
 
       final RenderObject? renderObject = context.findRenderObject();
-      if (renderObject == null || renderObject is! RenderRepaintBoundary) return null;
+      if (renderObject == null || renderObject is! RenderRepaintBoundary) {
+        return null;
+      }
 
       // Use devicePixelRatio for an accurate, high-res snapshot
       final double pixelRatio = MediaQuery.of(context).devicePixelRatio;
       final ui.Image image = await renderObject.toImage(pixelRatio: pixelRatio);
-      final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
-      
+      final ByteData? byteData = await image.toByteData(
+        format: ui.ImageByteFormat.rawRgba,
+      );
+
       // IMPORTANT: dispose the image to prevent memory leaks!
       image.dispose();
 
@@ -81,12 +101,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
       debugPrint('Error getting color at position: $e');
       return null;
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _cubit = context.read<PhotoPreviewCubit>();
   }
 
   @override
@@ -118,44 +132,54 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
       borderRadius: 16.borderRadius,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          Offset? magnifierCenter;
-          Offset? focalPointOffset;
-          if (_showMagnifier) {
-            final double radius = 60.0;
-            final double offsetDistance = 100.0;
-
-            magnifierCenter = _touchPosition.translate(0, -offsetDistance);
-            if (magnifierCenter.dy - radius < 0) {
-              magnifierCenter = _touchPosition.translate(offsetDistance, 0);
-              if (magnifierCenter.dx + radius > constraints.maxWidth) {
-                magnifierCenter = _touchPosition.translate(-offsetDistance, 0);
-              }
-            }
-            focalPointOffset = _touchPosition - magnifierCenter;
-          }
-
           return SizedBox(
             width: double.maxFinite,
             child: Stack(
               children: [
                 Positioned.fill(child: _buildImage()),
-                if (_showMagnifier)
-                  Positioned(
-                    bottom: 50,
-                    right: 8,
-                    child: Tooltip(
-                      message: S.of(context).autoDetectColors,
-                      child: IconButton(
-                        color: Colors.red,
-                        onPressed: () {
-                          setState(() {
-                            _showMagnifier = false;
-                          });
-                        },
-                        icon: Icon(Icons.block_outlined, size: 32),
+                ValueListenableBuilder<bool>(
+                  valueListenable: _showMagnifier,
+                  builder: (context, showMagnifier, child) {
+                    if (!showMagnifier) return const SizedBox.shrink();
+                    return Positioned(
+                      bottom: 50,
+                      right: 8,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Tooltip(
+                            message: S.of(context).saveColor,
+                            child: IconButton(
+                              color: Colors.green,
+                              onPressed: () {
+                                if (_cubit.state.selectedColor != null) {
+                                  _cubit.saveUserColor(
+                                    color: _cubit.state.selectedColor!,
+                                  );
+                                }
+                                _showMagnifier.value = false;
+                              },
+                              icon: const Icon(
+                                Icons.check_circle_outline,
+                                size: 32,
+                              ),
+                            ),
+                          ),
+                          Tooltip(
+                            message: S.of(context).cancel,
+                            child: IconButton(
+                              color: Colors.red,
+                              onPressed: () {
+                                _showMagnifier.value = false;
+                              },
+                              icon: const Icon(Icons.block_outlined, size: 32),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
+                    );
+                  },
+                ),
                 Positioned(
                   bottom: 8,
                   left: 8,
@@ -164,42 +188,93 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                 ),
                 // Filter Loading Overlay
                 _buildColorOverlay(),
-                if (_showMagnifier &&
-                    magnifierCenter != null &&
-                    focalPointOffset != null)
-                  Positioned(
-                    left: magnifierCenter.dx - 60,
-                    top: magnifierCenter.dy - 40,
-                    child: RawMagnifier(
-                      size: const Size(120, 120),
-                      magnificationScale: 10.0,
-                      focalPointOffset: focalPointOffset,
-                      decoration: MagnifierDecoration(
-                        shape: CircleBorder(
-                          side: BorderSide(
-                            color: _theme.colorScheme.surface,
-                            width: 2,
+                ValueListenableBuilder<bool>(
+                  valueListenable: _showMagnifier,
+                  builder: (context, showMagnifier, child) {
+                    if (!showMagnifier) return const SizedBox.shrink();
+
+                    return ValueListenableBuilder<Offset>(
+                      valueListenable: _touchPosition,
+                      builder: (context, touchPos, child) {
+                        final double radius = 60.0;
+                        final double offsetDistance = 100.0;
+
+                        Offset magnifierCenter = touchPos.translate(
+                          0,
+                          -offsetDistance,
+                        );
+                        if (magnifierCenter.dy - radius < 0) {
+                          magnifierCenter = touchPos.translate(
+                            offsetDistance,
+                            0,
+                          );
+                          if (magnifierCenter.dx + radius >
+                              constraints.maxWidth) {
+                            magnifierCenter = touchPos.translate(
+                              -offsetDistance,
+                              0,
+                            );
+                          }
+                        }
+
+                        final double magnifierLeft = magnifierCenter.dx - 60;
+                        final double magnifierTop = magnifierCenter.dy - 40;
+
+                        final Offset actualMagnifierCenter = Offset(
+                          magnifierLeft + radius,
+                          magnifierTop + radius,
+                        );
+                        final Offset focalPointOffset =
+                            touchPos - actualMagnifierCenter;
+
+                        return Positioned(
+                          left: magnifierLeft,
+                          top: magnifierTop,
+                          child: RawMagnifier(
+                            size: const Size(120, 120),
+                            magnificationScale: 10.0,
+                            focalPointOffset: focalPointOffset,
+                            decoration: MagnifierDecoration(
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  color: _theme.colorScheme.surface,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                if (_showMagnifier)
-                  Positioned(
-                    left: _touchPosition.dx - 10,
-                    top: _touchPosition.dy - 10,
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: _theme.colorScheme.surface,
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                ValueListenableBuilder<bool>(
+                  valueListenable: _showMagnifier,
+                  builder: (context, showMagnifier, child) {
+                    if (!showMagnifier) return const SizedBox.shrink();
+
+                    return ValueListenableBuilder<Offset>(
+                      valueListenable: _touchPosition,
+                      builder: (context, touchPos, child) {
+                        return Positioned(
+                          left: touchPos.dx - 10,
+                          top: touchPos.dy - 10,
+                          child: Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: _theme.colorScheme.surface,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ],
             ),
           );
@@ -213,18 +288,14 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
       padding: EdgeInsets.zero,
       child: GestureDetector(
         onPanStart: (details) {
-          setState(() {
-            _showMagnifier = true;
-            _touchPosition = details.localPosition;
-          });
+          _showMagnifier.value = true;
+          _touchPosition.value = details.localPosition;
         },
         onPanUpdate: (details) {
-          setState(() {
-            _touchPosition = details.localPosition;
-          });
+          _touchPosition.value = details.localPosition;
         },
         onPanEnd: (_) async {
-          final color = await _getColorAtPosition(_touchPosition);
+          final color = await _getColorAtPosition(_touchPosition.value);
           if (color != null) {
             _cubit.setSelectedColor(color: color);
           }
@@ -236,7 +307,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                 current.filteredImageBytes != previous.filteredImageBytes,
             builder: (context, state) {
               if (state.filteredImageBytes != null) {
-                return Image.memory(state.filteredImageBytes!, fit: BoxFit.cover);
+                return Image.memory(
+                  state.filteredImageBytes!,
+                  fit: BoxFit.cover,
+                );
               }
               return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
             },
@@ -247,68 +321,151 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   }
 
   Widget _buildColorSet() {
-    return AnimatedSize(
-      duration: 150.milliseconds,
-      curve: Curves.decelerate,
-      alignment: Alignment.topCenter,
-      child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-        buildWhen: (previous, current) =>
-            current.getColorStatus != previous.getColorStatus ||
-            current.filterColorStatus != previous.filterColorStatus ||
-            current.selectedColor != previous.selectedColor,
-        builder: (context, state) {
-          Widget child;
-          if (state.getColorStatus.isLoading) {
-            child = Column(
-              key: const ValueKey('loading'),
+    return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+      buildWhen: (previous, current) =>
+          current.getColorStatus != previous.getColorStatus ||
+          current.filterColorStatus != previous.filterColorStatus ||
+          current.selectedColor != previous.selectedColor ||
+          previous.userColors != current.userColors,
+      builder: (context, state) {
+        if (state.getColorStatus.isLoading) {
+          return Column(
+            key: const ValueKey('loading'),
+            children: [
+              AppTitleText(title: S.of(context).autoDetectColors),
+              SizedBox(height: 80, child: PaletteShimmerList()),
+            ],
+          );
+        } else if (state.getColorStatus.isFailure) {
+          return Container(
+            key: const ValueKey('failure'),
+            padding: 8.paddingAll,
+            child: Text(
+              S.of(context).failedToLoadColors,
+              style: const TextStyle(color: Colors.red),
+            ),
+          );
+        } else {
+          return SizedBox(
+            key: const ValueKey('loaded'),
+            height: 120, // Enough height for title + list
+            child: Row(
               children: [
-                AppTitleText(title: S.of(context).autoDetectColors),
-                SizedBox(height: 80, child: PaletteShimmerList()),
-              ],
-            );
-          } else if (state.getColorStatus.isFailure) {
-            child = Container(
-              key: const ValueKey('failure'),
-              padding: 8.paddingAll,
-              child: Text(
-                S.of(context).failedToLoadColors,
-                style: const TextStyle(color: Colors.red),
-              ),
-            );
-          } else if (state.paletteColors.isEmpty) {
-            child = const SizedBox.shrink(key: ValueKey('empty'));
-          } else {
-            child = Column(
-              key: const ValueKey('loaded'),
-              children: [
-                AppTitleText(title: S.of(context).autoDetectColors),
-                SizedBox(
-                  height: 80,
-                  child: ListView.separated(
-                    itemCount: state.paletteColors.length,
-                    scrollDirection: Axis.horizontal,
-                    separatorBuilder: (context, index) => 10.width,
-                    itemBuilder: (context, index) {
-                      final color = state.paletteColors[index];
-                      final hex = ColorUtils.colorToHex(color: color);
-                      return PaletteColorListItem(
-                        color: color,
-                        hex: hex,
-                        isSelected: state.selectedColor == color,
-                        onTap: () {
-                          _cubit.filterColor(widget.imagePath, color);
-                        },
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      // Page 1: Auto-detected colors
+                      Column(
+                        children: [
+                          AppTitleText(title: S.of(context).autoDetectColors),
+                          SizedBox(
+                            height: 80,
+                            child: ListView.separated(
+                              itemCount: state.paletteColors.length,
+                              scrollDirection: Axis.horizontal,
+                              separatorBuilder: (context, index) => 10.width,
+                              itemBuilder: (context, index) {
+                                final color = state.paletteColors[index];
+                                final hex = ColorUtils.colorToHex(color: color);
+                                return PaletteColorListItem(
+                                  color: color,
+                                  hex: hex,
+                                  isSelected: state.selectedColor == color,
+                                  onTap: () {
+                                    _cubit.filterColor(widget.imagePath, color);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Page 2: User-picked colors
+                      Column(
+                        children: [
+                          AppTitleText(title: S.of(context).myColors),
+                          SizedBox(
+                            height: 80,
+                            child: state.userColors.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      S.of(context).useMagnifierToPickColors,
+                                      style: TextStyle(
+                                        color: _theme.colorScheme.onSurface
+                                            .withValues(alpha: 0.5),
+                                      ),
+                                    ),
+                                  )
+                                : ListView.separated(
+                                    itemCount: state.userColors.length,
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, index) =>
+                                        10.width,
+                                    itemBuilder: (context, index) {
+                                      final color = state.userColors[index];
+                                      final hex = ColorUtils.colorToHex(
+                                        color: color,
+                                      );
+                                      return PaletteColorListItem(
+                                        color: color,
+                                        hex: hex,
+                                        isSelected:
+                                            state.selectedColor == color,
+                                        onTap: () {
+                                          _cubit.filterColor(
+                                            widget.imagePath,
+                                            color,
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                8.width,
+                Center(
+                  child: AnimatedBuilder(
+                    animation: _pageController,
+                    builder: (context, child) {
+                      final double page =
+                          (_pageController.hasClients &&
+                              _pageController.positions.length == 1)
+                          ? _pageController.page ?? 0
+                          : 0;
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: List.generate(2, (index) {
+                          final isSelected = (page.round() == index);
+                          return AnimatedContainer(
+                            duration: 200.milliseconds,
+                            margin: 4.paddingVertical,
+                            width: isSelected ? 8 : 6,
+                            height: isSelected ? 8 : 6,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isSelected
+                                  ? _theme.colorScheme.primary
+                                  : _theme.colorScheme.onSurface.withValues(
+                                      alpha: 0.3,
+                                    ),
+                            ),
+                          );
+                        }),
                       );
                     },
                   ),
                 ),
               ],
-            );
-          }
-
-          return AnimatedSwitcher(duration: 150.milliseconds, child: child);
-        },
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -420,16 +577,16 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             icon: const Icon(Icons.save_outlined, size: 24),
           ),
         ),
-        48.width,
-        Tooltip(
-          message: S.of(context).autoDetectColors,
-          child: IconButton(
-            onPressed: () {
-              _cubit.extractPalette(widget.imagePath);
-            },
-            icon: Icon(Icons.auto_awesome, color: Colors.amberAccent),
-          ),
-        ),
+        // 48.width,
+        // Tooltip(
+        //   message: S.of(context).autoDetectColors,
+        //   child: IconButton(
+        //     onPressed: () {
+        //       _cubit.extractPalette(widget.imagePath);
+        //     },
+        //     icon: Icon(Icons.auto_awesome, color: Colors.amberAccent),
+        //   ),
+        // ),
       ],
     );
   }

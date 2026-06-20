@@ -7,11 +7,13 @@ class PhotoPreviewState extends Equatable {
   final LoadStatus getColorStatus;
   final LoadStatus filterColorStatus;
   final List<Color> paletteColors;
+  final List<Color> userColors;
   final Color? selectedColor;
   final Uint8List? filteredImageBytes;
 
   const PhotoPreviewState({
     this.paletteColors = const [],
+    this.userColors = const [],
     this.getColorStatus = LoadStatus.initial,
     this.filterColorStatus = LoadStatus.initial,
     this.selectedColor,
@@ -20,6 +22,7 @@ class PhotoPreviewState extends Equatable {
 
   PhotoPreviewState copyWith({
     List<Color>? paletteColors,
+    List<Color>? userColors,
     LoadStatus? getColorStatus,
     LoadStatus? filterColorStatus,
     Color? selectedColor,
@@ -27,6 +30,7 @@ class PhotoPreviewState extends Equatable {
   }) {
     return PhotoPreviewState(
       paletteColors: paletteColors ?? this.paletteColors,
+      userColors: userColors ?? this.userColors,
       getColorStatus: getColorStatus ?? this.getColorStatus,
       filterColorStatus: filterColorStatus ?? this.filterColorStatus,
       // If selectedColor is explicitly passed as null, it will be ignored by ??
@@ -45,6 +49,7 @@ class PhotoPreviewState extends Equatable {
   @override
   List<Object?> get props => [
     paletteColors,
+    userColors,
     getColorStatus,
     filterColorStatus,
     selectedColor,

@@ -965,5 +965,11 @@
     }
   },
   "colorCopiedFailure": "复制颜色失败",
-  "@colorCopiedFailure": {}
+  "@colorCopiedFailure": {},
+  "saveColor": "保存颜色",
+  "@saveColor": {},
+  "myColors": "我的颜色",
+  "@myColors": {},
+  "useMagnifierToPickColors": "使用放大镜选择颜色",
+  "@useMagnifierToPickColors": {}
 }

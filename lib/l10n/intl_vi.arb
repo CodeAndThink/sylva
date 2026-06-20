@@ -965,5 +965,11 @@
     }
   },
   "colorCopiedFailure": "Sao chép màu thất bại",
-  "@colorCopiedFailure": {}
+  "@colorCopiedFailure": {},
+  "saveColor": "Lưu Màu",
+  "@saveColor": {},
+  "myColors": "Màu Của Tôi",
+  "@myColors": {},
+  "useMagnifierToPickColors": "Sử dụng kính lúp để lấy màu",
+  "@useMagnifierToPickColors": {}
 }

@@ -22,7 +22,21 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     safeEmit(state.copyWith(selectedColor: color));
   }
 
-  Future<void> extractPalette(String imagePath) async {
+  void saveUserColor({required Color color}) {
+    final updatedUserColors = List<Color>.from(state.userColors);
+    if (!updatedUserColors.contains(color)) {
+      updatedUserColors.insert(0, color);
+    } else {
+      updatedUserColors.remove(color);
+      updatedUserColors.insert(0, color);
+    }
+
+    safeEmit(
+      state.copyWith(selectedColor: color, userColors: updatedUserColors),
+    );
+  }
+
+  Future<void> extractPalette({required String imagePath}) async {
     if (state.getColorStatus.isLoading) return;
     safeEmit(state.copyWith(getColorStatus: LoadStatus.loading));
     await Future.delayed(2.seconds);

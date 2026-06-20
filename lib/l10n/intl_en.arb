@@ -965,5 +965,11 @@
     }
   },
   "colorCopiedFailure": "Failed to copy color",
-  "@colorCopiedFailure": {}
+  "@colorCopiedFailure": {},
+  "saveColor": "Save Color",
+  "@saveColor": {},
+  "myColors": "My Colors",
+  "@myColors": {},
+  "useMagnifierToPickColors": "Use magnifier to pick colors",
+  "@useMagnifierToPickColors": {}
 }

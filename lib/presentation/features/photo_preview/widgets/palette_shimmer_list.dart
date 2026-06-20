@@ -10,7 +10,8 @@ class PaletteShimmerList extends StatelessWidget {
     return AppShimmer(
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: 8,
+        physics: NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) {
           return 10.width;
         },

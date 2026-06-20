@@ -565,6 +565,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mon": MessageLookupByLibrary.simpleMessage("Mon"),
     "more": MessageLookupByLibrary.simpleMessage("More"),
     "moveAndZoom": MessageLookupByLibrary.simpleMessage("Zoom"),
+    "myColors": MessageLookupByLibrary.simpleMessage("My Colors"),
     "nameLength": MessageLookupByLibrary.simpleMessage(
       "Name must be at least 2 characters",
     ),
@@ -746,6 +747,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sat": MessageLookupByLibrary.simpleMessage("Sat"),
     "saturation": MessageLookupByLibrary.simpleMessage("Saturation"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
     "saving": MessageLookupByLibrary.simpleMessage("Saving..."),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
     "scanLimitAll": MessageLookupByLibrary.simpleMessage("All"),
@@ -857,6 +859,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownUser": MessageLookupByLibrary.simpleMessage("Unknown User"),
     "upgradeToPremium": MessageLookupByLibrary.simpleMessage(
       "Upgrade to Premium",
+    ),
+    "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
+      "Use magnifier to pick colors",
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("User is banned."),
     "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),

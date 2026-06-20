@@ -965,5 +965,11 @@
     }
   },
   "colorCopiedFailure": "色のコピーに失敗しました",
-  "@colorCopiedFailure": {}
+  "@colorCopiedFailure": {},
+  "saveColor": "色を保存",
+  "@saveColor": {},
+  "myColors": "私の色",
+  "@myColors": {},
+  "useMagnifierToPickColors": "虫眼鏡を使って色を選択",
+  "@useMagnifierToPickColors": {}
 }

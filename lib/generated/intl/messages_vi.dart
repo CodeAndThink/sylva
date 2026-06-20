@@ -577,6 +577,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mon": MessageLookupByLibrary.simpleMessage("Th 2"),
     "more": MessageLookupByLibrary.simpleMessage("nhiều"),
     "moveAndZoom": MessageLookupByLibrary.simpleMessage("Phóng to"),
+    "myColors": MessageLookupByLibrary.simpleMessage("Màu Của Tôi"),
     "nameLength": MessageLookupByLibrary.simpleMessage(
       "Tên phải có ít nhất 2 ký tự",
     ),
@@ -762,6 +763,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sat": MessageLookupByLibrary.simpleMessage("Th 7"),
     "saturation": MessageLookupByLibrary.simpleMessage("Độ bão hòa"),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+    "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
     "saving": MessageLookupByLibrary.simpleMessage("Đang lưu..."),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
     "scanLimitAll": MessageLookupByLibrary.simpleMessage("Tất cả"),
@@ -879,6 +881,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "unknownUser": MessageLookupByLibrary.simpleMessage("Người dùng ẩn danh"),
     "upgradeToPremium": MessageLookupByLibrary.simpleMessage(
       "Nâng cấp Premium",
+    ),
+    "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
+      "Sử dụng kính lúp để lấy màu",
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("Người dùng đã bị cấm."),
     "userNotFound": MessageLookupByLibrary.simpleMessage(

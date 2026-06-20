@@ -3623,6 +3623,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Save Color`
+  String get saveColor {
+    return Intl.message('Save Color', name: 'saveColor', desc: '', args: []);
+  }
+
+  /// `My Colors`
+  String get myColors {
+    return Intl.message('My Colors', name: 'myColors', desc: '', args: []);
+  }
+
+  /// `Use magnifier to pick colors`
+  String get useMagnifierToPickColors {
+    return Intl.message(
+      'Use magnifier to pick colors',
+      name: 'useMagnifierToPickColors',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

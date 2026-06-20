@@ -57,6 +57,7 @@
   "save": "保存",
   "@save": {},
   "edit": "编辑",
+  "@edit": {},
   "tune": "调整",
   "@tune": {},
   "brightness": "亮度",
@@ -159,7 +160,6 @@
   "@filter": {},
   "blur": "模糊",
   "@blur": {},
-  "@edit": {},
   "success": "成功",
   "@success": {},
   "search": "搜索",
@@ -270,17 +270,17 @@
   "sizeDesc": "按大小降序",
   "@sizeDesc": {},
   "sizeAsc": "按大小升序",
+  "@sizeAsc": {},
   "countDesc": "数量递减",
   "@countDesc": {},
   "countAsc": "数量递增",
   "@countAsc": {},
-  "@sizeAsc": {},
-  "cleanedSpaceSuccess": "成功清理 {num} {unit} ({size})",
+  "cleanedSpaceSuccess": "成功清理 {amount} {unit} ({size})",
   "@cleanedSpaceSuccess": {
     "placeholders": {
-      "num": {},
       "unit": {},
-      "size": {}
+      "size": {},
+      "amount": {}
     }
   },
   "media_photo": "照片",
@@ -898,13 +898,21 @@
   "delete_confirm_message_trash": "请最后再检查一次！\n照片将被移至设备的垃圾桶，可在30天内恢复。",
   "@delete_confirm_message_trash": {},
   "delete_confirm_message_permanent": "请最后再检查一次！\n此操作无法撤销。照片将从设备中永久删除。",
+  "@delete_confirm_message_permanent": {},
   "customThemeDescription": "点击选择，长按选择另一张图片",
+  "@customThemeDescription": {},
   "bgNone": "无",
+  "@bgNone": {},
   "bgNature1": "自然 1",
+  "@bgNature1": {},
   "bgNature2": "自然 2",
+  "@bgNature2": {},
   "bgNature3": "自然 3",
+  "@bgNature3": {},
   "bgNature4": "自然 4",
+  "@bgNature4": {},
   "bgCustom": "自定义",
+  "@bgCustom": {},
   "notifScanningTitle": "正在扫描照片...",
   "@notifScanningTitle": {},
   "notifScanningBody": "已扫描 {current}/{total} 张照片",
@@ -943,17 +951,19 @@
   "notifScanCompleteNone": "未发现问题。您的相册很干净！",
   "@notifScanCompleteNone": {},
   "enableNotification": "启用通知",
+  "@enableNotification": {},
   "enableNotificationDescription": "接收扫描进度和完成提醒。",
+  "@enableNotificationDescription": {},
   "autoDetectColors": "自动检测颜色",
   "@autoDetectColors": {},
   "failedToLoadColors": "加载颜色失败",
   "@failedToLoadColors": {},
   "colorCopiedSuccess": "已将 {color} 复制到剪贴板",
-  "colorCopiedFailure": "复制颜色失败",
   "@colorCopiedSuccess": {
     "placeholders": {
       "color": {}
     }
   },
+  "colorCopiedFailure": "复制颜色失败",
   "@colorCopiedFailure": {}
 }

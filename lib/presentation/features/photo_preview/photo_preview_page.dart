@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/color_utils.dart';
@@ -169,61 +168,71 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   }
 
   Widget _buildColorSet() {
-    return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-      buildWhen: (previous, current) =>
-          current.getColorStatus != previous.getColorStatus ||
-          current.filterColorStatus != previous.filterColorStatus ||
-          current.selectedColor != previous.selectedColor,
-      builder: (context, state) {
-        if (state.getColorStatus.isLoading) {
-          return Column(
-            children: [
-              AppTitleText(title: S.of(context).autoDetectColors),
-              SizedBox(
-                height: 80,
-                child: Center(child: const CircularProgressIndicator()),
+    return AnimatedSize(
+      duration: 150.milliseconds,
+      curve: Curves.decelerate,
+      alignment: Alignment.topCenter,
+      child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+        buildWhen: (previous, current) =>
+            current.getColorStatus != previous.getColorStatus ||
+            current.filterColorStatus != previous.filterColorStatus ||
+            current.selectedColor != previous.selectedColor,
+        builder: (context, state) {
+          Widget child;
+          if (state.getColorStatus.isLoading) {
+            child = Column(
+              key: const ValueKey('loading'),
+              children: [
+                AppTitleText(title: S.of(context).autoDetectColors),
+                const SizedBox(
+                  height: 80,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              ],
+            );
+          } else if (state.getColorStatus.isFailure) {
+            child = Container(
+              key: const ValueKey('failure'),
+              padding: 8.paddingAll,
+              child: Text(
+                S.of(context).failedToLoadColors,
+                style: const TextStyle(color: Colors.red),
               ),
-            ],
-          );
-        }
-        if (state.getColorStatus.isFailure) {
-          return Container(
-            padding: 8.paddingAll,
-            child: Text(
-              S.of(context).failedToLoadColors,
-              style: const TextStyle(color: Colors.red),
-            ),
-          );
-        }
-        if (state.paletteColors.isEmpty) {
-          return const SizedBox.shrink();
-        }
-        return Column(
-          children: [
-            AppTitleText(title: S.of(context).autoDetectColors),
-            SizedBox(
-              height: 80,
-              child: ListView.separated(
-                itemCount: state.paletteColors.length,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => 10.width,
-                itemBuilder: (context, index) {
-                  final color = state.paletteColors[index];
-                  final hex = ColorUtils.colorToHex(color: color);
-                  return PaletteColorListItem(
-                    color: color,
-                    hex: hex,
-                    isSelected: state.selectedColor == color,
-                    onTap: () {
-                      _cubit.filterColor(widget.imagePath, color);
+            );
+          } else if (state.paletteColors.isEmpty) {
+            child = const SizedBox.shrink(key: ValueKey('empty'));
+          } else {
+            child = Column(
+              key: const ValueKey('loaded'),
+              children: [
+                AppTitleText(title: S.of(context).autoDetectColors),
+                SizedBox(
+                  height: 80,
+                  child: ListView.separated(
+                    itemCount: state.paletteColors.length,
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) => 10.width,
+                    itemBuilder: (context, index) {
+                      final color = state.paletteColors[index];
+                      final hex = ColorUtils.colorToHex(color: color);
+                      return PaletteColorListItem(
+                        color: color,
+                        hex: hex,
+                        isSelected: state.selectedColor == color,
+                        onTap: () {
+                          _cubit.filterColor(widget.imagePath, color);
+                        },
+                      );
                     },
-                  );
-                },
-              ),
-            ),
-          ],
-        );
-      },
+                  ),
+                ),
+              ],
+            );
+          }
+
+          return AnimatedSwitcher(duration: 150.milliseconds, child: child);
+        },
+      ),
     );
   }
 
@@ -329,7 +338,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             onPressed: () {
               _cubit.navigator.safePop();
             },
-            icon: const Icon(Icons.save, size: 24),
+            icon: const Icon(Icons.save_outlined, size: 24),
           ),
         ),
         48.width,

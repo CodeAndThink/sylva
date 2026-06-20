@@ -22,8 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(version) => "Version ${version}";
 
-  static String m1(num, unit, size) =>
-      "Successfully cleaned ${num} ${unit} (${size})";
+  static String m1(unit, size, amount) =>
+      "Successfully cleaned ${amount} ${unit} (${size})";
 
   static String m2(color) => "Copied ${color} to clipboard";
 

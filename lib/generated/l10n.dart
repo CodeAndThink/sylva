@@ -979,13 +979,13 @@ class S {
     );
   }
 
-  /// `Successfully cleaned {num} {unit} ({size})`
-  String cleanedSpaceSuccess(Object num, Object unit, Object size) {
+  /// `Successfully cleaned {amount} {unit} ({size})`
+  String cleanedSpaceSuccess(Object unit, Object size, Object amount) {
     return Intl.message(
-      'Successfully cleaned $num $unit ($size)',
+      'Successfully cleaned $amount $unit ($size)',
       name: 'cleanedSpaceSuccess',
       desc: '',
-      args: [num, unit, size],
+      args: [unit, size, amount],
     );
   }
 

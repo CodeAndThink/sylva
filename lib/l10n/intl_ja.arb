@@ -57,6 +57,7 @@
   "save": "保存",
   "@save": {},
   "edit": "編集",
+  "@edit": {},
   "tune": "調整",
   "@tune": {},
   "brightness": "明るさ",
@@ -159,7 +160,6 @@
   "@filter": {},
   "blur": "ぼかし",
   "@blur": {},
-  "@edit": {},
   "success": "成功",
   "@success": {},
   "search": "検索",
@@ -270,17 +270,17 @@
   "sizeDesc": "サイズ降順",
   "@sizeDesc": {},
   "sizeAsc": "サイズ昇順",
+  "@sizeAsc": {},
   "countDesc": "数（降順）",
   "@countDesc": {},
   "countAsc": "数（昇順）",
   "@countAsc": {},
-  "@sizeAsc": {},
-  "cleanedSpaceSuccess": "{num} {unit} ({size}) をクリーンアップしました",
+  "cleanedSpaceSuccess": "{amount} {unit} ({size}) をクリーンアップしました",
   "@cleanedSpaceSuccess": {
     "placeholders": {
-      "num": {},
       "unit": {},
-      "size": {}
+      "size": {},
+      "amount": {}
     }
   },
   "media_photo": "写真",
@@ -898,13 +898,21 @@
   "delete_confirm_message_trash": "最後にもう一度ご確認ください！\n写真はデバイスのゴミ箱に移動され、30日以内であれば復元可能です。",
   "@delete_confirm_message_trash": {},
   "delete_confirm_message_permanent": "最後にもう一度ご確認ください！\nこの操作は元に戻せません。写真はデバイスから完全に削除されます。",
+  "@delete_confirm_message_permanent": {},
   "customThemeDescription": "タップして選択、長押しして別の画像を選択",
+  "@customThemeDescription": {},
   "bgNone": "なし",
+  "@bgNone": {},
   "bgNature1": "自然 1",
+  "@bgNature1": {},
   "bgNature2": "自然 2",
+  "@bgNature2": {},
   "bgNature3": "自然 3",
+  "@bgNature3": {},
   "bgNature4": "自然 4",
+  "@bgNature4": {},
   "bgCustom": "カスタム",
+  "@bgCustom": {},
   "notifScanningTitle": "写真をスキャン中...",
   "@notifScanningTitle": {},
   "notifScanningBody": "{current}/{total} 枚スキャン済み",
@@ -943,17 +951,19 @@
   "notifScanCompleteNone": "問題は見つかりませんでした。ギャラリーはきれいです！",
   "@notifScanCompleteNone": {},
   "enableNotification": "通知を有効にする",
+  "@enableNotification": {},
   "enableNotificationDescription": "スキャンの進行状況と完了の通知を受け取ります。",
+  "@enableNotificationDescription": {},
   "autoDetectColors": "色を自動検出",
   "@autoDetectColors": {},
   "failedToLoadColors": "色の読み込みに失敗しました",
   "@failedToLoadColors": {},
   "colorCopiedSuccess": "{color} をクリップボードにコピーしました",
-  "colorCopiedFailure": "色のコピーに失敗しました",
   "@colorCopiedSuccess": {
     "placeholders": {
       "color": {}
     }
   },
+  "colorCopiedFailure": "色のコピーに失敗しました",
   "@colorCopiedFailure": {}
 }

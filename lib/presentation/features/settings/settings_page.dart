@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/app/locale_cubit.dart';
 import 'package:sylva/presentation/app/theme_cubit.dart';
@@ -117,12 +118,20 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
               child: Column(
                 children: [
                   RadioListTile<String>(
-                    title: Text(_l10n.english),
-                    value: 'en',
+                    title: Text(LanguageType.en.name),
+                    value: LanguageType.en.value,
                   ),
                   RadioListTile<String>(
-                    title: Text(_l10n.vietnamese),
-                    value: 'vi',
+                    title: Text(LanguageType.vi.name),
+                    value: LanguageType.vi.value,
+                  ),
+                  RadioListTile<String>(
+                    title: Text(LanguageType.ja.name),
+                    value: LanguageType.ja.value,
+                  ),
+                  RadioListTile<String>(
+                    title: Text(LanguageType.zh.name),
+                    value: LanguageType.zh.value,
                   ),
                 ],
               ),

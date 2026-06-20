@@ -57,6 +57,7 @@
   "save": "Lưu",
   "@save": {},
   "edit": "Chỉnh sửa",
+  "@edit": {},
   "tune": "Điều chỉnh",
   "@tune": {},
   "brightness": "Độ sáng",
@@ -159,7 +160,6 @@
   "@filter": {},
   "blur": "Làm mờ",
   "@blur": {},
-  "@edit": {},
   "success": "Thành công",
   "@success": {},
   "search": "Tìm kiếm",
@@ -270,17 +270,17 @@
   "sizeDesc": "Kích thước giảm dần",
   "@sizeDesc": {},
   "sizeAsc": "Kích thước tăng dần",
+  "@sizeAsc": {},
   "countDesc": "Số lượng giảm dần",
   "@countDesc": {},
   "countAsc": "Số lượng tăng dần",
   "@countAsc": {},
-  "@sizeAsc": {},
-  "cleanedSpaceSuccess": "Đã dọn dẹp thành công {num} {unit} ({size})",
+  "cleanedSpaceSuccess": "Đã dọn dẹp thành công {amount} {unit} ({size})",
   "@cleanedSpaceSuccess": {
     "placeholders": {
-      "num": {},
       "unit": {},
-      "size": {}
+      "size": {},
+      "amount": {}
     }
   },
   "media_photo": "Ảnh",
@@ -898,13 +898,21 @@
   "delete_confirm_message_trash": "Vui lòng kiểm tra lại lần cuối!\nẢnh sẽ được chuyển vào Thùng rác của thiết bị và có thể khôi phục trong vòng 30 ngày.",
   "@delete_confirm_message_trash": {},
   "delete_confirm_message_permanent": "Vui lòng kiểm tra lại lần cuối!\nHành động này không thể hoàn tác. Ảnh sẽ bị xóa vĩnh viễn khỏi thiết bị.",
+  "@delete_confirm_message_permanent": {},
   "customThemeDescription": "Nhấn để chọn, nhấn giữ để chọn ảnh khác",
+  "@customThemeDescription": {},
   "bgNone": "Không",
+  "@bgNone": {},
   "bgNature1": "Thiên nhiên 1",
+  "@bgNature1": {},
   "bgNature2": "Thiên nhiên 2",
+  "@bgNature2": {},
   "bgNature3": "Thiên nhiên 3",
+  "@bgNature3": {},
   "bgNature4": "Thiên nhiên 4",
+  "@bgNature4": {},
   "bgCustom": "Tuỳ chỉnh",
+  "@bgCustom": {},
   "notifScanningTitle": "Đang quét ảnh...",
   "@notifScanningTitle": {},
   "notifScanningBody": "{current}/{total} ảnh đã quét",
@@ -943,17 +951,19 @@
   "notifScanCompleteNone": "Không tìm thấy vấn đề. Thư viện ảnh rất sạch!",
   "@notifScanCompleteNone": {},
   "enableNotification": "Bật thông báo",
+  "@enableNotification": {},
   "enableNotificationDescription": "Nhận thông báo tiến trình và kết quả quét.",
+  "@enableNotificationDescription": {},
   "autoDetectColors": "Tự động phát hiện màu",
   "@autoDetectColors": {},
   "failedToLoadColors": "Không thể tải màu",
   "@failedToLoadColors": {},
   "colorCopiedSuccess": "Đã chép {color} vào khay nhớ tạm",
-  "colorCopiedFailure": "Sao chép màu thất bại",
   "@colorCopiedSuccess": {
     "placeholders": {
       "color": {}
     }
   },
+  "colorCopiedFailure": "Sao chép màu thất bại",
   "@colorCopiedFailure": {}
 }

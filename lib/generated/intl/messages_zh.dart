@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(version) => "版本 ${version}";
 
-  static String m1(num, unit, size) => "成功清理 ${num} ${unit} (${size})";
+  static String m1(unit, size, amount) => "成功清理 ${amount} ${unit} (${size})";
 
   static String m2(color) => "已将 ${color} 复制到剪贴板";
 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
   int _timerSeconds = 0; // 0 (off), 3, 5, 10
   bool _isCountingDown = false;
   int _countdownSeconds = 0;
+  IconData? _centerIcon;
+  Timer? _centerIconTimer;
   late final HomeCubit _cubit;
   late ThemeData _theme;
 
@@ -67,6 +70,11 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   Future<void> _setCamera(CameraDescription cameraDescription) async {
     if (_controller != null) {
+      if (mounted) {
+        setState(() {
+          _isCameraInitialized = false;
+        });
+      }
       await _controller!.dispose();
     }
 
@@ -102,9 +110,24 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   @override
   void dispose() {
+    _centerIconTimer?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     _controller?.dispose();
     super.dispose();
+  }
+
+  void _showCenterIcon(IconData icon) {
+    _centerIconTimer?.cancel();
+    setState(() {
+      _centerIcon = icon;
+    });
+    _centerIconTimer = Timer(const Duration(milliseconds: 800), () {
+      if (mounted) {
+        setState(() {
+          _centerIcon = null;
+        });
+      }
+    });
   }
 
   @override
@@ -115,6 +138,11 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
 
     if (state == AppLifecycleState.inactive) {
+      if (mounted) {
+        setState(() {
+          _isCameraInitialized = false;
+        });
+      }
       cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
       _initCamera();
@@ -125,6 +153,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_cameras.length > 1) {
       _selectedCameraIndex = (_selectedCameraIndex + 1) % _cameras.length;
       _setCamera(_cameras[_selectedCameraIndex]);
+      final isFront =
+          _cameras[_selectedCameraIndex].lensDirection ==
+          CameraLensDirection.front;
+      _showCenterIcon(
+        isFront ? Icons.camera_front_outlined : Icons.camera_rear_outlined,
+      );
     }
   }
 
@@ -136,6 +170,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
           ? FlashMode.always
           : FlashMode.off;
     });
+
+    _showCenterIcon(
+      _flashMode == FlashMode.always
+          ? Icons.flash_on_outlined
+          : Icons.flash_off_outlined,
+    );
 
     try {
       await _controller!.setFlashMode(_flashMode);
@@ -272,7 +312,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
             Center(
               child: Text(
                 _countdownSeconds.toString(),
-                style: const TextStyle(
+                style: _theme.textTheme.titleLarge?.copyWith(
                   color: Colors.white,
                   fontSize: 100,
                   fontWeight: FontWeight.bold,
@@ -284,6 +324,21 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     ),
                   ],
                 ),
+              ),
+            ),
+          if (!_isCountingDown && _centerIcon != null)
+            Center(
+              child: Icon(
+                _centerIcon,
+                color: Colors.white,
+                size: 100,
+                shadows: const [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.black,
+                    offset: Offset(2.0, 2.0),
+                  ),
+                ],
               ),
             ),
         ],
@@ -310,8 +365,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 },
                 child: Icon(
                   _flashMode == FlashMode.always
-                      ? Icons.flash_on
-                      : Icons.flash_off,
+                      ? Icons.flash_on_outlined
+                      : Icons.flash_off_outlined,
                   key: ValueKey<FlashMode>(_flashMode),
                   color: _theme.colorScheme.onSurface,
                   size: 24,
@@ -338,12 +393,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 },
                 child: Icon(
                   _timerSeconds == 0
-                      ? Icons.timer_off
+                      ? Icons.timer_off_outlined
                       : _timerSeconds == 3
-                      ? Icons.timer_3
+                      ? Icons.timer_3_outlined
                       : _timerSeconds == 5
                       ? Icons
-                            .timer_10 // Giữ icon timer_10 do không có timer_5
+                            .timer_10_outlined // Giữ icon timer_10 do không có timer_5
                       : Icons.timer_10,
                   color: _timerSeconds == 0
                       ? _theme.colorScheme.onSurface
@@ -352,14 +407,14 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               itemBuilder: (context) => [
-                _buildTimerMenuItem(0, Icons.timer_off),
+                _buildTimerMenuItem(0, Icons.timer_off_outlined),
                 _buildTimerMenuItem(3, Icons.timer_3),
                 _buildTimerMenuItem(10, Icons.timer_10),
               ],
             ),
             IconButton(
               icon: Icon(
-                Icons.settings,
+                Icons.settings_outlined,
                 color: _theme.colorScheme.onSurface,
                 size: 24,
               ),
@@ -383,8 +438,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   _cameras.isNotEmpty &&
                           _cameras[_selectedCameraIndex].lensDirection ==
                               CameraLensDirection.front
-                      ? Icons.camera_front
-                      : Icons.camera_rear,
+                      ? Icons.camera_front_outlined
+                      : Icons.camera_rear_outlined,
                   color: _theme.colorScheme.onSurface,
                   size: 40,
                 ),
@@ -417,7 +472,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
             ),
             IconButton(
               icon: Icon(
-                Icons.color_lens,
+                Icons.color_lens_outlined,
                 color: _theme.colorScheme.onSurface,
                 size: 40,
               ),

@@ -22,8 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(version) => "Phiên bản ${version}";
 
-  static String m1(num, unit, size) =>
-      "Đã dọn dẹp thành công ${num} ${unit} (${size})";
+  static String m1(unit, size, amount) =>
+      "Đã dọn dẹp thành công ${amount} ${unit} (${size})";
 
   static String m2(color) => "Đã chép ${color} vào khay nhớ tạm";
 

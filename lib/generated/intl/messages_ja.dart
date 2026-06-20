@@ -22,7 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(version) => "バージョン ${version}";
 
-  static String m1(num, unit, size) => "${num} ${unit} (${size}) をクリーンアップしました";
+  static String m1(unit, size, amount) =>
+      "${amount} ${unit} (${size}) をクリーンアップしました";
 
   static String m2(color) => "${color} をクリップボードにコピーしました";
 

@@ -57,6 +57,7 @@
   "save": "Save",
   "@save": {},
   "edit": "Edit",
+  "@edit": {},
   "tune": "Tune",
   "@tune": {},
   "brightness": "Brightness",
@@ -159,7 +160,6 @@
   "@filter": {},
   "blur": "Blur",
   "@blur": {},
-  "@edit": {},
   "success": "Success",
   "@success": {},
   "search": "Search",
@@ -270,17 +270,17 @@
   "sizeDesc": "Size Descending",
   "@sizeDesc": {},
   "sizeAsc": "Size Ascending",
+  "@sizeAsc": {},
   "countDesc": "Count Descending",
   "@countDesc": {},
   "countAsc": "Count Ascending",
   "@countAsc": {},
-  "@sizeAsc": {},
-  "cleanedSpaceSuccess": "Successfully cleaned {num} {unit} ({size})",
+  "cleanedSpaceSuccess": "Successfully cleaned {amount} {unit} ({size})",
   "@cleanedSpaceSuccess": {
     "placeholders": {
-      "num": {},
       "unit": {},
-      "size": {}
+      "size": {},
+      "amount": {}
     }
   },
   "media_photo": "Photo",
@@ -898,6 +898,7 @@
   "delete_confirm_message_trash": "Please double-check one last time!\nPhotos will be moved to the device's Trash and can be recovered within 30 days.",
   "@delete_confirm_message_trash": {},
   "delete_confirm_message_permanent": "Please double-check one last time!\nThis action cannot be undone. Photos will be permanently deleted from the device.",
+  "@delete_confirm_message_permanent": {},
   "customThemeDescription": "Tap to select, long press to choose another image",
   "@customThemeDescription": {},
   "bgNone": "None",
@@ -958,11 +959,11 @@
   "failedToLoadColors": "Failed to load colors",
   "@failedToLoadColors": {},
   "colorCopiedSuccess": "Copied {color} to clipboard",
-  "colorCopiedFailure": "Failed to copy color",
   "@colorCopiedSuccess": {
     "placeholders": {
       "color": {}
     }
   },
+  "colorCopiedFailure": "Failed to copy color",
   "@colorCopiedFailure": {}
 }

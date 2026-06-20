@@ -500,7 +500,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           height: 38,
           padding: 8.paddingHorizontal,
           onTap: () {
-            if (color == null) return;
             _cubit.copyColorToClipboard(color: color);
           },
           borderRadius: 20,

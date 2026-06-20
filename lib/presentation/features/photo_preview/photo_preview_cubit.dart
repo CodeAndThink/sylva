@@ -136,7 +136,11 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     }
   }
 
-  void copyColorToClipboard({required Color color}) {
+  void copyColorToClipboard({Color? color}) {
+    if (color == null) {
+      navigator.flushBar.showError(message: S.current.nothingSelectedToCopy);
+      return;
+    }
     try {
       final rgbaString = ColorUtils.colorToRgba(color: color);
       Clipboard.setData(ClipboardData(text: rgbaString));

@@ -24,45 +24,47 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(num, unit, size) => "成功清理 ${num} ${unit} (${size})";
 
-  static String m2(badgeName) => "您刚刚获得了\"${badgeName}\"徽章！";
+  static String m2(color) => "已将 ${color} 复制到剪贴板";
 
-  static String m3(count) => "您刚刚获得了 ${count} 个新徽章！";
+  static String m3(badgeName) => "您刚刚获得了\"${badgeName}\"徽章！";
 
-  static String m4(email) => "无法打开邮件应用。支持邮箱: ${email}";
+  static String m4(count) => "您刚刚获得了 ${count} 个新徽章！";
 
-  static String m5(count) => "删除 (${count})";
+  static String m5(email) => "无法打开邮件应用。支持邮箱: ${email}";
 
-  static String m6(count) => "已删除 ${count} 个项目";
+  static String m6(count) => "删除 (${count})";
 
-  static String m7(count) => "检测到 ${count} 组重复项";
+  static String m7(count) => "已删除 ${count} 个项目";
 
-  static String m8(message) => "错误: ${message}";
+  static String m8(count) => "检测到 ${count} 组重复项";
 
-  static String m9(index, count) => "第 ${index} 组 (${count} 张照片)";
+  static String m9(message) => "错误: ${message}";
 
-  static String m10(level) => "等级 ${level}";
+  static String m10(index, count) => "第 ${index} 组 (${count} 张照片)";
 
-  static String m11(count) => "发现 ${count} 张模糊照片。点击查看。";
+  static String m11(level) => "等级 ${level}";
 
-  static String m12(count) => "发现 ${count} 个文档。点击查看。";
+  static String m12(count) => "发现 ${count} 张模糊照片。点击查看。";
 
-  static String m13(count) => "发现 ${count} 张重复照片。点击查看。";
+  static String m13(count) => "发现 ${count} 个文档。点击查看。";
 
-  static String m14(count) => "发现 ${count} 张含GPS数据的照片。点击查看。";
+  static String m14(count) => "发现 ${count} 张重复照片。点击查看。";
 
-  static String m15(current, total) => "已扫描 ${current}/${total} 张照片";
+  static String m15(count) => "发现 ${count} 张含GPS数据的照片。点击查看。";
 
-  static String m16(percent) => "存储空间即将用完 (${percent}%)，立即清理！";
+  static String m16(current, total) => "已扫描 ${current}/${total} 张照片";
 
-  static String m17(percent) => "已使用 ${percent}%";
+  static String m17(percent) => "存储空间即将用完 (${percent}%)，立即清理！";
 
-  static String m18(days) => "连续 ${days} 天";
+  static String m18(percent) => "已使用 ${percent}%";
 
-  static String m19(count) => "${count} 张照片";
+  static String m19(days) => "连续 ${days} 天";
 
-  static String m20(count, mediaType) => "总计: ${count} ${mediaType} (最近7天)";
+  static String m20(count) => "${count} 张照片";
 
-  static String m21(count, mediaType) => "总计: ${count} ${mediaType} (最近7周)";
+  static String m21(count, mediaType) => "总计: ${count} ${mediaType} (最近7天)";
+
+  static String m22(count, mediaType) => "总计: ${count} ${mediaType} (最近7周)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -177,21 +179,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "cleanedSpaceSuccess": m1,
     "clearSelection": MessageLookupByLibrary.simpleMessage("清除选择"),
     "color": MessageLookupByLibrary.simpleMessage("颜色"),
+    "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("复制颜色失败"),
+    "colorCopiedSuccess": m2,
     "confirmDelete": MessageLookupByLibrary.simpleMessage("确认删除"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "confirmnoMorePhotosToDelete": MessageLookupByLibrary.simpleMessage(
       "没有更多照片可删除",
     ),
-    "congratsBadgeMessage": m2,
+    "congratsBadgeMessage": m3,
     "congratsBadgeTitle": MessageLookupByLibrary.simpleMessage("新徽章！"),
-    "congratsMultipleBadgesMessage": m3,
+    "congratsMultipleBadgesMessage": m4,
     "contactUs": MessageLookupByLibrary.simpleMessage("联系我们"),
     "continueWithFreeVersion": MessageLookupByLibrary.simpleMessage("继续使用免费版"),
     "contrast": MessageLookupByLibrary.simpleMessage("对比度"),
     "contributionGraph": MessageLookupByLibrary.simpleMessage("贡献图"),
     "convertImageFailed": MessageLookupByLibrary.simpleMessage("转换图像失败"),
-    "couldNotOpenEmailApp": m4,
+    "couldNotOpenEmailApp": m5,
     "countAsc": MessageLookupByLibrary.simpleMessage("数量递增"),
     "countDesc": MessageLookupByLibrary.simpleMessage("数量递减"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("创建新图像"),
@@ -221,7 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "此操作无法撤销。您的所有数据和个人信息将从我们的系统中永久删除。\n\n重要提示：删除帐户不会自动取消有效的订阅。请在继续操作前在应用商店中管理并取消您的订阅，以避免意外扣费。",
     ),
     "deleteAccountWarningTitle": MessageLookupByLibrary.simpleMessage("删除帐户"),
-    "deleteSelected": m5,
+    "deleteSelected": m6,
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
     ),
@@ -231,10 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message_trash": MessageLookupByLibrary.simpleMessage(
       "请最后再检查一次！\n照片将被移至设备的垃圾桶，可在30天内恢复。",
     ),
-    "deletedItemsCount": m6,
+    "deletedItemsCount": m7,
     "density": MessageLookupByLibrary.simpleMessage("密度"),
     "deselectAll": MessageLookupByLibrary.simpleMessage("取消全选"),
-    "detectedDuplicateGroups": m7,
+    "detectedDuplicateGroups": m8,
     "deviceIsClean": MessageLookupByLibrary.simpleMessage("您的设备非常干净。"),
     "document": MessageLookupByLibrary.simpleMessage("文档检测"),
     "documentDescription": MessageLookupByLibrary.simpleMessage(
@@ -259,7 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "english": MessageLookupByLibrary.simpleMessage("英语"),
     "enterWatermarkText": MessageLookupByLibrary.simpleMessage("输入水印文本"),
     "eraser": MessageLookupByLibrary.simpleMessage("橡皮擦"),
-    "error": m8,
+    "error": m9,
     "errorEmailNotFound": MessageLookupByLibrary.simpleMessage("错误邮箱未找到"),
     "errorTitle": MessageLookupByLibrary.simpleMessage("错误"),
     "error_unable_to_play_media": MessageLookupByLibrary.simpleMessage(
@@ -334,7 +338,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS 位置数据已移除并另存为副本。",
     ),
-    "groupIndex": m9,
+    "groupIndex": m10,
     "hexagon": MessageLookupByLibrary.simpleMessage("六边形"),
     "history": MessageLookupByLibrary.simpleMessage("历史记录"),
     "historyEarlier": MessageLookupByLibrary.simpleMessage("更早"),
@@ -376,7 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "japanese": MessageLookupByLibrary.simpleMessage("日语"),
     "keepLocalData": MessageLookupByLibrary.simpleMessage("保留本地数据"),
     "language": MessageLookupByLibrary.simpleMessage("语言"),
-    "level": m10,
+    "level": m11,
     "line": MessageLookupByLibrary.simpleMessage("直线"),
     "lineWidth": MessageLookupByLibrary.simpleMessage("线宽"),
     "livePhotos": MessageLookupByLibrary.simpleMessage("实况照片"),
@@ -422,15 +426,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "notEarned": MessageLookupByLibrary.simpleMessage("未满足条件"),
     "notLoggedIn": MessageLookupByLibrary.simpleMessage("未登录 (访客)"),
     "nothingFound": MessageLookupByLibrary.simpleMessage("未找到内容"),
-    "notifScanCompleteBlurry": m11,
-    "notifScanCompleteDocuments": m12,
-    "notifScanCompleteDuplicates": m13,
-    "notifScanCompleteGPS": m14,
+    "notifScanCompleteBlurry": m12,
+    "notifScanCompleteDocuments": m13,
+    "notifScanCompleteDuplicates": m14,
+    "notifScanCompleteGPS": m15,
     "notifScanCompleteNone": MessageLookupByLibrary.simpleMessage(
       "未发现问题。您的相册很干净！",
     ),
     "notifScanCompleteTitle": MessageLookupByLibrary.simpleMessage("扫描完成！"),
-    "notifScanningBody": m15,
+    "notifScanningBody": m16,
     "notifScanningTitle": MessageLookupByLibrary.simpleMessage("正在扫描照片..."),
     "ok": MessageLookupByLibrary.simpleMessage("确定"),
     "oldPassword": MessageLookupByLibrary.simpleMessage("旧密码"),
@@ -561,10 +565,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "使用此按钮扫描您的图库并一次性检测重复项。",
     ),
     "stats": MessageLookupByLibrary.simpleMessage("统计数据"),
-    "storageAlmostFull": m16,
-    "storageUsedPercent": m17,
+    "storageAlmostFull": m17,
+    "storageUsedPercent": m18,
     "streak": MessageLookupByLibrary.simpleMessage("连续"),
-    "streakDays": m18,
+    "streakDays": m19,
     "streaks": MessageLookupByLibrary.simpleMessage("连续记录"),
     "strokeWidth": MessageLookupByLibrary.simpleMessage("笔触宽度"),
     "submitFeedback": MessageLookupByLibrary.simpleMessage("提交反馈"),
@@ -603,9 +607,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "timelineYear": MessageLookupByLibrary.simpleMessage("年"),
     "toggleFill": MessageLookupByLibrary.simpleMessage("切换填充"),
     "tooManyRequests": MessageLookupByLibrary.simpleMessage("请求过多。请稍后再试。"),
-    "totalPhotos": m19,
-    "totalPhotosLast7Days": m20,
-    "totalPhotosLast7Weeks": m21,
+    "totalPhotos": m20,
+    "totalPhotosLast7Days": m21,
+    "totalPhotosLast7Weeks": m22,
     "tue": MessageLookupByLibrary.simpleMessage("二"),
     "tune": MessageLookupByLibrary.simpleMessage("调整"),
     "understood": MessageLookupByLibrary.simpleMessage("知道了"),

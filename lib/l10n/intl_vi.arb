@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "vi",
   "appName": "Sylva",
   "@appName": {},
@@ -943,6 +943,17 @@
   "notifScanCompleteNone": "Không tìm thấy vấn đề. Thư viện ảnh rất sạch!",
   "@notifScanCompleteNone": {},
   "enableNotification": "Bật thông báo",
-  "enableNotificationDescription": "Nhận thông báo tiến trình và kết quả quét."
-,"autoDetectColors":"Tự động phát hiện màu","@autoDetectColors":{},"failedToLoadColors":"Không thể tải màu","@failedToLoadColors":{}
+  "enableNotificationDescription": "Nhận thông báo tiến trình và kết quả quét.",
+  "autoDetectColors": "Tự động phát hiện màu",
+  "@autoDetectColors": {},
+  "failedToLoadColors": "Không thể tải màu",
+  "@failedToLoadColors": {},
+  "colorCopiedSuccess": "Đã chép {color} vào khay nhớ tạm",
+  "colorCopiedFailure": "Sao chép màu thất bại",
+  "@colorCopiedSuccess": {
+    "placeholders": {
+      "color": {}
+    }
+  },
+  "@colorCopiedFailure": {}
 }

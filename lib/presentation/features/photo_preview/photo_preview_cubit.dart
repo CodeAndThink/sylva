@@ -2,10 +2,13 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:palette_generator_master/palette_generator_master.dart';
 import 'package:sylva/core/enums/load_status.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/color_utils.dart';
+import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
@@ -97,9 +100,9 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     try {
       final Map<String, dynamic> params = {
         'imagePath': imagePath,
-        'targetColorValue': targetColor.value,
+        'targetColorValue': targetColor.toARGB32(),
         'threshold': 30.0, // RGB distance threshold
-        'replacementColorValue': replacementColor?.value,
+        'replacementColorValue': replacementColor?.toARGB32(),
       };
 
       final Uint8List result = await compute(_processImageIsolate, params);
@@ -113,6 +116,19 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     } catch (e) {
       debugPrint('Error filtering color: $e');
       safeEmit(state.copyWith(filterColorStatus: LoadStatus.failure));
+    }
+  }
+
+  void copyColorToClipboard({required Color color}) {
+    try {
+      final rgbaString = ColorUtils.colorToRgba(color: color);
+      Clipboard.setData(ClipboardData(text: rgbaString));
+      navigator.flushBar.showSuccess(
+        message: S.current.colorCopiedSuccess(rgbaString),
+      );
+    } catch (e) {
+      debugPrint('Error copying color: $e');
+      navigator.flushBar.showError(message: S.current.colorCopiedFailure);
     }
   }
 }

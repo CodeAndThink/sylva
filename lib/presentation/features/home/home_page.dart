@@ -43,11 +43,13 @@ class __HomeChildPageState extends State<_HomeChildPage>
   int _timerSeconds = 0; // 0 (off), 3, 5, 10
   bool _isCountingDown = false;
   int _countdownSeconds = 0;
+  late final HomeCubit _cubit;
   late ThemeData _theme;
 
   @override
   void initState() {
     super.initState();
+    _cubit = context.read<HomeCubit>();
     WidgetsBinding.instance.addObserver(this);
     _initCamera();
   }
@@ -319,7 +321,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
             ),
             PopupMenuButton<int>(
               menuPadding: EdgeInsets.zero,
-              color: Colors.black38,
+              color: Colors.black54,
               constraints: const BoxConstraints(minWidth: 48, maxWidth: 48),
               borderRadius: 16.borderRadius,
               shape: RoundedRectangleBorder(borderRadius: 16.borderRadius),
@@ -345,7 +347,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                       : Icons.timer_10,
                   color: _timerSeconds == 0
                       ? _theme.colorScheme.onSurface
-                      : Colors.yellowAccent,
+                      : Colors.amber,
                   size: 24,
                 ),
               ),
@@ -361,7 +363,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 color: _theme.colorScheme.onSurface,
                 size: 24,
               ),
-              onPressed: () {},
+              onPressed: () {
+                _cubit.navigator.goToSettings();
+              },
             ),
           ],
         ),
@@ -439,12 +443,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
             borderRadius: 10.borderRadius,
           ),
           child: Center(
-            child: Icon(
-              icon,
-              color: isSelected
-                  ? Colors.yellowAccent
-                  : _theme.colorScheme.onSurface,
-            ),
+            child: Icon(icon, color: isSelected ? Colors.amber : Colors.white),
           ),
         ),
       ),

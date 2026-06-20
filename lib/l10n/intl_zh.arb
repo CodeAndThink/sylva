@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "zh",
   "appName": "Sylva",
   "@appName": {},
@@ -943,6 +943,17 @@
   "notifScanCompleteNone": "未发现问题。您的相册很干净！",
   "@notifScanCompleteNone": {},
   "enableNotification": "启用通知",
-  "enableNotificationDescription": "接收扫描进度和完成提醒。"
-,"autoDetectColors":"自动检测颜色","@autoDetectColors":{},"failedToLoadColors":"加载颜色失败","@failedToLoadColors":{}
+  "enableNotificationDescription": "接收扫描进度和完成提醒。",
+  "autoDetectColors": "自动检测颜色",
+  "@autoDetectColors": {},
+  "failedToLoadColors": "加载颜色失败",
+  "@failedToLoadColors": {},
+  "colorCopiedSuccess": "已将 {color} 复制到剪贴板",
+  "colorCopiedFailure": "复制颜色失败",
+  "@colorCopiedSuccess": {
+    "placeholders": {
+      "color": {}
+    }
+  },
+  "@colorCopiedFailure": {}
 }

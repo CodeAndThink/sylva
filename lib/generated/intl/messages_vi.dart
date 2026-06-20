@@ -25,49 +25,51 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(num, unit, size) =>
       "Đã dọn dẹp thành công ${num} ${unit} (${size})";
 
-  static String m2(badgeName) => "Bạn vừa đạt được huy hiệu \"${badgeName}\"!";
+  static String m2(color) => "Đã chép ${color} vào khay nhớ tạm";
 
-  static String m3(count) => "Bạn vừa đạt được ${count} huy hiệu mới!";
+  static String m3(badgeName) => "Bạn vừa đạt được huy hiệu \"${badgeName}\"!";
 
-  static String m4(email) =>
+  static String m4(count) => "Bạn vừa đạt được ${count} huy hiệu mới!";
+
+  static String m5(email) =>
       "Không thể mở ứng dụng Email. Email hỗ trợ: ${email}";
 
-  static String m5(count) => "Xóa (${count})";
+  static String m6(count) => "Xóa (${count})";
 
-  static String m6(count) => "Đã xóa ${count} ảnh";
+  static String m7(count) => "Đã xóa ${count} ảnh";
 
-  static String m7(count) => "Phát hiện ${count} nhóm ảnh tương đồng";
+  static String m8(count) => "Phát hiện ${count} nhóm ảnh tương đồng";
 
-  static String m8(message) => "Lỗi: ${message}";
+  static String m9(message) => "Lỗi: ${message}";
 
-  static String m9(index, count) => "Nhóm ${index} (${count} ảnh)";
+  static String m10(index, count) => "Nhóm ${index} (${count} ảnh)";
 
-  static String m10(level) => "Cấp ${level}";
+  static String m11(level) => "Cấp ${level}";
 
-  static String m11(count) => "Tìm thấy ${count} ảnh mờ. Nhấn để xem.";
+  static String m12(count) => "Tìm thấy ${count} ảnh mờ. Nhấn để xem.";
 
-  static String m12(count) => "Tìm thấy ${count} tài liệu. Nhấn để xem.";
+  static String m13(count) => "Tìm thấy ${count} tài liệu. Nhấn để xem.";
 
-  static String m13(count) => "Tìm thấy ${count} ảnh trùng lặp. Nhấn để xem.";
+  static String m14(count) => "Tìm thấy ${count} ảnh trùng lặp. Nhấn để xem.";
 
-  static String m14(count) =>
+  static String m15(count) =>
       "Tìm thấy ${count} ảnh có dữ liệu GPS. Nhấn để xem.";
 
-  static String m15(current, total) => "${current}/${total} ảnh đã quét";
+  static String m16(current, total) => "${current}/${total} ảnh đã quét";
 
-  static String m16(percent) =>
+  static String m17(percent) =>
       "Dung lượng sắp hết (${percent}%), hãy dọn dẹp ngay!";
 
-  static String m17(percent) => "Đã dùng ${percent}%";
+  static String m18(percent) => "Đã dùng ${percent}%";
 
-  static String m18(days) => "${days} Ngày liên tiếp";
+  static String m19(days) => "${days} Ngày liên tiếp";
 
-  static String m19(count) => "${count} ảnh";
-
-  static String m20(count, mediaType) =>
-      "Tổng: ${count} ${mediaType} (7 ngày qua)";
+  static String m20(count) => "${count} ảnh";
 
   static String m21(count, mediaType) =>
+      "Tổng: ${count} ${mediaType} (7 ngày qua)";
+
+  static String m22(count, mediaType) =>
       "Tổng: ${count} ${mediaType} (7 tuần qua)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -251,6 +253,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "cleanedSpaceSuccess": m1,
     "clearSelection": MessageLookupByLibrary.simpleMessage("Bỏ chọn tất cả"),
     "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
+    "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
+      "Sao chép màu thất bại",
+    ),
+    "colorCopiedSuccess": m2,
     "confirmDelete": MessageLookupByLibrary.simpleMessage("Xác nhận xóa"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
@@ -261,9 +267,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmnoMorePhotosToDelete": MessageLookupByLibrary.simpleMessage(
       "Không còn ảnh nào để xoá",
     ),
-    "congratsBadgeMessage": m2,
+    "congratsBadgeMessage": m3,
     "congratsBadgeTitle": MessageLookupByLibrary.simpleMessage("Huy hiệu mới!"),
-    "congratsMultipleBadgesMessage": m3,
+    "congratsMultipleBadgesMessage": m4,
     "contactUs": MessageLookupByLibrary.simpleMessage("Liên hệ với chúng tôi"),
     "continueWithFreeVersion": MessageLookupByLibrary.simpleMessage(
       "Tiếp tục với phiên bản miễn phí",
@@ -275,7 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "convertImageFailed": MessageLookupByLibrary.simpleMessage(
       "Không thể chuyển đổi ảnh",
     ),
-    "couldNotOpenEmailApp": m4,
+    "couldNotOpenEmailApp": m5,
     "countAsc": MessageLookupByLibrary.simpleMessage("Số lượng tăng dần"),
     "countDesc": MessageLookupByLibrary.simpleMessage("Số lượng giảm dần"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
@@ -309,7 +315,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteAccountWarningTitle": MessageLookupByLibrary.simpleMessage(
       "Xóa tài khoản",
     ),
-    "deleteSelected": m5,
+    "deleteSelected": m6,
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
     ),
@@ -319,10 +325,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message_trash": MessageLookupByLibrary.simpleMessage(
       "Vui lòng kiểm tra lại lần cuối!\nẢnh sẽ được chuyển vào Thùng rác của thiết bị và có thể khôi phục trong vòng 30 ngày.",
     ),
-    "deletedItemsCount": m6,
+    "deletedItemsCount": m7,
     "density": MessageLookupByLibrary.simpleMessage("Mật độ"),
     "deselectAll": MessageLookupByLibrary.simpleMessage("Bỏ chọn tất cả"),
-    "detectedDuplicateGroups": m7,
+    "detectedDuplicateGroups": m8,
     "deviceIsClean": MessageLookupByLibrary.simpleMessage(
       "Thiết bị của bạn rất sạch sẽ.",
     ),
@@ -359,7 +365,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nhập văn bản watermark",
     ),
     "eraser": MessageLookupByLibrary.simpleMessage("Tẩy"),
-    "error": m8,
+    "error": m9,
     "errorEmailNotFound": MessageLookupByLibrary.simpleMessage(
       "Email hỗ trợ không được tìm thấy",
     ),
@@ -472,7 +478,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "Đã xóa dữ liệu vị trí và lưu thành bản sao mới.",
     ),
-    "groupIndex": m9,
+    "groupIndex": m10,
     "hexagon": MessageLookupByLibrary.simpleMessage("Hình lục giác"),
     "history": MessageLookupByLibrary.simpleMessage("Lịch sử"),
     "historyEarlier": MessageLookupByLibrary.simpleMessage("Cũ hơn"),
@@ -530,7 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Giữ dữ liệu trên máy",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
-    "level": m10,
+    "level": m11,
     "line": MessageLookupByLibrary.simpleMessage("Đường thẳng"),
     "lineWidth": MessageLookupByLibrary.simpleMessage("Độ dày nét"),
     "livePhotos": MessageLookupByLibrary.simpleMessage("Ảnh Live"),
@@ -608,17 +614,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Chưa đăng nhập (Khách)",
     ),
     "nothingFound": MessageLookupByLibrary.simpleMessage("Không tìm thấy gì"),
-    "notifScanCompleteBlurry": m11,
-    "notifScanCompleteDocuments": m12,
-    "notifScanCompleteDuplicates": m13,
-    "notifScanCompleteGPS": m14,
+    "notifScanCompleteBlurry": m12,
+    "notifScanCompleteDocuments": m13,
+    "notifScanCompleteDuplicates": m14,
+    "notifScanCompleteGPS": m15,
     "notifScanCompleteNone": MessageLookupByLibrary.simpleMessage(
       "Không tìm thấy vấn đề. Thư viện ảnh rất sạch!",
     ),
     "notifScanCompleteTitle": MessageLookupByLibrary.simpleMessage(
       "Quét hoàn tất!",
     ),
-    "notifScanningBody": m15,
+    "notifScanningBody": m16,
     "notifScanningTitle": MessageLookupByLibrary.simpleMessage(
       "Đang quét ảnh...",
     ),
@@ -807,10 +813,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nút này dùng để quét thư viện và tìm ảnh trùng chỉ với vài thao tác.",
     ),
     "stats": MessageLookupByLibrary.simpleMessage("Thống kê"),
-    "storageAlmostFull": m16,
-    "storageUsedPercent": m17,
+    "storageAlmostFull": m17,
+    "storageUsedPercent": m18,
     "streak": MessageLookupByLibrary.simpleMessage("Chuỗi ngày"),
-    "streakDays": m18,
+    "streakDays": m19,
     "streaks": MessageLookupByLibrary.simpleMessage("Chuỗi ngày"),
     "strokeWidth": MessageLookupByLibrary.simpleMessage("Độ dày viền"),
     "submitFeedback": MessageLookupByLibrary.simpleMessage("Gửi phản hồi"),
@@ -859,9 +865,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tooManyRequests": MessageLookupByLibrary.simpleMessage(
       "Quá nhiều yêu cầu. Vui lòng thử lại sau.",
     ),
-    "totalPhotos": m19,
-    "totalPhotosLast7Days": m20,
-    "totalPhotosLast7Weeks": m21,
+    "totalPhotos": m20,
+    "totalPhotosLast7Days": m21,
+    "totalPhotosLast7Weeks": m22,
     "tue": MessageLookupByLibrary.simpleMessage("Th 3"),
     "tune": MessageLookupByLibrary.simpleMessage("Điều chỉnh"),
     "understood": MessageLookupByLibrary.simpleMessage("ĐÃ HIỂU"),

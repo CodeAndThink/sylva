@@ -3603,6 +3603,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Copied {color} to clipboard`
+  String colorCopiedSuccess(Object color) {
+    return Intl.message(
+      'Copied $color to clipboard',
+      name: 'colorCopiedSuccess',
+      desc: '',
+      args: [color],
+    );
+  }
+
+  /// `Failed to copy color`
+  String get colorCopiedFailure {
+    return Intl.message(
+      'Failed to copy color',
+      name: 'colorCopiedFailure',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

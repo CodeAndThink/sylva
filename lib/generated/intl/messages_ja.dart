@@ -24,46 +24,48 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(num, unit, size) => "${num} ${unit} (${size}) をクリーンアップしました";
 
-  static String m2(badgeName) => "「${badgeName}」バッジを獲得しました！";
+  static String m2(color) => "${color} をクリップボードにコピーしました";
 
-  static String m3(count) => "${count} 個の新しいバッジを獲得しました！";
+  static String m3(badgeName) => "「${badgeName}」バッジを獲得しました！";
 
-  static String m4(email) => "メールアプリを開けませんでした。サポートメール: ${email}";
+  static String m4(count) => "${count} 個の新しいバッジを獲得しました！";
 
-  static String m5(count) => "削除 (${count})";
+  static String m5(email) => "メールアプリを開けませんでした。サポートメール: ${email}";
 
-  static String m6(count) => "${count} 個の項目を削除しました";
+  static String m6(count) => "削除 (${count})";
 
-  static String m7(count) => "${count}組の重複を検出しました";
+  static String m7(count) => "${count} 個の項目を削除しました";
 
-  static String m8(message) => "エラー: ${message}";
+  static String m8(count) => "${count}組の重複を検出しました";
 
-  static String m9(index, count) => "グループ ${index} (${count}枚の写真)";
+  static String m9(message) => "エラー: ${message}";
 
-  static String m10(level) => "レベル ${level}";
+  static String m10(index, count) => "グループ ${index} (${count}枚の写真)";
 
-  static String m11(count) => "ぼやけた写真が${count}枚見つかりました。タップして確認。";
+  static String m11(level) => "レベル ${level}";
 
-  static String m12(count) => "文書が${count}件見つかりました。タップして確認。";
+  static String m12(count) => "ぼやけた写真が${count}枚見つかりました。タップして確認。";
 
-  static String m13(count) => "重複写真が${count}枚見つかりました。タップして確認。";
+  static String m13(count) => "文書が${count}件見つかりました。タップして確認。";
 
-  static String m14(count) => "GPS付き写真が${count}枚見つかりました。タップして確認。";
+  static String m14(count) => "重複写真が${count}枚見つかりました。タップして確認。";
 
-  static String m15(current, total) => "${current}/${total} 枚スキャン済み";
+  static String m15(count) => "GPS付き写真が${count}枚見つかりました。タップして確認。";
 
-  static String m16(percent) =>
+  static String m16(current, total) => "${current}/${total} 枚スキャン済み";
+
+  static String m17(percent) =>
       "ストレージがほぼいっぱいです (${percent}%)。今すぐクリーンアップしてください！";
 
-  static String m17(percent) => "${percent}% 使用済み";
+  static String m18(percent) => "${percent}% 使用済み";
 
-  static String m18(days) => "${days}日連続";
+  static String m19(days) => "${days}日連続";
 
-  static String m19(count) => "${count} 枚の写真";
+  static String m20(count) => "${count} 枚の写真";
 
-  static String m20(count, mediaType) => "合計: ${count} ${mediaType} (過去7日間)";
+  static String m21(count, mediaType) => "合計: ${count} ${mediaType} (過去7日間)";
 
-  static String m21(count, mediaType) => "合計: ${count} ${mediaType} (過去7週間)";
+  static String m22(count, mediaType) => "合計: ${count} ${mediaType} (過去7週間)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -204,6 +206,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "cleanedSpaceSuccess": m1,
     "clearSelection": MessageLookupByLibrary.simpleMessage("選択をクリア"),
     "color": MessageLookupByLibrary.simpleMessage("色"),
+    "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
+    "colorCopiedSuccess": m2,
     "confirmDelete": MessageLookupByLibrary.simpleMessage("削除の確認"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
@@ -212,15 +216,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmnoMorePhotosToDelete": MessageLookupByLibrary.simpleMessage(
       "削除する写真はもうありません",
     ),
-    "congratsBadgeMessage": m2,
+    "congratsBadgeMessage": m3,
     "congratsBadgeTitle": MessageLookupByLibrary.simpleMessage("新しいバッジ！"),
-    "congratsMultipleBadgesMessage": m3,
+    "congratsMultipleBadgesMessage": m4,
     "contactUs": MessageLookupByLibrary.simpleMessage("お問い合わせ"),
     "continueWithFreeVersion": MessageLookupByLibrary.simpleMessage("無料版を続ける"),
     "contrast": MessageLookupByLibrary.simpleMessage("コントラスト"),
     "contributionGraph": MessageLookupByLibrary.simpleMessage("コントリビューショングラフ"),
     "convertImageFailed": MessageLookupByLibrary.simpleMessage("画像の変換に失敗しました"),
-    "couldNotOpenEmailApp": m4,
+    "couldNotOpenEmailApp": m5,
     "countAsc": MessageLookupByLibrary.simpleMessage("数（昇順）"),
     "countDesc": MessageLookupByLibrary.simpleMessage("数（降順）"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
@@ -254,7 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteAccountWarningTitle": MessageLookupByLibrary.simpleMessage(
       "アカウントを削除",
     ),
-    "deleteSelected": m5,
+    "deleteSelected": m6,
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
     ),
@@ -264,10 +268,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message_trash": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度ご確認ください！\n写真はデバイスのゴミ箱に移動され、30日以内であれば復元可能です。",
     ),
-    "deletedItemsCount": m6,
+    "deletedItemsCount": m7,
     "density": MessageLookupByLibrary.simpleMessage("密度"),
     "deselectAll": MessageLookupByLibrary.simpleMessage("すべて選択解除"),
-    "detectedDuplicateGroups": m7,
+    "detectedDuplicateGroups": m8,
     "deviceIsClean": MessageLookupByLibrary.simpleMessage("デバイスは非常に綺麗です。"),
     "document": MessageLookupByLibrary.simpleMessage("ドキュメント検出"),
     "documentDescription": MessageLookupByLibrary.simpleMessage(
@@ -296,7 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "english": MessageLookupByLibrary.simpleMessage("英語"),
     "enterWatermarkText": MessageLookupByLibrary.simpleMessage("透かしテキストを入力"),
     "eraser": MessageLookupByLibrary.simpleMessage("消しゴム"),
-    "error": m8,
+    "error": m9,
     "errorEmailNotFound": MessageLookupByLibrary.simpleMessage(
       "エラー: メールが見つかりません",
     ),
@@ -391,7 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS位置データが削除され、コピーとして保存されました。",
     ),
-    "groupIndex": m9,
+    "groupIndex": m10,
     "hexagon": MessageLookupByLibrary.simpleMessage("六角形"),
     "history": MessageLookupByLibrary.simpleMessage("履歴"),
     "historyEarlier": MessageLookupByLibrary.simpleMessage("以前"),
@@ -445,7 +449,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "japanese": MessageLookupByLibrary.simpleMessage("日本語"),
     "keepLocalData": MessageLookupByLibrary.simpleMessage("ローカルデータを保持"),
     "language": MessageLookupByLibrary.simpleMessage("言語"),
-    "level": m10,
+    "level": m11,
     "line": MessageLookupByLibrary.simpleMessage("直線"),
     "lineWidth": MessageLookupByLibrary.simpleMessage("線の太さ"),
     "livePhotos": MessageLookupByLibrary.simpleMessage("ライブフォト"),
@@ -501,15 +505,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "notEarned": MessageLookupByLibrary.simpleMessage("条件未達成"),
     "notLoggedIn": MessageLookupByLibrary.simpleMessage("未ログイン（ゲスト）"),
     "nothingFound": MessageLookupByLibrary.simpleMessage("何も見つかりませんでした"),
-    "notifScanCompleteBlurry": m11,
-    "notifScanCompleteDocuments": m12,
-    "notifScanCompleteDuplicates": m13,
-    "notifScanCompleteGPS": m14,
+    "notifScanCompleteBlurry": m12,
+    "notifScanCompleteDocuments": m13,
+    "notifScanCompleteDuplicates": m14,
+    "notifScanCompleteGPS": m15,
     "notifScanCompleteNone": MessageLookupByLibrary.simpleMessage(
       "問題は見つかりませんでした。ギャラリーはきれいです！",
     ),
     "notifScanCompleteTitle": MessageLookupByLibrary.simpleMessage("スキャン完了！"),
-    "notifScanningBody": m15,
+    "notifScanningBody": m16,
     "notifScanningTitle": MessageLookupByLibrary.simpleMessage("写真をスキャン中..."),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "oldPassword": MessageLookupByLibrary.simpleMessage("古いパスワード"),
@@ -664,10 +668,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "このボタンを使用してライブラリをスキャンし、一括で重複を検出します。",
     ),
     "stats": MessageLookupByLibrary.simpleMessage("統計"),
-    "storageAlmostFull": m16,
-    "storageUsedPercent": m17,
+    "storageAlmostFull": m17,
+    "storageUsedPercent": m18,
     "streak": MessageLookupByLibrary.simpleMessage("連続"),
-    "streakDays": m18,
+    "streakDays": m19,
     "streaks": MessageLookupByLibrary.simpleMessage("連続記録"),
     "strokeWidth": MessageLookupByLibrary.simpleMessage("線の幅"),
     "submitFeedback": MessageLookupByLibrary.simpleMessage("フィードバックを送信"),
@@ -708,9 +712,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tooManyRequests": MessageLookupByLibrary.simpleMessage(
       "リクエストが多すぎます。後でもう一度お試しください。",
     ),
-    "totalPhotos": m19,
-    "totalPhotosLast7Days": m20,
-    "totalPhotosLast7Weeks": m21,
+    "totalPhotos": m20,
+    "totalPhotosLast7Days": m21,
+    "totalPhotosLast7Weeks": m22,
     "tue": MessageLookupByLibrary.simpleMessage("火"),
     "tune": MessageLookupByLibrary.simpleMessage("調整"),
     "understood": MessageLookupByLibrary.simpleMessage("了解"),

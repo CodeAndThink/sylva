@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ja",
   "appName": "Sylva",
   "@appName": {},
@@ -943,6 +943,17 @@
   "notifScanCompleteNone": "問題は見つかりませんでした。ギャラリーはきれいです！",
   "@notifScanCompleteNone": {},
   "enableNotification": "通知を有効にする",
-  "enableNotificationDescription": "スキャンの進行状況と完了の通知を受け取ります。"
-,"autoDetectColors":"色を自動検出","@autoDetectColors":{},"failedToLoadColors":"色の読み込みに失敗しました","@failedToLoadColors":{}
+  "enableNotificationDescription": "スキャンの進行状況と完了の通知を受け取ります。",
+  "autoDetectColors": "色を自動検出",
+  "@autoDetectColors": {},
+  "failedToLoadColors": "色の読み込みに失敗しました",
+  "@failedToLoadColors": {},
+  "colorCopiedSuccess": "{color} をクリップボードにコピーしました",
+  "colorCopiedFailure": "色のコピーに失敗しました",
+  "@colorCopiedSuccess": {
+    "placeholders": {
+      "color": {}
+    }
+  },
+  "@colorCopiedFailure": {}
 }

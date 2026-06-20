@@ -25,49 +25,51 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(num, unit, size) =>
       "Successfully cleaned ${num} ${unit} (${size})";
 
-  static String m2(badgeName) => "You just earned the \"${badgeName}\" badge!";
+  static String m2(color) => "Copied ${color} to clipboard";
 
-  static String m3(count) => "You just earned ${count} new badges!";
+  static String m3(badgeName) => "You just earned the \"${badgeName}\" badge!";
 
-  static String m4(email) =>
+  static String m4(count) => "You just earned ${count} new badges!";
+
+  static String m5(email) =>
       "Could not open email app. Support email: ${email}";
 
-  static String m5(count) => "Delete (${count})";
+  static String m6(count) => "Delete (${count})";
 
-  static String m6(count) => "Deleted ${count} items";
+  static String m7(count) => "Deleted ${count} items";
 
-  static String m7(count) => "Detected ${count} duplicate groups";
+  static String m8(count) => "Detected ${count} duplicate groups";
 
-  static String m8(message) => "Error: ${message}";
+  static String m9(message) => "Error: ${message}";
 
-  static String m9(index, count) => "Group ${index} (${count} photos)";
+  static String m10(index, count) => "Group ${index} (${count} photos)";
 
-  static String m10(level) => "Level ${level}";
+  static String m11(level) => "Level ${level}";
 
-  static String m11(count) => "Found ${count} blurry photos. Tap to review.";
+  static String m12(count) => "Found ${count} blurry photos. Tap to review.";
 
-  static String m12(count) => "Found ${count} documents. Tap to review.";
+  static String m13(count) => "Found ${count} documents. Tap to review.";
 
-  static String m13(count) => "Found ${count} duplicate photos. Tap to review.";
+  static String m14(count) => "Found ${count} duplicate photos. Tap to review.";
 
-  static String m14(count) =>
+  static String m15(count) =>
       "Found ${count} photos with GPS data. Tap to review.";
 
-  static String m15(current, total) => "${current}/${total} photos scanned";
+  static String m16(current, total) => "${current}/${total} photos scanned";
 
-  static String m16(percent) =>
+  static String m17(percent) =>
       "Storage almost full (${percent}%), clean up now!";
 
-  static String m17(percent) => "${percent}% Used";
+  static String m18(percent) => "${percent}% Used";
 
-  static String m18(days) => "${days} Days Streak";
+  static String m19(days) => "${days} Days Streak";
 
-  static String m19(count) => "${count} photos";
-
-  static String m20(count, mediaType) =>
-      "Total: ${count} ${mediaType} (last 7 days)";
+  static String m20(count) => "${count} photos";
 
   static String m21(count, mediaType) =>
+      "Total: ${count} ${mediaType} (last 7 days)";
+
+  static String m22(count, mediaType) =>
       "Total: ${count} ${mediaType} (last 7 weeks)";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -243,6 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "cleanedSpaceSuccess": m1,
     "clearSelection": MessageLookupByLibrary.simpleMessage("Clear selection"),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
+    "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
+      "Failed to copy color",
+    ),
+    "colorCopiedSuccess": m2,
     "confirmDelete": MessageLookupByLibrary.simpleMessage("Confirm delete"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
@@ -251,9 +257,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmnoMorePhotosToDelete": MessageLookupByLibrary.simpleMessage(
       "No more photos to delete",
     ),
-    "congratsBadgeMessage": m2,
+    "congratsBadgeMessage": m3,
     "congratsBadgeTitle": MessageLookupByLibrary.simpleMessage("New Badge!"),
-    "congratsMultipleBadgesMessage": m3,
+    "congratsMultipleBadgesMessage": m4,
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
     "continueWithFreeVersion": MessageLookupByLibrary.simpleMessage(
       "Continue with Free Version",
@@ -265,7 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "convertImageFailed": MessageLookupByLibrary.simpleMessage(
       "Failed to convert image",
     ),
-    "couldNotOpenEmailApp": m4,
+    "couldNotOpenEmailApp": m5,
     "countAsc": MessageLookupByLibrary.simpleMessage("Count Ascending"),
     "countDesc": MessageLookupByLibrary.simpleMessage("Count Descending"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
@@ -299,7 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteAccountWarningTitle": MessageLookupByLibrary.simpleMessage(
       "Delete Account",
     ),
-    "deleteSelected": m5,
+    "deleteSelected": m6,
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
     ),
@@ -309,10 +315,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message_trash": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nPhotos will be moved to the device\'s Trash and can be recovered within 30 days.",
     ),
-    "deletedItemsCount": m6,
+    "deletedItemsCount": m7,
     "density": MessageLookupByLibrary.simpleMessage("Density"),
     "deselectAll": MessageLookupByLibrary.simpleMessage("Deselect All"),
-    "detectedDuplicateGroups": m7,
+    "detectedDuplicateGroups": m8,
     "deviceIsClean": MessageLookupByLibrary.simpleMessage(
       "Your device is very clean.",
     ),
@@ -351,7 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter watermark text",
     ),
     "eraser": MessageLookupByLibrary.simpleMessage("Eraser"),
-    "error": m8,
+    "error": m9,
     "errorEmailNotFound": MessageLookupByLibrary.simpleMessage(
       "Error email not found",
     ),
@@ -460,7 +466,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS location data removed and saved as a new copy.",
     ),
-    "groupIndex": m9,
+    "groupIndex": m10,
     "hexagon": MessageLookupByLibrary.simpleMessage("Hexagon"),
     "history": MessageLookupByLibrary.simpleMessage("History"),
     "historyEarlier": MessageLookupByLibrary.simpleMessage("Earlier"),
@@ -516,7 +522,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "japanese": MessageLookupByLibrary.simpleMessage("Japanese"),
     "keepLocalData": MessageLookupByLibrary.simpleMessage("Keep Local Data"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
-    "level": m10,
+    "level": m11,
     "line": MessageLookupByLibrary.simpleMessage("Line"),
     "lineWidth": MessageLookupByLibrary.simpleMessage("Line width"),
     "livePhotos": MessageLookupByLibrary.simpleMessage("Live Photos"),
@@ -592,17 +598,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Not logged in (Guest)",
     ),
     "nothingFound": MessageLookupByLibrary.simpleMessage("Nothing found"),
-    "notifScanCompleteBlurry": m11,
-    "notifScanCompleteDocuments": m12,
-    "notifScanCompleteDuplicates": m13,
-    "notifScanCompleteGPS": m14,
+    "notifScanCompleteBlurry": m12,
+    "notifScanCompleteDocuments": m13,
+    "notifScanCompleteDuplicates": m14,
+    "notifScanCompleteGPS": m15,
     "notifScanCompleteNone": MessageLookupByLibrary.simpleMessage(
       "No issues found. Your gallery is clean!",
     ),
     "notifScanCompleteTitle": MessageLookupByLibrary.simpleMessage(
       "Scan complete!",
     ),
-    "notifScanningBody": m15,
+    "notifScanningBody": m16,
     "notifScanningTitle": MessageLookupByLibrary.simpleMessage(
       "Scanning photos...",
     ),
@@ -789,10 +795,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Use this button to scan your library and detect duplicates in one flow.",
     ),
     "stats": MessageLookupByLibrary.simpleMessage("Stats"),
-    "storageAlmostFull": m16,
-    "storageUsedPercent": m17,
+    "storageAlmostFull": m17,
+    "storageUsedPercent": m18,
     "streak": MessageLookupByLibrary.simpleMessage("Streak"),
-    "streakDays": m18,
+    "streakDays": m19,
     "streaks": MessageLookupByLibrary.simpleMessage("Streaks"),
     "strokeWidth": MessageLookupByLibrary.simpleMessage("Stroke Width"),
     "submitFeedback": MessageLookupByLibrary.simpleMessage("Submit Feedback"),
@@ -837,9 +843,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tooManyRequests": MessageLookupByLibrary.simpleMessage(
       "Too many requests. Please try again later.",
     ),
-    "totalPhotos": m19,
-    "totalPhotosLast7Days": m20,
-    "totalPhotosLast7Weeks": m21,
+    "totalPhotos": m20,
+    "totalPhotosLast7Days": m21,
+    "totalPhotosLast7Weeks": m22,
     "tue": MessageLookupByLibrary.simpleMessage("Tue"),
     "tune": MessageLookupByLibrary.simpleMessage("Tune"),
     "understood": MessageLookupByLibrary.simpleMessage("GOT IT"),

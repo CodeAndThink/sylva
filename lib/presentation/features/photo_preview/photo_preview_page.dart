@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/color_utils.dart';
@@ -39,7 +40,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   bool _showMagnifier = false;
   Offset _touchPosition = Offset.zero;
   late ThemeData _theme;
-  late S _l10n;
 
   @override
   void initState() {
@@ -50,7 +50,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
-    _l10n = S.of(context);
     return AppScaffold(showAppBar: false, body: _buildBody());
   }
 
@@ -99,7 +98,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
               children: [
                 Positioned.fill(child: _buildImage()),
                 Positioned(
-                  top: 8,
+                  bottom: 8,
                   left: 8,
                   right: 8,
                   child: _buildColorDetails(),
@@ -123,16 +122,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       ),
                     ),
                   ),
-                Positioned(
-                  bottom: 12,
-                  right: 12,
-                  child: IconButton(
-                    onPressed: () {
-                      _cubit.extractPalette(widget.imagePath);
-                    },
-                    icon: Icon(Icons.auto_awesome, color: Colors.amberAccent),
-                  ),
-                ),
               ],
             ),
           );
@@ -265,6 +254,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         if (color == null) return const SizedBox.shrink();
 
         return AppTransparentContainer(
+          onTap: () {
+            _cubit.copyColorToClipboard(color: color);
+          },
           borderRadius: 20,
           padding: 8.paddingAll,
           child: Row(
@@ -272,22 +264,22 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             children: [
               _buildColorDetailItem(
                 label: 'R',
-                value: color.red,
+                value: (color.r * 255.0).round().clamp(0, 255),
                 labelColor: Colors.red,
               ),
               _buildColorDetailItem(
                 label: 'G',
-                value: color.green,
+                value: (color.g * 255.0).round().clamp(0, 255),
                 labelColor: Colors.green,
               ),
               _buildColorDetailItem(
                 label: 'B',
-                value: color.blue,
+                value: (color.b * 255.0).round().clamp(0, 255),
                 labelColor: Colors.blue,
               ),
               _buildColorDetailItem(
                 label: 'A',
-                value: color.alpha,
+                value: (color.a * 255.0).round().clamp(0, 255),
                 labelColor: Theme.of(context).colorScheme.onSurface,
               ),
             ],
@@ -321,18 +313,34 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        IconButton(
-          onPressed: () {
-            _cubit.navigator.safePop();
-          },
-          icon: const Icon(Icons.arrow_back, size: 36),
+        Tooltip(
+          message: S.of(context).back,
+          child: IconButton(
+            onPressed: () {
+              _cubit.navigator.safePop();
+            },
+            icon: const Icon(Icons.navigate_before_rounded, size: 36),
+          ),
         ),
         48.width,
-        IconButton(
-          onPressed: () {
-            _cubit.navigator.safePop();
-          },
-          icon: const Icon(Icons.save, size: 36),
+        Tooltip(
+          message: S.of(context).save,
+          child: IconButton(
+            onPressed: () {
+              _cubit.navigator.safePop();
+            },
+            icon: const Icon(Icons.save, size: 24),
+          ),
+        ),
+        48.width,
+        Tooltip(
+          message: S.of(context).autoDetectColors,
+          child: IconButton(
+            onPressed: () {
+              _cubit.extractPalette(widget.imagePath);
+            },
+            icon: Icon(Icons.auto_awesome, color: Colors.amberAccent),
+          ),
         ),
       ],
     );

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/navigation/app_router.dart';
@@ -240,7 +241,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
           child: Column(
             children: [
               Expanded(child: _buildCameraPreview()),
-              12.height,
               SizedBox(height: 120, child: _buildBottomActions()),
             ],
           ),
@@ -253,8 +253,10 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_isCameraInitialized && _controller != null) {
       return Stack(
         children: [
-          Positioned.fill(
-            child: Center(
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: Align(
+              alignment: Alignment.bottomCenter,
               child: AppTransparentContainer(
                 padding: EdgeInsets.zero,
                 child: GestureDetector(
@@ -279,30 +281,36 @@ class __HomeChildPageState extends State<_HomeChildPage>
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: GestureDetector(
-              onTap: () {
-                if (_controller == null || !_isCameraInitialized) return;
-                setState(() {
-                  _currentScale = 1.0;
-                  _baseScale = 1.0;
-                });
-                _controller!.setZoomLevel(1.0);
-              },
-              child: Container(
-                margin: 8.paddingBottom,
-                width: 50,
-                padding: 5.paddingAll,
-                decoration: BoxDecoration(
-                  color: Colors.black38,
+          Padding(
+            padding: 8.paddingBottom,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
                   borderRadius: 25.borderRadius,
-                ),
-                child: Text(
-                  '${_currentScale.toStringAsFixed(1)}x',
-                  textAlign: TextAlign.center,
-                  style: _theme.textTheme.titleSmall?.copyWith(
-                    color: Colors.white,
+                  onTap: () {
+                    if (_controller == null || !_isCameraInitialized) return;
+                    setState(() {
+                      _currentScale = 1.0;
+                      _baseScale = 1.0;
+                    });
+                    _controller!.setZoomLevel(1.0);
+                  },
+                  child: Container(
+                    width: 50,
+                    padding: 5.paddingAll,
+                    decoration: BoxDecoration(
+                      color: Colors.black38,
+                      borderRadius: 25.borderRadius,
+                    ),
+                    child: Text(
+                      '${_currentScale.toStringAsFixed(1)}x',
+                      textAlign: TextAlign.center,
+                      style: _theme.textTheme.titleSmall?.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -345,7 +353,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
       );
     } else {
       return AppTransparentContainer(
-        child: const Center(child: CircularProgressIndicator()),
+        child: Center(child: SpinKitRipple(color: _theme.colorScheme.primary)),
       );
     }
   }
@@ -459,9 +467,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
                 child: _isCapturing
                     ? Center(
-                        child: CircularProgressIndicator(
-                          color: _theme.colorScheme.surface,
-                        ),
+                        child: SpinKitRipple(color: _theme.colorScheme.surface),
                       )
                     : Icon(
                         Icons.camera_alt,

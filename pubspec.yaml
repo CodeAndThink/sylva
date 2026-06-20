@@ -24,6 +24,7 @@ dependencies:
   shimmer: ^3.0.0
   fl_chart: ^1.2.0
   palette_generator_master: ^1.1.0
+  flutter_spinkit: ^5.2.2
 
   #Navigation
   go_router: ^17.2.0

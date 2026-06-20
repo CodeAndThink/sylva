@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/color_utils.dart';
 import 'package:sylva/generated/l10n.dart';
@@ -7,6 +11,7 @@ import 'package:sylva/presentation/features/photo_preview/photo_preview_cubit.da
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
+import 'package:sylva/presentation/features/photo_preview/widgets/palette_shimmer_list.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -39,6 +44,35 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   bool _showMagnifier = false;
   Offset _touchPosition = Offset.zero;
   late ThemeData _theme;
+  final GlobalKey _imageKey = GlobalKey();
+
+  Future<Color?> _getColorAtPosition(Offset position) async {
+    try {
+      if (_imageKey.currentContext == null) return null;
+      final RenderObject? renderObject = _imageKey.currentContext!.findRenderObject();
+      if (renderObject == null || renderObject is! RenderRepaintBoundary) return null;
+
+      final ui.Image image = await renderObject.toImage();
+      final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+      if (byteData == null) return null;
+
+      final int x = position.dx.toInt();
+      final int y = position.dy.toInt();
+
+      if (x < 0 || x >= image.width || y < 0 || y >= image.height) return null;
+
+      final int byteOffset = (y * image.width + x) * 4;
+      final int r = byteData.getUint8(byteOffset);
+      final int g = byteData.getUint8(byteOffset + 1);
+      final int b = byteData.getUint8(byteOffset + 2);
+      final int a = byteData.getUint8(byteOffset + 3);
+
+      return Color.fromARGB(a, r, g, b);
+    } catch (e) {
+      debugPrint('Error getting color at position: $e');
+      return null;
+    }
+  }
 
   @override
   void initState() {
@@ -96,6 +130,23 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             child: Stack(
               children: [
                 Positioned.fill(child: _buildImage()),
+                if (_showMagnifier)
+                  Positioned(
+                    bottom: 50,
+                    right: 8,
+                    child: Tooltip(
+                      message: S.of(context).autoDetectColors,
+                      child: IconButton(
+                        color: Colors.red,
+                        onPressed: () {
+                          setState(() {
+                            _showMagnifier = false;
+                          });
+                        },
+                        icon: Icon(Icons.block_outlined, size: 32),
+                      ),
+                    ),
+                  ),
                 Positioned(
                   bottom: 8,
                   left: 8,
@@ -109,14 +160,33 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                     focalPointOffset != null)
                   Positioned(
                     left: magnifierCenter.dx - 60,
-                    top: magnifierCenter.dy - 60,
+                    top: magnifierCenter.dy - 40,
                     child: RawMagnifier(
                       size: const Size(120, 120),
                       magnificationScale: 10.0,
                       focalPointOffset: focalPointOffset,
-                      decoration: const MagnifierDecoration(
+                      decoration: MagnifierDecoration(
                         shape: CircleBorder(
-                          side: BorderSide(color: Colors.white, width: 2),
+                          side: BorderSide(
+                            color: _theme.colorScheme.surface,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                if (_showMagnifier)
+                  Positioned(
+                    left: _touchPosition.dx - 10,
+                    top: _touchPosition.dy - 10,
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: _theme.colorScheme.surface,
+                          width: 2,
                         ),
                       ),
                     ),
@@ -144,24 +214,24 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             _touchPosition = details.localPosition;
           });
         },
-        onPanEnd: (details) {
-          setState(() {
-            _showMagnifier = false;
-          });
+        onPanEnd: (_) async {
+          final color = await _getColorAtPosition(_touchPosition);
+          if (color != null) {
+            _cubit.setSelectedColor(color: color);
+          }
         },
-        child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-          buildWhen: (previous, current) =>
-              current.filteredImageBytes != previous.filteredImageBytes,
-          builder: (context, state) {
-            if (state.filteredImageBytes != null) {
-              return Image.memory(
-                state.filteredImageBytes!,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              );
-            }
-            return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
-          },
+        child: RepaintBoundary(
+          key: _imageKey,
+          child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+            buildWhen: (previous, current) =>
+                current.filteredImageBytes != previous.filteredImageBytes,
+            builder: (context, state) {
+              if (state.filteredImageBytes != null) {
+                return Image.memory(state.filteredImageBytes!, fit: BoxFit.cover);
+              }
+              return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
+            },
+          ),
         ),
       ),
     );
@@ -184,10 +254,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
               key: const ValueKey('loading'),
               children: [
                 AppTitleText(title: S.of(context).autoDetectColors),
-                const SizedBox(
-                  height: 80,
-                  child: Center(child: CircularProgressIndicator()),
-                ),
+                SizedBox(height: 80, child: PaletteShimmerList()),
               ],
             );
           } else if (state.getColorStatus.isFailure) {
@@ -245,7 +312,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           return Positioned.fill(
             child: Container(
               color: Colors.black38,
-              child: const Center(child: CircularProgressIndicator()),
+              child: Center(
+                child: SpinKitRipple(color: _theme.colorScheme.primary),
+              ),
             ),
           );
         }
@@ -260,35 +329,36 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           current.selectedColor != previous.selectedColor,
       builder: (context, state) {
         final color = state.selectedColor;
-        if (color == null) return const SizedBox.shrink();
 
         return AppTransparentContainer(
+          height: 38,
+          padding: 8.paddingHorizontal,
           onTap: () {
+            if (color == null) return;
             _cubit.copyColorToClipboard(color: color);
           },
           borderRadius: 20,
-          padding: 8.paddingAll,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildColorDetailItem(
                 label: 'R',
-                value: (color.r * 255.0).round().clamp(0, 255),
+                value: (color?.r ?? 0 * 255.0).round().clamp(0, 255),
                 labelColor: Colors.red,
               ),
               _buildColorDetailItem(
                 label: 'G',
-                value: (color.g * 255.0).round().clamp(0, 255),
+                value: (color?.g ?? 0 * 255.0).round().clamp(0, 255),
                 labelColor: Colors.green,
               ),
               _buildColorDetailItem(
                 label: 'B',
-                value: (color.b * 255.0).round().clamp(0, 255),
+                value: (color?.b ?? 0 * 255.0).round().clamp(0, 255),
                 labelColor: Colors.blue,
               ),
               _buildColorDetailItem(
                 label: 'A',
-                value: (color.a * 255.0).round().clamp(0, 255),
+                value: (color?.a ?? 0 * 255.0).round().clamp(0, 255),
                 labelColor: Theme.of(context).colorScheme.onSurface,
               ),
             ],

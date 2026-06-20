@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 
@@ -33,14 +34,11 @@ class AppSvgImage extends StatelessWidget {
           color: Colors.grey.shade100,
           borderRadius: 8.borderRadius,
         ),
-        child: const Center(
+        child: Center(
           child: SizedBox(
             width: 16,
             height: 16,
-            child: CircularProgressIndicator(
-              strokeWidth: 1.5,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-            ),
+            child: SpinKitRipple(color: Theme.of(context).colorScheme.primary),
           ),
         ),
       ),

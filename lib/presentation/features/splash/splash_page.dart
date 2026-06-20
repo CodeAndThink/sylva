@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/presentation/app/app_cubit.dart';
 import 'package:sylva/presentation/features/splash/splash_cubit.dart';
@@ -38,6 +39,10 @@ class __SplashChildPageState extends State<_SplashChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(
+      body: Center(
+        child: SpinKitRipple(color: Theme.of(context).colorScheme.primary),
+      ),
+    );
   }
 }

@@ -19,6 +19,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   PhotoPreviewCubit({required this.navigator})
     : super(const PhotoPreviewState());
 
+  void setSelectedColor({required Color color}) {
+    safeEmit(state.copyWith(selectedColor: color));
+  }
+
   Future<void> extractPalette(String imagePath) async {
     if (state.getColorStatus.isLoading) return;
     safeEmit(state.copyWith(getColorStatus: LoadStatus.loading));
@@ -101,7 +105,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final Map<String, dynamic> params = {
         'imagePath': imagePath,
         'targetColorValue': targetColor.toARGB32(),
-        'threshold': 30.0, // RGB distance threshold
+        'threshold': 10.0, // RGB distance threshold
         'replacementColorValue': replacementColor?.toARGB32(),
       };
 

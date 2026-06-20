@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 
 class AppOutlineButton extends StatelessWidget {
@@ -42,10 +43,7 @@ class AppOutlineButton extends StatelessWidget {
             ? SizedBox(
                 height: 20,
                 width: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(themeColor),
-                ),
+                child: SpinKitRipple(color: themeColor),
               )
             : Row(
                 mainAxisSize: MainAxisSize.min,

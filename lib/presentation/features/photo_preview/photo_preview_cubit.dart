@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -147,6 +146,9 @@ Uint8List _processImageIsolate(Map<String, dynamic> params) {
   final targetG = (colorValue >> 8) & 0xFF;
   final targetB = colorValue & 0xFF;
 
+  // Use squared threshold to avoid expensive math.sqrt in the loop
+  final double thresholdSq = threshold * threshold;
+
   final bytes = File(path).readAsBytesSync();
   final image = img.decodeImage(bytes);
   if (image == null) return bytes;
@@ -157,25 +159,37 @@ Uint8List _processImageIsolate(Map<String, dynamic> params) {
     processImage = img.copyResize(image, width: 1080);
   }
 
+  // Pre-calculate replacement colors to avoid bitwise ops inside the loop
+  final num? repR = replacementColorValue != null
+      ? (replacementColorValue >> 16) & 0xFF
+      : null;
+  final num? repG = replacementColorValue != null
+      ? (replacementColorValue >> 8) & 0xFF
+      : null;
+  final num? repB = replacementColorValue != null
+      ? replacementColorValue & 0xFF
+      : null;
+
   for (var pixel in processImage) {
-    final r = pixel.r;
-    final g = pixel.g;
-    final b = pixel.b;
+    final num r = pixel.r;
+    final num g = pixel.g;
+    final num b = pixel.b;
 
-    final dist = math.sqrt(
-      math.pow(r - targetR, 2) +
-          math.pow(g - targetG, 2) +
-          math.pow(b - targetB, 2),
-    );
+    final num dr = r - targetR;
+    final num dg = g - targetG;
+    final num db = b - targetB;
 
-    if (dist > threshold) {
-      if (replacementColorValue != null) {
-        pixel.r = (replacementColorValue >> 16) & 0xFF;
-        pixel.g = (replacementColorValue >> 8) & 0xFF;
-        pixel.b = replacementColorValue & 0xFF;
+    // Fast distance squared calculation
+    final num distSq = (dr * dr) + (dg * dg) + (db * db);
+
+    if (distSq > thresholdSq) {
+      if (repR != null && repG != null && repB != null) {
+        pixel.r = repR;
+        pixel.g = repG;
+        pixel.b = repB;
       } else {
-        // Convert to grayscale
-        final luminance = img.getLuminance(pixel);
+        // Fast inline grayscale conversion (luminance)
+        final num luminance = r * 0.299 + g * 0.587 + b * 0.114;
         pixel.r = luminance;
         pixel.g = luminance;
         pixel.b = luminance;

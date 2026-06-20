@@ -48,16 +48,25 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
 
   Future<Color?> _getColorAtPosition(Offset position) async {
     try {
-      if (_imageKey.currentContext == null) return null;
-      final RenderObject? renderObject = _imageKey.currentContext!.findRenderObject();
+      final BuildContext? context = _imageKey.currentContext;
+      if (context == null) return null;
+
+      final RenderObject? renderObject = context.findRenderObject();
       if (renderObject == null || renderObject is! RenderRepaintBoundary) return null;
 
-      final ui.Image image = await renderObject.toImage();
+      // Use devicePixelRatio for an accurate, high-res snapshot
+      final double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+      final ui.Image image = await renderObject.toImage(pixelRatio: pixelRatio);
       final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+      
+      // IMPORTANT: dispose the image to prevent memory leaks!
+      image.dispose();
+
       if (byteData == null) return null;
 
-      final int x = position.dx.toInt();
-      final int y = position.dy.toInt();
+      // Adjust coordinates based on the pixel ratio used for the snapshot
+      final int x = (position.dx * pixelRatio).toInt();
+      final int y = (position.dy * pixelRatio).toInt();
 
       if (x < 0 || x >= image.width || y < 0 || y >= image.height) return null;
 
@@ -343,22 +352,22 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             children: [
               _buildColorDetailItem(
                 label: 'R',
-                value: (color?.r ?? 0 * 255.0).round().clamp(0, 255),
+                value: ((color?.r ?? 0.0) * 255.0).round().clamp(0, 255),
                 labelColor: Colors.red,
               ),
               _buildColorDetailItem(
                 label: 'G',
-                value: (color?.g ?? 0 * 255.0).round().clamp(0, 255),
+                value: ((color?.g ?? 0.0) * 255.0).round().clamp(0, 255),
                 labelColor: Colors.green,
               ),
               _buildColorDetailItem(
                 label: 'B',
-                value: (color?.b ?? 0 * 255.0).round().clamp(0, 255),
+                value: ((color?.b ?? 0.0) * 255.0).round().clamp(0, 255),
                 labelColor: Colors.blue,
               ),
               _buildColorDetailItem(
                 label: 'A',
-                value: (color?.a ?? 0 * 255.0).round().clamp(0, 255),
+                value: ((color?.a ?? 0.0) * 255.0).round().clamp(0, 255),
                 labelColor: Theme.of(context).colorScheme.onSurface,
               ),
             ],

@@ -10,6 +10,8 @@
   },
   "back": "戻る",
   "@back": {},
+  "deletePhoto": "写真の削除",
+  "@deletePhoto": {},
   "ok": "OK",
   "@ok": {},
   "cancel": "キャンセル",

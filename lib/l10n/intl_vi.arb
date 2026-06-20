@@ -10,6 +10,8 @@
   },
   "back": "Quay lại",
   "@back": {},
+  "deletePhoto": "Xóa ảnh",
+  "@deletePhoto": {},
   "ok": "Đồng ý",
   "@ok": {},
   "cancel": "Hủy",

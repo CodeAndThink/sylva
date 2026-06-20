@@ -10,6 +10,8 @@
   },
   "back": "Back",
   "@back": {},
+  "deletePhoto": "Delete photo",
+  "@deletePhoto": {},
   "ok": "OK",
   "@ok": {},
   "cancel": "Cancel",

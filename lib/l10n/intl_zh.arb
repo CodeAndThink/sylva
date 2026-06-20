@@ -10,6 +10,8 @@
   },
   "back": "返回",
   "@back": {},
+  "deletePhoto": "删除照片",
+  "@deletePhoto": {},
   "ok": "确定",
   "@ok": {},
   "cancel": "取消",

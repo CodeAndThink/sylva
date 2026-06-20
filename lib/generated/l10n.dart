@@ -74,6 +74,16 @@ class S {
     return Intl.message('Back', name: 'back', desc: '', args: []);
   }
 
+  /// `Delete photo`
+  String get deletePhoto {
+    return Intl.message(
+      'Delete photo',
+      name: 'deletePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `OK`
   String get ok {
     return Intl.message('OK', name: 'ok', desc: '', args: []);

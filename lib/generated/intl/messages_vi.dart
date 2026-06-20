@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
     "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
+    "deletePhoto": MessageLookupByLibrary.simpleMessage("Xóa ảnh"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
     ),

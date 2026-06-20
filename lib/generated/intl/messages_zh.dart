@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createNewImage": MessageLookupByLibrary.simpleMessage("创建新图像"),
     "days": MessageLookupByLibrary.simpleMessage("天"),
     "delete": MessageLookupByLibrary.simpleMessage("删除"),
+    "deletePhoto": MessageLookupByLibrary.simpleMessage("删除照片"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
     ),

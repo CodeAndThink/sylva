@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
     "delete": MessageLookupByLibrary.simpleMessage("削除"),
+    "deletePhoto": MessageLookupByLibrary.simpleMessage("写真の削除"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
     ),

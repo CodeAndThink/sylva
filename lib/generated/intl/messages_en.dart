@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deletePhoto": MessageLookupByLibrary.simpleMessage("Delete photo"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
     ),

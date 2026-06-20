@@ -158,6 +158,11 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                                   );
                                 }
                                 _showMagnifier.value = false;
+                                _pageController.animateToPage(
+                                  1,
+                                  duration: 200.milliseconds,
+                                  curve: Curves.easeInOut,
+                                );
                               },
                               icon: const Icon(
                                 Icons.check_circle_outline,
@@ -576,16 +581,14 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             icon: const Icon(Icons.save_outlined, size: 24),
           ),
         ),
-        // 48.width,
-        // Tooltip(
-        //   message: S.of(context).autoDetectColors,
-        //   child: IconButton(
-        //     onPressed: () {
-        //       _cubit.extractPalette(widget.imagePath);
-        //     },
-        //     icon: Icon(Icons.auto_awesome, color: Colors.amberAccent),
-        //   ),
-        // ),
+        48.width,
+        Tooltip(
+          message: S.of(context).deletePhoto,
+          child: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.close_outlined, color: Colors.red),
+          ),
+        ),
       ],
     );
   }

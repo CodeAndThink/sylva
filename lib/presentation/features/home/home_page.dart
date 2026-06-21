@@ -365,6 +365,25 @@ class __HomeChildPageState extends State<_HomeChildPage>
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            AnimatedSwitcher(
+              duration: 150.milliseconds,
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
+              child: IconButton(
+                key: ValueKey<int>(_selectedCameraIndex),
+                icon: Icon(
+                  _cameras.isNotEmpty &&
+                          _cameras[_selectedCameraIndex].lensDirection ==
+                              CameraLensDirection.front
+                      ? Icons.camera_front_outlined
+                      : Icons.camera_rear_outlined,
+                  color: _theme.colorScheme.onSurface,
+                  size: 24,
+                ),
+                onPressed: _switchCamera,
+              ),
+            ),
             IconButton(
               icon: AnimatedSwitcher(
                 duration: 150.milliseconds,
@@ -435,24 +454,13 @@ class __HomeChildPageState extends State<_HomeChildPage>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            AnimatedSwitcher(
-              duration: 150.milliseconds,
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return ScaleTransition(scale: animation, child: child);
-              },
-              child: IconButton(
-                key: ValueKey<int>(_selectedCameraIndex),
-                icon: Icon(
-                  _cameras.isNotEmpty &&
-                          _cameras[_selectedCameraIndex].lensDirection ==
-                              CameraLensDirection.front
-                      ? Icons.camera_front_outlined
-                      : Icons.camera_rear_outlined,
-                  color: _theme.colorScheme.onSurface,
-                  size: 40,
-                ),
-                onPressed: _switchCamera,
+            IconButton(
+              icon: Icon(
+                Icons.history_outlined,
+                color: _theme.colorScheme.onSurface,
+                size: 40,
               ),
+              onPressed: () {},
             ),
             GestureDetector(
               onTap: _isCapturing ? null : _takePicture,

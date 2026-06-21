@@ -205,5 +205,7 @@
   "nothingSelectedToCopy": "未选择要复制的颜色",
   "@nothingSelectedToCopy": {},
   "saveToLibrary": "保存到图库",
-  "@saveToLibrary": {}
+  "@saveToLibrary": {},
+  "pickImageFromGallery": "从图库选择图片",
+  "@pickImageFromGallery": {}
 }

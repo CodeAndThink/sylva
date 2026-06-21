@@ -121,6 +121,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Twinfixは、重複写真をスキャンしてクリーンアップするために写真ライブラリへのアクセスが必要です。",
     ),
     "permissionRequired": MessageLookupByLibrary.simpleMessage("許可が必要です"),
+    "pickImageFromGallery": MessageLookupByLibrary.simpleMessage(
+      "ライブラリから画像を選択",
+    ),
     "premium": MessageLookupByLibrary.simpleMessage("プレミアム"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("プライバシーポリシー"),
     "progress": MessageLookupByLibrary.simpleMessage("進捗"),

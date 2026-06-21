@@ -205,5 +205,7 @@
   "nothingSelectedToCopy": "Chưa chọn màu để sao chép",
   "@nothingSelectedToCopy": {},
   "saveToLibrary": "Lưu vào thư viện",
-  "@saveToLibrary": {}
+  "@saveToLibrary": {},
+  "pickImageFromGallery": "Chọn ảnh từ thư viện",
+  "@pickImageFromGallery": {}
 }

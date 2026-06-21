@@ -205,5 +205,7 @@
   "nothingSelectedToCopy": "Nothing selected to copy",
   "@nothingSelectedToCopy": {},
   "saveToLibrary": "Save to library",
-  "@saveToLibrary": {}
+  "@saveToLibrary": {},
+  "pickImageFromGallery": "Pick image from gallery",
+  "@pickImageFromGallery": {}
 }

@@ -149,6 +149,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "permissionRequired": MessageLookupByLibrary.simpleMessage(
       "Yêu cầu quyền truy cập",
     ),
+    "pickImageFromGallery": MessageLookupByLibrary.simpleMessage(
+      "Chọn ảnh từ thư viện",
+    ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
     "progress": MessageLookupByLibrary.simpleMessage("Tiến trình"),

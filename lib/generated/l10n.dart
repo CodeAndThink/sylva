@@ -753,6 +753,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Pick image from gallery`
+  String get pickImageFromGallery {
+    return Intl.message(
+      'Pick image from gallery',
+      name: 'pickImageFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

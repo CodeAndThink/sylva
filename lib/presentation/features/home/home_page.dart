@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/navigation/app_router.dart';
+import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
@@ -475,27 +476,30 @@ class __HomeChildPageState extends State<_HomeChildPage>
                       ),
               ),
             ),
-            IconButton(
-              icon: Icon(
-                Icons.photo_library_outlined,
-                color: _theme.colorScheme.onSurface,
-                size: 40,
-              ),
-              onPressed: () async {
-                try {
-                  await _controller?.pausePreview();
-                } catch (e) {
-                  debugPrint('Error pausing preview: $e');
-                }
-                await _cubit.pickImageFromGallery();
-                if (mounted && _controller != null) {
+            Tooltip(
+              message: S.current.pickImageFromGallery,
+              child: IconButton(
+                icon: Icon(
+                  Icons.upload_rounded,
+                  color: _theme.colorScheme.onSurface,
+                  size: 40,
+                ),
+                onPressed: () async {
                   try {
-                    await _controller?.resumePreview();
+                    await _controller?.pausePreview();
                   } catch (e) {
-                    debugPrint('Error resuming preview: $e');
+                    debugPrint('Error pausing preview: $e');
                   }
-                }
-              },
+                  await _cubit.pickImageFromGallery();
+                  if (mounted && _controller != null) {
+                    try {
+                      await _controller?.resumePreview();
+                    } catch (e) {
+                      debugPrint('Error resuming preview: $e');
+                    }
+                  }
+                },
+              ),
             ),
           ],
         ),

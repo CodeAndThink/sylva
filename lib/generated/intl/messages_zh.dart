@@ -109,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Twinfix 需要访问您的相册以扫描和清理重复照片。",
     ),
     "permissionRequired": MessageLookupByLibrary.simpleMessage("需要权限"),
+    "pickImageFromGallery": MessageLookupByLibrary.simpleMessage("从图库选择图片"),
     "premium": MessageLookupByLibrary.simpleMessage("高级版"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
     "progress": MessageLookupByLibrary.simpleMessage("进度"),

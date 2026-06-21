@@ -143,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "permissionRequired": MessageLookupByLibrary.simpleMessage(
       "Permission Required",
     ),
+    "pickImageFromGallery": MessageLookupByLibrary.simpleMessage(
+      "Pick image from gallery",
+    ),
     "premium": MessageLookupByLibrary.simpleMessage("Premium"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "progress": MessageLookupByLibrary.simpleMessage("Progress"),

@@ -207,5 +207,7 @@
   "saveToLibrary": "Save to library",
   "@saveToLibrary": {},
   "pickImageFromGallery": "Pick image from gallery",
-  "@pickImageFromGallery": {}
+  "@pickImageFromGallery": {},
+  "noHistoryYet": "No history yet",
+  "@noHistoryYet": {}
 }

@@ -207,5 +207,7 @@
   "saveToLibrary": "保存到图库",
   "@saveToLibrary": {},
   "pickImageFromGallery": "从图库选择图片",
-  "@pickImageFromGallery": {}
+  "@pickImageFromGallery": {},
+  "noHistoryYet": "暂无记录",
+  "@noHistoryYet": {}
 }

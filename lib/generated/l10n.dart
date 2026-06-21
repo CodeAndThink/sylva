@@ -763,6 +763,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No history yet`
+  String get noHistoryYet {
+    return Intl.message(
+      'No history yet',
+      name: 'noHistoryYet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

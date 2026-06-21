@@ -120,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "nameRequired": MessageLookupByLibrary.simpleMessage("Name is required"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noHistoryYet": MessageLookupByLibrary.simpleMessage("No history yet"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Nothing selected to copy",
     ),

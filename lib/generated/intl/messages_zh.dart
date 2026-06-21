@@ -94,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameLength": MessageLookupByLibrary.simpleMessage("姓名至少包含2个字符"),
     "nameRequired": MessageLookupByLibrary.simpleMessage("必须输入姓名"),
     "next": MessageLookupByLibrary.simpleMessage("下一步"),
+    "noHistoryYet": MessageLookupByLibrary.simpleMessage("暂无记录"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage("未选择要复制的颜色"),
     "ok": MessageLookupByLibrary.simpleMessage("确定"),
     "opacity": MessageLookupByLibrary.simpleMessage("不透明度"),

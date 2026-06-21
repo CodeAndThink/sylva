@@ -15,8 +15,7 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          HistoryCubit(navigator: HistoryNavigator(context))..loadHistory(),
+      create: (_) => HistoryCubit(navigator: HistoryNavigator(context)),
       child: const _HistoryChildPage(),
     );
   }
@@ -30,6 +29,15 @@ class _HistoryChildPage extends StatefulWidget {
 }
 
 class __HistoryChildPageState extends State<_HistoryChildPage> {
+  late final HistoryCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<HistoryCubit>();
+    _cubit.loadHistory();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -45,7 +53,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           if (state.records.isEmpty) {
             return Center(
               child: Text(
-                'No history yet',
+                S.of(context).noHistoryYet,
                 style: theme.textTheme.titleMedium?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -69,10 +77,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                     child: ClipRRect(
                       borderRadius: 8.borderRadius,
                       child: InkWell(
-                        onTap: () => context
-                            .read<HistoryCubit>()
-                            .navigator
-                            .goToPhotoPreview(record),
+                        onTap: () => _cubit.navigator.goToPhotoPreview(record),
                         child: AppFileImage(
                           path: record.imagePath,
                           fit: BoxFit.cover,
@@ -95,7 +100,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                         minimumSize: const Size(28, 28),
                       ),
                       onPressed: () {
-                        context.read<HistoryCubit>().deleteRecord(record.id);
+                        _cubit.deleteRecord(record.id);
                       },
                     ),
                   ),

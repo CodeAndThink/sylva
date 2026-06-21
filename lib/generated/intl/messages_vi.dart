@@ -126,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tên không được để trống",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+    "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Chưa chọn màu để sao chép",
     ),

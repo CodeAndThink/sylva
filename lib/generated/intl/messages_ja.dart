@@ -104,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameLength": MessageLookupByLibrary.simpleMessage("名前は2文字以上である必要があります"),
     "nameRequired": MessageLookupByLibrary.simpleMessage("名前が必要です"),
     "next": MessageLookupByLibrary.simpleMessage("次へ"),
+    "noHistoryYet": MessageLookupByLibrary.simpleMessage("履歴がありません"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "コピーする色が選択されていません",
     ),

@@ -207,5 +207,7 @@
   "saveToLibrary": "Lưu vào thư viện",
   "@saveToLibrary": {},
   "pickImageFromGallery": "Chọn ảnh từ thư viện",
-  "@pickImageFromGallery": {}
+  "@pickImageFromGallery": {},
+  "noHistoryYet": "Chưa có lịch sử",
+  "@noHistoryYet": {}
 }

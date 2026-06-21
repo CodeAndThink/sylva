@@ -15,7 +15,8 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HistoryCubit(navigator: HistoryNavigator(context))..loadHistory(),
+      create: (_) =>
+          HistoryCubit(navigator: HistoryNavigator(context))..loadHistory(),
       child: const _HistoryChildPage(),
     );
   }
@@ -32,7 +33,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return AppScaffold(
       showAppBar: true,
       title: S.of(context).history,
@@ -68,7 +69,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                     child: ClipRRect(
                       borderRadius: 8.borderRadius,
                       child: InkWell(
-                        onTap: () => context.read<HistoryCubit>().navigator.goToPhotoPreview(record),
+                        onTap: () => context
+                            .read<HistoryCubit>()
+                            .navigator
+                            .goToPhotoPreview(record),
                         child: AppFileImage(
                           path: record.imagePath,
                           fit: BoxFit.cover,
@@ -80,7 +84,11 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                     top: 4,
                     right: 4,
                     child: IconButton(
-                      icon: const Icon(Icons.delete_outline, color: Colors.white, size: 20),
+                      icon: const Icon(
+                        Icons.delete_outline,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                       style: IconButton.styleFrom(
                         backgroundColor: Colors.black45,
                         padding: EdgeInsets.zero,

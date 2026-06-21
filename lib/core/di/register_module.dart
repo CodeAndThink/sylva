@@ -10,10 +10,7 @@ abstract class RegisterModule {
   @lazySingleton
   Future<Isar> get isar async {
     final dir = await getApplicationDocumentsDirectory();
-    final isar = await Isar.open(
-      [HistoryRecordSchema],
-      directory: dir.path,
-    );
+    final isar = await Isar.open([HistoryRecordSchema], directory: dir.path);
     return isar;
   }
 

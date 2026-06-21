@@ -25,10 +25,12 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     required this.navigator,
     List<Color>? initialColors,
     Color? initialSelectedColor,
-  }) : super(PhotoPreviewState(
-          userColors: initialColors ?? const [],
-          selectedColor: initialSelectedColor,
-        ));
+  }) : super(
+         PhotoPreviewState(
+           userColors: initialColors ?? const [],
+           selectedColor: initialSelectedColor,
+         ),
+       );
 
   void setSelectedColor({required Color color}) {
     safeEmit(state.copyWith(selectedColor: color));

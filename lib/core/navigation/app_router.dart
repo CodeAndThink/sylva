@@ -80,7 +80,9 @@ class AppRouter {
             return PhotoPreviewPage(
               imagePath: record.imagePath,
               initialColors: record.userColors.map((c) => Color(c)).toList(),
-              initialSelectedColor: record.selectedColor != null ? Color(record.selectedColor!) : null,
+              initialSelectedColor: record.selectedColor != null
+                  ? Color(record.selectedColor!)
+                  : null,
             );
           }
           final imagePath = state.extra as String;

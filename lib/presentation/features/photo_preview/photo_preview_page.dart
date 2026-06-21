@@ -22,9 +22,9 @@ class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
   final List<Color>? initialColors;
   final Color? initialSelectedColor;
-  
+
   const PhotoPreviewPage({
-    super.key, 
+    super.key,
     required this.imagePath,
     this.initialColors,
     this.initialSelectedColor,
@@ -33,12 +33,11 @@ class PhotoPreviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          PhotoPreviewCubit(
-            navigator: PhotoPreviewNavigator(context),
-            initialColors: initialColors,
-            initialSelectedColor: initialSelectedColor,
-          ),
+      create: (_) => PhotoPreviewCubit(
+        navigator: PhotoPreviewNavigator(context),
+        initialColors: initialColors,
+        initialSelectedColor: initialSelectedColor,
+      ),
       child: _PhotoPreviewChildPage(imagePath: imagePath),
     );
   }

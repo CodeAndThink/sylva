@@ -11,10 +11,7 @@ class HistoryState extends Equatable {
     this.status = LoadStatus.initial,
   });
 
-  HistoryState copyWith({
-    List<HistoryRecord>? records,
-    LoadStatus? status,
-  }) {
+  HistoryState copyWith({List<HistoryRecord>? records, LoadStatus? status}) {
     return HistoryState(
       records: records ?? this.records,
       status: status ?? this.status,

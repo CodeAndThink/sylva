@@ -7,4 +7,8 @@ class HomeNavigator extends BaseNavigator {
   void goToSettings() {
     pushNamed(AppRouter.settings);
   }
+
+  void goToPhotoPreview(String imagePath) {
+    pushNamed(AppRouter.photoPreview, extra: imagePath);
+  }
 }

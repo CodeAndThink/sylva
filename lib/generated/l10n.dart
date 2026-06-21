@@ -743,6 +743,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Save to library`
+  String get saveToLibrary {
+    return Intl.message(
+      'Save to library',
+      name: 'saveToLibrary',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

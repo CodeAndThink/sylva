@@ -10,6 +10,7 @@ import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_cubit.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
+import 'package:sylva/presentation/features/photo_preview/widgets/color_palette_bottom_sheet.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_shimmer_list.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
@@ -137,51 +138,85 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             child: Stack(
               children: [
                 Positioned.fill(child: _buildImage()),
-                ValueListenableBuilder<bool>(
-                  valueListenable: _showMagnifier,
-                  builder: (context, showMagnifier, child) {
-                    if (!showMagnifier) return const SizedBox.shrink();
-                    return Positioned(
-                      bottom: 50,
-                      right: 8,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Tooltip(
-                            message: S.of(context).saveColor,
-                            child: IconButton(
-                              color: Colors.green,
-                              onPressed: () {
-                                if (_cubit.state.selectedColor != null) {
-                                  _cubit.saveUserColor(
-                                    color: _cubit.state.selectedColor!,
-                                  );
-                                }
-                                _showMagnifier.value = false;
-                                _pageController.animateToPage(
-                                  1,
-                                  duration: 200.milliseconds,
-                                  curve: Curves.easeInOut,
+                BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+                  buildWhen: (previous, current) =>
+                      current.filteredImageBytes != previous.filteredImageBytes,
+                  builder: (context, state) {
+                    final isFiltering = state.filteredImageBytes != null;
+
+                    if (isFiltering) {
+                      return Positioned(
+                        bottom: 50,
+                        right: 8,
+                        child: Tooltip(
+                          message: S.of(context).cancel,
+                          child: IconButton(
+                            color: Colors.red,
+                            onPressed: () {
+                              if (state.selectedColor != null) {
+                                _cubit.filterColor(
+                                  widget.imagePath,
+                                  state.selectedColor!,
                                 );
-                              },
-                              icon: const Icon(
-                                Icons.check_circle_outline,
-                                size: 32,
+                              }
+                            },
+                            icon: const Icon(Icons.close_rounded, size: 32),
+                          ),
+                        ),
+                      );
+                    }
+
+                    return ValueListenableBuilder<bool>(
+                      valueListenable: _showMagnifier,
+                      builder: (context, showMagnifier, child) {
+                        if (!showMagnifier) return const SizedBox.shrink();
+                        return Positioned(
+                          bottom: 50,
+                          right: 8,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Tooltip(
+                                message: S.of(context).saveColor,
+                                child: IconButton(
+                                  color: Colors.green,
+                                  onPressed: () {
+                                    if (_cubit.state.selectedColor != null) {
+                                      _cubit.saveUserColor(
+                                        color: _cubit.state.selectedColor!,
+                                      );
+                                    }
+                                    _showMagnifier.value = false;
+                                    _pageController.animateToPage(
+                                      1,
+                                      duration: 200.milliseconds,
+                                      curve: Curves.easeInOut,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.check_circle_outline,
+                                    size: 32,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Tooltip(
+                                message: S.of(context).cancel,
+                                child: IconButton(
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    _showMagnifier.value = false;
+                                    _cubit.clearSelectedColor();
+                                  },
+                                  icon: const Icon(
+                                    Icons.block_outlined,
+                                    size: 32,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Tooltip(
-                            message: S.of(context).cancel,
-                            child: IconButton(
-                              color: Colors.red,
-                              onPressed: () {
-                                _showMagnifier.value = false;
-                              },
-                              icon: const Icon(Icons.block_outlined, size: 32),
-                            ),
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     );
                   },
                 ),
@@ -293,13 +328,16 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
       padding: EdgeInsets.zero,
       child: GestureDetector(
         onPanStart: (details) {
+          if (_cubit.state.filteredImageBytes != null) return;
           _showMagnifier.value = true;
           _touchPosition.value = details.localPosition;
         },
         onPanUpdate: (details) {
+          if (_cubit.state.filteredImageBytes != null) return;
           _touchPosition.value = details.localPosition;
         },
         onPanEnd: (_) async {
+          if (_cubit.state.filteredImageBytes != null) return;
           final color = await _getColorAtPosition(_touchPosition.value);
           if (color != null) {
             _cubit.setSelectedColor(color: color);
@@ -334,12 +372,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           previous.userColors != current.userColors,
       builder: (context, state) {
         if (state.getColorStatus.isLoading) {
-          return Column(
+          return SizedBox(
             key: const ValueKey('loading'),
-            children: [
-              AppTitleText(title: S.of(context).autoDetectColors),
-              SizedBox(height: 80, child: PaletteShimmerList()),
-            ],
+            height: 120,
+            child: PaletteShimmerList(),
           );
         } else if (state.getColorStatus.isFailure) {
           return Container(
@@ -347,7 +383,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             padding: 8.paddingAll,
             child: Text(
               S.of(context).failedToLoadColors,
-              style: const TextStyle(color: Colors.red),
+              style: _theme.textTheme.bodyMedium?.copyWith(color: Colors.red),
             ),
           );
         } else {
@@ -364,7 +400,34 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       // Page 1: Auto-detected colors
                       Column(
                         children: [
-                          AppTitleText(title: S.of(context).autoDetectColors),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: AppTitleText(
+                                  title: S.of(context).autoDetectColors,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  ColorPaletteBottomSheet.show(
+                                    context: context,
+                                    paletteColors: _cubit.state.paletteColors,
+                                    userColors: _cubit.state.userColors,
+                                    onColorTap: (color) {
+                                      _cubit.filterColor(
+                                        widget.imagePath,
+                                        color,
+                                      );
+                                      _showMagnifier.value = false;
+                                    },
+                                    onColorLongPress: (color) =>
+                                        _cubit.copyColor(color),
+                                  );
+                                },
+                                child: const Icon(Icons.zoom_out_map_outlined),
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 80,
                             child: ListView.separated(
@@ -380,6 +443,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                                   isSelected: state.selectedColor == color,
                                   onTap: () {
                                     _cubit.filterColor(widget.imagePath, color);
+                                    _showMagnifier.value = false;
+                                  },
+                                  onLongPress: () {
+                                    _cubit.copyColor(color);
                                   },
                                 );
                               },
@@ -390,17 +457,45 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          AppTitleText(title: S.of(context).myColors),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: AppTitleText(
+                                  title: S.of(context).myColors,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  ColorPaletteBottomSheet.show(
+                                    context: context,
+                                    paletteColors: _cubit.state.paletteColors,
+                                    userColors: _cubit.state.userColors,
+                                    onColorTap: (color) {
+                                      _cubit.filterColor(
+                                        widget.imagePath,
+                                        color,
+                                      );
+                                      _showMagnifier.value = false;
+                                    },
+                                    onColorLongPress: (color) =>
+                                        _cubit.copyColor(color),
+                                  );
+                                },
+                                child: const Icon(Icons.zoom_out_map_outlined),
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 80,
                             child: state.userColors.isEmpty
                                 ? Center(
                                     child: Text(
                                       S.of(context).useMagnifierToPickColors,
-                                      style: TextStyle(
-                                        color: _theme.colorScheme.onSurface
-                                            .withValues(alpha: 0.5),
-                                      ),
+                                      style: _theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                            color: _theme.colorScheme.onSurface
+                                                .withValues(alpha: 0.5),
+                                          ),
                                     ),
                                   )
                                 : ListView.separated(
@@ -423,6 +518,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                                             widget.imagePath,
                                             color,
                                           );
+                                          _showMagnifier.value = false;
+                                        },
+                                        onLongPress: () {
+                                          _cubit.copyColor(color);
                                         },
                                       );
                                     },
@@ -482,9 +581,12 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         if (state.filterColorStatus.isLoading) {
           return Positioned.fill(
             child: Container(
-              color: Colors.black38,
+              color: Colors.black45,
               child: Center(
-                child: SpinKitRipple(color: _theme.colorScheme.primary),
+                child: SpinKitRipple(
+                  color: _theme.colorScheme.primary,
+                  size: MediaQuery.sizeOf(context).width * 0.5,
+                ),
               ),
             ),
           );
@@ -578,15 +680,15 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
             onPressed: () {
               _cubit.navigator.safePop();
             },
-            icon: const Icon(Icons.save_outlined, size: 24),
+            icon: const Icon(Icons.save_outlined, size: 30),
           ),
         ),
         48.width,
         Tooltip(
-          message: S.of(context).deletePhoto,
+          message: S.of(context).saveToLibrary,
           child: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.close_outlined, color: Colors.red),
+            onPressed: () => _cubit.saveToLibrary(imagePath: widget.imagePath),
+            icon: Icon(Icons.library_add_outlined, size: 28),
           ),
         ),
       ],

@@ -138,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restorePurchases": MessageLookupByLibrary.simpleMessage("購入の復元"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),
+    "saveToLibrary": MessageLookupByLibrary.simpleMessage("ライブラリに保存"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),

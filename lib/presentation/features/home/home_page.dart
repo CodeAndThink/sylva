@@ -42,7 +42,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   double _currentScale = 1.0;
   double _baseScale = 1.0;
   bool _isCapturing = false;
-  int _timerSeconds = 0; // 0 (off), 3, 5, 10
+  int _timerSeconds = 0; // 0 (off), 3, 10
   bool _isCountingDown = false;
   int _countdownSeconds = 0;
   IconData? _centerIcon;
@@ -122,7 +122,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     setState(() {
       _centerIcon = icon;
     });
-    _centerIconTimer = Timer(const Duration(milliseconds: 800), () {
+    _centerIconTimer = Timer(800.milliseconds, () {
       if (mounted) {
         setState(() {
           _centerIcon = null;
@@ -154,12 +154,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_cameras.length > 1) {
       _selectedCameraIndex = (_selectedCameraIndex + 1) % _cameras.length;
       _setCamera(_cameras[_selectedCameraIndex]);
-      final isFront =
-          _cameras[_selectedCameraIndex].lensDirection ==
-          CameraLensDirection.front;
-      _showCenterIcon(
-        isFront ? Icons.camera_front_outlined : Icons.camera_rear_outlined,
-      );
     }
   }
 
@@ -185,7 +179,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
-  void _takePicture() async {
+  Future<void> _takePicture() async {
     if (_controller == null || !_controller!.value.isInitialized) return;
     if (_controller!.value.isTakingPicture || _isCapturing || _isCountingDown) {
       return;
@@ -353,7 +347,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
       );
     } else {
       return AppTransparentContainer(
-        child: Center(child: SpinKitRipple(color: _theme.colorScheme.primary)),
+        child: Center(
+          child: SpinKitRipple(
+            color: _theme.colorScheme.primary,
+            size: MediaQuery.sizeOf(context).width * 0.5,
+          ),
+        ),
       );
     }
   }
@@ -415,9 +414,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               itemBuilder: (context) => [
-                _buildTimerMenuItem(0, Icons.timer_off_outlined),
-                _buildTimerMenuItem(3, Icons.timer_3),
-                _buildTimerMenuItem(10, Icons.timer_10),
+                _buildTimerMenuItem(value: 0, icon: Icons.timer_off_outlined),
+                _buildTimerMenuItem(value: 3, icon: Icons.timer_3),
+                _buildTimerMenuItem(value: 10, icon: Icons.timer_10),
               ],
             ),
             IconButton(
@@ -470,19 +469,33 @@ class __HomeChildPageState extends State<_HomeChildPage>
                         child: SpinKitRipple(color: _theme.colorScheme.surface),
                       )
                     : Icon(
-                        Icons.camera_alt,
+                        Icons.camera_outlined,
                         color: _theme.colorScheme.surface,
-                        size: 40,
+                        size: 60,
                       ),
               ),
             ),
             IconButton(
               icon: Icon(
-                Icons.color_lens_outlined,
+                Icons.photo_library_outlined,
                 color: _theme.colorScheme.onSurface,
                 size: 40,
               ),
-              onPressed: () {},
+              onPressed: () async {
+                try {
+                  await _controller?.pausePreview();
+                } catch (e) {
+                  debugPrint('Error pausing preview: $e');
+                }
+                await _cubit.pickImageFromGallery();
+                if (mounted && _controller != null) {
+                  try {
+                    await _controller?.resumePreview();
+                  } catch (e) {
+                    debugPrint('Error resuming preview: $e');
+                  }
+                }
+              },
             ),
           ],
         ),
@@ -490,7 +503,10 @@ class __HomeChildPageState extends State<_HomeChildPage>
     );
   }
 
-  PopupMenuItem<int> _buildTimerMenuItem(int value, IconData icon) {
+  PopupMenuItem<int> _buildTimerMenuItem({
+    required int value,
+    required IconData icon,
+  }) {
     final isSelected = _timerSeconds == value;
     return PopupMenuItem<int>(
       value: value,

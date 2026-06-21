@@ -8,22 +8,34 @@ class PaletteShimmerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppShimmer(
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: 8,
-        physics: NeverScrollableScrollPhysics(),
-        separatorBuilder: (context, index) {
-          return 10.width;
-        },
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              AppShimmerBox(width: 55, height: 55),
-              5.height,
-              AppShimmerBox(width: 55, height: 12),
-            ],
-          );
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          4.height,
+          AppShimmerBox(width: 100, height: 20, borderRadius: 8),
+          4.height,
+          SizedBox(
+            height: 80,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: 8,
+              physics: NeverScrollableScrollPhysics(),
+              separatorBuilder: (context, index) {
+                return 10.width;
+              },
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    AppShimmerBox(width: 55, height: 55),
+                    5.height,
+                    AppShimmerBox(width: 55, height: 12),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -162,6 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
+    "saveToLibrary": MessageLookupByLibrary.simpleMessage("Save to library"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),

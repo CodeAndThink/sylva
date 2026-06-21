@@ -203,5 +203,7 @@
   "useMagnifierToPickColors": "使用放大镜选择颜色",
   "@useMagnifierToPickColors": {},
   "nothingSelectedToCopy": "未选择要复制的颜色",
-  "@nothingSelectedToCopy": {}
+  "@nothingSelectedToCopy": {},
+  "saveToLibrary": "保存到图库",
+  "@saveToLibrary": {}
 }

@@ -4,14 +4,16 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 class PaletteColorListItem extends StatelessWidget {
   final Color color;
   final String hex;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
   final bool isSelected;
 
   const PaletteColorListItem({
     super.key,
     required this.color,
     required this.hex,
-    required this.onTap,
+    this.onTap,
+    this.onLongPress,
     this.isSelected = false,
   });
 
@@ -25,6 +27,7 @@ class PaletteColorListItem extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
+          onLongPress: onLongPress,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

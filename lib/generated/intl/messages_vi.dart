@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
+    "saveToLibrary": MessageLookupByLibrary.simpleMessage("Lưu vào thư viện"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),

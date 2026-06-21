@@ -126,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restorePurchases": MessageLookupByLibrary.simpleMessage("恢复购买"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("保存颜色"),
+    "saveToLibrary": MessageLookupByLibrary.simpleMessage("保存到图库"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("扫描限制"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),

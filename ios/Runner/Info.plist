@@ -8,6 +8,8 @@
 	<string>This app requires microphone access to record videos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires photo library access to save photos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app requires photo library access to save photos to your camera roll.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

@@ -69,6 +69,7 @@ abstract class BaseNavigator {
     required ValueChanged<bool> onOptionSelected,
   }) {
     return showModalBottomSheet<bool>(
+      showDragHandle: true,
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => SaveOptionsBottomSheet(

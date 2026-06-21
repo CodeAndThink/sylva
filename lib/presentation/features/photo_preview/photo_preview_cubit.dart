@@ -1,5 +1,9 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:path/path.dart' as p;
+import 'package:sylva/core/di/injection.dart';
+import 'package:sylva/core/services/permission_service.dart';
+import 'package:sylva/core/utils/file_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
@@ -20,6 +24,16 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
 
   void setSelectedColor({required Color color}) {
     safeEmit(state.copyWith(selectedColor: color));
+  }
+
+  void clearSelectedColor() {
+    safeEmit(
+      state.copyWith(
+        selectedColor: null,
+        filteredImageBytes: null,
+        filterColorStatus: LoadStatus.initial,
+      ),
+    );
   }
 
   void saveUserColor({required Color color}) {
@@ -152,9 +166,64 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       navigator.flushBar.showError(message: S.current.colorCopiedFailure);
     }
   }
+
+  void copyColor(Color color) {
+    try {
+      final hexString = ColorUtils.colorToHex(color: color);
+      Clipboard.setData(ClipboardData(text: hexString));
+      navigator.flushBar.showSuccess(
+        message: S.current.colorCopiedSuccess(hexString),
+      );
+    } catch (e) {
+      debugPrint('Error copying color: $e');
+      navigator.flushBar.showError(message: S.current.colorCopiedFailure);
+    }
+  }
+
+  Future<void> saveToLibrary({required String imagePath}) async {
+    final permissionService = locator<PermissionService>();
+    final hasPermission = await permissionService.requestPhotoPermission(
+      navigator.context,
+    );
+
+    if (!hasPermission) return;
+
+    try {
+      bool success = false;
+      final extension = p.extension(imagePath);
+      final ext = extension.isNotEmpty ? extension : '.jpg';
+
+      if (state.filteredImageBytes != null) {
+        success = await FileUtils.saveImageToLibrary(
+          bytes: state.filteredImageBytes!,
+          titlePrefix: 'sylva_filter',
+          extension: ext,
+        );
+      } else {
+        final file = File(imagePath);
+        final bytes = await file.readAsBytes();
+        success = await FileUtils.saveImageToLibrary(
+          bytes: bytes,
+          titlePrefix: 'sylva',
+          extension: ext,
+        );
+      }
+
+      if (success) {
+        navigator.flushBar.showSuccess(message: S.current.imageSaved);
+      } else {
+        navigator.flushBar.showError(
+          message: S.current.error('Failed to save image'),
+        );
+      }
+    } catch (e) {
+      debugPrint('Error saving to library: $e');
+      navigator.flushBar.showError(message: S.current.error(e.toString()));
+    }
+  }
 }
 
-Uint8List _processImageIsolate(Map<String, dynamic> params) {
+Future<Uint8List> _processImageIsolate(Map<String, dynamic> params) async {
   final String path = params['imagePath'];
   final int colorValue = params['targetColorValue'];
   final double threshold = params['threshold'];

@@ -203,5 +203,7 @@
   "useMagnifierToPickColors": "Use magnifier to pick colors",
   "@useMagnifierToPickColors": {},
   "nothingSelectedToCopy": "Nothing selected to copy",
-  "@nothingSelectedToCopy": {}
+  "@nothingSelectedToCopy": {},
+  "saveToLibrary": "Save to library",
+  "@saveToLibrary": {}
 }

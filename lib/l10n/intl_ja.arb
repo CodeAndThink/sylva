@@ -203,5 +203,7 @@
   "useMagnifierToPickColors": "虫眼鏡を使って色を選択",
   "@useMagnifierToPickColors": {},
   "nothingSelectedToCopy": "コピーする色が選択されていません",
-  "@nothingSelectedToCopy": {}
+  "@nothingSelectedToCopy": {},
+  "saveToLibrary": "ライブラリに保存",
+  "@saveToLibrary": {}
 }

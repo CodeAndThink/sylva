@@ -203,5 +203,7 @@
   "useMagnifierToPickColors": "Sử dụng kính lúp để lấy màu",
   "@useMagnifierToPickColors": {},
   "nothingSelectedToCopy": "Chưa chọn màu để sao chép",
-  "@nothingSelectedToCopy": {}
+  "@nothingSelectedToCopy": {},
+  "saveToLibrary": "Lưu vào thư viện",
+  "@saveToLibrary": {}
 }

@@ -20,13 +20,25 @@ import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
-  const PhotoPreviewPage({super.key, required this.imagePath});
+  final List<Color>? initialColors;
+  final Color? initialSelectedColor;
+  
+  const PhotoPreviewPage({
+    super.key, 
+    required this.imagePath,
+    this.initialColors,
+    this.initialSelectedColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          PhotoPreviewCubit(navigator: PhotoPreviewNavigator(context)),
+          PhotoPreviewCubit(
+            navigator: PhotoPreviewNavigator(context),
+            initialColors: initialColors,
+            initialSelectedColor: initialSelectedColor,
+          ),
       child: _PhotoPreviewChildPage(imagePath: imagePath),
     );
   }
@@ -678,7 +690,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           message: S.of(context).save,
           child: IconButton(
             onPressed: () {
-              _cubit.navigator.safePop();
+              _cubit.saveHistory(imagePath: widget.imagePath);
             },
             icon: const Icon(Icons.save_outlined, size: 30),
           ),

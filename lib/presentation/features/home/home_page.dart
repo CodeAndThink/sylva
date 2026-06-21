@@ -460,7 +460,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 color: _theme.colorScheme.onSurface,
                 size: 40,
               ),
-              onPressed: () {},
+              onPressed: () {
+                _cubit.navigator.goToHistory();
+              },
             ),
             GestureDetector(
               onTap: _isCapturing ? null : _takePicture,

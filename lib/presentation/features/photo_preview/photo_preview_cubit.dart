@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as p;
 import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/core/services/permission_service.dart';
 import 'package:sylva/core/utils/file_utils.dart';
+import 'package:sylva/data/entities/history_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
@@ -19,8 +21,14 @@ import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   final PhotoPreviewNavigator navigator;
 
-  PhotoPreviewCubit({required this.navigator})
-    : super(const PhotoPreviewState());
+  PhotoPreviewCubit({
+    required this.navigator,
+    List<Color>? initialColors,
+    Color? initialSelectedColor,
+  }) : super(PhotoPreviewState(
+          userColors: initialColors ?? const [],
+          selectedColor: initialSelectedColor,
+        ));
 
   void setSelectedColor({required Color color}) {
     safeEmit(state.copyWith(selectedColor: color));
@@ -177,6 +185,28 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     } catch (e) {
       debugPrint('Error copying color: $e');
       navigator.flushBar.showError(message: S.current.colorCopiedFailure);
+    }
+  }
+
+  Future<void> saveHistory({required String imagePath}) async {
+    try {
+      final isar = locator<Isar>();
+      final userColors = state.userColors.map((c) => c.toARGB32()).toList();
+      final record = HistoryRecord(
+        imagePath: imagePath,
+        userColors: userColors,
+        selectedColor: state.selectedColor?.toARGB32(),
+        createdAt: DateTime.now(),
+      );
+
+      await isar.writeTxn(() async {
+        await isar.historyRecords.put(record);
+      });
+
+      navigator.flushBar.showSuccess(message: S.current.success);
+    } catch (e) {
+      debugPrint('Error saving history: $e');
+      navigator.flushBar.showError(message: S.current.error(e.toString()));
     }
   }
 

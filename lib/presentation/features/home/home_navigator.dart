@@ -11,4 +11,8 @@ class HomeNavigator extends BaseNavigator {
   void goToPhotoPreview(String imagePath) {
     pushNamed(AppRouter.photoPreview, extra: imagePath);
   }
+
+  void goToHistory() {
+    pushNamed(AppRouter.history);
+  }
 }

@@ -11,7 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-// import 'package:isar_community/isar.dart' as _i214;
+import 'package:isar_community/isar.dart' as _i214;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../presentation/app/app_cubit.dart' as _i503;
@@ -31,10 +31,10 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
-    // await gh.lazySingletonAsync<_i214.Isar>(
-    //   () => registerModule.isar,
-    //   preResolve: true,
-    // );
+    await gh.lazySingletonAsync<_i214.Isar>(
+      () => registerModule.isar,
+      preResolve: true,
+    );
     await gh.lazySingletonAsync<_i460.SharedPreferences>(
       () => registerModule.prefs,
       preResolve: true,

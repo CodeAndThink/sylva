@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("About"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Arrow"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(
@@ -54,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Confirm password is required",
     ),
+    "contact": MessageLookupByLibrary.simpleMessage("Contact"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
     "createTime": MessageLookupByLibrary.simpleMessage("Time"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
@@ -62,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
     ),
+    "donation": MessageLookupByLibrary.simpleMessage("Donation"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Duplicates"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage(
@@ -106,6 +109,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "imageSaved": MessageLookupByLibrary.simpleMessage(
       "Image saved successfully!",
+    ),
+    "informationAndSupport": MessageLookupByLibrary.simpleMessage(
+      "Information & Support",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),

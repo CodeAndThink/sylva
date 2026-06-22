@@ -289,5 +289,13 @@
   "tutorialLibraryDesc": "Xuất ảnh này vào thư viện của điện thoại.",
   "@tutorialLibraryDesc": {},
   "createTime": "Thời gian",
-  "@createTime": {}
+  "@createTime": {},
+  "informationAndSupport": "Thông tin & Hỗ trợ",
+  "@informationAndSupport": {},
+  "donation": "Ủng hộ",
+  "@donation": {},
+  "about": "Giới thiệu",
+  "@about": {},
+  "contact": "Liên hệ",
+  "@contact": {}
 }

@@ -1113,6 +1113,31 @@ class S {
   String get createTime {
     return Intl.message('Time', name: 'createTime', desc: '', args: []);
   }
+
+  /// `Information & Support`
+  String get informationAndSupport {
+    return Intl.message(
+      'Information & Support',
+      name: 'informationAndSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donation`
+  String get donation {
+    return Intl.message('Donation', name: 'donation', desc: '', args: []);
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message('About', name: 'about', desc: '', args: []);
+  }
+
+  /// `Contact`
+  String get contact {
+    return Intl.message('Contact', name: 'contact', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -32,6 +32,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       final groupedItems = _computeGroupedItems(
         records: sortedRecords,
         isAscending: state.isSortAscending,
+        isFavoriteOnly: state.isFavoriteOnly,
       );
 
       emit(
@@ -59,6 +60,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       final groupedItems = _computeGroupedItems(
         records: updatedRecords,
         isAscending: state.isSortAscending,
+        isFavoriteOnly: state.isFavoriteOnly,
       );
 
       emit(state.copyWith(records: updatedRecords, groupedItems: groupedItems));
@@ -87,6 +89,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     final groupedItems = _computeGroupedItems(
       records: sortedRecords,
       isAscending: newAscending,
+      isFavoriteOnly: state.isFavoriteOnly,
     );
     emit(
       state.copyWith(
@@ -100,6 +103,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   List<Object> _computeGroupedItems({
     required List<HistoryRecord> records,
     bool isAscending = false,
+    bool isFavoriteOnly = false,
   }) {
     final flattened = <Object>[];
     final now = DateTime.now();
@@ -110,6 +114,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
 
     final grouped = <TimeGroup, List<HistoryRecord>>{};
     for (final record in records) {
+      if (isFavoriteOnly && !record.isFavorite) continue;
       final date = DateTime(
         record.createdAt.year,
         record.createdAt.month,
@@ -138,6 +143,21 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       }
     }
     return flattened;
+  }
+
+  void toggleFavoriteOnly() {
+    final newFavoriteOnly = !state.isFavoriteOnly;
+    final groupedItems = _computeGroupedItems(
+      records: state.records,
+      isAscending: state.isSortAscending,
+      isFavoriteOnly: newFavoriteOnly,
+    );
+    emit(
+      state.copyWith(
+        isFavoriteOnly: newFavoriteOnly,
+        groupedItems: groupedItems,
+      ),
+    );
   }
 
   void toggleFavorite(int id) async {

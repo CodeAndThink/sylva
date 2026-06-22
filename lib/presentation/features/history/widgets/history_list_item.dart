@@ -133,7 +133,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                           topRight: 18.radius,
                           bottomRight: 18.radius,
                         ),
-                        color: theme.colorScheme.primary,
+                        color: theme.colorScheme.primaryContainer,
                         image: DecorationImage(
                           image: FileImage(File(widget.record.imagePath)),
                           fit: BoxFit.cover,
@@ -151,7 +151,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: 24.borderRadius,
-                                    color: Colors.amber,
+                                    color: theme.colorScheme.surface,
                                     border: Border.all(
                                       color: Colors.orange,
                                       width: 1,
@@ -160,9 +160,9 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                   padding: 4.paddingAll,
                                   child: Icon(
                                     widget.isFavorite
-                                        ? Icons.bookmark_outlined
-                                        : Icons.bookmark,
-                                    color: Colors.white,
+                                        ? Icons.bookmark
+                                        : Icons.bookmark_outline_rounded,
+                                    color: Colors.amber,
                                   ),
                                 ),
                               ),
@@ -195,6 +195,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                 overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   fontWeight: FontWeight.bold,
+                                  color: theme.colorScheme.onPrimaryContainer,
                                 ),
                               ),
                             ],

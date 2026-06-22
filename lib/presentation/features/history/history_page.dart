@@ -86,7 +86,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           previous.groupedItems != current.groupedItems ||
           previous.isGridView != current.isGridView,
       builder: (context, state) {
-        if (state.status.isLoading) {
+        if (state.status.isInitial) {
           return const HistoryShimmerList();
         }
         if (state.records.isEmpty) {
@@ -171,7 +171,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       child: Padding(
         padding: 16.paddingBottom,
         child: AppTransparentContainer(
-          padding: 8.paddingAll,
+          padding: 4.paddingAll,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             spacing: 12,
@@ -180,7 +180,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 onTap: () {},
                 customBorder: const CircleBorder(),
                 child: Container(
-                  height: 30,
+                  height: 40,
                   decoration: BoxDecoration(
                     borderRadius: 30.borderRadius,
                     color: _theme.colorScheme.primaryContainer,
@@ -200,12 +200,35 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               ),
               InkWell(
                 onTap: () {
+                  _cubit.toggleFavoriteOnly();
+                },
+                customBorder: const CircleBorder(),
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  child: BlocBuilder<HistoryCubit, HistoryState>(
+                    buildWhen: (p, c) => p.isFavoriteOnly != c.isFavoriteOnly,
+                    builder: (context, state) {
+                      return Icon(
+                        state.isFavoriteOnly
+                            ? Icons.bookmark
+                            : Icons.bookmark_outline_rounded,
+                        color: Colors.amber,
+                        size: 30,
+                      );
+                    },
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
                   _cubit.toggleSort();
                 },
                 customBorder: const CircleBorder(),
                 child: Container(
-                  height: 30,
-                  width: 30,
+                  height: 40,
+                  width: 40,
                   decoration: const BoxDecoration(shape: BoxShape.circle),
                   child: BlocBuilder<HistoryCubit, HistoryState>(
                     buildWhen: (p, c) => p.isSortAscending != c.isSortAscending,
@@ -214,6 +237,8 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                         state.isSortAscending
                             ? Icons.expand_less_outlined
                             : Icons.expand_more_outlined,
+
+                        size: 30,
                       );
                     },
                   ),

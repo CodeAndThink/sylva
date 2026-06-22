@@ -8,6 +8,7 @@ class HistoryState extends Equatable {
   final LoadStatus status;
   final bool isSortAscending;
   final bool isGridView;
+  final bool isFavoriteOnly;
 
   const HistoryState({
     this.records = const [],
@@ -15,6 +16,7 @@ class HistoryState extends Equatable {
     this.status = LoadStatus.initial,
     this.isSortAscending = false,
     this.isGridView = false,
+    this.isFavoriteOnly = false,
   });
 
   HistoryState copyWith({
@@ -23,6 +25,7 @@ class HistoryState extends Equatable {
     LoadStatus? status,
     bool? isSortAscending,
     bool? isGridView,
+    bool? isFavoriteOnly,
   }) {
     return HistoryState(
       records: records ?? this.records,
@@ -30,6 +33,7 @@ class HistoryState extends Equatable {
       status: status ?? this.status,
       isSortAscending: isSortAscending ?? this.isSortAscending,
       isGridView: isGridView ?? this.isGridView,
+      isFavoriteOnly: isFavoriteOnly ?? this.isFavoriteOnly,
     );
   }
 
@@ -40,5 +44,6 @@ class HistoryState extends Equatable {
     status,
     isSortAscending,
     isGridView,
+    isFavoriteOnly,
   ];
 }

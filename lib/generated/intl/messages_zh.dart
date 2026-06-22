@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("关于"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("箭头"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("自动检测颜色"),
@@ -46,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "colorCopiedSuccess": m0,
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
+    "contact": MessageLookupByLibrary.simpleMessage("联系"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("创建新图像"),
     "createTime": MessageLookupByLibrary.simpleMessage("时间"),
     "days": MessageLookupByLibrary.simpleMessage("天"),
@@ -54,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
     ),
+    "donation": MessageLookupByLibrary.simpleMessage("捐款"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重复项"),
     "email": MessageLookupByLibrary.simpleMessage("邮箱"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("无效的邮箱格式"),
@@ -85,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "4. 找到 Twinfix 并将小部件拖到屏幕上。",
     ),
     "imageSaved": MessageLookupByLibrary.simpleMessage("图像保存成功！"),
+    "informationAndSupport": MessageLookupByLibrary.simpleMessage("信息与支持"),
     "language": MessageLookupByLibrary.simpleMessage("语言"),
     "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
     "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),

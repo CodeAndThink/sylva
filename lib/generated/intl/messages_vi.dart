@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Mũi tên"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(
@@ -56,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu không được để trống",
     ),
+    "contact": MessageLookupByLibrary.simpleMessage("Liên hệ"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
     "createTime": MessageLookupByLibrary.simpleMessage("Thời gian"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
@@ -64,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
     ),
+    "donation": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Ảnh trùng lặp"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage(
@@ -110,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "imageSaved": MessageLookupByLibrary.simpleMessage(
       "Đã lưu ảnh thành công!",
+    ),
+    "informationAndSupport": MessageLookupByLibrary.simpleMessage(
+      "Thông tin & Hỗ trợ",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
     "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),

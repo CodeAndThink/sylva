@@ -289,5 +289,13 @@
   "tutorialLibraryDesc": "この写真をデバイスのギャラリーにエクスポートします。",
   "@tutorialLibraryDesc": {},
   "createTime": "時間",
-  "@createTime": {}
+  "@createTime": {},
+  "informationAndSupport": "情報とサポート",
+  "@informationAndSupport": {},
+  "donation": "寄付",
+  "@donation": {},
+  "about": "約",
+  "@about": {},
+  "contact": "連絡先",
+  "@contact": {}
 }

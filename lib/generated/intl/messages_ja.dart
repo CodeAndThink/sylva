@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "about": MessageLookupByLibrary.simpleMessage("約"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("色を自動検出"),
@@ -48,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "パスワードの確認が必要です",
     ),
+    "contact": MessageLookupByLibrary.simpleMessage("連絡先"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
     "createTime": MessageLookupByLibrary.simpleMessage("時間"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
@@ -56,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
     ),
+    "donation": MessageLookupByLibrary.simpleMessage("寄付"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重複"),
     "email": MessageLookupByLibrary.simpleMessage("メール"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("無効なメール形式です"),
@@ -95,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "4. Twinfixを見つけて、ウィジェットを画面にドラッグします。",
     ),
     "imageSaved": MessageLookupByLibrary.simpleMessage("画像が正常に保存されました！"),
+    "informationAndSupport": MessageLookupByLibrary.simpleMessage("情報とサポート"),
     "language": MessageLookupByLibrary.simpleMessage("言語"),
     "last30Days": MessageLookupByLibrary.simpleMessage("過去30日間"),
     "last7Days": MessageLookupByLibrary.simpleMessage("過去7日間"),

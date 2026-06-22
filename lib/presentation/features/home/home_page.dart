@@ -617,43 +617,36 @@ class __HomeChildPageState extends State<_HomeChildPage>
   List<TargetFocus> _createTargets() {
     return [
       _buildTarget(
-        identify: "Target Settings",
         key: _keySettings,
         title: S.of(context).tutorialSettingsTitle,
         desc: S.of(context).tutorialSettingsDesc,
       ),
       _buildTarget(
-        identify: "Target Flash",
         key: _keyFlash,
         title: S.of(context).tutorialFlashTitle,
         desc: S.of(context).tutorialFlashDesc,
       ),
       _buildTarget(
-        identify: "Target Timer",
         key: _keyTimer,
         title: S.of(context).tutorialTimerTitle,
         desc: S.of(context).tutorialTimerDesc,
       ),
       _buildTarget(
-        identify: "Target Switch Camera",
         key: _keySwitchCamera,
         title: S.of(context).tutorialCameraTitle,
         desc: S.of(context).tutorialCameraDesc,
       ),
       _buildTarget(
-        identify: "Target History",
         key: _keyHistory,
         title: S.of(context).tutorialHistoryTitle,
         desc: S.of(context).tutorialHistoryDesc,
       ),
       _buildTarget(
-        identify: "Target Capture",
         key: _keyCapture,
         title: S.of(context).tutorialCaptureTitle,
         desc: S.of(context).tutorialCaptureDesc,
       ),
       _buildTarget(
-        identify: "Target Gallery",
         key: _keyUpload,
         title: S.of(context).tutorialGalleryTitle,
         desc: S.of(context).tutorialGalleryDesc,
@@ -662,13 +655,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
   }
 
   TargetFocus _buildTarget({
-    required String identify,
     required GlobalKey key,
     required String title,
     required String desc,
   }) {
     return TargetFocus(
-      identify: identify,
+      identify: key,
       keyTarget: key,
       alignSkip: Alignment.topRight,
       focusAnimationDuration: 400.milliseconds,
@@ -677,41 +669,61 @@ class __HomeChildPageState extends State<_HomeChildPage>
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(title, style: _theme.textTheme.headlineMedium),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-                  child: Text(desc, style: _theme.textTheme.bodyMedium),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: controller.skip,
-                      child: Text(
-                        S.of(context).tutorialSkip,
-                        style: _theme.textTheme.titleSmall,
+            return Container(
+              padding: 16.paddingAll,
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.65),
+                borderRadius: 16.borderRadius,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: _theme.textTheme.headlineMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                    child: Text(
+                      desc,
+                      style: _theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.white,
                       ),
                     ),
-                    8.width,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _theme.colorScheme.primary,
-                      ),
-                      onPressed: controller.next,
-                      child: Text(
-                        S.of(context).tutorialNext,
-                        style: _theme.textTheme.titleSmall?.copyWith(
-                          color: _theme.colorScheme.surface,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: controller.skip,
+                        child: Text(
+                          S.of(context).tutorialSkip,
+                          style: _theme.textTheme.titleSmall?.copyWith(
+                            color: Colors.white70,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      8.width,
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _theme.colorScheme.primary,
+                        ),
+                        onPressed: controller.next,
+                        child: Text(
+                          S.of(context).tutorialNext,
+                          style: _theme.textTheme.titleSmall?.copyWith(
+                            color: _theme.colorScheme.surface,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           },
         ),

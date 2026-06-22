@@ -191,6 +191,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Thu"),
     "timer": MessageLookupByLibrary.simpleMessage("Timer"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
+      "Discard changes and return to the camera.",
+    ),
+    "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("Go Back"),
     "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
       "Switch between front and rear cameras.",
     ),
@@ -201,6 +205,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Take a photo right now.",
     ),
     "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Capture"),
+    "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "View all extracted and picked colors in a bottom sheet.",
+    ),
+    "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "Expand Palette",
+    ),
     "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
       "Toggle flash modes (Auto, On, Off).",
     ),
@@ -213,7 +223,27 @@ class MessageLookup extends MessageLookupByLibrary {
       "View your previously captured photos.",
     ),
     "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("History"),
+    "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
+      "Pan your finger on the photo to magnify and pick any color.",
+    ),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("Photo Preview"),
+    "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
+      "Export this photo to your device\'s photo gallery.",
+    ),
+    "tutorialLibraryTitle": MessageLookupByLibrary.simpleMessage(
+      "Save to Library",
+    ),
     "tutorialNext": MessageLookupByLibrary.simpleMessage("Next"),
+    "tutorialPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "Tap a color to filter, long press to copy its hex code.",
+    ),
+    "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "Color Palette",
+    ),
+    "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
+      "Save this photo and colors to the app\'s history.",
+    ),
+    "tutorialSaveTitle": MessageLookupByLibrary.simpleMessage("Save to App"),
     "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
       "Customize your app preferences here.",
     ),

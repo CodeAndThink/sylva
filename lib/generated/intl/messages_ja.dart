@@ -167,12 +167,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("木"),
     "timer": MessageLookupByLibrary.simpleMessage("タイマー"),
     "today": MessageLookupByLibrary.simpleMessage("今日"),
+    "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
+      "変更を破棄してカメラに戻ります。",
+    ),
+    "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("戻る"),
     "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
       "前面カメラと背面カメラを切り替えます。",
     ),
     "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage("今すぐ写真を撮ります。"),
     "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("撮影"),
+    "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "抽出・選択したすべての色を表示します。",
+    ),
+    "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "パレットを拡大",
+    ),
     "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
       "フラッシュのオン/オフを切り替えます。",
     ),
@@ -185,7 +195,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "過去に撮影した写真を表示します。",
     ),
     "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("履歴"),
+    "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
+      "写真の上で指を動かして拡大し、色を選択します。",
+    ),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("写真プレビュー"),
+    "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
+      "この写真をデバイスのギャラリーにエクスポートします。",
+    ),
+    "tutorialLibraryTitle": MessageLookupByLibrary.simpleMessage("ライブラリに保存"),
     "tutorialNext": MessageLookupByLibrary.simpleMessage("次へ"),
+    "tutorialPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "色をタップしてフィルター、長押しで16進数コードをコピーします。",
+    ),
+    "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage("カラーパレット"),
+    "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
+      "この写真と色をアプリの履歴に保存します。",
+    ),
+    "tutorialSaveTitle": MessageLookupByLibrary.simpleMessage("アプリに保存"),
     "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
       "アプリの設定をカスタマイズします。",
     ),

@@ -988,6 +988,126 @@ class S {
   String get tutorialSkip {
     return Intl.message('Skip', name: 'tutorialSkip', desc: '', args: []);
   }
+
+  /// `Photo Preview`
+  String get tutorialImageTitle {
+    return Intl.message(
+      'Photo Preview',
+      name: 'tutorialImageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pan your finger on the photo to magnify and pick any color.`
+  String get tutorialImageDesc {
+    return Intl.message(
+      'Pan your finger on the photo to magnify and pick any color.',
+      name: 'tutorialImageDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color Palette`
+  String get tutorialPaletteTitle {
+    return Intl.message(
+      'Color Palette',
+      name: 'tutorialPaletteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap a color to filter, long press to copy its hex code.`
+  String get tutorialPaletteDesc {
+    return Intl.message(
+      'Tap a color to filter, long press to copy its hex code.',
+      name: 'tutorialPaletteDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expand Palette`
+  String get tutorialExpandPaletteTitle {
+    return Intl.message(
+      'Expand Palette',
+      name: 'tutorialExpandPaletteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View all extracted and picked colors in a bottom sheet.`
+  String get tutorialExpandPaletteDesc {
+    return Intl.message(
+      'View all extracted and picked colors in a bottom sheet.',
+      name: 'tutorialExpandPaletteDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Back`
+  String get tutorialBackTitle {
+    return Intl.message(
+      'Go Back',
+      name: 'tutorialBackTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discard changes and return to the camera.`
+  String get tutorialBackDesc {
+    return Intl.message(
+      'Discard changes and return to the camera.',
+      name: 'tutorialBackDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save to App`
+  String get tutorialSaveTitle {
+    return Intl.message(
+      'Save to App',
+      name: 'tutorialSaveTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save this photo and colors to the app's history.`
+  String get tutorialSaveDesc {
+    return Intl.message(
+      'Save this photo and colors to the app\'s history.',
+      name: 'tutorialSaveDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save to Library`
+  String get tutorialLibraryTitle {
+    return Intl.message(
+      'Save to Library',
+      name: 'tutorialLibraryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export this photo to your device's photo gallery.`
+  String get tutorialLibraryDesc {
+    return Intl.message(
+      'Export this photo to your device\'s photo gallery.',
+      name: 'tutorialLibraryDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -34,5 +34,11 @@ class HistoryState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [records, groupedItems, status, isSortAscending, isGridView];
+  List<Object?> get props => [
+    records,
+    groupedItems,
+    status,
+    isSortAscending,
+    isGridView,
+  ];
 }

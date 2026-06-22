@@ -44,15 +44,39 @@ class PermissionService {
     return await PhotoManager.requestPermissionExtend();
   }
 
-  /// Request notification permission (for Android 13+)
-  Future<bool> requestNotificationPermission() async {
-    final status = await ph.Permission.notification.request();
-    return status.isGranted;
+  /// Request camera permission
+  Future<bool> requestCameraPermission(BuildContext context) async {
+    final status = await ph.Permission.camera.request();
+
+    if (status.isGranted) {
+      return true;
+    }
+
+    if (!context.mounted) return false;
+
+    if (status.isPermanentlyDenied) {
+      await AppDialog(context).showConfirm(
+        title: S.current.permissionRequired,
+        message: S.current.permissionDescription,
+        rightText: S.current.ok,
+        leftText: S.current.cancel,
+        onRight: () {
+          openAppSettings();
+        },
+      );
+    } else {
+      await AppDialog(context).showError(
+        title: S.current.permissionRequired,
+        message: S.current.permissionDescription,
+      );
+    }
+
+    return false;
   }
 
-  /// Check current notification permission status
-  Future<bool> checkNotificationStatus() async {
-    return await ph.Permission.notification.isGranted;
+  /// Check current camera permission status
+  Future<bool> checkCameraStatus() async {
+    return await ph.Permission.camera.isGranted;
   }
 
   /// Open app settings

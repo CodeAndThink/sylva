@@ -1,12 +1,14 @@
 part of 'app_cubit.dart';
 
 class AppState extends Equatable {
-  const AppState();
+  final bool isFirstTime;
+
+  const AppState({this.isFirstTime = true});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [isFirstTime];
 
-  AppState copyWith() {
-    return AppState();
+  AppState copyWith({bool? isFirstTime}) {
+    return AppState(isFirstTime: isFirstTime ?? this.isFirstTime);
   }
 }

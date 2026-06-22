@@ -4,8 +4,10 @@ import 'package:sylva/presentation/features/history/history_page.dart';
 import 'package:sylva/presentation/features/home/home_page.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
 import 'package:sylva/presentation/features/paywall/paywall_page.dart';
+import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
+import 'package:sylva/data/entities/history_record.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -31,6 +33,9 @@ class AppRouter {
 
   static const String paywall = 'paywall';
   static const String paywallPath = '/paywall';
+
+  static const String photoPreview = 'photoPreview';
+  static const String photoPreviewPath = '/photoPreview';
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -65,6 +70,25 @@ class AppRouter {
         path: settingsPath,
         name: settings,
         builder: (context, state) => const SettingsPage(),
+      ),
+      GoRoute(
+        path: photoPreviewPath,
+        name: photoPreview,
+        builder: (context, state) {
+          if (state.extra is HistoryRecord) {
+            final record = state.extra as HistoryRecord;
+            return PhotoPreviewPage(
+              imagePath: record.imagePath,
+              initialColors: record.userColors.map((c) => Color(c)).toList(),
+              initialSelectedColor: record.selectedColor != null
+                  ? Color(record.selectedColor!)
+                  : null,
+              historyRecordId: record.id,
+            );
+          }
+          final imagePath = state.extra as String;
+          return PhotoPreviewPage(imagePath: imagePath);
+        },
       ),
     ],
   );

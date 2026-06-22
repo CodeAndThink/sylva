@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 
@@ -11,6 +12,7 @@ class AppFilledButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? foregroundColor;
   final bool enabled;
+  final double borderRadius;
 
   const AppFilledButton({
     super.key,
@@ -22,6 +24,7 @@ class AppFilledButton extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.enabled = true,
+    this.borderRadius = 20,
   });
 
   @override
@@ -37,7 +40,7 @@ class AppFilledButton extends StatelessWidget {
       disabledForegroundColor: Colors.white70,
       elevation: 0,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      shape: RoundedRectangleBorder(borderRadius: 20.borderRadius),
+      shape: RoundedRectangleBorder(borderRadius: borderRadius.borderRadius),
     );
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: 48),
@@ -48,12 +51,7 @@ class AppFilledButton extends StatelessWidget {
             ? SizedBox(
                 height: 20,
                 width: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    theme.colorScheme.onPrimary,
-                  ),
-                ),
+                child: SpinKitRipple(color: foreColor),
               )
             : Row(
                 mainAxisSize: MainAxisSize.min,

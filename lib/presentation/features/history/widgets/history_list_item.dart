@@ -127,7 +127,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                           topRight: 18.radius,
                           bottomRight: 18.radius,
                         ),
-                        color: theme.colorScheme.primaryContainer,
+                        color: theme.colorScheme.primary,
                         image: DecorationImage(
                           image: FileImage(File(widget.record.imagePath)),
                           fit: BoxFit.cover,
@@ -136,8 +136,30 @@ class _HistoryListItemState extends State<HistoryListItem> {
                       ),
                       padding: 4.paddingVertical.copyWith(left: 8, right: 8),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              const Spacer(),
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: 24.borderRadius,
+                                    color: Colors.amber,
+                                    border: Border.all(
+                                      color: Colors.orange,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  padding: 4.paddingAll,
+                                  child: Icon(
+                                    Icons.bookmark,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           const Spacer(),
                           Row(
                             spacing: 4,
@@ -161,6 +183,8 @@ class _HistoryListItemState extends State<HistoryListItem> {
                               const Spacer(),
                               Text(
                                 widget.record.createdAt.toDateTimeString(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),

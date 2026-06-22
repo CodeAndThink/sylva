@@ -75,32 +75,64 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                     children: [
                       Spacer(),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        spacing: 4,
                         children: [
-                          if (widget.record.userColors.isNotEmpty)
-                            ...widget.record.userColors
-                                .take(5)
-                                .map(
-                                  (c) => Container(
-                                    width: 16,
-                                    height: 16,
-                                    decoration: BoxDecoration(
-                                      color: Color(c),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(color: Colors.white),
-                                    ),
+                          InkWell(
+                            onTap: () {},
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: 24.borderRadius,
+                                color: Colors.amber,
+                                border: Border.all(
+                                  color: Colors.orange,
+                                  width: 1,
+                                ),
+                              ),
+                              padding: 4.paddingAll,
+                              child: Icon(Icons.bookmark, color: Colors.white),
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                if (widget.record.userColors.isNotEmpty) ...[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    spacing: 4,
+                                    children: [
+                                      ...widget.record.userColors
+                                          .take(5)
+                                          .map(
+                                            (c) => Container(
+                                              width: 16,
+                                              height: 16,
+                                              decoration: BoxDecoration(
+                                                color: Color(c),
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                    ],
+                                  ),
+                                ] else ...[
+                                  16.height,
+                                ],
+                                8.height,
+                                Text(
+                                  widget.record.createdAt.toDateTimeString(),
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
                         ],
-                      ),
-                      8.height,
-                      Text(
-                        widget.record.createdAt.toDateTimeString(),
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
                       ),
                     ],
                   ),

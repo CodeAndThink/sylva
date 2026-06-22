@@ -191,6 +191,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Thu"),
     "timer": MessageLookupByLibrary.simpleMessage("Timer"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
+      "Switch between front and rear cameras.",
+    ),
+    "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage(
+      "Switch Camera",
+    ),
+    "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage(
+      "Take a photo right now.",
+    ),
+    "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Capture"),
+    "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
+      "Toggle flash modes (Auto, On, Off).",
+    ),
+    "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Flash Mode"),
+    "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
+      "Pick an existing photo from your gallery.",
+    ),
+    "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage("Gallery"),
+    "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage(
+      "View your previously captured photos.",
+    ),
+    "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("History"),
+    "tutorialNext": MessageLookupByLibrary.simpleMessage("Next"),
+    "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "Customize your app preferences here.",
+    ),
+    "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+    "tutorialSkip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
+      "Set a countdown timer before capturing.",
+    ),
+    "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Timer"),
     "understood": MessageLookupByLibrary.simpleMessage("GOT IT"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Use magnifier to pick colors",

@@ -199,6 +199,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Th 5"),
     "timer": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
     "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
+    "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
+      "Chuyển đổi giữa camera trước và sau.",
+    ),
+    "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
+    "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage(
+      "Nhấn để chụp ảnh ngay.",
+    ),
+    "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Chụp ảnh"),
+    "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
+      "Bật/tắt đèn flash.",
+    ),
+    "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
+    "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
+      "Chọn ảnh có sẵn từ điện thoại.",
+    ),
+    "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage(
+      "Thư viện ảnh",
+    ),
+    "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage(
+      "Xem lại các bức ảnh đã chụp.",
+    ),
+    "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("Lịch sử"),
+    "tutorialNext": MessageLookupByLibrary.simpleMessage("Tiếp"),
+    "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "Tùy chỉnh các thiết lập của ứng dụng.",
+    ),
+    "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+    "tutorialSkip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+    "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
+      "Cài đặt đếm ngược trước khi chụp.",
+    ),
+    "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
     "understood": MessageLookupByLibrary.simpleMessage("ĐÃ HIỂU"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Sử dụng kính lúp để lấy màu",

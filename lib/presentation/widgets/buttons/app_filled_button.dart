@@ -13,6 +13,7 @@ class AppFilledButton extends StatelessWidget {
   final Color? foregroundColor;
   final bool enabled;
   final double borderRadius;
+  final EdgeInsets? padding;
 
   const AppFilledButton({
     super.key,
@@ -25,6 +26,7 @@ class AppFilledButton extends StatelessWidget {
     this.foregroundColor,
     this.enabled = true,
     this.borderRadius = 20,
+    this.padding,
   });
 
   @override
@@ -39,7 +41,7 @@ class AppFilledButton extends StatelessWidget {
       ),
       disabledForegroundColor: Colors.white70,
       elevation: 0,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      padding: padding ?? 12.paddingAll,
       shape: RoundedRectangleBorder(borderRadius: borderRadius.borderRadius),
     );
     return ConstrainedBox(

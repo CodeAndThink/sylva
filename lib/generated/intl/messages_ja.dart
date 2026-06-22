@@ -167,6 +167,34 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("木"),
     "timer": MessageLookupByLibrary.simpleMessage("タイマー"),
     "today": MessageLookupByLibrary.simpleMessage("今日"),
+    "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
+      "前面カメラと背面カメラを切り替えます。",
+    ),
+    "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
+    "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage("今すぐ写真を撮ります。"),
+    "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("撮影"),
+    "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
+      "フラッシュのオン/オフを切り替えます。",
+    ),
+    "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("フラッシュ"),
+    "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
+      "ギャラリーから写真を選択します。",
+    ),
+    "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage("ギャラリー"),
+    "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage(
+      "過去に撮影した写真を表示します。",
+    ),
+    "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("履歴"),
+    "tutorialNext": MessageLookupByLibrary.simpleMessage("次へ"),
+    "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "アプリの設定をカスタマイズします。",
+    ),
+    "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("設定"),
+    "tutorialSkip": MessageLookupByLibrary.simpleMessage("スキップ"),
+    "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
+      "撮影前のカウントダウンを設定します。",
+    ),
+    "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("タイマー"),
     "understood": MessageLookupByLibrary.simpleMessage("了解"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "虫眼鏡を使って色を選択",

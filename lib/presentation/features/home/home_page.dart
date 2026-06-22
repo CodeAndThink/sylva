@@ -11,6 +11,7 @@ import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,6 +34,16 @@ class _HomeChildPage extends StatefulWidget {
 
 class __HomeChildPageState extends State<_HomeChildPage>
     with WidgetsBindingObserver {
+  final GlobalKey _keySettings = GlobalKey();
+  final GlobalKey _keyFlash = GlobalKey();
+  final GlobalKey _keyTimer = GlobalKey();
+  final GlobalKey _keySwitchCamera = GlobalKey();
+  final GlobalKey _keyHistory = GlobalKey();
+  final GlobalKey _keyCapture = GlobalKey();
+  final GlobalKey _keyUpload = GlobalKey();
+
+  TutorialCoachMark? tutorialCoachMark;
+
   CameraController? _controller;
   List<CameraDescription> _cameras = [];
   bool _isCameraInitialized = false;
@@ -162,16 +173,22 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_controller == null || !_isCameraInitialized) return;
 
     setState(() {
-      _flashMode = _flashMode == FlashMode.off
-          ? FlashMode.always
-          : FlashMode.off;
+      if (_flashMode == FlashMode.off) {
+        _flashMode = FlashMode.always;
+      } else if (_flashMode == FlashMode.always) {
+        _flashMode = FlashMode.auto;
+      } else {
+        _flashMode = FlashMode.off;
+      }
     });
 
-    _showCenterIcon(
-      _flashMode == FlashMode.always
-          ? Icons.flash_on_outlined
-          : Icons.flash_off_outlined,
-    );
+    IconData getIcon() {
+      if (_flashMode == FlashMode.always) return Icons.flash_on_outlined;
+      if (_flashMode == FlashMode.auto) return Icons.flash_auto_outlined;
+      return Icons.flash_off_outlined;
+    }
+
+    _showCenterIcon(getIcon());
 
     try {
       await _controller!.setFlashMode(_flashMode);
@@ -370,6 +387,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).settings,
                 child: IconButton(
+                  key: _keySettings,
                   icon: Icon(
                     Icons.settings_outlined,
                     color: _theme.colorScheme.onSurface,
@@ -383,6 +401,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).flashMode,
                 child: IconButton(
+                  key: _keyFlash,
                   icon: AnimatedSwitcher(
                     duration: 150.milliseconds,
                     transitionBuilder:
@@ -395,6 +414,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     child: Icon(
                       _flashMode == FlashMode.always
                           ? Icons.flash_on_outlined
+                          : _flashMode == FlashMode.auto
+                          ? Icons.flash_auto_outlined
                           : Icons.flash_off_outlined,
                       key: ValueKey<FlashMode>(_flashMode),
                       color: _theme.colorScheme.onSurface,
@@ -405,6 +426,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               PopupMenuButton<int>(
+                key: _keyTimer,
                 tooltip: S.of(context).timer,
                 menuPadding: EdgeInsets.zero,
                 color: Colors.black54,
@@ -447,7 +469,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).switchCamera,
                 child: IconButton(
-                  key: ValueKey<int>(_selectedCameraIndex),
+                  key: _keySwitchCamera,
                   icon: AnimatedSwitcher(
                     duration: 150.milliseconds,
                     transitionBuilder:
@@ -478,7 +500,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     color: _theme.colorScheme.onSurface,
                     size: 24,
                   ),
-                  onPressed: () {},
+                  onPressed: _showTutorial,
                 ),
               ),
             ],
@@ -489,6 +511,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).history,
                 child: IconButton(
+                  key: _keyHistory,
                   icon: Icon(
                     Icons.history_outlined,
                     color: _theme.colorScheme.onSurface,
@@ -500,6 +523,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               GestureDetector(
+                key: _keyCapture,
                 onTap: _isCapturing ? null : _takePicture,
                 child: Container(
                   width: 70,
@@ -526,6 +550,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.current.pickImageFromGallery,
                 child: IconButton(
+                  key: _keyUpload,
                   icon: Icon(
                     Icons.upload_rounded,
                     color: _theme.colorScheme.onSurface,
@@ -576,6 +601,121 @@ class __HomeChildPageState extends State<_HomeChildPage>
           ),
         ),
       ),
+    );
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: _createTargets(),
+      colorShadow: Colors.black,
+      hideSkip: true,
+      paddingFocus: 10,
+      opacityShadow: 0.8,
+    )..show(context: context);
+  }
+
+  List<TargetFocus> _createTargets() {
+    return [
+      _buildTarget(
+        identify: "Target Settings",
+        key: _keySettings,
+        title: S.of(context).tutorialSettingsTitle,
+        desc: S.of(context).tutorialSettingsDesc,
+      ),
+      _buildTarget(
+        identify: "Target Flash",
+        key: _keyFlash,
+        title: S.of(context).tutorialFlashTitle,
+        desc: S.of(context).tutorialFlashDesc,
+      ),
+      _buildTarget(
+        identify: "Target Timer",
+        key: _keyTimer,
+        title: S.of(context).tutorialTimerTitle,
+        desc: S.of(context).tutorialTimerDesc,
+      ),
+      _buildTarget(
+        identify: "Target Switch Camera",
+        key: _keySwitchCamera,
+        title: S.of(context).tutorialCameraTitle,
+        desc: S.of(context).tutorialCameraDesc,
+      ),
+      _buildTarget(
+        identify: "Target History",
+        key: _keyHistory,
+        title: S.of(context).tutorialHistoryTitle,
+        desc: S.of(context).tutorialHistoryDesc,
+      ),
+      _buildTarget(
+        identify: "Target Capture",
+        key: _keyCapture,
+        title: S.of(context).tutorialCaptureTitle,
+        desc: S.of(context).tutorialCaptureDesc,
+      ),
+      _buildTarget(
+        identify: "Target Gallery",
+        key: _keyUpload,
+        title: S.of(context).tutorialGalleryTitle,
+        desc: S.of(context).tutorialGalleryDesc,
+      ),
+    ];
+  }
+
+  TargetFocus _buildTarget({
+    required String identify,
+    required GlobalKey key,
+    required String title,
+    required String desc,
+  }) {
+    return TargetFocus(
+      identify: identify,
+      keyTarget: key,
+      alignSkip: Alignment.topRight,
+      focusAnimationDuration: 400.milliseconds,
+      unFocusAnimationDuration: 400.milliseconds,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(title, style: _theme.textTheme.headlineMedium),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                  child: Text(desc, style: _theme.textTheme.bodyMedium),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: controller.skip,
+                      child: Text(
+                        S.of(context).tutorialSkip,
+                        style: _theme.textTheme.titleSmall,
+                      ),
+                    ),
+                    8.width,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _theme.colorScheme.primary,
+                      ),
+                      onPressed: controller.next,
+                      child: Text(
+                        S.of(context).tutorialNext,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: _theme.colorScheme.surface,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

@@ -695,7 +695,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         Tooltip(
           message: S.of(context).save,
           child: IconButton(
-            onPressed: () {
+            onPressed: () async {
               if (widget.historyRecordId != null) {
                 SaveOptionsBottomSheet.show(
                   context: context,
@@ -707,7 +707,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                   ),
                 );
               } else {
-                _cubit.saveHistory(imagePath: widget.imagePath);
+                await _cubit.saveHistory(imagePath: widget.imagePath);
+                _cubit.navigator.safePop();
               }
             },
             icon: const Icon(Icons.save_outlined, size: 30),

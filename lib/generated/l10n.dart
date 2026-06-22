@@ -788,6 +788,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Today`
+  String get today {
+    return Intl.message('Today', name: 'today', desc: '', args: []);
+  }
+
+  /// `Yesterday`
+  String get yesterday {
+    return Intl.message('Yesterday', name: 'yesterday', desc: '', args: []);
+  }
+
+  /// `Last 7 days`
+  String get last7Days {
+    return Intl.message('Last 7 days', name: 'last7Days', desc: '', args: []);
+  }
+
+  /// `Last 30 days`
+  String get last30Days {
+    return Intl.message('Last 30 days', name: 'last30Days', desc: '', args: []);
+  }
+
+  /// `Older`
+  String get older {
+    return Intl.message('Older', name: 'older', desc: '', args: []);
+  }
+
+  /// `Flash Mode`
+  String get flashMode {
+    return Intl.message('Flash Mode', name: 'flashMode', desc: '', args: []);
+  }
+
+  /// `Timer`
+  String get timer {
+    return Intl.message('Timer', name: 'timer', desc: '', args: []);
+  }
+
+  /// `Switch Camera`
+  String get switchCamera {
+    return Intl.message(
+      'Switch Camera',
+      name: 'switchCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help`
+  String get help {
+    return Intl.message('Help', name: 'help', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

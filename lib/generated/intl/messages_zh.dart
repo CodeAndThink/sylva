@@ -65,9 +65,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "fill": MessageLookupByLibrary.simpleMessage("填充"),
     "filter": MessageLookupByLibrary.simpleMessage("滤镜"),
     "finish": MessageLookupByLibrary.simpleMessage("完成"),
+    "flashMode": MessageLookupByLibrary.simpleMessage("闪光灯模式"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS 位置数据已移除并另存为副本。",
     ),
+    "help": MessageLookupByLibrary.simpleMessage("帮助"),
     "history": MessageLookupByLibrary.simpleMessage("历史记录"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "您可以将 Twinfix 小部件添加到主屏幕以快速监控设备存储：",
@@ -83,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "imageSaved": MessageLookupByLibrary.simpleMessage("图像保存成功！"),
     "language": MessageLookupByLibrary.simpleMessage("语言"),
+    "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
+    "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("直线"),
     "login": MessageLookupByLibrary.simpleMessage("登录"),
@@ -97,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("暂无记录"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage("未选择要复制的颜色"),
     "ok": MessageLookupByLibrary.simpleMessage("确定"),
+    "older": MessageLookupByLibrary.simpleMessage("更早"),
     "opacity": MessageLookupByLibrary.simpleMessage("不透明度"),
     "or": MessageLookupByLibrary.simpleMessage("或"),
     "paint": MessageLookupByLibrary.simpleMessage("涂鸦"),
@@ -135,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
+    "switchCamera": MessageLookupByLibrary.simpleMessage("切换相机"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("服务条款"),
     "text": MessageLookupByLibrary.simpleMessage("文本"),
     "textAlign": MessageLookupByLibrary.simpleMessage("对齐文本"),
@@ -143,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "themeLight": MessageLookupByLibrary.simpleMessage("浅色"),
     "themeSystem": MessageLookupByLibrary.simpleMessage("系统"),
     "thu": MessageLookupByLibrary.simpleMessage("四"),
+    "timer": MessageLookupByLibrary.simpleMessage("定时器"),
+    "today": MessageLookupByLibrary.simpleMessage("今天"),
     "understood": MessageLookupByLibrary.simpleMessage("知道了"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "使用放大镜选择颜色",
@@ -151,5 +159,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "userNotFound": MessageLookupByLibrary.simpleMessage("未找到用户。"),
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
+    "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),
   };
 }

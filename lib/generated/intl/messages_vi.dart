@@ -83,9 +83,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "fill": MessageLookupByLibrary.simpleMessage("Tô màu"),
     "filter": MessageLookupByLibrary.simpleMessage("Bộ lọc"),
     "finish": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
+    "flashMode": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "Đã xóa dữ liệu vị trí và lưu thành bản sao mới.",
     ),
+    "help": MessageLookupByLibrary.simpleMessage("Trợ giúp"),
     "history": MessageLookupByLibrary.simpleMessage("Lịch sử"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "Bạn có thể thêm widget của Twinfix ra màn hình chính để theo dõi dung lượng thiết bị nhanh chóng:",
@@ -109,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Đã lưu ảnh thành công!",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+    "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),
+    "last7Days": MessageLookupByLibrary.simpleMessage("7 ngày qua"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("Đường thẳng"),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
@@ -131,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Chưa chọn màu để sao chép",
     ),
     "ok": MessageLookupByLibrary.simpleMessage("Đồng ý"),
+    "older": MessageLookupByLibrary.simpleMessage("Cũ hơn"),
     "opacity": MessageLookupByLibrary.simpleMessage("Đậm nhạt"),
     "or": MessageLookupByLibrary.simpleMessage("Hoặc"),
     "paint": MessageLookupByLibrary.simpleMessage("Vẽ"),
@@ -181,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+    "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(
       "Điều khoản dịch vụ",
     ),
@@ -191,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "themeLight": MessageLookupByLibrary.simpleMessage("Sáng"),
     "themeSystem": MessageLookupByLibrary.simpleMessage("Hệ thống"),
     "thu": MessageLookupByLibrary.simpleMessage("Th 5"),
+    "timer": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
+    "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
     "understood": MessageLookupByLibrary.simpleMessage("ĐÃ HIỂU"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Sử dụng kính lúp để lấy màu",
@@ -201,5 +209,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "weakPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu quá yếu."),
     "wed": MessageLookupByLibrary.simpleMessage("Th 4"),
+    "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),
   };
 }

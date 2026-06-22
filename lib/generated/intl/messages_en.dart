@@ -79,9 +79,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "fill": MessageLookupByLibrary.simpleMessage("Fill"),
     "filter": MessageLookupByLibrary.simpleMessage("Filter"),
     "finish": MessageLookupByLibrary.simpleMessage("Finish"),
+    "flashMode": MessageLookupByLibrary.simpleMessage("Flash Mode"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS location data removed and saved as a new copy.",
     ),
+    "help": MessageLookupByLibrary.simpleMessage("Help"),
     "history": MessageLookupByLibrary.simpleMessage("History"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "You can add Twinfix widget to your home screen to quickly monitor device storage:",
@@ -105,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Image saved successfully!",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),
+    "last7Days": MessageLookupByLibrary.simpleMessage("Last 7 days"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("Line"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -125,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nothing selected to copy",
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
+    "older": MessageLookupByLibrary.simpleMessage("Older"),
     "opacity": MessageLookupByLibrary.simpleMessage("Opacity"),
     "or": MessageLookupByLibrary.simpleMessage("Or"),
     "paint": MessageLookupByLibrary.simpleMessage("Paint"),
@@ -175,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
+    "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Align text"),
@@ -183,6 +189,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "themeLight": MessageLookupByLibrary.simpleMessage("Light"),
     "themeSystem": MessageLookupByLibrary.simpleMessage("System"),
     "thu": MessageLookupByLibrary.simpleMessage("Thu"),
+    "timer": MessageLookupByLibrary.simpleMessage("Timer"),
+    "today": MessageLookupByLibrary.simpleMessage("Today"),
     "understood": MessageLookupByLibrary.simpleMessage("GOT IT"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Use magnifier to pick colors",
@@ -193,5 +201,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Password is too weak.",
     ),
     "wed": MessageLookupByLibrary.simpleMessage("Wed"),
+    "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
   };
 }

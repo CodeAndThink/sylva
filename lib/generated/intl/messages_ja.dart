@@ -69,9 +69,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "fill": MessageLookupByLibrary.simpleMessage("塗りつぶし"),
     "filter": MessageLookupByLibrary.simpleMessage("フィルター"),
     "finish": MessageLookupByLibrary.simpleMessage("完了"),
+    "flashMode": MessageLookupByLibrary.simpleMessage("フラッシュモード"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS位置データが削除され、コピーとして保存されました。",
     ),
+    "help": MessageLookupByLibrary.simpleMessage("ヘルプ"),
     "history": MessageLookupByLibrary.simpleMessage("履歴"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "Twinfixウィジェットをホーム画面に追加して、デバイスのストレージをすばやく監視できます：",
@@ -93,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "imageSaved": MessageLookupByLibrary.simpleMessage("画像が正常に保存されました！"),
     "language": MessageLookupByLibrary.simpleMessage("言語"),
+    "last30Days": MessageLookupByLibrary.simpleMessage("過去30日間"),
+    "last7Days": MessageLookupByLibrary.simpleMessage("過去7日間"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("直線"),
     "login": MessageLookupByLibrary.simpleMessage("ログイン"),
@@ -109,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "コピーする色が選択されていません",
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
+    "older": MessageLookupByLibrary.simpleMessage("それ以前"),
     "opacity": MessageLookupByLibrary.simpleMessage("不透明度"),
     "or": MessageLookupByLibrary.simpleMessage("または"),
     "paint": MessageLookupByLibrary.simpleMessage("ペイント"),
@@ -134,7 +139,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratio": MessageLookupByLibrary.simpleMessage("比率"),
     "rectangle": MessageLookupByLibrary.simpleMessage("長方形"),
     "register": MessageLookupByLibrary.simpleMessage("登録"),
-    "replaceExistingRecord": MessageLookupByLibrary.simpleMessage("既存の記録を上書き"),
+    "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
+      "既存の記録を置き換える",
+    ),
     "replaceOriginal": MessageLookupByLibrary.simpleMessage("元の画像を置換"),
     "reset": MessageLookupByLibrary.simpleMessage("リセット"),
     "restoreFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -149,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
+    "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
     "text": MessageLookupByLibrary.simpleMessage("テキスト"),
     "textAlign": MessageLookupByLibrary.simpleMessage("文字揃え"),
@@ -157,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "themeLight": MessageLookupByLibrary.simpleMessage("ライト"),
     "themeSystem": MessageLookupByLibrary.simpleMessage("システム"),
     "thu": MessageLookupByLibrary.simpleMessage("木"),
+    "timer": MessageLookupByLibrary.simpleMessage("タイマー"),
+    "today": MessageLookupByLibrary.simpleMessage("今日"),
     "understood": MessageLookupByLibrary.simpleMessage("了解"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "虫眼鏡を使って色を選択",
@@ -165,5 +175,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザーが見つかりません。"),
     "weakPassword": MessageLookupByLibrary.simpleMessage("パスワードが弱すぎます。"),
     "wed": MessageLookupByLibrary.simpleMessage("水"),
+    "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),
   };
 }

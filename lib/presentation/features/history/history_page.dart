@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:isar_community/isar.dart';
+import 'package:sylva/core/di/injection.dart';
+import 'package:sylva/core/enums/time_group.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/history/history_cubit.dart';
@@ -8,6 +11,8 @@ import 'package:sylva/presentation/features/history/history_state.dart';
 import 'package:sylva/presentation/features/history/widgets/history_list_item.dart';
 import 'package:sylva/presentation/features/history/widgets/history_shimmer_list.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
+import 'package:sylva/data/entities/history_record.dart';
+import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -15,7 +20,10 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HistoryCubit(navigator: HistoryNavigator(context)),
+      create: (_) => HistoryCubit(
+        navigator: HistoryNavigator(context),
+        isarService: locator<Isar>(),
+      ),
       child: const _HistoryChildPage(),
     );
   }
@@ -44,15 +52,21 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     _theme = Theme.of(context);
 
     return AppScaffold(
-      showAppBar: true,
+      actions: [_buildSortButton()],
       title: S.of(context).history,
       body: _buildBody(),
     );
   }
 
+  Widget _buildSortButton() {
+    return IconButton(onPressed: () {}, icon: Icon(Icons.grid_view_rounded));
+  }
+
   Widget _buildBody() {
     return BlocBuilder<HistoryCubit, HistoryState>(
-      buildWhen: (previous, current) => previous.status != current.status,
+      buildWhen: (previous, current) =>
+          previous.status != current.status ||
+          previous.groupedItems != current.groupedItems,
       builder: (context, state) {
         if (state.status.isLoading) {
           return const HistoryShimmerList();
@@ -68,23 +82,30 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           );
         }
 
-        return ListView.separated(
+        return ListView.builder(
           padding: EdgeInsets.fromLTRB(
             12,
             MediaQuery.of(context).padding.top + 12,
             12,
             12,
           ),
-          itemCount: state.records.length,
+          itemCount: state.groupedItems.length,
           itemBuilder: (context, index) {
-            final record = state.records[index];
-            return HistoryListItem(
-              record: record,
-              onDelete: () => _cubit.deleteRecord(id: record.id),
-              onTap: () => _cubit.goToPhotoPreview(record: record),
-            );
+            final item = state.groupedItems[index];
+            if (item is TimeGroup) {
+              return Padding(
+                padding: 4.paddingTop.copyWith(bottom: 8),
+                child: AppTitleText(title: item.title),
+              );
+            } else if (item is HistoryRecord) {
+              return HistoryListItem(
+                record: item,
+                onDelete: () => _cubit.deleteRecord(id: item.id),
+                onTap: () => _cubit.goToPhotoPreview(record: item),
+              );
+            }
+            return const SizedBox.shrink();
           },
-          separatorBuilder: (context, index) => 12.height,
         );
       },
     );

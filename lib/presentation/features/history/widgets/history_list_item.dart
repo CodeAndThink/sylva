@@ -39,7 +39,18 @@ class _HistoryListItemState extends State<HistoryListItem> {
         dismissible: DismissiblePane(onDismissed: widget.onDelete),
         children: [
           CustomSlidableAction(
-            onPressed: (context) => widget.onDelete(),
+            autoClose: false,
+            onPressed: (context) {
+              final slidable = Slidable.of(context);
+              if (slidable != null) {
+                slidable.dismiss(
+                  ResizeRequest(300.milliseconds, widget.onDelete),
+                  duration: 300.milliseconds,
+                );
+              } else {
+                widget.onDelete();
+              }
+            },
             backgroundColor: Colors.transparent,
             padding: EdgeInsets.zero,
             child: Container(
@@ -118,42 +129,40 @@ class _HistoryListItemState extends State<HistoryListItem> {
                       image: DecorationImage(
                         image: FileImage(File(widget.record.imagePath)),
                         fit: BoxFit.cover,
-                        opacity: 0.1,
+                        opacity: 0.2,
                       ),
                     ),
-                    padding: 4.paddingAll,
+                    padding: 4.paddingVertical.copyWith(left: 8, right: 8),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Spacer(),
-                        if (widget.record.userColors.isNotEmpty)
-                          Padding(
-                            padding: 4.paddingHorizontal,
-                            child: Row(
-                              spacing: 4,
-                              children: [
-                                ...widget.record.userColors
-                                    .take(5)
-                                    .map(
-                                      (c) => Container(
-                                        width: 16,
-                                        height: 16,
-                                        decoration: BoxDecoration(
-                                          color: Color(c),
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: theme.colorScheme.onSurface,
-                                          ),
+                        Row(
+                          spacing: 4,
+                          children: [
+                            if (widget.record.userColors.isNotEmpty)
+                              ...widget.record.userColors
+                                  .take(5)
+                                  .map(
+                                    (c) => Container(
+                                      width: 16,
+                                      height: 16,
+                                      decoration: BoxDecoration(
+                                        color: Color(c),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: theme.colorScheme.onSurface,
                                         ),
                                       ),
                                     ),
-                                const Spacer(),
-                                Text(
-                                  widget.record.createdAt.toDateTimeString(),
-                                  style: theme.textTheme.titleSmall,
-                                ),
-                              ],
+                                  ),
+                            const Spacer(),
+                            Text(
+                              widget.record.createdAt.toDateTimeString(),
+                              style: theme.textTheme.titleSmall,
                             ),
-                          ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

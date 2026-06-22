@@ -367,44 +367,45 @@ class __HomeChildPageState extends State<_HomeChildPage>
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              AnimatedSwitcher(
-                duration: 150.milliseconds,
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  return ScaleTransition(scale: animation, child: child);
-                },
+              Tooltip(
+                message: S.of(context).settings,
                 child: IconButton(
-                  key: ValueKey<int>(_selectedCameraIndex),
                   icon: Icon(
-                    _cameras.isNotEmpty &&
-                            _cameras[_selectedCameraIndex].lensDirection ==
-                                CameraLensDirection.front
-                        ? Icons.camera_front_outlined
-                        : Icons.camera_rear_outlined,
+                    Icons.settings_outlined,
                     color: _theme.colorScheme.onSurface,
                     size: 24,
                   ),
-                  onPressed: _switchCamera,
+                  onPressed: () {
+                    _cubit.navigator.goToSettings();
+                  },
                 ),
               ),
-              IconButton(
-                icon: AnimatedSwitcher(
-                  duration: 150.milliseconds,
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                        return ScaleTransition(scale: animation, child: child);
-                      },
-                  child: Icon(
-                    _flashMode == FlashMode.always
-                        ? Icons.flash_on_outlined
-                        : Icons.flash_off_outlined,
-                    key: ValueKey<FlashMode>(_flashMode),
-                    color: _theme.colorScheme.onSurface,
-                    size: 24,
+              Tooltip(
+                message: S.of(context).flashMode,
+                child: IconButton(
+                  icon: AnimatedSwitcher(
+                    duration: 150.milliseconds,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                          return ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          );
+                        },
+                    child: Icon(
+                      _flashMode == FlashMode.always
+                          ? Icons.flash_on_outlined
+                          : Icons.flash_off_outlined,
+                      key: ValueKey<FlashMode>(_flashMode),
+                      color: _theme.colorScheme.onSurface,
+                      size: 24,
+                    ),
                   ),
+                  onPressed: _toggleFlash,
                 ),
-                onPressed: _toggleFlash,
               ),
               PopupMenuButton<int>(
+                tooltip: S.of(context).timer,
                 menuPadding: EdgeInsets.zero,
                 color: Colors.black54,
                 constraints: const BoxConstraints(minWidth: 48, maxWidth: 48),
@@ -427,9 +428,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
                         ? Icons.timer_off_outlined
                         : _timerSeconds == 3
                         ? Icons.timer_3_outlined
-                        : _timerSeconds == 5
-                        ? Icons
-                              .timer_10_outlined // Giữ icon timer_10 do không có timer_5
+                        : _timerSeconds == 3
+                        ? Icons.timer_10_outlined
                         : Icons.timer_10,
                     color: _timerSeconds == 0
                         ? _theme.colorScheme.onSurface
@@ -443,30 +443,61 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   _buildTimerMenuItem(value: 10, icon: Icons.timer_10),
                 ],
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.settings_outlined,
-                  color: _theme.colorScheme.onSurface,
-                  size: 24,
+
+              Tooltip(
+                message: S.of(context).switchCamera,
+                child: IconButton(
+                  key: ValueKey<int>(_selectedCameraIndex),
+                  icon: AnimatedSwitcher(
+                    duration: 150.milliseconds,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                          return ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          );
+                        },
+                    child: Icon(
+                      _cameras.isNotEmpty &&
+                              _cameras[_selectedCameraIndex].lensDirection ==
+                                  CameraLensDirection.front
+                          ? Icons.camera_front_outlined
+                          : Icons.camera_rear_outlined,
+                      color: _theme.colorScheme.onSurface,
+                      size: 24,
+                    ),
+                  ),
+                  onPressed: _switchCamera,
                 ),
-                onPressed: () {
-                  _cubit.navigator.goToSettings();
-                },
+              ),
+              Tooltip(
+                message: S.of(context).help,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.question_mark_outlined,
+                    color: _theme.colorScheme.onSurface,
+                    size: 24,
+                  ),
+                  onPressed: () {},
+                ),
               ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                icon: Icon(
-                  Icons.history_outlined,
-                  color: _theme.colorScheme.onSurface,
-                  size: 40,
+              Tooltip(
+                message: S.of(context).history,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.history_outlined,
+                    color: _theme.colorScheme.onSurface,
+                    size: 40,
+                  ),
+                  onPressed: () {
+                    _cubit.navigator.goToHistory();
+                  },
                 ),
-                onPressed: () {
-                  _cubit.navigator.goToHistory();
-                },
               ),
               GestureDetector(
                 onTap: _isCapturing ? null : _takePicture,
@@ -475,7 +506,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   height: 70,
                   decoration: BoxDecoration(
                     color: _isCapturing
-                        ? Colors.grey
+                        ? _theme.colorScheme.onSurface.withValues(alpha: 0.5)
                         : _theme.colorScheme.onSurface,
                     shape: BoxShape.circle,
                   ),

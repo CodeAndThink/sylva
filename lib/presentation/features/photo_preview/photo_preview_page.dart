@@ -13,6 +13,7 @@ import 'package:sylva/presentation/features/photo_preview/photo_preview_state.da
 import 'package:sylva/presentation/features/photo_preview/widgets/color_palette_bottom_sheet.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_shimmer_list.dart';
+import 'package:sylva/presentation/features/photo_preview/widgets/save_options_bottom_sheet.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -22,12 +23,14 @@ class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
   final List<Color>? initialColors;
   final Color? initialSelectedColor;
+  final int? historyRecordId;
 
   const PhotoPreviewPage({
     super.key,
     required this.imagePath,
     this.initialColors,
     this.initialSelectedColor,
+    this.historyRecordId,
   });
 
   @override
@@ -38,14 +41,18 @@ class PhotoPreviewPage extends StatelessWidget {
         initialColors: initialColors,
         initialSelectedColor: initialSelectedColor,
       ),
-      child: _PhotoPreviewChildPage(imagePath: imagePath),
+      child: _PhotoPreviewChildPage(
+        imagePath: imagePath,
+        historyRecordId: historyRecordId,
+      ),
     );
   }
 }
 
 class _PhotoPreviewChildPage extends StatefulWidget {
   final String imagePath;
-  const _PhotoPreviewChildPage({required this.imagePath});
+  final int? historyRecordId;
+  const _PhotoPreviewChildPage({required this.imagePath, this.historyRecordId});
 
   @override
   State<_PhotoPreviewChildPage> createState() => __PhotoPreviewChildPageState();
@@ -689,7 +696,19 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           message: S.of(context).save,
           child: IconButton(
             onPressed: () {
-              _cubit.saveHistory(imagePath: widget.imagePath);
+              if (widget.historyRecordId != null) {
+                SaveOptionsBottomSheet.show(
+                  context: context,
+                  onSaveAsNew: () =>
+                      _cubit.saveHistory(imagePath: widget.imagePath),
+                  onReplaceExisting: () => _cubit.updateHistory(
+                    imagePath: widget.imagePath,
+                    id: widget.historyRecordId!,
+                  ),
+                );
+              } else {
+                _cubit.saveHistory(imagePath: widget.imagePath);
+              }
             },
             icon: const Icon(Icons.save_outlined, size: 30),
           ),

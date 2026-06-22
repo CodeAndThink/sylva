@@ -773,6 +773,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Save as new`
+  String get saveAsNew {
+    return Intl.message('Save as new', name: 'saveAsNew', desc: '', args: []);
+  }
+
+  /// `Replace existing record`
+  String get replaceExistingRecord {
+    return Intl.message(
+      'Replace existing record',
+      name: 'replaceExistingRecord',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -120,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratio": MessageLookupByLibrary.simpleMessage("比例"),
     "rectangle": MessageLookupByLibrary.simpleMessage("矩形"),
     "register": MessageLookupByLibrary.simpleMessage("注册"),
+    "replaceExistingRecord": MessageLookupByLibrary.simpleMessage("替换现有记录"),
     "replaceOriginal": MessageLookupByLibrary.simpleMessage("替换原图"),
     "reset": MessageLookupByLibrary.simpleMessage("重置"),
     "restoreFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -127,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("恢复购买"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
+    "saveAsNew": MessageLookupByLibrary.simpleMessage("保存为新记录"),
     "saveColor": MessageLookupByLibrary.simpleMessage("保存颜色"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("保存到图库"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("扫描限制"),

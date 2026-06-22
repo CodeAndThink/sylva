@@ -209,5 +209,9 @@
   "pickImageFromGallery": "Chọn ảnh từ thư viện",
   "@pickImageFromGallery": {},
   "noHistoryYet": "Chưa có lịch sử",
-  "@noHistoryYet": {}
+  "@noHistoryYet": {},
+  "saveAsNew": "Lưu mới",
+  "@saveAsNew": {},
+  "replaceExistingRecord": "Thay thế bản ghi cũ",
+  "@replaceExistingRecord": {}
 }

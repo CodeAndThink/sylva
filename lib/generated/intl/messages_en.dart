@@ -156,6 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratio": MessageLookupByLibrary.simpleMessage("Ratio"),
     "rectangle": MessageLookupByLibrary.simpleMessage("Rectangle"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
+    "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
+      "Replace existing record",
+    ),
     "replaceOriginal": MessageLookupByLibrary.simpleMessage("Replace Original"),
     "reset": MessageLookupByLibrary.simpleMessage("Reset"),
     "restoreFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -165,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Restore Purchases",
     ),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "saveAsNew": MessageLookupByLibrary.simpleMessage("Save as new"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Save to library"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),

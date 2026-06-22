@@ -162,6 +162,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratio": MessageLookupByLibrary.simpleMessage("Tỷ lệ"),
     "rectangle": MessageLookupByLibrary.simpleMessage("Hình chữ nhật"),
     "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+    "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
+      "Thay thế bản ghi cũ",
+    ),
     "replaceOriginal": MessageLookupByLibrary.simpleMessage("Thay thế bản gốc"),
     "reset": MessageLookupByLibrary.simpleMessage("Đặt lại"),
     "restoreFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -171,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Khôi phục giao dịch (Restore Purchases)",
     ),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+    "saveAsNew": MessageLookupByLibrary.simpleMessage("Lưu mới"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Lưu vào thư viện"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),

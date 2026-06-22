@@ -208,6 +208,10 @@
   "@saveToLibrary": {},
   "pickImageFromGallery": "ライブラリから画像を選択",
   "@pickImageFromGallery": {},
-  "noHistoryYet": "履歴がありません",
-  "@noHistoryYet": {}
+  "noHistoryYet": "履歴はまだありません",
+  "@noHistoryYet": {},
+  "saveAsNew": "新しく保存",
+  "@saveAsNew": {},
+  "replaceExistingRecord": "既存の記録を上書き",
+  "@replaceExistingRecord": {}
 }

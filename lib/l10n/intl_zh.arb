@@ -209,5 +209,9 @@
   "pickImageFromGallery": "从图库选择图片",
   "@pickImageFromGallery": {},
   "noHistoryYet": "暂无记录",
-  "@noHistoryYet": {}
+  "@noHistoryYet": {},
+  "saveAsNew": "保存为新记录",
+  "@saveAsNew": {},
+  "replaceExistingRecord": "替换现有记录",
+  "@replaceExistingRecord": {}
 }

@@ -83,6 +83,7 @@ class AppRouter {
               initialSelectedColor: record.selectedColor != null
                   ? Color(record.selectedColor!)
                   : null,
+              historyRecordId: record.id,
             );
           }
           final imagePath = state.extra as String;

@@ -12,6 +12,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   HistoryCubit({required this.navigator}) : super(const HistoryState());
 
   Future<void> loadHistory() async {
+    if (state.status.isLoading) return;
     emit(state.copyWith(status: LoadStatus.loading));
     try {
       final isar = locator<Isar>();
@@ -26,15 +27,24 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     }
   }
 
-  void deleteRecord(int id) async {
+  void deleteRecord({required int id}) async {
     try {
       final isar = locator<Isar>();
       await isar.writeTxn(() async {
         await isar.historyRecords.delete(id);
       });
-      loadHistory();
+
+      final updatedRecords = List<HistoryRecord>.from(state.records)
+        ..removeWhere((record) => record.id == id);
+
+      emit(state.copyWith(records: updatedRecords));
     } catch (e) {
       debugPrint('Error deleting record: $e');
     }
+  }
+
+  void goToPhotoPreview({required HistoryRecord record}) async {
+    await navigator.goToPhotoPreview(record);
+    loadHistory();
   }
 }

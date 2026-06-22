@@ -5,7 +5,7 @@ import 'package:sylva/data/entities/history_record.dart';
 class HistoryNavigator extends BaseNavigator {
   HistoryNavigator(super.context);
 
-  void goToPhotoPreview(HistoryRecord record) {
-    pushNamed(AppRouter.photoPreview, extra: record);
+  Future<void> goToPhotoPreview(HistoryRecord record) async {
+    await pushNamed(AppRouter.photoPreview, extra: record);
   }
 }

@@ -209,5 +209,9 @@
   "pickImageFromGallery": "Pick image from gallery",
   "@pickImageFromGallery": {},
   "noHistoryYet": "No history yet",
-  "@noHistoryYet": {}
+  "@noHistoryYet": {},
+  "saveAsNew": "Save as new",
+  "@saveAsNew": {},
+  "replaceExistingRecord": "Replace existing record",
+  "@replaceExistingRecord": {}
 }

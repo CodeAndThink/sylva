@@ -104,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameLength": MessageLookupByLibrary.simpleMessage("名前は2文字以上である必要があります"),
     "nameRequired": MessageLookupByLibrary.simpleMessage("名前が必要です"),
     "next": MessageLookupByLibrary.simpleMessage("次へ"),
-    "noHistoryYet": MessageLookupByLibrary.simpleMessage("履歴がありません"),
+    "noHistoryYet": MessageLookupByLibrary.simpleMessage("履歴はまだありません"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "コピーする色が選択されていません",
     ),
@@ -134,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratio": MessageLookupByLibrary.simpleMessage("比率"),
     "rectangle": MessageLookupByLibrary.simpleMessage("長方形"),
     "register": MessageLookupByLibrary.simpleMessage("登録"),
+    "replaceExistingRecord": MessageLookupByLibrary.simpleMessage("既存の記録を上書き"),
     "replaceOriginal": MessageLookupByLibrary.simpleMessage("元の画像を置換"),
     "reset": MessageLookupByLibrary.simpleMessage("リセット"),
     "restoreFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -141,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("購入の復元"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
+    "saveAsNew": MessageLookupByLibrary.simpleMessage("新しく保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("ライブラリに保存"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),

@@ -212,6 +212,31 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     }
   }
 
+  Future<void> updateHistory({
+    required String imagePath,
+    required int id,
+  }) async {
+    try {
+      final isar = locator<Isar>();
+      final userColors = state.userColors.map((c) => c.toARGB32()).toList();
+      final record = HistoryRecord(
+        imagePath: imagePath,
+        userColors: userColors,
+        selectedColor: state.selectedColor?.toARGB32(),
+        createdAt: DateTime.now(),
+      )..id = id;
+
+      await isar.writeTxn(() async {
+        await isar.historyRecords.put(record);
+      });
+
+      navigator.flushBar.showSuccess(message: S.current.success);
+    } catch (e) {
+      debugPrint('Error updating history: $e');
+      navigator.flushBar.showError(message: S.current.error(e.toString()));
+    }
+  }
+
   Future<void> saveToLibrary({required String imagePath}) async {
     final permissionService = locator<PermissionService>();
     final hasPermission = await permissionService.requestPhotoPermission(

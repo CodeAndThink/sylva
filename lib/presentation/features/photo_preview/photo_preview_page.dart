@@ -763,14 +763,18 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         title: S.of(context).tutorialImageTitle,
         desc: S.of(context).tutorialImageDesc,
         contentAlign: ContentAlign.bottom,
+        shape: ShapeLightFocus.RRect,
+        radius: 28,
+        customPosition: CustomTargetContentPosition(
+          bottom: MediaQuery.of(context).padding.bottom + 12,
+        ),
       ),
       _buildTarget(
         key: _keyPalette,
         title: S.of(context).tutorialPaletteTitle,
         desc: S.of(context).tutorialPaletteDesc,
-        customPosition: CustomTargetContentPosition(
-          bottom: MediaQuery.sizeOf(context).height * 0.45,
-        ),
+        shape: ShapeLightFocus.RRect,
+        radius: 28,
       ),
       _buildTarget(
         key: _keyExpandPalette,
@@ -802,11 +806,15 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
     Alignment alignSkip = Alignment.topRight,
     ContentAlign contentAlign = ContentAlign.top,
     CustomTargetContentPosition? customPosition,
+    ShapeLightFocus? shape,
+    double? radius,
   }) {
     return TargetFocus(
       identify: key,
       keyTarget: key,
       alignSkip: alignSkip,
+      shape: shape,
+      radius: radius,
       focusAnimationDuration: 400.milliseconds,
       unFocusAnimationDuration: 400.milliseconds,
       contents: [

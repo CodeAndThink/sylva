@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("创建新图像"),
+    "createTime": MessageLookupByLibrary.simpleMessage("时间"),
     "days": MessageLookupByLibrary.simpleMessage("天"),
     "delete": MessageLookupByLibrary.simpleMessage("删除"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("删除照片"),

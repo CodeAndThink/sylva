@@ -287,5 +287,7 @@
   "tutorialLibraryTitle": "保存到图库",
   "@tutorialLibraryTitle": {},
   "tutorialLibraryDesc": "将此照片导出到您设备的相册。",
-  "@tutorialLibraryDesc": {}
+  "@tutorialLibraryDesc": {},
+  "createTime": "时间",
+  "@createTime": {}
 }

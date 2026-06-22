@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "パスワードの確認が必要です",
     ),
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
+    "createTime": MessageLookupByLibrary.simpleMessage("時間"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
     "delete": MessageLookupByLibrary.simpleMessage("削除"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("写真の削除"),

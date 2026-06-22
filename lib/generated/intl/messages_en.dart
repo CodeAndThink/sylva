@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm password is required",
     ),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
+    "createTime": MessageLookupByLibrary.simpleMessage("Time"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("Delete photo"),

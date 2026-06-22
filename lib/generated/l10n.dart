@@ -1108,6 +1108,11 @@ class S {
       args: [],
     );
   }
+
+  /// `Time`
+  String get createTime {
+    return Intl.message('Time', name: 'createTime', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

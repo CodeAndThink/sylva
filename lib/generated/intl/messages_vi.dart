@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Xác nhận mật khẩu không được để trống",
     ),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
+    "createTime": MessageLookupByLibrary.simpleMessage("Thời gian"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
     "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("Xóa ảnh"),

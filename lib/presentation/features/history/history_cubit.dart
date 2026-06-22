@@ -139,4 +139,19 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     }
     return flattened;
   }
+
+  void toggleFavorite(int id) async {
+    try {
+      final record = await isarService.historyRecords.get(id);
+      if (record != null) {
+        record.isFavorite = !record.isFavorite;
+        await isarService.writeTxn(() async {
+          await isarService.historyRecords.put(record);
+        });
+        loadHistory();
+      }
+    } catch (e) {
+      debugPrint('Error toggling favorite: $e');
+    }
+  }
 }

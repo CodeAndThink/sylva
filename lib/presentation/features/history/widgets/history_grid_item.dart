@@ -7,14 +7,18 @@ import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 
 class HistoryGridItem extends StatefulWidget {
   final HistoryRecord record;
-  final VoidCallback onTap;
-  final VoidCallback onDelete;
+  final VoidCallback? onTap;
+  final VoidCallback? onDelete;
+  final bool isFavorite;
+  final VoidCallback? onFavoritePressed;
 
   const HistoryGridItem({
     super.key,
     required this.record,
-    required this.onTap,
-    required this.onDelete,
+    this.onTap,
+    this.onDelete,
+    this.isFavorite = false,
+    this.onFavoritePressed,
   });
 
   @override
@@ -31,7 +35,7 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
     });
     Future.delayed(300.milliseconds, () {
       if (mounted) {
-        widget.onDelete();
+        widget.onDelete?.call();
       }
     });
   }
@@ -77,7 +81,7 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                       Row(
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: widget.onFavoritePressed,
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: 24.borderRadius,
@@ -88,7 +92,12 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                                 ),
                               ),
                               padding: 4.paddingAll,
-                              child: Icon(Icons.bookmark, color: Colors.white),
+                              child: Icon(
+                                widget.isFavorite
+                                    ? Icons.bookmark_outlined
+                                    : Icons.bookmark,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           Expanded(

@@ -12,13 +12,17 @@ import 'package:sylva/generated/l10n.dart';
 
 class HistoryListItem extends StatefulWidget {
   final HistoryRecord record;
-  final VoidCallback onDelete;
-  final VoidCallback onTap;
+  final VoidCallback? onDelete;
+  final VoidCallback? onTap;
+  final bool isFavorite;
+  final VoidCallback? onFavoritePressed;
   const HistoryListItem({
     super.key,
     required this.record,
-    required this.onDelete,
-    required this.onTap,
+    this.onDelete,
+    this.onTap,
+    this.isFavorite = false,
+    this.onFavoritePressed,
   });
 
   @override
@@ -36,59 +40,61 @@ class _HistoryListItemState extends State<HistoryListItem> {
       padding: 12.paddingBottom,
       child: Slidable(
         key: ValueKey(widget.record.id),
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          dismissible: DismissiblePane(onDismissed: widget.onDelete),
-          children: [
-            CustomSlidableAction(
-              autoClose: false,
-              onPressed: (context) {
-                final slidable = Slidable.of(context);
-                if (slidable != null) {
-                  slidable.dismiss(
-                    ResizeRequest(300.milliseconds, widget.onDelete),
-                    duration: 300.milliseconds,
-                  );
-                } else {
-                  widget.onDelete();
-                }
-              },
-              backgroundColor: Colors.transparent,
-              padding: EdgeInsets.zero,
-              child: Container(
-                margin: 12.paddingLeft,
-                decoration: BoxDecoration(
-                  color: Colors.red.withValues(alpha: 0.9),
-                  borderRadius: 20.borderRadius,
-                ),
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(
-                      Icons.clear_outlined,
-                      color: Colors.white,
-                      size: 28,
-                    ),
-                    4.height,
-                    Text(
-                      S.of(context).delete,
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: Colors.white,
+        endActionPane: widget.onDelete != null
+            ? ActionPane(
+                motion: const ScrollMotion(),
+                dismissible: DismissiblePane(onDismissed: widget.onDelete!),
+                children: [
+                  CustomSlidableAction(
+                    autoClose: false,
+                    onPressed: (context) {
+                      final slidable = Slidable.of(context);
+                      if (slidable != null && widget.onDelete != null) {
+                        slidable.dismiss(
+                          ResizeRequest(300.milliseconds, widget.onDelete!),
+                          duration: 300.milliseconds,
+                        );
+                      } else {
+                        widget.onDelete?.call();
+                      }
+                    },
+                    backgroundColor: Colors.transparent,
+                    padding: EdgeInsets.zero,
+                    child: Container(
+                      margin: 12.paddingLeft,
+                      decoration: BoxDecoration(
+                        color: Colors.red.withValues(alpha: 0.9),
+                        borderRadius: 20.borderRadius,
+                      ),
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.clear_outlined,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                          4.height,
+                          Text(
+                            S.of(context).delete,
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+                  ),
+                ],
+              )
+            : null,
         child: AppTransparentContainer(
           onTap: () {
             ThrottleUtils.safeOnTap(() async {
               setState(() => _width = 0);
               await Future.delayed(350.milliseconds);
-              widget.onTap();
+              widget.onTap?.call();
               if (mounted) setState(() => _width = 88);
             }, delayMs: 1000);
           },
@@ -141,7 +147,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                             children: [
                               const Spacer(),
                               InkWell(
-                                onTap: () {},
+                                onTap: widget.onFavoritePressed,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: 24.borderRadius,
@@ -153,7 +159,9 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                   ),
                                   padding: 4.paddingAll,
                                   child: Icon(
-                                    Icons.bookmark,
+                                    widget.isFavorite
+                                        ? Icons.bookmark_outlined
+                                        : Icons.bookmark,
                                     color: Colors.white,
                                   ),
                                 ),

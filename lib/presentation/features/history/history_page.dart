@@ -150,6 +150,9 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                             record: item,
                             onDelete: () => _cubit.deleteRecord(id: item.id),
                             onTap: () => _cubit.goToPhotoPreview(record: item),
+                            isFavorite: item.isFavorite,
+                            onFavoritePressed: () =>
+                                _cubit.toggleFavorite(item.id),
                           );
                         }
                         return const SizedBox.shrink();
@@ -246,6 +249,8 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 record: record,
                 onDelete: () => _cubit.deleteRecord(id: record.id),
                 onTap: () => _cubit.goToPhotoPreview(record: record),
+                isFavorite: record.isFavorite,
+                onFavoritePressed: () => _cubit.toggleFavorite(record.id),
               );
             }, childCount: records.length),
           ),

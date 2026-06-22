@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Xác nhận mật khẩu không được để trống",
     ),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
+    "createTime": MessageLookupByLibrary.simpleMessage("Thời gian"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
     "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("Xóa ảnh"),
@@ -199,6 +200,66 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Th 5"),
     "timer": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
     "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
+    "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
+      "Hủy thay đổi và quay lại camera.",
+    ),
+    "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("Quay lại"),
+    "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
+      "Chuyển đổi giữa camera trước và sau.",
+    ),
+    "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
+    "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage(
+      "Nhấn để chụp ảnh ngay.",
+    ),
+    "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Chụp ảnh"),
+    "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "Xem toàn bộ màu đã trích xuất và chọn lọc.",
+    ),
+    "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "Mở rộng bảng màu",
+    ),
+    "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
+      "Bật/tắt đèn flash.",
+    ),
+    "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
+    "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
+      "Chọn ảnh có sẵn từ điện thoại.",
+    ),
+    "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage(
+      "Thư viện ảnh",
+    ),
+    "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage(
+      "Xem lại các bức ảnh đã chụp.",
+    ),
+    "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("Lịch sử"),
+    "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
+      "Di chuyển ngón tay trên ảnh để soi và chọn màu bất kỳ.",
+    ),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("Xem trước ảnh"),
+    "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
+      "Xuất ảnh này vào thư viện của điện thoại.",
+    ),
+    "tutorialLibraryTitle": MessageLookupByLibrary.simpleMessage(
+      "Lưu vào Thư viện",
+    ),
+    "tutorialNext": MessageLookupByLibrary.simpleMessage("Tiếp"),
+    "tutorialPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "Chạm vào màu để lọc, nhấn giữ để copy mã hex.",
+    ),
+    "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage("Bảng màu"),
+    "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
+      "Lưu ảnh và bảng màu vào lịch sử của ứng dụng.",
+    ),
+    "tutorialSaveTitle": MessageLookupByLibrary.simpleMessage("Lưu vào App"),
+    "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "Tùy chỉnh các thiết lập của ứng dụng.",
+    ),
+    "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+    "tutorialSkip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+    "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
+      "Cài đặt đếm ngược trước khi chụp.",
+    ),
+    "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
     "understood": MessageLookupByLibrary.simpleMessage("ĐÃ HIỂU"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Sử dụng kính lúp để lấy màu",

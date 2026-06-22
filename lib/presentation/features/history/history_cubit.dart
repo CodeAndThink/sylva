@@ -22,12 +22,22 @@ class HistoryCubit extends BaseCubit<HistoryState> {
           .where()
           .sortByCreatedAtDesc()
           .findAll();
-      final groupedItems = _computeGroupedItems(records: records);
+      final sortedRecords = List<HistoryRecord>.from(records);
+      if (state.isSortAscending) {
+        sortedRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      } else {
+        sortedRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      }
+
+      final groupedItems = _computeGroupedItems(
+        records: sortedRecords,
+        isAscending: state.isSortAscending,
+      );
 
       emit(
         state.copyWith(
           status: LoadStatus.success,
-          records: records,
+          records: sortedRecords,
           groupedItems: groupedItems,
         ),
       );
@@ -46,7 +56,10 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       final updatedRecords = List<HistoryRecord>.from(state.records)
         ..removeWhere((record) => record.id == id);
 
-      final groupedItems = _computeGroupedItems(records: updatedRecords);
+      final groupedItems = _computeGroupedItems(
+        records: updatedRecords,
+        isAscending: state.isSortAscending,
+      );
 
       emit(state.copyWith(records: updatedRecords, groupedItems: groupedItems));
     } catch (e) {
@@ -59,7 +72,35 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     loadHistory();
   }
 
-  List<Object> _computeGroupedItems({required List<HistoryRecord> records}) {
+  void toggleView() {
+    emit(state.copyWith(isGridView: !state.isGridView));
+  }
+
+  void toggleSort() {
+    final newAscending = !state.isSortAscending;
+    final sortedRecords = List<HistoryRecord>.from(state.records);
+    if (newAscending) {
+      sortedRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    } else {
+      sortedRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    }
+    final groupedItems = _computeGroupedItems(
+      records: sortedRecords,
+      isAscending: newAscending,
+    );
+    emit(
+      state.copyWith(
+        isSortAscending: newAscending,
+        records: sortedRecords,
+        groupedItems: groupedItems,
+      ),
+    );
+  }
+
+  List<Object> _computeGroupedItems({
+    required List<HistoryRecord> records,
+    bool isAscending = false,
+  }) {
     final flattened = <Object>[];
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -89,7 +130,8 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       grouped.putIfAbsent(group, () => []).add(record);
     }
 
-    for (final group in TimeGroup.values) {
+    final groups = isAscending ? TimeGroup.values.reversed : TimeGroup.values;
+    for (final group in groups) {
       if (grouped.containsKey(group)) {
         flattened.add(group);
         flattened.addAll(grouped[group]!);

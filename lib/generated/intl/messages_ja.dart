@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "パスワードの確認が必要です",
     ),
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
+    "createTime": MessageLookupByLibrary.simpleMessage("時間"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
     "delete": MessageLookupByLibrary.simpleMessage("削除"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("写真の削除"),
@@ -167,6 +168,60 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("木"),
     "timer": MessageLookupByLibrary.simpleMessage("タイマー"),
     "today": MessageLookupByLibrary.simpleMessage("今日"),
+    "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
+      "変更を破棄してカメラに戻ります。",
+    ),
+    "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("戻る"),
+    "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
+      "前面カメラと背面カメラを切り替えます。",
+    ),
+    "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
+    "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage("今すぐ写真を撮ります。"),
+    "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("撮影"),
+    "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "抽出・選択したすべての色を表示します。",
+    ),
+    "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "パレットを拡大",
+    ),
+    "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
+      "フラッシュのオン/オフを切り替えます。",
+    ),
+    "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("フラッシュ"),
+    "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
+      "ギャラリーから写真を選択します。",
+    ),
+    "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage("ギャラリー"),
+    "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage(
+      "過去に撮影した写真を表示します。",
+    ),
+    "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("履歴"),
+    "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
+      "写真の上で指を動かして拡大し、色を選択します。",
+    ),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("写真プレビュー"),
+    "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
+      "この写真をデバイスのギャラリーにエクスポートします。",
+    ),
+    "tutorialLibraryTitle": MessageLookupByLibrary.simpleMessage("ライブラリに保存"),
+    "tutorialNext": MessageLookupByLibrary.simpleMessage("次へ"),
+    "tutorialPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "色をタップしてフィルター、長押しで16進数コードをコピーします。",
+    ),
+    "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage("カラーパレット"),
+    "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
+      "この写真と色をアプリの履歴に保存します。",
+    ),
+    "tutorialSaveTitle": MessageLookupByLibrary.simpleMessage("アプリに保存"),
+    "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "アプリの設定をカスタマイズします。",
+    ),
+    "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("設定"),
+    "tutorialSkip": MessageLookupByLibrary.simpleMessage("スキップ"),
+    "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
+      "撮影前のカウントダウンを設定します。",
+    ),
+    "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("タイマー"),
     "understood": MessageLookupByLibrary.simpleMessage("了解"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "虫眼鏡を使って色を選択",

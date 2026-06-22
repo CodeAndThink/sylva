@@ -6,25 +6,39 @@ class HistoryState extends Equatable {
   final List<HistoryRecord> records;
   final List<Object> groupedItems;
   final LoadStatus status;
+  final bool isSortAscending;
+  final bool isGridView;
 
   const HistoryState({
     this.records = const [],
     this.groupedItems = const [],
     this.status = LoadStatus.initial,
+    this.isSortAscending = false,
+    this.isGridView = false,
   });
 
   HistoryState copyWith({
     List<HistoryRecord>? records,
     List<Object>? groupedItems,
     LoadStatus? status,
+    bool? isSortAscending,
+    bool? isGridView,
   }) {
     return HistoryState(
       records: records ?? this.records,
       groupedItems: groupedItems ?? this.groupedItems,
       status: status ?? this.status,
+      isSortAscending: isSortAscending ?? this.isSortAscending,
+      isGridView: isGridView ?? this.isGridView,
     );
   }
 
   @override
-  List<Object?> get props => [records, groupedItems, status];
+  List<Object?> get props => [
+    records,
+    groupedItems,
+    status,
+    isSortAscending,
+    isGridView,
+  ];
 }

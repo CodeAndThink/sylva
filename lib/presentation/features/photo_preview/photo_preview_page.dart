@@ -18,6 +18,7 @@ import 'package:sylva/presentation/widgets/containers/app_transparent_container.
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
@@ -66,6 +67,13 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   );
   late ThemeData _theme;
   final GlobalKey _imageKey = GlobalKey();
+  final GlobalKey _keyPalette = GlobalKey();
+  final GlobalKey _keyExpandPalette = GlobalKey();
+  final GlobalKey _keyBack = GlobalKey();
+  final GlobalKey _keySave = GlobalKey();
+  final GlobalKey _keyLibrary = GlobalKey();
+
+  TutorialCoachMark? tutorialCoachMark;
 
   final PageController _pageController = PageController();
   @override
@@ -406,7 +414,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           );
         } else {
           return SizedBox(
-            key: const ValueKey('loaded'),
+            key: _keyPalette,
             height: 120, // Enough height for title + list
             child: Row(
               children: [
@@ -418,34 +426,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       // Page 1: Auto-detected colors
                       Column(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTitleText(
-                                  title: S.of(context).autoDetectColors,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  ColorPaletteBottomSheet.show(
-                                    context: context,
-                                    paletteColors: _cubit.state.paletteColors,
-                                    userColors: _cubit.state.userColors,
-                                    onColorTap: (color) {
-                                      _cubit.filterColor(
-                                        widget.imagePath,
-                                        color,
-                                      );
-                                      _showMagnifier.value = false;
-                                    },
-                                    onColorLongPress: (color) =>
-                                        _cubit.copyColor(color),
-                                  );
-                                },
-                                child: const Icon(Icons.zoom_out_map_outlined),
-                              ),
-                            ],
-                          ),
+                          AppTitleText(title: S.of(context).autoDetectColors),
                           SizedBox(
                             height: 80,
                             child: ListView.separated(
@@ -475,34 +456,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTitleText(
-                                  title: S.of(context).myColors,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  ColorPaletteBottomSheet.show(
-                                    context: context,
-                                    paletteColors: _cubit.state.paletteColors,
-                                    userColors: _cubit.state.userColors,
-                                    onColorTap: (color) {
-                                      _cubit.filterColor(
-                                        widget.imagePath,
-                                        color,
-                                      );
-                                      _showMagnifier.value = false;
-                                    },
-                                    onColorLongPress: (color) =>
-                                        _cubit.copyColor(color),
-                                  );
-                                },
-                                child: const Icon(Icons.zoom_out_map_outlined),
-                              ),
-                            ],
-                          ),
+                          AppTitleText(title: S.of(context).myColors),
                           SizedBox(
                             height: 80,
                             child: state.userColors.isEmpty
@@ -551,36 +505,65 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                   ),
                 ),
                 8.width,
-                Center(
-                  child: AnimatedBuilder(
-                    animation: _pageController,
-                    builder: (context, child) {
-                      final double page =
-                          (_pageController.hasClients &&
-                              _pageController.positions.length == 1)
-                          ? _pageController.page ?? 0
-                          : 0;
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: List.generate(2, (index) {
-                          final isSelected = (page.round() == index);
-                          return AnimatedContainer(
-                            duration: 200.milliseconds,
-                            margin: 4.paddingVertical,
-                            width: isSelected ? 8 : 6,
-                            height: isSelected ? 8 : 6,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: isSelected
-                                  ? _theme.colorScheme.primary
-                                  : _theme.colorScheme.onSurface.withValues(
-                                      alpha: 0.3,
-                                    ),
-                            ),
-                          );
-                        }),
-                      );
-                    },
+                Padding(
+                  padding: 8.paddingVertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 24,
+                        child: InkWell(
+                          key: _keyExpandPalette,
+                          onTap: () {
+                            ColorPaletteBottomSheet.show(
+                              context: context,
+                              paletteColors: _cubit.state.paletteColors,
+                              userColors: _cubit.state.userColors,
+                              onColorTap: (color) {
+                                _cubit.filterColor(widget.imagePath, color);
+                                _showMagnifier.value = false;
+                              },
+                              onColorLongPress: (color) =>
+                                  _cubit.copyColor(color),
+                            );
+                          },
+                          child: const Icon(Icons.zoom_out_map_outlined),
+                        ),
+                      ),
+
+                      Center(
+                        child: AnimatedBuilder(
+                          animation: _pageController,
+                          builder: (context, child) {
+                            final double page =
+                                (_pageController.hasClients &&
+                                    _pageController.positions.length == 1)
+                                ? _pageController.page ?? 0
+                                : 0;
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(2, (index) {
+                                final isSelected = (page.round() == index);
+                                return AnimatedContainer(
+                                  duration: 200.milliseconds,
+                                  margin: 4.paddingVertical,
+                                  width: isSelected ? 8 : 6,
+                                  height: isSelected ? 8 : 6,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: isSelected
+                                        ? _theme.colorScheme.primary
+                                        : _theme.colorScheme.onSurface
+                                              .withValues(alpha: 0.3),
+                                  ),
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                      ),
+                      16.height,
+                    ],
                   ),
                 ),
               ],
@@ -685,6 +668,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         Tooltip(
           message: S.of(context).back,
           child: IconButton(
+            key: _keyBack,
             onPressed: () {
               _cubit.navigator.safePop();
             },
@@ -695,6 +679,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         Tooltip(
           message: S.of(context).save,
           child: IconButton(
+            key: _keySave,
             onPressed: () async {
               if (widget.historyRecordId != null) {
                 SaveOptionsBottomSheet.show(
@@ -718,9 +703,149 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         Tooltip(
           message: S.of(context).saveToLibrary,
           child: IconButton(
+            key: _keyLibrary,
             onPressed: () => _cubit.saveToLibrary(imagePath: widget.imagePath),
             icon: Icon(Icons.library_add_outlined, size: 28),
           ),
+        ),
+        48.width,
+        Tooltip(
+          message: S.of(context).help,
+          child: IconButton(
+            onPressed: _showTutorial,
+            icon: Icon(Icons.question_mark_outlined, size: 28),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: _createTargets(),
+      colorShadow: Colors.black,
+      hideSkip: true,
+      paddingFocus: 10,
+      opacityShadow: 0.8,
+    )..show(context: context);
+  }
+
+  List<TargetFocus> _createTargets() {
+    return [
+      _buildTarget(
+        key: _imageKey,
+        title: S.of(context).tutorialImageTitle,
+        desc: S.of(context).tutorialImageDesc,
+        contentAlign: ContentAlign.bottom,
+        shape: ShapeLightFocus.RRect,
+        radius: 28,
+        customPosition: CustomTargetContentPosition(
+          bottom: MediaQuery.of(context).padding.bottom + 12,
+        ),
+      ),
+      _buildTarget(
+        key: _keyPalette,
+        title: S.of(context).tutorialPaletteTitle,
+        desc: S.of(context).tutorialPaletteDesc,
+        shape: ShapeLightFocus.RRect,
+        radius: 28,
+      ),
+      _buildTarget(
+        key: _keyExpandPalette,
+        title: S.of(context).tutorialExpandPaletteTitle,
+        desc: S.of(context).tutorialExpandPaletteDesc,
+      ),
+      _buildTarget(
+        key: _keyBack,
+        title: S.of(context).tutorialBackTitle,
+        desc: S.of(context).tutorialBackDesc,
+      ),
+      _buildTarget(
+        key: _keySave,
+        title: S.of(context).tutorialSaveTitle,
+        desc: S.of(context).tutorialSaveDesc,
+      ),
+      _buildTarget(
+        key: _keyLibrary,
+        title: S.of(context).tutorialLibraryTitle,
+        desc: S.of(context).tutorialLibraryDesc,
+      ),
+    ];
+  }
+
+  TargetFocus _buildTarget({
+    required GlobalKey key,
+    required String title,
+    required String desc,
+    Alignment alignSkip = Alignment.topRight,
+    ContentAlign contentAlign = ContentAlign.top,
+    CustomTargetContentPosition? customPosition,
+    ShapeLightFocus? shape,
+    double? radius,
+  }) {
+    return TargetFocus(
+      identify: key,
+      keyTarget: key,
+      alignSkip: alignSkip,
+      shape: shape,
+      radius: radius,
+      focusAnimationDuration: 400.milliseconds,
+      unFocusAnimationDuration: 400.milliseconds,
+      contents: [
+        TargetContent(
+          align: customPosition != null ? ContentAlign.custom : contentAlign,
+          customPosition: customPosition,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  title,
+                  style: _theme.textTheme.headlineMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                  child: Text(
+                    desc,
+                    style: _theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: controller.skip,
+                      child: Text(
+                        S.of(context).tutorialSkip,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                    8.width,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _theme.colorScheme.primary,
+                      ),
+                      onPressed: controller.next,
+                      child: Text(
+                        S.of(context).tutorialNext,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: _theme.colorScheme.surface,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
         ),
       ],
     );

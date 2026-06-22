@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
+import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,6 +36,16 @@ class _HomeChildPage extends StatefulWidget {
 
 class __HomeChildPageState extends State<_HomeChildPage>
     with WidgetsBindingObserver {
+  final GlobalKey _keySettings = GlobalKey();
+  final GlobalKey _keyFlash = GlobalKey();
+  final GlobalKey _keyTimer = GlobalKey();
+  final GlobalKey _keySwitchCamera = GlobalKey();
+  final GlobalKey _keyHistory = GlobalKey();
+  final GlobalKey _keyCapture = GlobalKey();
+  final GlobalKey _keyUpload = GlobalKey();
+
+  TutorialCoachMark? tutorialCoachMark;
+
   CameraController? _controller;
   List<CameraDescription> _cameras = [];
   bool _isCameraInitialized = false;
@@ -162,16 +175,22 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_controller == null || !_isCameraInitialized) return;
 
     setState(() {
-      _flashMode = _flashMode == FlashMode.off
-          ? FlashMode.always
-          : FlashMode.off;
+      if (_flashMode == FlashMode.off) {
+        _flashMode = FlashMode.always;
+      } else if (_flashMode == FlashMode.always) {
+        _flashMode = FlashMode.auto;
+      } else {
+        _flashMode = FlashMode.off;
+      }
     });
 
-    _showCenterIcon(
-      _flashMode == FlashMode.always
-          ? Icons.flash_on_outlined
-          : Icons.flash_off_outlined,
-    );
+    IconData getIcon() {
+      if (_flashMode == FlashMode.always) return Icons.flash_on_outlined;
+      if (_flashMode == FlashMode.auto) return Icons.flash_auto_outlined;
+      return Icons.flash_off_outlined;
+    }
+
+    _showCenterIcon(getIcon());
 
     try {
       await _controller!.setFlashMode(_flashMode);
@@ -370,6 +389,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).settings,
                 child: IconButton(
+                  key: _keySettings,
                   icon: Icon(
                     Icons.settings_outlined,
                     color: _theme.colorScheme.onSurface,
@@ -383,6 +403,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).flashMode,
                 child: IconButton(
+                  key: _keyFlash,
                   icon: AnimatedSwitcher(
                     duration: 150.milliseconds,
                     transitionBuilder:
@@ -395,6 +416,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     child: Icon(
                       _flashMode == FlashMode.always
                           ? Icons.flash_on_outlined
+                          : _flashMode == FlashMode.auto
+                          ? Icons.flash_auto_outlined
                           : Icons.flash_off_outlined,
                       key: ValueKey<FlashMode>(_flashMode),
                       color: _theme.colorScheme.onSurface,
@@ -405,6 +428,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               PopupMenuButton<int>(
+                key: _keyTimer,
                 tooltip: S.of(context).timer,
                 menuPadding: EdgeInsets.zero,
                 color: Colors.black54,
@@ -447,7 +471,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).switchCamera,
                 child: IconButton(
-                  key: ValueKey<int>(_selectedCameraIndex),
+                  key: _keySwitchCamera,
                   icon: AnimatedSwitcher(
                     duration: 150.milliseconds,
                     transitionBuilder:
@@ -478,7 +502,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     color: _theme.colorScheme.onSurface,
                     size: 24,
                   ),
-                  onPressed: () {},
+                  onPressed: _showTutorial,
                 ),
               ),
             ],
@@ -489,6 +513,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               Tooltip(
                 message: S.of(context).history,
                 child: IconButton(
+                  key: _keyHistory,
                   icon: Icon(
                     Icons.history_outlined,
                     color: _theme.colorScheme.onSurface,
@@ -499,33 +524,40 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   },
                 ),
               ),
-              GestureDetector(
-                onTap: _isCapturing ? null : _takePicture,
-                child: Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: _isCapturing
-                        ? _theme.colorScheme.onSurface.withValues(alpha: 0.5)
-                        : _theme.colorScheme.onSurface,
-                    shape: BoxShape.circle,
-                  ),
-                  child: _isCapturing
-                      ? Center(
-                          child: SpinKitRipple(
-                            color: _theme.colorScheme.surface,
+              Material(
+                color: _isCapturing ? Colors.transparent : Colors.white,
+                shape: const CircleBorder(),
+                elevation: 6,
+                shadowColor: _theme.colorScheme.onSurface.withValues(
+                  alpha: 0.5,
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                  key: _keyCapture,
+                  onTap: _isCapturing ? null : _takePicture,
+                  child: SizedBox(
+                    width: 70,
+                    height: 70,
+                    child: _isCapturing
+                        ? Center(
+                            child: SpinKitRipple(
+                              color: _theme.colorScheme.primary,
+                            ),
+                          )
+                        : Center(
+                            child: AppAssetImage(
+                              path: AppAssets.icCamera,
+                              height: 65,
+                              width: 65,
+                            ),
                           ),
-                        )
-                      : Icon(
-                          Icons.camera_outlined,
-                          color: _theme.colorScheme.surface,
-                          size: 60,
-                        ),
+                  ),
                 ),
               ),
               Tooltip(
                 message: S.current.pickImageFromGallery,
                 child: IconButton(
+                  key: _keyUpload,
                   icon: Icon(
                     Icons.upload_rounded,
                     color: _theme.colorScheme.onSurface,
@@ -576,6 +608,133 @@ class __HomeChildPageState extends State<_HomeChildPage>
           ),
         ),
       ),
+    );
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: _createTargets(),
+      colorShadow: Colors.black,
+      hideSkip: true,
+      paddingFocus: 10,
+      opacityShadow: 0.8,
+    )..show(context: context);
+  }
+
+  List<TargetFocus> _createTargets() {
+    return [
+      _buildTarget(
+        key: _keySettings,
+        title: S.of(context).tutorialSettingsTitle,
+        desc: S.of(context).tutorialSettingsDesc,
+      ),
+      _buildTarget(
+        key: _keyFlash,
+        title: S.of(context).tutorialFlashTitle,
+        desc: S.of(context).tutorialFlashDesc,
+      ),
+      _buildTarget(
+        key: _keyTimer,
+        title: S.of(context).tutorialTimerTitle,
+        desc: S.of(context).tutorialTimerDesc,
+      ),
+      _buildTarget(
+        key: _keySwitchCamera,
+        title: S.of(context).tutorialCameraTitle,
+        desc: S.of(context).tutorialCameraDesc,
+      ),
+      _buildTarget(
+        key: _keyHistory,
+        title: S.of(context).tutorialHistoryTitle,
+        desc: S.of(context).tutorialHistoryDesc,
+      ),
+      _buildTarget(
+        key: _keyCapture,
+        title: S.of(context).tutorialCaptureTitle,
+        desc: S.of(context).tutorialCaptureDesc,
+      ),
+      _buildTarget(
+        key: _keyUpload,
+        title: S.of(context).tutorialGalleryTitle,
+        desc: S.of(context).tutorialGalleryDesc,
+      ),
+    ];
+  }
+
+  TargetFocus _buildTarget({
+    required GlobalKey key,
+    required String title,
+    required String desc,
+  }) {
+    return TargetFocus(
+      identify: key,
+      keyTarget: key,
+      alignSkip: Alignment.topRight,
+      focusAnimationDuration: 400.milliseconds,
+      unFocusAnimationDuration: 400.milliseconds,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Container(
+              padding: 16.paddingAll,
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.65),
+                borderRadius: 16.borderRadius,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: _theme.textTheme.headlineMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                    child: Text(
+                      desc,
+                      style: _theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: controller.skip,
+                        child: Text(
+                          S.of(context).tutorialSkip,
+                          style: _theme.textTheme.titleSmall?.copyWith(
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ),
+                      8.width,
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _theme.colorScheme.primary,
+                        ),
+                        onPressed: controller.next,
+                        child: Text(
+                          S.of(context).tutorialNext,
+                          style: _theme.textTheme.titleSmall?.copyWith(
+                            color: _theme.colorScheme.surface,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

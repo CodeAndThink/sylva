@@ -838,6 +838,281 @@ class S {
   String get help {
     return Intl.message('Help', name: 'help', desc: '', args: []);
   }
+
+  /// `Settings`
+  String get tutorialSettingsTitle {
+    return Intl.message(
+      'Settings',
+      name: 'tutorialSettingsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customize your app preferences here.`
+  String get tutorialSettingsDesc {
+    return Intl.message(
+      'Customize your app preferences here.',
+      name: 'tutorialSettingsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flash Mode`
+  String get tutorialFlashTitle {
+    return Intl.message(
+      'Flash Mode',
+      name: 'tutorialFlashTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Toggle flash modes (Auto, On, Off).`
+  String get tutorialFlashDesc {
+    return Intl.message(
+      'Toggle flash modes (Auto, On, Off).',
+      name: 'tutorialFlashDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Timer`
+  String get tutorialTimerTitle {
+    return Intl.message(
+      'Timer',
+      name: 'tutorialTimerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set a countdown timer before capturing.`
+  String get tutorialTimerDesc {
+    return Intl.message(
+      'Set a countdown timer before capturing.',
+      name: 'tutorialTimerDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch Camera`
+  String get tutorialCameraTitle {
+    return Intl.message(
+      'Switch Camera',
+      name: 'tutorialCameraTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch between front and rear cameras.`
+  String get tutorialCameraDesc {
+    return Intl.message(
+      'Switch between front and rear cameras.',
+      name: 'tutorialCameraDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get tutorialHistoryTitle {
+    return Intl.message(
+      'History',
+      name: 'tutorialHistoryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View your previously captured photos.`
+  String get tutorialHistoryDesc {
+    return Intl.message(
+      'View your previously captured photos.',
+      name: 'tutorialHistoryDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Capture`
+  String get tutorialCaptureTitle {
+    return Intl.message(
+      'Capture',
+      name: 'tutorialCaptureTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a photo right now.`
+  String get tutorialCaptureDesc {
+    return Intl.message(
+      'Take a photo right now.',
+      name: 'tutorialCaptureDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get tutorialGalleryTitle {
+    return Intl.message(
+      'Gallery',
+      name: 'tutorialGalleryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick an existing photo from your gallery.`
+  String get tutorialGalleryDesc {
+    return Intl.message(
+      'Pick an existing photo from your gallery.',
+      name: 'tutorialGalleryDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get tutorialNext {
+    return Intl.message('Next', name: 'tutorialNext', desc: '', args: []);
+  }
+
+  /// `Skip`
+  String get tutorialSkip {
+    return Intl.message('Skip', name: 'tutorialSkip', desc: '', args: []);
+  }
+
+  /// `Photo Preview`
+  String get tutorialImageTitle {
+    return Intl.message(
+      'Photo Preview',
+      name: 'tutorialImageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pan your finger on the photo to magnify and pick any color.`
+  String get tutorialImageDesc {
+    return Intl.message(
+      'Pan your finger on the photo to magnify and pick any color.',
+      name: 'tutorialImageDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color Palette`
+  String get tutorialPaletteTitle {
+    return Intl.message(
+      'Color Palette',
+      name: 'tutorialPaletteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap a color to filter, long press to copy its hex code.`
+  String get tutorialPaletteDesc {
+    return Intl.message(
+      'Tap a color to filter, long press to copy its hex code.',
+      name: 'tutorialPaletteDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expand Palette`
+  String get tutorialExpandPaletteTitle {
+    return Intl.message(
+      'Expand Palette',
+      name: 'tutorialExpandPaletteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View all extracted and picked colors in a bottom sheet.`
+  String get tutorialExpandPaletteDesc {
+    return Intl.message(
+      'View all extracted and picked colors in a bottom sheet.',
+      name: 'tutorialExpandPaletteDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go Back`
+  String get tutorialBackTitle {
+    return Intl.message(
+      'Go Back',
+      name: 'tutorialBackTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discard changes and return to the camera.`
+  String get tutorialBackDesc {
+    return Intl.message(
+      'Discard changes and return to the camera.',
+      name: 'tutorialBackDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save to App`
+  String get tutorialSaveTitle {
+    return Intl.message(
+      'Save to App',
+      name: 'tutorialSaveTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save this photo and colors to the app's history.`
+  String get tutorialSaveDesc {
+    return Intl.message(
+      'Save this photo and colors to the app\'s history.',
+      name: 'tutorialSaveDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save to Library`
+  String get tutorialLibraryTitle {
+    return Intl.message(
+      'Save to Library',
+      name: 'tutorialLibraryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export this photo to your device's photo gallery.`
+  String get tutorialLibraryDesc {
+    return Intl.message(
+      'Export this photo to your device\'s photo gallery.',
+      name: 'tutorialLibraryDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get createTime {
+    return Intl.message('Time', name: 'createTime', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

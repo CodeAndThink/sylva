@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm password is required",
     ),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
+    "createTime": MessageLookupByLibrary.simpleMessage("Time"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("Delete photo"),
@@ -191,6 +192,68 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Thu"),
     "timer": MessageLookupByLibrary.simpleMessage("Timer"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
+      "Discard changes and return to the camera.",
+    ),
+    "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("Go Back"),
+    "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage(
+      "Switch between front and rear cameras.",
+    ),
+    "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage(
+      "Switch Camera",
+    ),
+    "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage(
+      "Take a photo right now.",
+    ),
+    "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Capture"),
+    "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "View all extracted and picked colors in a bottom sheet.",
+    ),
+    "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "Expand Palette",
+    ),
+    "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
+      "Toggle flash modes (Auto, On, Off).",
+    ),
+    "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Flash Mode"),
+    "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
+      "Pick an existing photo from your gallery.",
+    ),
+    "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage("Gallery"),
+    "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage(
+      "View your previously captured photos.",
+    ),
+    "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("History"),
+    "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
+      "Pan your finger on the photo to magnify and pick any color.",
+    ),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("Photo Preview"),
+    "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
+      "Export this photo to your device\'s photo gallery.",
+    ),
+    "tutorialLibraryTitle": MessageLookupByLibrary.simpleMessage(
+      "Save to Library",
+    ),
+    "tutorialNext": MessageLookupByLibrary.simpleMessage("Next"),
+    "tutorialPaletteDesc": MessageLookupByLibrary.simpleMessage(
+      "Tap a color to filter, long press to copy its hex code.",
+    ),
+    "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage(
+      "Color Palette",
+    ),
+    "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
+      "Save this photo and colors to the app\'s history.",
+    ),
+    "tutorialSaveTitle": MessageLookupByLibrary.simpleMessage("Save to App"),
+    "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "Customize your app preferences here.",
+    ),
+    "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+    "tutorialSkip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
+      "Set a countdown timer before capturing.",
+    ),
+    "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Timer"),
     "understood": MessageLookupByLibrary.simpleMessage("GOT IT"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Use magnifier to pick colors",

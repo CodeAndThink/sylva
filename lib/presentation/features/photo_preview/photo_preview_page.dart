@@ -426,35 +426,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       // Page 1: Auto-detected colors
                       Column(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTitleText(
-                                  title: S.of(context).autoDetectColors,
-                                ),
-                              ),
-                              InkWell(
-                                key: _keyExpandPalette,
-                                onTap: () {
-                                  ColorPaletteBottomSheet.show(
-                                    context: context,
-                                    paletteColors: _cubit.state.paletteColors,
-                                    userColors: _cubit.state.userColors,
-                                    onColorTap: (color) {
-                                      _cubit.filterColor(
-                                        widget.imagePath,
-                                        color,
-                                      );
-                                      _showMagnifier.value = false;
-                                    },
-                                    onColorLongPress: (color) =>
-                                        _cubit.copyColor(color),
-                                  );
-                                },
-                                child: const Icon(Icons.zoom_out_map_outlined),
-                              ),
-                            ],
-                          ),
+                          AppTitleText(title: S.of(context).autoDetectColors),
                           SizedBox(
                             height: 80,
                             child: ListView.separated(
@@ -484,34 +456,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTitleText(
-                                  title: S.of(context).myColors,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  ColorPaletteBottomSheet.show(
-                                    context: context,
-                                    paletteColors: _cubit.state.paletteColors,
-                                    userColors: _cubit.state.userColors,
-                                    onColorTap: (color) {
-                                      _cubit.filterColor(
-                                        widget.imagePath,
-                                        color,
-                                      );
-                                      _showMagnifier.value = false;
-                                    },
-                                    onColorLongPress: (color) =>
-                                        _cubit.copyColor(color),
-                                  );
-                                },
-                                child: const Icon(Icons.zoom_out_map_outlined),
-                              ),
-                            ],
-                          ),
+                          AppTitleText(title: S.of(context).myColors),
                           SizedBox(
                             height: 80,
                             child: state.userColors.isEmpty
@@ -560,36 +505,65 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                   ),
                 ),
                 8.width,
-                Center(
-                  child: AnimatedBuilder(
-                    animation: _pageController,
-                    builder: (context, child) {
-                      final double page =
-                          (_pageController.hasClients &&
-                              _pageController.positions.length == 1)
-                          ? _pageController.page ?? 0
-                          : 0;
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: List.generate(2, (index) {
-                          final isSelected = (page.round() == index);
-                          return AnimatedContainer(
-                            duration: 200.milliseconds,
-                            margin: 4.paddingVertical,
-                            width: isSelected ? 8 : 6,
-                            height: isSelected ? 8 : 6,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: isSelected
-                                  ? _theme.colorScheme.primary
-                                  : _theme.colorScheme.onSurface.withValues(
-                                      alpha: 0.3,
-                                    ),
-                            ),
-                          );
-                        }),
-                      );
-                    },
+                Padding(
+                  padding: 8.paddingVertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 24,
+                        child: InkWell(
+                          key: _keyExpandPalette,
+                          onTap: () {
+                            ColorPaletteBottomSheet.show(
+                              context: context,
+                              paletteColors: _cubit.state.paletteColors,
+                              userColors: _cubit.state.userColors,
+                              onColorTap: (color) {
+                                _cubit.filterColor(widget.imagePath, color);
+                                _showMagnifier.value = false;
+                              },
+                              onColorLongPress: (color) =>
+                                  _cubit.copyColor(color),
+                            );
+                          },
+                          child: const Icon(Icons.zoom_out_map_outlined),
+                        ),
+                      ),
+
+                      Center(
+                        child: AnimatedBuilder(
+                          animation: _pageController,
+                          builder: (context, child) {
+                            final double page =
+                                (_pageController.hasClients &&
+                                    _pageController.positions.length == 1)
+                                ? _pageController.page ?? 0
+                                : 0;
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: List.generate(2, (index) {
+                                final isSelected = (page.round() == index);
+                                return AnimatedContainer(
+                                  duration: 200.milliseconds,
+                                  margin: 4.paddingVertical,
+                                  width: isSelected ? 8 : 6,
+                                  height: isSelected ? 8 : 6,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: isSelected
+                                        ? _theme.colorScheme.primary
+                                        : _theme.colorScheme.onSurface
+                                              .withValues(alpha: 0.3),
+                                  ),
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                      ),
+                      16.height,
+                    ],
                   ),
                 ),
               ],

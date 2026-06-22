@@ -161,7 +161,9 @@ class _HistoryListItemState extends State<HistoryListItem> {
                               const Spacer(),
                               Text(
                                 widget.record.createdAt.toDateTimeString(),
-                                style: theme.textTheme.titleSmall,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),

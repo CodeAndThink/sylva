@@ -72,6 +72,10 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     loadHistory();
   }
 
+  void toggleView() {
+    emit(state.copyWith(isGridView: !state.isGridView));
+  }
+
   void toggleSort() {
     final newAscending = !state.isSortAscending;
     final sortedRecords = List<HistoryRecord>.from(state.records);

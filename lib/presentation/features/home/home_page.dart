@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
+import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -522,29 +524,34 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   },
                 ),
               ),
-              GestureDetector(
-                key: _keyCapture,
-                onTap: _isCapturing ? null : _takePicture,
-                child: Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: _isCapturing
-                        ? _theme.colorScheme.onSurface.withValues(alpha: 0.5)
-                        : _theme.colorScheme.onSurface,
-                    shape: BoxShape.circle,
-                  ),
-                  child: _isCapturing
-                      ? Center(
-                          child: SpinKitRipple(
-                            color: _theme.colorScheme.surface,
+              Material(
+                color: _isCapturing ? Colors.transparent : Colors.white,
+                shape: const CircleBorder(),
+                elevation: 6,
+                shadowColor: _theme.colorScheme.onSurface.withValues(
+                  alpha: 0.5,
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                  key: _keyCapture,
+                  onTap: _isCapturing ? null : _takePicture,
+                  child: SizedBox(
+                    width: 70,
+                    height: 70,
+                    child: _isCapturing
+                        ? Center(
+                            child: SpinKitRipple(
+                              color: _theme.colorScheme.primary,
+                            ),
+                          )
+                        : Center(
+                            child: AppAssetImage(
+                              path: AppAssets.icCamera,
+                              height: 65,
+                              width: 65,
+                            ),
                           ),
-                        )
-                      : Icon(
-                          Icons.camera_outlined,
-                          color: _theme.colorScheme.surface,
-                          size: 60,
-                        ),
+                  ),
                 ),
               ),
               Tooltip(

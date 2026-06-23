@@ -145,6 +145,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "older": MessageLookupByLibrary.simpleMessage("Older"),
+    "onboardDesc": MessageLookupByLibrary.simpleMessage(
+      "Extract, save and manage vibrant colors from any photo you take.",
+    ),
+    "onboardTitle": MessageLookupByLibrary.simpleMessage("Capture the Colors"),
     "onlyFavorites": MessageLookupByLibrary.simpleMessage("Only Favorites"),
     "opacity": MessageLookupByLibrary.simpleMessage("Opacity"),
     "or": MessageLookupByLibrary.simpleMessage("Or"),

@@ -151,6 +151,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("Đồng ý"),
     "older": MessageLookupByLibrary.simpleMessage("Cũ hơn"),
+    "onboardDesc": MessageLookupByLibrary.simpleMessage(
+      "Trích xuất, lưu trữ và quản lý những màu sắc rực rỡ từ mọi bức ảnh bạn chụp.",
+    ),
+    "onboardTitle": MessageLookupByLibrary.simpleMessage("Khám phá sắc màu"),
     "onlyFavorites": MessageLookupByLibrary.simpleMessage("Chỉ mục yêu thích"),
     "opacity": MessageLookupByLibrary.simpleMessage("Đậm nhạt"),
     "or": MessageLookupByLibrary.simpleMessage("Hoặc"),

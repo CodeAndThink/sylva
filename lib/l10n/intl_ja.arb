@@ -323,5 +323,9 @@
   "onlyFavorites": "お気に入りのみ",
   "@onlyFavorites": {},
   "historySort": "並べ替え",
-  "@historySort": {}
+  "@historySort": {},
+  "onboardTitle": "色をキャプチャする",
+  "@onboardTitle": {},
+  "onboardDesc": "撮影した写真から鮮やかな色を抽出し、保存して管理します。",
+  "@onboardDesc": {}
 }

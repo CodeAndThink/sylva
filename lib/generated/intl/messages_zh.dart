@@ -113,6 +113,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage("未选择要复制的颜色"),
     "ok": MessageLookupByLibrary.simpleMessage("确定"),
     "older": MessageLookupByLibrary.simpleMessage("更早"),
+    "onboardDesc": MessageLookupByLibrary.simpleMessage(
+      "从您拍摄的任何照片中提取、保存和管理鲜艳的色彩。",
+    ),
+    "onboardTitle": MessageLookupByLibrary.simpleMessage("捕捉色彩"),
     "onlyFavorites": MessageLookupByLibrary.simpleMessage("仅限收藏"),
     "opacity": MessageLookupByLibrary.simpleMessage("不透明度"),
     "or": MessageLookupByLibrary.simpleMessage("或"),

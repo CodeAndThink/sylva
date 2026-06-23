@@ -323,5 +323,9 @@
   "onlyFavorites": "Chỉ mục yêu thích",
   "@onlyFavorites": {},
   "historySort": "Sắp xếp",
-  "@historySort": {}
+  "@historySort": {},
+  "onboardTitle": "Khám phá sắc màu",
+  "@onboardTitle": {},
+  "onboardDesc": "Trích xuất, lưu trữ và quản lý những màu sắc rực rỡ từ mọi bức ảnh bạn chụp.",
+  "@onboardDesc": {}
 }

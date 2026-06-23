@@ -323,5 +323,9 @@
   "onlyFavorites": "仅限收藏",
   "@onlyFavorites": {},
   "historySort": "排序",
-  "@historySort": {}
+  "@historySort": {},
+  "onboardTitle": "捕捉色彩",
+  "@onboardTitle": {},
+  "onboardDesc": "从您拍摄的任何照片中提取、保存和管理鲜艳的色彩。",
+  "@onboardDesc": {}
 }

@@ -323,5 +323,9 @@
   "onlyFavorites": "Only Favorites",
   "@onlyFavorites": {},
   "historySort": "Sort History",
-  "@historySort": {}
+  "@historySort": {},
+  "onboardTitle": "Capture the Colors",
+  "@onboardTitle": {},
+  "onboardDesc": "Extract, save and manage vibrant colors from any photo you take.",
+  "@onboardDesc": {}
 }

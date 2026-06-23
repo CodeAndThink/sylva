@@ -125,6 +125,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "older": MessageLookupByLibrary.simpleMessage("それ以前"),
+    "onboardDesc": MessageLookupByLibrary.simpleMessage(
+      "撮影した写真から鮮やかな色を抽出し、保存して管理します。",
+    ),
+    "onboardTitle": MessageLookupByLibrary.simpleMessage("色をキャプチャする"),
     "onlyFavorites": MessageLookupByLibrary.simpleMessage("お気に入りのみ"),
     "opacity": MessageLookupByLibrary.simpleMessage("不透明度"),
     "or": MessageLookupByLibrary.simpleMessage("または"),

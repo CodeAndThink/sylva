@@ -1263,6 +1263,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Capture the Colors`
+  String get onboardTitle {
+    return Intl.message(
+      'Capture the Colors',
+      name: 'onboardTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extract, save and manage vibrant colors from any photo you take.`
+  String get onboardDesc {
+    return Intl.message(
+      'Extract, save and manage vibrant colors from any photo you take.',
+      name: 'onboardDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -5,7 +5,6 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_cubit.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_navigator.dart';
-import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
@@ -28,15 +27,31 @@ class _OnboardingChildPage extends StatefulWidget {
   State<_OnboardingChildPage> createState() => __OnboardingChildPageState();
 }
 
-class __OnboardingChildPageState extends State<_OnboardingChildPage> {
+class __OnboardingChildPageState extends State<_OnboardingChildPage> with SingleTickerProviderStateMixin {
   late final OnBoardCubit _cubit;
   late S _l10n;
   late ThemeData _theme;
+
+  late final AnimationController _animationController;
+  late final Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
     _cubit = context.read<OnBoardCubit>();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,6 +64,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> {
           Positioned.fill(
             child: AppAssetImage(path: AppAssets.bgOnboard, fit: BoxFit.cover),
           ),
+
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -73,6 +89,17 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        AppAssetImage(
+                          path: AppAssets.icAppIcon,
+                          width: 150,
+                          height: 150,
+                        ),
+                      ],
+                    ),
+                    30.height,
                     ShaderMask(
                       shaderCallback: (bounds) => const LinearGradient(
                         colors: [
@@ -92,7 +119,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> {
                         style: _theme.textTheme.displaySmall?.copyWith(
                           fontWeight: FontWeight.w800,
                           height: 1.1,
-                          color: _theme.colorScheme.onSurface,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -109,16 +136,38 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 36,
-            left: 24,
-            right: 24,
-            child: AppFilledButton(
-              borderRadius: 30,
-              onPressed: () {
-                _cubit.navigateToHome();
-              },
-              text: _l10n.letGo,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: 16.paddingBottom,
+              child: SafeArea(
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: Material(
+                    color: _theme.colorScheme.primary,
+                    shape: const CircleBorder(),
+                    clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    onTap: () {
+                      _cubit.navigateToHome();
+                    },
+                    borderRadius: 50.borderRadius,
+                    child: Container(
+                      padding: 20.paddingAll,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.1),
+                        borderRadius: 50.borderRadius,
+                      ),
+                      child: const Icon(
+                        Icons.navigate_next_outlined,
+                        color: Colors.white,
+                        size: 36,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              ),
             ),
           ),
         ],

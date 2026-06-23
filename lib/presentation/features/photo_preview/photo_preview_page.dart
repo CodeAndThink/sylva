@@ -60,7 +60,8 @@ class _PhotoPreviewChildPage extends StatefulWidget {
   State<_PhotoPreviewChildPage> createState() => __PhotoPreviewChildPageState();
 }
 
-class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> with TickerProviderStateMixin {
+class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
+    with TickerProviderStateMixin {
   late final PhotoPreviewCubit _cubit;
   final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
   final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
@@ -81,21 +82,22 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> with Ti
   final PageController _pageController = PageController();
   final TransformationController _transformationController =
       TransformationController();
-  
+
   late final AnimationController _zoomAnimationController;
   Animation<Matrix4>? _zoomAnimation;
 
   @override
   void initState() {
     super.initState();
-    _zoomAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    )..addListener(() {
-        if (_zoomAnimation != null) {
-          _transformationController.value = _zoomAnimation!.value;
-        }
-      });
+    _zoomAnimationController =
+        AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 200),
+        )..addListener(() {
+          if (_zoomAnimation != null) {
+            _transformationController.value = _zoomAnimation!.value;
+          }
+        });
     _cubit = context.read<PhotoPreviewCubit>();
     _cubit.extractPalette(imagePath: widget.imagePath);
   }
@@ -130,13 +132,16 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> with Ti
   }
 
   void _animateZoomTo(Matrix4 targetMatrix) {
-    _zoomAnimation = Matrix4Tween(
-      begin: _transformationController.value,
-      end: targetMatrix,
-    ).animate(CurvedAnimation(
-      parent: _zoomAnimationController,
-      curve: Curves.easeOut,
-    ));
+    _zoomAnimation =
+        Matrix4Tween(
+          begin: _transformationController.value,
+          end: targetMatrix,
+        ).animate(
+          CurvedAnimation(
+            parent: _zoomAnimationController,
+            curve: Curves.easeOut,
+          ),
+        );
     _zoomAnimationController.forward(from: 0.0);
   }
 

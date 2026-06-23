@@ -35,8 +35,10 @@ class FullScreenPhotoViewer extends StatefulWidget {
   State<FullScreenPhotoViewer> createState() => _FullScreenPhotoViewerState();
 }
 
-class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer> with TickerProviderStateMixin {
-  final TransformationController _transformationController = TransformationController();
+class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer>
+    with TickerProviderStateMixin {
+  final TransformationController _transformationController =
+      TransformationController();
 
   late final AnimationController _zoomAnimationController;
   Animation<Matrix4>? _zoomAnimation;
@@ -44,14 +46,15 @@ class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer> with Tick
   @override
   void initState() {
     super.initState();
-    _zoomAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    )..addListener(() {
-        if (_zoomAnimation != null) {
-          _transformationController.value = _zoomAnimation!.value;
-        }
-      });
+    _zoomAnimationController =
+        AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 200),
+        )..addListener(() {
+          if (_zoomAnimation != null) {
+            _transformationController.value = _zoomAnimation!.value;
+          }
+        });
   }
 
   @override
@@ -80,13 +83,16 @@ class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer> with Tick
   }
 
   void _animateZoomTo(Matrix4 targetMatrix) {
-    _zoomAnimation = Matrix4Tween(
-      begin: _transformationController.value,
-      end: targetMatrix,
-    ).animate(CurvedAnimation(
-      parent: _zoomAnimationController,
-      curve: Curves.easeOut,
-    ));
+    _zoomAnimation =
+        Matrix4Tween(
+          begin: _transformationController.value,
+          end: targetMatrix,
+        ).animate(
+          CurvedAnimation(
+            parent: _zoomAnimationController,
+            curve: Curves.easeOut,
+          ),
+        );
     _zoomAnimationController.forward(from: 0.0);
   }
 

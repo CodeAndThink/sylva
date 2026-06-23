@@ -36,11 +36,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("戻る"),
     "blur": MessageLookupByLibrary.simpleMessage("ぼかし"),
     "brightness": MessageLookupByLibrary.simpleMessage("明るさ"),
-    "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
-    "cancelMonthlyMessage": MessageLookupByLibrary.simpleMessage(
-      "無期限プランへのアップグレードに成功しました！ 以前に月額サブスクリプションを利用していたため、二重請求を避けるためにApp StoreまたはGoogle Playでキャンセルしてください。",
+    "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylvaは写真を撮り、色を抽出するためにカメラへのアクセスが必要です。",
     ),
-    "cancelMonthlyTitle": MessageLookupByLibrary.simpleMessage("必要なアクション"),
+    "cameraPermissionRequired": MessageLookupByLibrary.simpleMessage(
+      "カメラの権限が必要です",
+    ),
+    "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
     "circle": MessageLookupByLibrary.simpleMessage("円"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage("すべての履歴を消去"),
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
@@ -86,24 +88,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "history": MessageLookupByLibrary.simpleMessage("履歴"),
     "historySort": MessageLookupByLibrary.simpleMessage("並べ替え"),
     "historyView": MessageLookupByLibrary.simpleMessage("表示の変更"),
-    "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Twinfixウィジェットをホーム画面に追加して、デバイスのストレージをすばやく監視できます：",
-    ),
-    "homeWidgetDialogTitle": MessageLookupByLibrary.simpleMessage(
-      "Twinfixウィジェットを追加",
-    ),
-    "homeWidgetStep1": MessageLookupByLibrary.simpleMessage(
-      "1. 携帯電話のホーム画面に戻ります。",
-    ),
-    "homeWidgetStep2": MessageLookupByLibrary.simpleMessage(
-      "2. 画面上の空白のスペースを長押しします。",
-    ),
-    "homeWidgetStep3": MessageLookupByLibrary.simpleMessage(
-      "3. 「ウィジェット」を選択します。",
-    ),
-    "homeWidgetStep4": MessageLookupByLibrary.simpleMessage(
-      "4. Twinfixを見つけて、ウィジェットを画面にドラッグします。",
-    ),
     "imageSaved": MessageLookupByLibrary.simpleMessage("画像が正常に保存されました！"),
     "informationAndSupport": MessageLookupByLibrary.simpleMessage("情報とサポート"),
     "language": MessageLookupByLibrary.simpleMessage("言語"),
@@ -115,7 +99,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("ログイン"),
     "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
     "luminance": MessageLookupByLibrary.simpleMessage("輝度"),
-    "manageSubscriptions": MessageLookupByLibrary.simpleMessage("サブスクリプションの管理"),
     "mon": MessageLookupByLibrary.simpleMessage("月"),
     "myColors": MessageLookupByLibrary.simpleMessage("私の色"),
     "nameLength": MessageLookupByLibrary.simpleMessage("名前は2文字以上である必要があります"),
@@ -142,13 +125,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordRequired": MessageLookupByLibrary.simpleMessage("パスワードが必要です"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage("パスワードが一致しません"),
     "permissionDescription": MessageLookupByLibrary.simpleMessage(
-      "Twinfixは、重複写真をスキャンしてクリーンアップするために写真ライブラリへのアクセスが必要です。",
+      "Sylvaは、写真を選択して色を抽出するために写真ライブラリへのアクセスが必要です。",
     ),
-    "permissionRequired": MessageLookupByLibrary.simpleMessage("許可が必要です"),
+    "permissionRequired": MessageLookupByLibrary.simpleMessage(
+      "写真ライブラリの権限が必要です",
+    ),
     "pickImageFromGallery": MessageLookupByLibrary.simpleMessage(
       "ライブラリから画像を選択",
     ),
-    "premium": MessageLookupByLibrary.simpleMessage("プレミアム"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("プライバシーポリシー"),
     "progress": MessageLookupByLibrary.simpleMessage("進捗"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -263,7 +247,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "これらのボタンを使用して、正確にズームインまたはズームアウトします。",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("ズーム"),
-    "understood": MessageLookupByLibrary.simpleMessage("了解"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "虫眼鏡を使って色を選択",
     ),

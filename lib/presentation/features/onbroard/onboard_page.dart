@@ -27,7 +27,8 @@ class _OnboardingChildPage extends StatefulWidget {
   State<_OnboardingChildPage> createState() => __OnboardingChildPageState();
 }
 
-class __OnboardingChildPageState extends State<_OnboardingChildPage> with SingleTickerProviderStateMixin {
+class __OnboardingChildPageState extends State<_OnboardingChildPage>
+    with SingleTickerProviderStateMixin {
   late final OnBoardCubit _cubit;
   late S _l10n;
   late ThemeData _theme;
@@ -147,26 +148,26 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> with Single
                     color: _theme.colorScheme.primary,
                     shape: const CircleBorder(),
                     clipBehavior: Clip.hardEdge,
-                  child: InkWell(
-                    onTap: () {
-                      _cubit.navigateToHome();
-                    },
-                    borderRadius: 50.borderRadius,
-                    child: Container(
-                      padding: 20.paddingAll,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.1),
-                        borderRadius: 50.borderRadius,
-                      ),
-                      child: const Icon(
-                        Icons.navigate_next_outlined,
-                        color: Colors.white,
-                        size: 36,
+                    child: InkWell(
+                      onTap: () {
+                        _cubit.navigateToHome();
+                      },
+                      borderRadius: 50.borderRadius,
+                      child: Container(
+                        padding: 20.paddingAll,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.1),
+                          borderRadius: 50.borderRadius,
+                        ),
+                        child: const Icon(
+                          Icons.navigate_next_outlined,
+                          color: Colors.white,
+                          size: 36,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
               ),
             ),
           ),

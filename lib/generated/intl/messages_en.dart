@@ -38,13 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "blur": MessageLookupByLibrary.simpleMessage("Blur"),
     "brightness": MessageLookupByLibrary.simpleMessage("Brightness"),
+    "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva needs access to your camera to take photos and extract colors.",
+    ),
+    "cameraPermissionRequired": MessageLookupByLibrary.simpleMessage(
+      "Camera Permission Required",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-    "cancelMonthlyMessage": MessageLookupByLibrary.simpleMessage(
-      "You\'ve successfully upgraded to Lifetime! Since you previously had a Monthly subscription, please remember to cancel it in the App Store/Google Play to avoid being charged for both.",
-    ),
-    "cancelMonthlyTitle": MessageLookupByLibrary.simpleMessage(
-      "Action Required",
-    ),
     "circle": MessageLookupByLibrary.simpleMessage("Circle"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage(
       "Clear all history",
@@ -98,24 +98,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "history": MessageLookupByLibrary.simpleMessage("History"),
     "historySort": MessageLookupByLibrary.simpleMessage("Sort History"),
     "historyView": MessageLookupByLibrary.simpleMessage("Change View"),
-    "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
-      "You can add Twinfix widget to your home screen to quickly monitor device storage:",
-    ),
-    "homeWidgetDialogTitle": MessageLookupByLibrary.simpleMessage(
-      "Add Twinfix Widget",
-    ),
-    "homeWidgetStep1": MessageLookupByLibrary.simpleMessage(
-      "1. Go to your phone\'s home screen.",
-    ),
-    "homeWidgetStep2": MessageLookupByLibrary.simpleMessage(
-      "2. Touch and hold any empty space on the screen.",
-    ),
-    "homeWidgetStep3": MessageLookupByLibrary.simpleMessage(
-      "3. Select \"Widgets\".",
-    ),
-    "homeWidgetStep4": MessageLookupByLibrary.simpleMessage(
-      "4. Find Twinfix and drag the widget to the screen.",
-    ),
     "imageSaved": MessageLookupByLibrary.simpleMessage(
       "Image saved successfully!",
     ),
@@ -131,9 +113,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
     "luminance": MessageLookupByLibrary.simpleMessage("Luminance"),
-    "manageSubscriptions": MessageLookupByLibrary.simpleMessage(
-      "Manage Subscriptions",
-    ),
     "mon": MessageLookupByLibrary.simpleMessage("Mon"),
     "myColors": MessageLookupByLibrary.simpleMessage("My Colors"),
     "nameLength": MessageLookupByLibrary.simpleMessage(
@@ -166,15 +145,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Passwords do not match",
     ),
     "permissionDescription": MessageLookupByLibrary.simpleMessage(
-      "Twinfix needs access to your photo library to scan and clean duplicate photos.",
+      "Sylva needs access to your photo library to select photos and extract colors.",
     ),
     "permissionRequired": MessageLookupByLibrary.simpleMessage(
-      "Permission Required",
+      "Photo Library Permission Required",
     ),
     "pickImageFromGallery": MessageLookupByLibrary.simpleMessage(
       "Pick image from gallery",
     ),
-    "premium": MessageLookupByLibrary.simpleMessage("Premium"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "progress": MessageLookupByLibrary.simpleMessage("Progress"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -307,7 +285,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Use these buttons to zoom in or out precisely.",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("Zoom"),
-    "understood": MessageLookupByLibrary.simpleMessage("GOT IT"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Use magnifier to pick colors",
     ),

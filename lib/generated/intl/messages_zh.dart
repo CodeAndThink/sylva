@@ -36,11 +36,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("返回"),
     "blur": MessageLookupByLibrary.simpleMessage("模糊"),
     "brightness": MessageLookupByLibrary.simpleMessage("亮度"),
-    "cancel": MessageLookupByLibrary.simpleMessage("取消"),
-    "cancelMonthlyMessage": MessageLookupByLibrary.simpleMessage(
-      "您已成功升级至终身版！因为您之前有一个包月订阅，请记得在 App Store/Google Play 中取消它，以避免被重复扣费。",
+    "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva需要访问您的相机以拍摄照片并提取颜色。",
     ),
-    "cancelMonthlyTitle": MessageLookupByLibrary.simpleMessage("需要采取操作"),
+    "cameraPermissionRequired": MessageLookupByLibrary.simpleMessage("需要相机权限"),
+    "cancel": MessageLookupByLibrary.simpleMessage("取消"),
     "circle": MessageLookupByLibrary.simpleMessage("圆形"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage("清除所有历史记录"),
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
@@ -82,18 +82,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "history": MessageLookupByLibrary.simpleMessage("历史记录"),
     "historySort": MessageLookupByLibrary.simpleMessage("排序"),
     "historyView": MessageLookupByLibrary.simpleMessage("更改视图"),
-    "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
-      "您可以将 Twinfix 小部件添加到主屏幕以快速监控设备存储：",
-    ),
-    "homeWidgetDialogTitle": MessageLookupByLibrary.simpleMessage(
-      "添加 Twinfix 小部件",
-    ),
-    "homeWidgetStep1": MessageLookupByLibrary.simpleMessage("1. 返回手机主屏幕。"),
-    "homeWidgetStep2": MessageLookupByLibrary.simpleMessage("2. 长按屏幕上的任何空白处。"),
-    "homeWidgetStep3": MessageLookupByLibrary.simpleMessage("3. 选择“小部件”。"),
-    "homeWidgetStep4": MessageLookupByLibrary.simpleMessage(
-      "4. 找到 Twinfix 并将小部件拖到屏幕上。",
-    ),
     "imageSaved": MessageLookupByLibrary.simpleMessage("图像保存成功！"),
     "informationAndSupport": MessageLookupByLibrary.simpleMessage("信息与支持"),
     "language": MessageLookupByLibrary.simpleMessage("语言"),
@@ -105,7 +93,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("登录"),
     "logout": MessageLookupByLibrary.simpleMessage("退出登录"),
     "luminance": MessageLookupByLibrary.simpleMessage("亮度"),
-    "manageSubscriptions": MessageLookupByLibrary.simpleMessage("管理订阅"),
     "mon": MessageLookupByLibrary.simpleMessage("一"),
     "myColors": MessageLookupByLibrary.simpleMessage("我的颜色"),
     "nameLength": MessageLookupByLibrary.simpleMessage("姓名至少包含2个字符"),
@@ -130,11 +117,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordRequired": MessageLookupByLibrary.simpleMessage("必须输入密码"),
     "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage("密码不匹配"),
     "permissionDescription": MessageLookupByLibrary.simpleMessage(
-      "Twinfix 需要访问您的相册以扫描和清理重复照片。",
+      "Sylva 需要访问您的相册以选择照片并提取颜色。",
     ),
-    "permissionRequired": MessageLookupByLibrary.simpleMessage("需要权限"),
+    "permissionRequired": MessageLookupByLibrary.simpleMessage("需要相册权限"),
     "pickImageFromGallery": MessageLookupByLibrary.simpleMessage("从图库选择图片"),
-    "premium": MessageLookupByLibrary.simpleMessage("高级版"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
     "progress": MessageLookupByLibrary.simpleMessage("进度"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -229,7 +215,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "使用这些按钮精确放大或缩小图像。",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("缩放"),
-    "understood": MessageLookupByLibrary.simpleMessage("知道了"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "使用放大镜选择颜色",
     ),

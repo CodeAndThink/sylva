@@ -483,24 +483,10 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 message: S.of(context).switchCamera,
                 child: IconButton(
                   key: _keySwitchCamera,
-                  icon: AnimatedSwitcher(
-                    duration: 150.milliseconds,
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                          return ScaleTransition(
-                            scale: animation,
-                            child: child,
-                          );
-                        },
-                    child: Icon(
-                      _cameras.isNotEmpty &&
-                              _cameras[_selectedCameraIndex].lensDirection ==
-                                  CameraLensDirection.front
-                          ? Icons.camera_front_outlined
-                          : Icons.camera_rear_outlined,
-                      color: _theme.colorScheme.onSurface,
-                      size: 24,
-                    ),
+                  icon: Icon(
+                    Icons.cached,
+                    color: _theme.colorScheme.onSurface,
+                    size: 24,
                   ),
                   onPressed: _switchCamera,
                 ),

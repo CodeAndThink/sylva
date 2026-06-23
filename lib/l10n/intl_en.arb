@@ -289,5 +289,13 @@
   "tutorialLibraryDesc": "Export this photo to your device's photo gallery.",
   "@tutorialLibraryDesc": {},
   "createTime": "Time",
-  "@createTime": {}
+  "@createTime": {},
+  "informationAndSupport": "Information & Support",
+  "@informationAndSupport": {},
+  "donation": "Donation",
+  "@donation": {},
+  "about": "About",
+  "@about": {},
+  "contact": "Contact",
+  "@contact": {}
 }

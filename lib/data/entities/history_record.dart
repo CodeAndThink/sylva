@@ -9,11 +9,13 @@ class HistoryRecord {
   List<int> userColors;
   int? selectedColor;
   DateTime createdAt;
+  bool isFavorite;
 
   HistoryRecord({
     required this.imagePath,
     required this.userColors,
     this.selectedColor,
     required this.createdAt,
+    this.isFavorite = false,
   });
 }

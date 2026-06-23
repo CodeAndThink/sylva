@@ -43,23 +43,38 @@ class _HistoryChildPage extends StatefulWidget {
 class __HistoryChildPageState extends State<_HistoryChildPage> {
   late final HistoryCubit _cubit;
   late ThemeData _theme;
+  final ScrollController _scrollController = ScrollController();
+  final ValueNotifier<bool> _showScrollToTop = ValueNotifier(false);
 
   @override
   void initState() {
     super.initState();
     _cubit = context.read<HistoryCubit>();
     _cubit.loadHistory();
+    _scrollController.addListener(() {
+      if (!_scrollController.hasClients) return;
+
+      final bool shouldShow = _scrollController.offset > 200 &&
+          _scrollController.position.maxScrollExtent > 0;
+
+      if (_showScrollToTop.value != shouldShow) {
+        _showScrollToTop.value = shouldShow;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _showScrollToTop.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
 
-    return AppScaffold(
-      title: S.of(context).history,
-      actions: [_buildChangeViewButton()],
-      body: _buildBody(),
-    );
+    return AppScaffold(title: S.of(context).history, body: _buildBody());
   }
 
   Widget _buildChangeViewButton() {
@@ -72,7 +87,11 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
             state.isGridView ? Icons.grid_view_rounded : Icons.list_outlined,
           ),
           onPressed: () {
+            if (_scrollController.hasClients) {
+              _scrollController.jumpTo(0);
+            }
             _cubit.toggleView();
+            _showScrollToTop.value = false;
           },
         );
       },
@@ -86,7 +105,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           previous.groupedItems != current.groupedItems ||
           previous.isGridView != current.isGridView,
       builder: (context, state) {
-        if (state.status.isLoading) {
+        if (state.status.isInitial) {
           return const HistoryShimmerList();
         }
         if (state.records.isEmpty) {
@@ -110,11 +129,12 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           );
         }
 
-        return Column(
+        return Stack(
           children: [
-            Expanded(
+            Positioned.fill(
               child: state.isGridView
                   ? CustomScrollView(
+                      controller: _scrollController,
                       slivers: [
                         SliverToBoxAdapter(
                           child: SizedBox(
@@ -127,15 +147,16 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                             slivers: _buildGridSlivers(state.groupedItems),
                           ),
                         ),
-                        SliverToBoxAdapter(child: 12.height),
+                        SliverToBoxAdapter(child: 100.height),
                       ],
                     )
                   : ListView.builder(
+                      controller: _scrollController,
                       padding: EdgeInsets.fromLTRB(
                         12,
                         MediaQuery.of(context).padding.top + 12,
                         12,
-                        12,
+                        100,
                       ),
                       itemCount: state.groupedItems.length,
                       itemBuilder: (context, index) {
@@ -150,76 +171,22 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                             record: item,
                             onDelete: () => _cubit.deleteRecord(id: item.id),
                             onTap: () => _cubit.goToPhotoPreview(record: item),
+                            isFavorite: item.isFavorite,
+                            onFavoritePressed: () =>
+                                _cubit.toggleFavorite(item.id),
                           );
                         }
                         return const SizedBox.shrink();
                       },
                     ),
             ),
-            _buildBottomActions(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _buildBottomActions(),
+            ),
           ],
         );
       },
-    );
-  }
-
-  Widget _buildBottomActions() {
-    return SafeArea(
-      child: Padding(
-        padding: 16.paddingBottom,
-        child: AppTransparentContainer(
-          padding: 8.paddingAll,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 12,
-            children: [
-              InkWell(
-                onTap: () {},
-                customBorder: const CircleBorder(),
-                child: Container(
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: 30.borderRadius,
-                    color: _theme.colorScheme.primaryContainer,
-                  ),
-                  padding: 8.paddingHorizontal,
-                  child: Center(
-                    child: Text(
-                      S.of(context).createTime,
-                      style: _theme.textTheme.titleSmall?.copyWith(
-                        color: _theme.colorScheme.onPrimaryContainer,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  _cubit.toggleSort();
-                },
-                customBorder: const CircleBorder(),
-                child: Container(
-                  height: 30,
-                  width: 30,
-                  decoration: const BoxDecoration(shape: BoxShape.circle),
-                  child: BlocBuilder<HistoryCubit, HistoryState>(
-                    buildWhen: (p, c) => p.isSortAscending != c.isSortAscending,
-                    builder: (context, state) {
-                      return Icon(
-                        state.isSortAscending
-                            ? Icons.expand_less_outlined
-                            : Icons.expand_more_outlined,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
@@ -246,6 +213,8 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 record: record,
                 onDelete: () => _cubit.deleteRecord(id: record.id),
                 onTap: () => _cubit.goToPhotoPreview(record: record),
+                isFavorite: record.isFavorite,
+                onFavoritePressed: () => _cubit.toggleFavorite(record.id),
               );
             }, childCount: records.length),
           ),
@@ -270,5 +239,129 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     addGridSliver();
 
     return slivers;
+  }
+
+  Widget _buildBottomActions() {
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: 16.paddingBottom,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            60.width,
+            AppTransparentContainer(
+              padding: 4.paddingAll,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildChangeViewButton(),
+                  InkWell(
+                    onTap: () {
+                      if (_scrollController.hasClients) {
+                        _scrollController.jumpTo(0);
+                      }
+                      _cubit.toggleFavoriteOnly();
+                      _showScrollToTop.value = false;
+                    },
+                    customBorder: const CircleBorder(),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: BlocBuilder<HistoryCubit, HistoryState>(
+                        buildWhen: (p, c) =>
+                            p.isFavoriteOnly != c.isFavoriteOnly,
+                        builder: (context, state) {
+                          return Icon(
+                            state.isFavoriteOnly
+                                ? Icons.bookmark
+                                : Icons.bookmark_outline_rounded,
+                            color: Colors.amber,
+                            size: 30,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  8.width,
+
+                  InkWell(
+                    onTap: () {
+                      if (_scrollController.hasClients) {
+                        _scrollController.jumpTo(0);
+                      }
+                      _cubit.toggleSort();
+                      _showScrollToTop.value = false;
+                    },
+                    customBorder: const CircleBorder(),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: 30.borderRadius,
+                        color: _theme.colorScheme.primaryContainer,
+                      ),
+                      padding: 8.paddingHorizontal,
+                      child: BlocBuilder<HistoryCubit, HistoryState>(
+                        buildWhen: (p, c) =>
+                            p.isSortAscending != c.isSortAscending,
+                        builder: (context, state) {
+                          return Row(
+                            children: [
+                              Text(
+                                S.of(context).createTime,
+                                style: _theme.textTheme.titleSmall?.copyWith(
+                                  color: _theme.colorScheme.onPrimaryContainer,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              8.width,
+                              Icon(
+                                state.isSortAscending
+                                    ? Icons.expand_less_outlined
+                                    : Icons.expand_more_outlined,
+
+                                size: 24,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            12.width,
+            ValueListenableBuilder<bool>(
+              valueListenable: _showScrollToTop,
+              builder: (context, show, child) {
+                return AnimatedOpacity(
+                  opacity: show ? 1.0 : 0.0,
+                  duration: 200.milliseconds,
+                  child: IgnorePointer(
+                    ignoring: !show,
+                    child: FloatingActionButton(
+                      shape: const CircleBorder(),
+                      onPressed: () {
+                        _scrollController.animateTo(
+                          0,
+                          duration: 300.milliseconds,
+                          curve: Curves.easeOut,
+                        );
+                      },
+                      backgroundColor: _theme.colorScheme.primaryContainer,
+                      foregroundColor: _theme.colorScheme.onPrimaryContainer,
+                      child: const Icon(Icons.arrow_upward),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -289,5 +289,13 @@
   "tutorialLibraryDesc": "将此照片导出到您设备的相册。",
   "@tutorialLibraryDesc": {},
   "createTime": "时间",
-  "@createTime": {}
+  "@createTime": {},
+  "informationAndSupport": "信息与支持",
+  "@informationAndSupport": {},
+  "donation": "捐款",
+  "@donation": {},
+  "about": "关于",
+  "@about": {},
+  "contact": "联系",
+  "@contact": {}
 }

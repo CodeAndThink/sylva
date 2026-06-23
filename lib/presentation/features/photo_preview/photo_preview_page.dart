@@ -705,7 +705,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           child: IconButton(
             key: _keyLibrary,
             onPressed: () => _cubit.saveToLibrary(imagePath: widget.imagePath),
-            icon: Icon(Icons.library_add_outlined, size: 28),
+            icon: Icon(Icons.download_outlined, size: 30),
           ),
         ),
         48.width,

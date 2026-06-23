@@ -14,6 +14,7 @@ import 'package:sylva/presentation/features/photo_preview/widgets/color_palette_
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_shimmer_list.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/save_options_bottom_sheet.dart';
+import 'package:sylva/presentation/features/photo_preview/widgets/full_screen_photo_viewer.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -76,6 +77,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   TutorialCoachMark? tutorialCoachMark;
 
   final PageController _pageController = PageController();
+  final TransformationController _transformationController =
+      TransformationController();
+
   @override
   void initState() {
     super.initState();
@@ -86,7 +90,29 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   @override
   void dispose() {
     _pageController.dispose();
+    _transformationController.dispose();
     super.dispose();
+  }
+
+  void _updateZoom(double delta) {
+    final double currentScale = _transformationController.value
+        .getMaxScaleOnAxis();
+    double targetScale = (currentScale + delta).clamp(1.0, 20.0);
+    final double ratio = targetScale / currentScale;
+
+    final RenderBox? renderBox =
+        _imageKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      final Offset center = renderBox.size.center(Offset.zero);
+      final Matrix4 matrix = _transformationController.value.clone();
+
+      final Matrix4 scaleMatrix = Matrix4.identity()
+        ..multiply(Matrix4.translationValues(center.dx, center.dy, 0.0))
+        ..multiply(Matrix4.diagonal3Values(ratio, ratio, 1.0))
+        ..multiply(Matrix4.translationValues(-center.dx, -center.dy, 0.0));
+
+      _transformationController.value = scaleMatrix * matrix;
+    }
   }
 
   Future<Color?> _getColorAtPosition(Offset position) async {
@@ -247,10 +273,47 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                   },
                 ),
                 Positioned(
+                  bottom: 54,
+                  left: 8,
+                  right: 8,
+                  child: _buildZoomController(),
+                ),
+                Positioned(
                   bottom: 8,
                   left: 8,
                   right: 8,
-                  child: _buildColorDetails(),
+                  child: Row(
+                    spacing: 8,
+                    children: [
+                      Expanded(child: _buildColorDetails()),
+                      Tooltip(
+                        message: S.of(context).fullScreen,
+                        child: Material(
+                          color: Colors.black54,
+                          shape: const CircleBorder(),
+                          clipBehavior: Clip.hardEdge,
+                          child: InkWell(
+                            onTap: () {
+                              FullScreenPhotoViewer.show(
+                                context,
+                                imagePath: widget.imagePath,
+                                imageBytes: _cubit.state.filteredImageBytes,
+                              );
+                            },
+                            child: SizedBox(
+                              height: 38,
+                              width: 38,
+                              child: const Icon(
+                                Icons.zoom_out_map_rounded,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 // Filter Loading Overlay
                 _buildColorOverlay(),
@@ -265,26 +328,28 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                         final double radius = 60.0;
                         final double offsetDistance = 100.0;
 
-                        Offset magnifierCenter = touchPos.translate(
-                          0,
-                          -offsetDistance,
-                        );
-                        if (magnifierCenter.dy - radius < 0) {
-                          magnifierCenter = touchPos.translate(
-                            offsetDistance,
+                        Offset getBestCenter() {
+                          Offset center = touchPos.translate(
                             0,
+                            -offsetDistance,
                           );
-                          if (magnifierCenter.dx + radius >
-                              constraints.maxWidth) {
-                            magnifierCenter = touchPos.translate(
-                              -offsetDistance,
-                              0,
-                            );
-                          }
+                          return Offset(
+                            center.dx.clamp(
+                              radius,
+                              constraints.maxWidth - radius,
+                            ),
+                            center.dy.clamp(
+                              radius,
+                              constraints.maxHeight - radius,
+                            ),
+                          );
                         }
 
-                        final double magnifierLeft = magnifierCenter.dx - 60;
-                        final double magnifierTop = magnifierCenter.dy - 40;
+                        Offset magnifierCenter = getBestCenter();
+
+                        final double magnifierLeft =
+                            magnifierCenter.dx - radius;
+                        final double magnifierTop = magnifierCenter.dy - radius;
 
                         final Offset actualMagnifierCenter = Offset(
                           magnifierLeft + radius,
@@ -353,6 +418,11 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
     return AppTransparentContainer(
       padding: EdgeInsets.zero,
       child: GestureDetector(
+        onTapDown: (details) {
+          if (_cubit.state.filteredImageBytes != null) return;
+          _showMagnifier.value = true;
+          _touchPosition.value = details.localPosition;
+        },
         onPanStart: (details) {
           if (_cubit.state.filteredImageBytes != null) return;
           _showMagnifier.value = true;
@@ -371,18 +441,24 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         },
         child: RepaintBoundary(
           key: _imageKey,
-          child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-            buildWhen: (previous, current) =>
-                current.filteredImageBytes != previous.filteredImageBytes,
-            builder: (context, state) {
-              if (state.filteredImageBytes != null) {
-                return Image.memory(
-                  state.filteredImageBytes!,
-                  fit: BoxFit.cover,
-                );
-              }
-              return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
-            },
+          child: InteractiveViewer(
+            transformationController: _transformationController,
+            panEnabled: true,
+            minScale: 1.0,
+            maxScale: 20.0,
+            child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+              buildWhen: (previous, current) =>
+                  current.filteredImageBytes != previous.filteredImageBytes,
+              builder: (context, state) {
+                if (state.filteredImageBytes != null) {
+                  return Image.memory(
+                    state.filteredImageBytes!,
+                    fit: BoxFit.cover,
+                  );
+                }
+                return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
+              },
+            ),
           ),
         ),
       ),
@@ -527,7 +603,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                                   _cubit.copyColor(color),
                             );
                           },
-                          child: const Icon(Icons.zoom_out_map_outlined),
+                          child: const Icon(Icons.expand_rounded),
                         ),
                       ),
 
@@ -593,6 +669,66 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           );
         }
         return const SizedBox.shrink();
+      },
+    );
+  }
+
+  Widget _buildZoomController() {
+    return ValueListenableBuilder<Matrix4>(
+      valueListenable: _transformationController,
+      builder: (context, matrix, child) {
+        final double currentScale = matrix.getMaxScaleOnAxis();
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 8,
+          children: [
+            Material(
+              color: Colors.black54,
+              borderRadius: 20.borderRadius,
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                onTap: () => _updateZoom(-0.5),
+                child: Padding(
+                  padding: 8.paddingAll,
+                  child: const Icon(Icons.remove, color: Colors.white),
+                ),
+              ),
+            ),
+            Material(
+              color: Colors.black54,
+              borderRadius: 25.borderRadius,
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                onTap: () {
+                  _transformationController.value = Matrix4.identity();
+                },
+                child: Container(
+                  width: 50,
+                  padding: 5.paddingAll,
+                  child: Text(
+                    '${currentScale.toStringAsFixed(1)}x',
+                    textAlign: TextAlign.center,
+                    style: _theme.textTheme.titleSmall?.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Material(
+              color: Colors.black54,
+              borderRadius: 20.borderRadius,
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                onTap: () => _updateZoom(0.5),
+                child: Padding(
+                  padding: 8.paddingAll,
+                  child: const Icon(Icons.add, color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        );
       },
     );
   }

@@ -1288,6 +1288,11 @@ class S {
   String get letGo {
     return Intl.message('Let\'s Go', name: 'letGo', desc: '', args: []);
   }
+
+  /// `Full Screen`
+  String get fullScreen {
+    return Intl.message('Full Screen', name: 'fullScreen', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

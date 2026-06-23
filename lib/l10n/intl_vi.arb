@@ -329,5 +329,7 @@
   "onboardDesc": "Trích xuất, lưu trữ và quản lý những màu sắc rực rỡ từ mọi bức ảnh bạn chụp.",
   "@onboardDesc": {},
   "letGo": "Bắt đầu",
-  "@letGo": {}
+  "@letGo": {},
+  "fullScreen": "Toàn màn hình",
+  "@fullScreen": {}
 }

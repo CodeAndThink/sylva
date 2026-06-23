@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "filter": MessageLookupByLibrary.simpleMessage("滤镜"),
     "finish": MessageLookupByLibrary.simpleMessage("完成"),
     "flashMode": MessageLookupByLibrary.simpleMessage("闪光灯模式"),
+    "fullScreen": MessageLookupByLibrary.simpleMessage("全屏"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS 位置数据已移除并另存为副本。",
     ),

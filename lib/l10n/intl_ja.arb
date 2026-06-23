@@ -329,5 +329,7 @@
   "onboardDesc": "撮影した写真から鮮やかな色を抽出し、保存して管理します。",
   "@onboardDesc": {},
   "letGo": "行こう",
-  "@letGo": {}
+  "@letGo": {},
+  "fullScreen": "全画面",
+  "@fullScreen": {}
 }

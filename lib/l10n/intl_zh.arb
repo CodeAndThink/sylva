@@ -329,5 +329,7 @@
   "onboardDesc": "从您拍摄的任何照片中提取、保存和管理鲜艳的色彩。",
   "@onboardDesc": {},
   "letGo": "开始吧",
-  "@letGo": {}
+  "@letGo": {},
+  "fullScreen": "全屏",
+  "@fullScreen": {}
 }

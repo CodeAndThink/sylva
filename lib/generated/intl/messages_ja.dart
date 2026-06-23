@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "filter": MessageLookupByLibrary.simpleMessage("フィルター"),
     "finish": MessageLookupByLibrary.simpleMessage("完了"),
     "flashMode": MessageLookupByLibrary.simpleMessage("フラッシュモード"),
+    "fullScreen": MessageLookupByLibrary.simpleMessage("全画面"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS位置データが削除され、コピーとして保存されました。",
     ),

@@ -327,5 +327,7 @@
   "onboardTitle": "Capture the Colors",
   "@onboardTitle": {},
   "onboardDesc": "Extract, save and manage vibrant colors from any photo you take.",
-  "@onboardDesc": {}
+  "@onboardDesc": {},
+  "letGo": "Let's Go",
+  "@letGo": {}
 }

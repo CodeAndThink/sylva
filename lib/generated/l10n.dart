@@ -1283,6 +1283,11 @@ class S {
       args: [],
     );
   }
+
+  /// `Let's Go`
+  String get letGo {
+    return Intl.message('Let\'s Go', name: 'letGo', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

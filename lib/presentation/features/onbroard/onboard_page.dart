@@ -58,57 +58,67 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> {
                   colors: [
                     Colors.transparent,
                     Colors.transparent,
-                    _theme.colorScheme.surface.withValues(alpha: 0.8),
                     _theme.colorScheme.surface,
                   ],
-                  stops: const [0.0, 0.4, 0.8, 1.0],
+                  stops: const [0.0, 0.8, 1.0],
                 ),
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SafeArea(
+          Positioned.fill(
+            child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 28.0,
-                  vertical: 32.0,
-                ),
+                padding: 20.paddingAll,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      _l10n.onboardTitle,
-                      style: _theme.textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        height: 1.1,
+                    ShaderMask(
+                      shaderCallback: (bounds) => const LinearGradient(
+                        colors: [
+                          Colors.red,
+                          Colors.orange,
+                          Colors.yellow,
+                          Colors.green,
+                          Colors.blue,
+                          Colors.indigo,
+                          Colors.purple,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ).createShader(bounds),
+                      child: Text(
+                        _l10n.onboardTitle,
+                        style: _theme.textTheme.displaySmall?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          height: 1.1,
+                          color: _theme.colorScheme.onSurface,
+                        ),
                       ),
                     ),
                     16.height,
                     Text(
                       _l10n.onboardDesc,
                       style: _theme.textTheme.titleMedium?.copyWith(
-                        color: _theme.colorScheme.onSurfaceVariant,
+                        color: Colors.black,
                         height: 1.4,
-                      ),
-                    ),
-                    48.height,
-                    SizedBox(
-                      width: double.infinity,
-                      child: AppFilledButton(
-                        borderRadius: 30,
-                        onPressed: () {
-                          _cubit.navigateToHome();
-                        },
-                        text: _l10n.next,
                       ),
                     ),
                   ],
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 36,
+            left: 24,
+            right: 24,
+            child: AppFilledButton(
+              borderRadius: 30,
+              onPressed: () {
+                _cubit.navigateToHome();
+              },
+              text: _l10n.letGo,
             ),
           ),
         ],

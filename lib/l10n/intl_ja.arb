@@ -327,5 +327,7 @@
   "onboardTitle": "色をキャプチャする",
   "@onboardTitle": {},
   "onboardDesc": "撮影した写真から鮮やかな色を抽出し、保存して管理します。",
-  "@onboardDesc": {}
+  "@onboardDesc": {},
+  "letGo": "行こう",
+  "@letGo": {}
 }

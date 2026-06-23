@@ -128,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
     "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),
     "last7Days": MessageLookupByLibrary.simpleMessage("7 ngày qua"),
+    "letGo": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("Đường thẳng"),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),

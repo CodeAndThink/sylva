@@ -124,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),
     "last7Days": MessageLookupByLibrary.simpleMessage("Last 7 days"),
+    "letGo": MessageLookupByLibrary.simpleMessage("Let\'s Go"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("Line"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),

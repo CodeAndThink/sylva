@@ -98,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "language": MessageLookupByLibrary.simpleMessage("语言"),
     "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
     "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),
+    "letGo": MessageLookupByLibrary.simpleMessage("开始吧"),
     "level": m2,
     "line": MessageLookupByLibrary.simpleMessage("直线"),
     "login": MessageLookupByLibrary.simpleMessage("登录"),

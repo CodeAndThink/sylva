@@ -46,6 +46,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hành động cần thiết",
     ),
     "circle": MessageLookupByLibrary.simpleMessage("Hình tròn"),
+    "clearAllHistory": MessageLookupByLibrary.simpleMessage(
+      "Xoá tất cả lịch sử",
+    ),
+    "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
+      "Bạn có chắc chắn muốn xoá tất cả lịch sử? Hành động này không thể hoàn tác.",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Sao chép màu thất bại",
@@ -93,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "help": MessageLookupByLibrary.simpleMessage("Trợ giúp"),
     "history": MessageLookupByLibrary.simpleMessage("Lịch sử"),
+    "historySort": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
+    "historyView": MessageLookupByLibrary.simpleMessage("Chế độ xem"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "Bạn có thể thêm widget của Twinfix ra màn hình chính để theo dõi dung lượng thiết bị nhanh chóng:",
     ),
@@ -143,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("Đồng ý"),
     "older": MessageLookupByLibrary.simpleMessage("Cũ hơn"),
+    "onlyFavorites": MessageLookupByLibrary.simpleMessage("Chỉ mục yêu thích"),
     "opacity": MessageLookupByLibrary.simpleMessage("Đậm nhạt"),
     "or": MessageLookupByLibrary.simpleMessage("Hoặc"),
     "paint": MessageLookupByLibrary.simpleMessage("Vẽ"),
@@ -218,11 +227,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nhấn để chụp ảnh ngay.",
     ),
     "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Chụp ảnh"),
+    "tutorialDeleteAllDesc": MessageLookupByLibrary.simpleMessage(
+      "Xoá tất cả các ảnh bạn đã chụp trước đó.",
+    ),
+    "tutorialDeleteAllTitle": MessageLookupByLibrary.simpleMessage(
+      "Xoá lịch sử",
+    ),
     "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
       "Xem toàn bộ màu đã trích xuất và chọn lọc.",
     ),
     "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
       "Mở rộng bảng màu",
+    ),
+    "tutorialFavoritesDesc": MessageLookupByLibrary.simpleMessage(
+      "Lọc lịch sử để chỉ hiển thị các ảnh yêu thích.",
+    ),
+    "tutorialFavoritesTitle": MessageLookupByLibrary.simpleMessage(
+      "Chỉ mục yêu thích",
     ),
     "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
       "Bật/tắt đèn flash.",
@@ -238,6 +259,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Xem lại các bức ảnh đã chụp.",
     ),
     "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("Lịch sử"),
+    "tutorialHistoryViewDesc": MessageLookupByLibrary.simpleMessage(
+      "Chuyển đổi giữa chế độ xem danh sách và lưới.",
+    ),
+    "tutorialHistoryViewTitle": MessageLookupByLibrary.simpleMessage(
+      "Đổi chế độ xem",
+    ),
     "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
       "Di chuyển ngón tay trên ảnh để soi và chọn màu bất kỳ.",
     ),
@@ -262,6 +289,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+    "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
+      "Sắp xếp lịch sử tăng dần hoặc giảm dần theo thời gian.",
+    ),
+    "tutorialSortTitle": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
     "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
       "Cài đặt đếm ngược trước khi chụp.",
     ),

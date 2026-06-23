@@ -46,6 +46,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Action Required",
     ),
     "circle": MessageLookupByLibrary.simpleMessage("Circle"),
+    "clearAllHistory": MessageLookupByLibrary.simpleMessage(
+      "Clear all history",
+    ),
+    "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to clear all history? This action cannot be undone.",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Failed to copy color",
@@ -89,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "help": MessageLookupByLibrary.simpleMessage("Help"),
     "history": MessageLookupByLibrary.simpleMessage("History"),
+    "historySort": MessageLookupByLibrary.simpleMessage("Sort History"),
+    "historyView": MessageLookupByLibrary.simpleMessage("Change View"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "You can add Twinfix widget to your home screen to quickly monitor device storage:",
     ),
@@ -137,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "older": MessageLookupByLibrary.simpleMessage("Older"),
+    "onlyFavorites": MessageLookupByLibrary.simpleMessage("Only Favorites"),
     "opacity": MessageLookupByLibrary.simpleMessage("Opacity"),
     "or": MessageLookupByLibrary.simpleMessage("Or"),
     "paint": MessageLookupByLibrary.simpleMessage("Paint"),
@@ -212,11 +221,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "Take a photo right now.",
     ),
     "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("Capture"),
+    "tutorialDeleteAllDesc": MessageLookupByLibrary.simpleMessage(
+      "Delete all of your previously captured photos.",
+    ),
+    "tutorialDeleteAllTitle": MessageLookupByLibrary.simpleMessage(
+      "Clear History",
+    ),
     "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
       "View all extracted and picked colors in a bottom sheet.",
     ),
     "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
       "Expand Palette",
+    ),
+    "tutorialFavoritesDesc": MessageLookupByLibrary.simpleMessage(
+      "Filter your history to only show your favorite photos.",
+    ),
+    "tutorialFavoritesTitle": MessageLookupByLibrary.simpleMessage(
+      "Favorites Only",
     ),
     "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
       "Toggle flash modes (Auto, On, Off).",
@@ -230,6 +251,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "View your previously captured photos.",
     ),
     "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("History"),
+    "tutorialHistoryViewDesc": MessageLookupByLibrary.simpleMessage(
+      "Toggle between list and grid views for your history.",
+    ),
+    "tutorialHistoryViewTitle": MessageLookupByLibrary.simpleMessage(
+      "Change View",
+    ),
     "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
       "Pan your finger on the photo to magnify and pick any color.",
     ),
@@ -256,6 +283,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
+      "Sort your history ascending or descending by time.",
+    ),
+    "tutorialSortTitle": MessageLookupByLibrary.simpleMessage("Sort History"),
     "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
       "Set a countdown timer before capturing.",
     ),

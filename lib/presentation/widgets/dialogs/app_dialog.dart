@@ -24,6 +24,11 @@ class AppDialog {
     return showDialog<T>(
       context: context,
       builder: (context) => _AppDialogWidget(
+        headerIcon: Icon(
+          Icons.warning_amber_rounded,
+          color: Colors.deepOrangeAccent,
+          size: 60,
+        ),
         title: title,
         message: message,
         rightText: rightText,
@@ -56,6 +61,7 @@ class AppDialog {
     return showDialog<T>(
       context: context,
       builder: (context) => _AppDialogWidget(
+        headerIcon: Icon(Icons.cancel_outlined, color: Colors.red, size: 60),
         title: title,
         message: message,
         rightText: closeText ?? 'Close',
@@ -72,6 +78,11 @@ class AppDialog {
     return showDialog<T>(
       context: context,
       builder: (context) => _AppDialogWidget(
+        headerIcon: Icon(
+          Icons.check_circle_outline_outlined,
+          color: Colors.green,
+          size: 60,
+        ),
         title: title,
         message: message,
         rightText: closeText ?? 'OK',
@@ -243,6 +254,7 @@ class _AppDialogWidget extends StatelessWidget {
   final VoidCallback? onRight;
   final VoidCallback? onLeft;
   final Color? rightColor;
+  final Widget? headerIcon;
 
   const _AppDialogWidget({
     required this.title,
@@ -252,17 +264,19 @@ class _AppDialogWidget extends StatelessWidget {
     this.onRight,
     this.onLeft,
     this.rightColor,
+    this.headerIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: 12.borderRadius),
+      shape: RoundedRectangleBorder(borderRadius: 36.borderRadius),
       child: Padding(
-        padding: 24.padding,
+        padding: 16.padding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (headerIcon != null) ...[headerIcon!, 12.height],
             Text(title, style: Theme.of(context).textTheme.titleLarge),
             12.height,
             Text(

@@ -1138,6 +1138,131 @@ class S {
   String get contact {
     return Intl.message('Contact', name: 'contact', desc: '', args: []);
   }
+
+  /// `Clear all history`
+  String get clearAllHistory {
+    return Intl.message(
+      'Clear all history',
+      name: 'clearAllHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to clear all history? This action cannot be undone.`
+  String get clearAllHistoryConfirm {
+    return Intl.message(
+      'Are you sure you want to clear all history? This action cannot be undone.',
+      name: 'clearAllHistoryConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear History`
+  String get tutorialDeleteAllTitle {
+    return Intl.message(
+      'Clear History',
+      name: 'tutorialDeleteAllTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all of your previously captured photos.`
+  String get tutorialDeleteAllDesc {
+    return Intl.message(
+      'Delete all of your previously captured photos.',
+      name: 'tutorialDeleteAllDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change View`
+  String get tutorialHistoryViewTitle {
+    return Intl.message(
+      'Change View',
+      name: 'tutorialHistoryViewTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Toggle between list and grid views for your history.`
+  String get tutorialHistoryViewDesc {
+    return Intl.message(
+      'Toggle between list and grid views for your history.',
+      name: 'tutorialHistoryViewDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites Only`
+  String get tutorialFavoritesTitle {
+    return Intl.message(
+      'Favorites Only',
+      name: 'tutorialFavoritesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter your history to only show your favorite photos.`
+  String get tutorialFavoritesDesc {
+    return Intl.message(
+      'Filter your history to only show your favorite photos.',
+      name: 'tutorialFavoritesDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort History`
+  String get tutorialSortTitle {
+    return Intl.message(
+      'Sort History',
+      name: 'tutorialSortTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort your history ascending or descending by time.`
+  String get tutorialSortDesc {
+    return Intl.message(
+      'Sort your history ascending or descending by time.',
+      name: 'tutorialSortDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change View`
+  String get historyView {
+    return Intl.message('Change View', name: 'historyView', desc: '', args: []);
+  }
+
+  /// `Only Favorites`
+  String get onlyFavorites {
+    return Intl.message(
+      'Only Favorites',
+      name: 'onlyFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort History`
+  String get historySort {
+    return Intl.message(
+      'Sort History',
+      name: 'historySort',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

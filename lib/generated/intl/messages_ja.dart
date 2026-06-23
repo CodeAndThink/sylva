@@ -42,6 +42,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cancelMonthlyTitle": MessageLookupByLibrary.simpleMessage("必要なアクション"),
     "circle": MessageLookupByLibrary.simpleMessage("円"),
+    "clearAllHistory": MessageLookupByLibrary.simpleMessage("すべての履歴を消去"),
+    "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
+      "すべての履歴を消去してもよろしいですか？この操作は元に戻せません。",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
@@ -79,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "help": MessageLookupByLibrary.simpleMessage("ヘルプ"),
     "history": MessageLookupByLibrary.simpleMessage("履歴"),
+    "historySort": MessageLookupByLibrary.simpleMessage("並べ替え"),
+    "historyView": MessageLookupByLibrary.simpleMessage("表示の変更"),
     "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
       "Twinfixウィジェットをホーム画面に追加して、デバイスのストレージをすばやく監視できます：",
     ),
@@ -119,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "older": MessageLookupByLibrary.simpleMessage("それ以前"),
+    "onlyFavorites": MessageLookupByLibrary.simpleMessage("お気に入りのみ"),
     "opacity": MessageLookupByLibrary.simpleMessage("不透明度"),
     "or": MessageLookupByLibrary.simpleMessage("または"),
     "paint": MessageLookupByLibrary.simpleMessage("ペイント"),
@@ -182,12 +189,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "tutorialCameraTitle": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "tutorialCaptureDesc": MessageLookupByLibrary.simpleMessage("今すぐ写真を撮ります。"),
     "tutorialCaptureTitle": MessageLookupByLibrary.simpleMessage("撮影"),
+    "tutorialDeleteAllDesc": MessageLookupByLibrary.simpleMessage(
+      "以前に撮影したすべての写真を削除します。",
+    ),
+    "tutorialDeleteAllTitle": MessageLookupByLibrary.simpleMessage("履歴を消去"),
     "tutorialExpandPaletteDesc": MessageLookupByLibrary.simpleMessage(
       "抽出・選択したすべての色を表示します。",
     ),
     "tutorialExpandPaletteTitle": MessageLookupByLibrary.simpleMessage(
       "パレットを拡大",
     ),
+    "tutorialFavoritesDesc": MessageLookupByLibrary.simpleMessage(
+      "お気に入りの写真のみを表示するようにフィルタリングします。",
+    ),
+    "tutorialFavoritesTitle": MessageLookupByLibrary.simpleMessage("お気に入りのみ"),
     "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage(
       "フラッシュのオン/オフを切り替えます。",
     ),
@@ -200,6 +215,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "過去に撮影した写真を表示します。",
     ),
     "tutorialHistoryTitle": MessageLookupByLibrary.simpleMessage("履歴"),
+    "tutorialHistoryViewDesc": MessageLookupByLibrary.simpleMessage(
+      "リスト表示とグリッド表示を切り替えます。",
+    ),
+    "tutorialHistoryViewTitle": MessageLookupByLibrary.simpleMessage("表示の変更"),
     "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
       "写真の上で指を動かして拡大し、色を選択します。",
     ),
@@ -222,6 +241,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("設定"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("スキップ"),
+    "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
+      "時間で履歴を昇順または降順に並べ替えます。",
+    ),
+    "tutorialSortTitle": MessageLookupByLibrary.simpleMessage("並べ替え"),
     "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage(
       "撮影前のカウントダウンを設定します。",
     ),

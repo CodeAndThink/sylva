@@ -498,7 +498,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 message: S.of(context).help,
                 child: IconButton(
                   icon: Icon(
-                    Icons.question_mark_outlined,
+                    Icons.help_outline_outlined,
                     color: _theme.colorScheme.onSurface,
                     size: 24,
                   ),

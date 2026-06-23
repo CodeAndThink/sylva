@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 
 class SaveOptionsBottomSheet extends StatelessWidget {
@@ -18,11 +17,9 @@ class SaveOptionsBottomSheet extends StatelessWidget {
     required VoidCallback onReplaceExisting,
   }) {
     return showModalBottomSheet(
+      showDragHandle: true,
       context: context,
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: 20.radius),
-      ),
+      isScrollControlled: true,
       builder: (_) => SaveOptionsBottomSheet(
         onSaveAsNew: onSaveAsNew,
         onReplaceExisting: onReplaceExisting,

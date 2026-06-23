@@ -676,61 +676,54 @@ class __HomeChildPageState extends State<_HomeChildPage>
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Container(
-              padding: 16.paddingAll,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.65),
-                borderRadius: 16.borderRadius,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    title,
-                    style: _theme.textTheme.headlineMedium?.copyWith(
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  title,
+                  style: _theme.textTheme.headlineMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                  child: Text(
+                    desc,
+                    style: _theme.textTheme.bodyMedium?.copyWith(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-                    child: Text(
-                      desc,
-                      style: _theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: controller.skip,
+                      child: Text(
+                        S.of(context).tutorialSkip,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: Colors.white70,
+                        ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: controller.skip,
-                        child: Text(
-                          S.of(context).tutorialSkip,
-                          style: _theme.textTheme.titleSmall?.copyWith(
-                            color: Colors.white70,
-                          ),
+                    8.width,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _theme.colorScheme.primary,
+                      ),
+                      onPressed: controller.next,
+                      child: Text(
+                        S.of(context).tutorialNext,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: _theme.colorScheme.surface,
                         ),
                       ),
-                      8.width,
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _theme.colorScheme.primary,
-                        ),
-                        onPressed: controller.next,
-                        child: Text(
-                          S.of(context).tutorialNext,
-                          style: _theme.textTheme.titleSmall?.copyWith(
-                            color: _theme.colorScheme.surface,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             );
           },
         ),

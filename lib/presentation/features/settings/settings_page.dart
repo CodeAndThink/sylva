@@ -34,6 +34,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   late final ThemeCubit _themeCubit;
   late final LocaleCubit _localeCubit;
   late S _l10n;
+  late ThemeData _theme;
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   @override
   Widget build(BuildContext context) {
     _l10n = S.of(context);
+    _theme = Theme.of(context);
 
     return AppScaffold(
       title: _l10n.settings,
@@ -163,7 +165,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             borderRadius: 16.borderRadius,
             boxShadow: [
               BoxShadow(
-                color: Colors.pink.withOpacity(0.3),
+                color: Colors.pink.withValues(alpha: 0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
@@ -173,15 +175,9 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             leading: const Icon(Icons.favorite, color: Colors.white, size: 28),
             title: Text(
               _l10n.donation,
-              style: const TextStyle(
+              style: _theme.textTheme.titleMedium?.copyWith(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
               ),
-            ),
-            trailing: const Icon(
-              Icons.chevron_right_rounded,
-              color: Colors.white,
             ),
             onTap: () {
               // TODO: Navigate to Donation
@@ -190,9 +186,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(
-              context,
-            ).colorScheme.secondaryContainer.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: 16.borderRadius,
           ),
           child: ListTile(
@@ -202,9 +196,10 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             ),
             title: Text(
               _l10n.about,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+              style: _theme.textTheme.titleMedium?.copyWith(
+                color: _theme.colorScheme.onPrimaryContainer,
+              ),
             ),
-            trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () {
               // TODO: Navigate to About
             },
@@ -212,9 +207,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(
-              context,
-            ).colorScheme.secondaryContainer.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: 16.borderRadius,
           ),
           child: ListTile(
@@ -224,9 +217,10 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             ),
             title: Text(
               _l10n.termsOfService,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+              style: _theme.textTheme.titleMedium?.copyWith(
+                color: _theme.colorScheme.onPrimaryContainer,
+              ),
             ),
-            trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () {
               // TODO: Navigate to Terms of Service
             },
@@ -234,9 +228,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(
-              context,
-            ).colorScheme.secondaryContainer.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: 16.borderRadius,
           ),
           child: ListTile(
@@ -246,9 +238,10 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             ),
             title: Text(
               _l10n.contact,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+              style: _theme.textTheme.titleMedium?.copyWith(
+                color: _theme.colorScheme.onPrimaryContainer,
+              ),
             ),
-            trailing: const Icon(Icons.chevron_right_rounded),
             onTap: () {
               // TODO: Navigate to Contact
             },

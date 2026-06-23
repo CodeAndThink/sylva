@@ -69,6 +69,18 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     }
   }
 
+  void clearHistory() async {
+    try {
+      await isarService.writeTxn(() async {
+        await isarService.historyRecords.clear();
+      });
+
+      emit(state.copyWith(records: [], groupedItems: []));
+    } catch (e) {
+      debugPrint('Error clearing history: $e');
+    }
+  }
+
   void goToPhotoPreview({required HistoryRecord record}) async {
     await navigator.goToPhotoPreview(record);
     loadHistory();

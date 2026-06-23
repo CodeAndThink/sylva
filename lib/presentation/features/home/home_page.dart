@@ -387,6 +387,17 @@ class __HomeChildPageState extends State<_HomeChildPage>
             mainAxisSize: MainAxisSize.min,
             children: [
               Tooltip(
+                message: S.of(context).help,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.help_outline_outlined,
+                    color: _theme.colorScheme.onSurface,
+                    size: 24,
+                  ),
+                  onPressed: _showTutorial,
+                ),
+              ),
+              Tooltip(
                 message: S.of(context).settings,
                 child: IconButton(
                   key: _keySettings,
@@ -492,17 +503,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     ),
                   ),
                   onPressed: _switchCamera,
-                ),
-              ),
-              Tooltip(
-                message: S.of(context).help,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.question_mark_outlined,
-                    color: _theme.colorScheme.onSurface,
-                    size: 24,
-                  ),
-                  onPressed: _showTutorial,
                 ),
               ),
             ],

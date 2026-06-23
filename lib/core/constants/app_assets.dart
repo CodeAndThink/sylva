@@ -5,4 +5,5 @@ class AppAssets {
   static const String bgOnboard = '${imagePath}bg_onboard.png';
   static const String icColors = '${iconPath}ic_colors.png';
   static const String icCamera = '${iconPath}ic_camera.png';
+  static const String icAppIcon = '${iconPath}ic_app_icon.png';
 }

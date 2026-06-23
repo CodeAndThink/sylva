@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/constants/app_assets.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_cubit.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_navigator.dart';
@@ -45,23 +46,79 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage> {
     return AppScaffold(
       body: Stack(
         children: [
-          Positioned.fill(child: AppAssetImage(path: AppAssets.bgOnboard)),
-          Positioned(
-            bottom: 12,
-            left: 12,
-            right: 12,
-            child: SafeArea(
-              child: SizedBox(
-                height: 63,
-                child: AppFilledButton(
-                  borderRadius: 63,
-                  onPressed: () {
-                    _cubit.navigateToHome();
-                  },
-                  text: _l10n.next,
-                  textStyle: _theme.textTheme.titleLarge,
+          Positioned.fill(
+            child: AppAssetImage(path: AppAssets.bgOnboard, fit: BoxFit.cover),
+          ),
+          Positioned.fill(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    _theme.colorScheme.surface,
+                  ],
+                  stops: const [0.0, 0.8, 1.0],
                 ),
               ),
+            ),
+          ),
+          Positioned.fill(
+            child: Center(
+              child: Padding(
+                padding: 20.paddingAll,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ShaderMask(
+                      shaderCallback: (bounds) => const LinearGradient(
+                        colors: [
+                          Colors.red,
+                          Colors.orange,
+                          Colors.yellow,
+                          Colors.green,
+                          Colors.blue,
+                          Colors.indigo,
+                          Colors.purple,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ).createShader(bounds),
+                      child: Text(
+                        _l10n.onboardTitle,
+                        style: _theme.textTheme.displaySmall?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          height: 1.1,
+                          color: _theme.colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                    16.height,
+                    Text(
+                      _l10n.onboardDesc,
+                      style: _theme.textTheme.titleMedium?.copyWith(
+                        color: Colors.black,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 36,
+            left: 24,
+            right: 24,
+            child: AppFilledButton(
+              borderRadius: 30,
+              onPressed: () {
+                _cubit.navigateToHome();
+              },
+              text: _l10n.letGo,
             ),
           ),
         ],

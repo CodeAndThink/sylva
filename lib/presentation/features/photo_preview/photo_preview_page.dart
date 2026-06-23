@@ -713,7 +713,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
           message: S.of(context).help,
           child: IconButton(
             onPressed: _showTutorial,
-            icon: Icon(Icons.question_mark_outlined, size: 28),
+            icon: Icon(Icons.help_outline_outlined, size: 28),
           ),
         ),
       ],

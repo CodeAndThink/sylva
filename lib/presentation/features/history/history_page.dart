@@ -17,6 +17,7 @@ import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -45,6 +46,11 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
   late ThemeData _theme;
   final ScrollController _scrollController = ScrollController();
   final ValueNotifier<bool> _showScrollToTop = ValueNotifier(false);
+  final GlobalKey _keyDeleteAll = GlobalKey();
+  final GlobalKey _keyChangeView = GlobalKey();
+  final GlobalKey _keyFavoriteOnly = GlobalKey();
+  final GlobalKey _keySort = GlobalKey();
+  TutorialCoachMark? tutorialCoachMark;
 
   @override
   void initState() {
@@ -54,13 +60,27 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     _scrollController.addListener(() {
       if (!_scrollController.hasClients) return;
 
-      final bool shouldShow = _scrollController.offset > 200 &&
+      final bool shouldShow =
+          _scrollController.offset > 200 &&
           _scrollController.position.maxScrollExtent > 0;
 
       if (_showScrollToTop.value != shouldShow) {
         _showScrollToTop.value = shouldShow;
       }
     });
+  }
+
+  void _handleCleanHistory() {
+    _cubit.navigator.dialog.showConfirm(
+      title: S.of(context).clearAllHistory,
+      message: S.of(context).clearAllHistoryConfirm,
+      leftText: S.of(context).cancel,
+      rightText: S.of(context).delete,
+      rightColor: _theme.colorScheme.error,
+      onRight: () {
+        _cubit.clearHistory();
+      },
+    );
   }
 
   @override
@@ -74,7 +94,33 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
 
-    return AppScaffold(title: S.of(context).history, body: _buildBody());
+    return AppScaffold(
+      title: S.of(context).history,
+      actions: [_buildCleanHistoryAction()],
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildCleanHistoryAction() {
+    return BlocBuilder<HistoryCubit, HistoryState>(
+      buildWhen: (previous, current) =>
+          previous.records.isNotEmpty != current.records.isNotEmpty,
+      builder: (context, state) {
+        if (state.records.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        return Tooltip(
+          message: S.of(context).clearAllHistory,
+          child: IconButton(
+            key: _keyDeleteAll,
+            icon: Icon(Icons.auto_delete, color: _theme.colorScheme.error),
+            onPressed: () {
+              _handleCleanHistory();
+            },
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildChangeViewButton() {
@@ -82,17 +128,21 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       buildWhen: (previous, current) =>
           previous.isGridView != current.isGridView,
       builder: (context, state) {
-        return IconButton(
-          icon: Icon(
-            state.isGridView ? Icons.grid_view_rounded : Icons.list_outlined,
+        return Tooltip(
+          message: S.of(context).historyView,
+          child: IconButton(
+            key: _keyChangeView,
+            icon: Icon(
+              state.isGridView ? Icons.grid_view_rounded : Icons.list_outlined,
+            ),
+            onPressed: () {
+              if (_scrollController.hasClients) {
+                _scrollController.jumpTo(0);
+              }
+              _cubit.toggleView();
+              _showScrollToTop.value = false;
+            },
           ),
-          onPressed: () {
-            if (_scrollController.hasClients) {
-              _scrollController.jumpTo(0);
-            }
-            _cubit.toggleView();
-            _showScrollToTop.value = false;
-          },
         );
       },
     );
@@ -255,78 +305,98 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Tooltip(
+                    message: S.of(context).help,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.help_outline_outlined,
+                        color: _theme.colorScheme.onSurface,
+                        size: 24,
+                      ),
+                      onPressed: _showTutorial,
+                    ),
+                  ),
                   _buildChangeViewButton(),
-                  InkWell(
-                    onTap: () {
-                      if (_scrollController.hasClients) {
-                        _scrollController.jumpTo(0);
-                      }
-                      _cubit.toggleFavoriteOnly();
-                      _showScrollToTop.value = false;
-                    },
-                    customBorder: const CircleBorder(),
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: const BoxDecoration(shape: BoxShape.circle),
-                      child: BlocBuilder<HistoryCubit, HistoryState>(
-                        buildWhen: (p, c) =>
-                            p.isFavoriteOnly != c.isFavoriteOnly,
-                        builder: (context, state) {
-                          return Icon(
-                            state.isFavoriteOnly
-                                ? Icons.bookmark
-                                : Icons.bookmark_outline_rounded,
-                            color: Colors.amber,
-                            size: 30,
-                          );
-                        },
+                  Tooltip(
+                    message: S.of(context).onlyFavorites,
+                    child: InkWell(
+                      key: _keyFavoriteOnly,
+                      onTap: () {
+                        if (_scrollController.hasClients) {
+                          _scrollController.jumpTo(0);
+                        }
+                        _cubit.toggleFavoriteOnly();
+                        _showScrollToTop.value = false;
+                      },
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
+                        child: BlocBuilder<HistoryCubit, HistoryState>(
+                          buildWhen: (p, c) =>
+                              p.isFavoriteOnly != c.isFavoriteOnly,
+                          builder: (context, state) {
+                            return Icon(
+                              state.isFavoriteOnly
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_outline_rounded,
+                              color: Colors.amber,
+                              size: 30,
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
                   8.width,
 
-                  InkWell(
-                    onTap: () {
-                      if (_scrollController.hasClients) {
-                        _scrollController.jumpTo(0);
-                      }
-                      _cubit.toggleSort();
-                      _showScrollToTop.value = false;
-                    },
-                    customBorder: const CircleBorder(),
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: 30.borderRadius,
-                        color: _theme.colorScheme.primaryContainer,
-                      ),
-                      padding: 8.paddingHorizontal,
-                      child: BlocBuilder<HistoryCubit, HistoryState>(
-                        buildWhen: (p, c) =>
-                            p.isSortAscending != c.isSortAscending,
-                        builder: (context, state) {
-                          return Row(
-                            children: [
-                              Text(
-                                S.of(context).createTime,
-                                style: _theme.textTheme.titleSmall?.copyWith(
-                                  color: _theme.colorScheme.onPrimaryContainer,
+                  Tooltip(
+                    message: S.of(context).historySort,
+                    child: InkWell(
+                      key: _keySort,
+                      onTap: () {
+                        if (_scrollController.hasClients) {
+                          _scrollController.jumpTo(0);
+                        }
+                        _cubit.toggleSort();
+                        _showScrollToTop.value = false;
+                      },
+                      customBorder: const CircleBorder(),
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: 30.borderRadius,
+                          color: _theme.colorScheme.primaryContainer,
+                        ),
+                        padding: 8.paddingHorizontal,
+                        child: BlocBuilder<HistoryCubit, HistoryState>(
+                          buildWhen: (p, c) =>
+                              p.isSortAscending != c.isSortAscending,
+                          builder: (context, state) {
+                            return Row(
+                              children: [
+                                Text(
+                                  S.of(context).createTime,
+                                  style: _theme.textTheme.titleSmall?.copyWith(
+                                    color:
+                                        _theme.colorScheme.onPrimaryContainer,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              8.width,
-                              Icon(
-                                state.isSortAscending
-                                    ? Icons.expand_less_outlined
-                                    : Icons.expand_more_outlined,
+                                8.width,
+                                Icon(
+                                  state.isSortAscending
+                                      ? Icons.expand_less_outlined
+                                      : Icons.expand_more_outlined,
 
-                                size: 24,
-                              ),
-                            ],
-                          );
-                        },
+                                  size: 24,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -362,6 +432,116 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: _createTargets(),
+      colorShadow: Colors.black,
+      hideSkip: true,
+      paddingFocus: 10,
+      opacityShadow: 0.8,
+    )..show(context: context);
+  }
+
+  List<TargetFocus> _createTargets() {
+    return [
+      if (_cubit.state.records.isNotEmpty)
+        _buildTarget(
+          key: _keyDeleteAll,
+          title: S.of(context).tutorialDeleteAllTitle,
+          desc: S.of(context).tutorialDeleteAllDesc,
+        ),
+      _buildTarget(
+        key: _keyChangeView,
+        title: S.of(context).tutorialHistoryViewTitle,
+        desc: S.of(context).tutorialHistoryViewDesc,
+        contentAlign: ContentAlign.top,
+      ),
+      _buildTarget(
+        key: _keyFavoriteOnly,
+        title: S.of(context).tutorialFavoritesTitle,
+        desc: S.of(context).tutorialFavoritesDesc,
+        contentAlign: ContentAlign.top,
+      ),
+      _buildTarget(
+        key: _keySort,
+        title: S.of(context).tutorialSortTitle,
+        desc: S.of(context).tutorialSortDesc,
+        contentAlign: ContentAlign.top,
+      ),
+    ];
+  }
+
+  TargetFocus _buildTarget({
+    required GlobalKey key,
+    required String title,
+    required String desc,
+    ContentAlign contentAlign = ContentAlign.bottom,
+  }) {
+    return TargetFocus(
+      identify: key,
+      keyTarget: key,
+      alignSkip: Alignment.topRight,
+      focusAnimationDuration: 400.milliseconds,
+      unFocusAnimationDuration: 400.milliseconds,
+      contents: [
+        TargetContent(
+          align: contentAlign,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  title,
+                  style: _theme.textTheme.headlineMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                  child: Text(
+                    desc,
+                    style: _theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: controller.skip,
+                      child: Text(
+                        S.of(context).tutorialSkip,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ),
+                    8.width,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _theme.colorScheme.primary,
+                      ),
+                      onPressed: controller.next,
+                      child: Text(
+                        S.of(context).tutorialNext,
+                        style: _theme.textTheme.titleSmall?.copyWith(
+                          color: _theme.colorScheme.surface,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      ],
     );
   }
 }

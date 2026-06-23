@@ -189,6 +189,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "tutorialFavoritesTitle": MessageLookupByLibrary.simpleMessage("仅限收藏"),
     "tutorialFlashDesc": MessageLookupByLibrary.simpleMessage("切换闪光灯模式。"),
     "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("闪光灯"),
+    "tutorialFullScreenDesc": MessageLookupByLibrary.simpleMessage(
+      "点击此处全屏查看原照片。",
+    ),
+    "tutorialFullScreenTitle": MessageLookupByLibrary.simpleMessage("全屏"),
     "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage("从图库中选择现有照片。"),
     "tutorialGalleryTitle": MessageLookupByLibrary.simpleMessage("图库"),
     "tutorialHistoryDesc": MessageLookupByLibrary.simpleMessage("查看以前拍摄的照片。"),
@@ -221,6 +225,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "tutorialSortTitle": MessageLookupByLibrary.simpleMessage("排序"),
     "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage("设置拍摄前的倒计时。"),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("定时器"),
+    "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
+      "使用这些按钮精确放大或缩小图像。",
+    ),
+    "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("缩放"),
     "understood": MessageLookupByLibrary.simpleMessage("知道了"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "使用放大镜选择颜色",

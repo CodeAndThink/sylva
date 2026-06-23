@@ -331,5 +331,13 @@
   "letGo": "Bắt đầu",
   "@letGo": {},
   "fullScreen": "Toàn màn hình",
-  "@fullScreen": {}
+  "@fullScreen": {},
+  "tutorialZoomTitle": "Thu phóng",
+  "@tutorialZoomTitle": {},
+  "tutorialZoomDesc": "Sử dụng các nút này để phóng to hoặc thu nhỏ ảnh chính xác.",
+  "@tutorialZoomDesc": {},
+  "tutorialFullScreenTitle": "Toàn màn hình",
+  "@tutorialFullScreenTitle": {},
+  "tutorialFullScreenDesc": "Chạm vào đây để xem bức ảnh gốc ở chế độ toàn màn hình.",
+  "@tutorialFullScreenDesc": {}
 }

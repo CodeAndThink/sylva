@@ -1293,6 +1293,41 @@ class S {
   String get fullScreen {
     return Intl.message('Full Screen', name: 'fullScreen', desc: '', args: []);
   }
+
+  /// `Zoom`
+  String get tutorialZoomTitle {
+    return Intl.message('Zoom', name: 'tutorialZoomTitle', desc: '', args: []);
+  }
+
+  /// `Use these buttons to zoom in or out precisely.`
+  String get tutorialZoomDesc {
+    return Intl.message(
+      'Use these buttons to zoom in or out precisely.',
+      name: 'tutorialZoomDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Screen`
+  String get tutorialFullScreenTitle {
+    return Intl.message(
+      'Full Screen',
+      name: 'tutorialFullScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap here to view the original photo in full screen.`
+  String get tutorialFullScreenDesc {
+    return Intl.message(
+      'Tap here to view the original photo in full screen.',
+      name: 'tutorialFullScreenDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

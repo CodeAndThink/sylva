@@ -331,5 +331,13 @@
   "letGo": "Let's Go",
   "@letGo": {},
   "fullScreen": "Full Screen",
-  "@fullScreen": {}
+  "@fullScreen": {},
+  "tutorialZoomTitle": "Zoom",
+  "@tutorialZoomTitle": {},
+  "tutorialZoomDesc": "Use these buttons to zoom in or out precisely.",
+  "@tutorialZoomDesc": {},
+  "tutorialFullScreenTitle": "Full Screen",
+  "@tutorialFullScreenTitle": {},
+  "tutorialFullScreenDesc": "Tap here to view the original photo in full screen.",
+  "@tutorialFullScreenDesc": {}
 }

@@ -331,5 +331,13 @@
   "letGo": "行こう",
   "@letGo": {},
   "fullScreen": "全画面",
-  "@fullScreen": {}
+  "@fullScreen": {},
+  "tutorialZoomTitle": "ズーム",
+  "@tutorialZoomTitle": {},
+  "tutorialZoomDesc": "これらのボタンを使用して、正確にズームインまたはズームアウトします。",
+  "@tutorialZoomDesc": {},
+  "tutorialFullScreenTitle": "全画面",
+  "@tutorialFullScreenTitle": {},
+  "tutorialFullScreenDesc": "ここをタップすると、元の写真を全画面で表示します。",
+  "@tutorialFullScreenDesc": {}
 }

@@ -213,6 +213,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "フラッシュのオン/オフを切り替えます。",
     ),
     "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("フラッシュ"),
+    "tutorialFullScreenDesc": MessageLookupByLibrary.simpleMessage(
+      "ここをタップすると、元の写真を全画面で表示します。",
+    ),
+    "tutorialFullScreenTitle": MessageLookupByLibrary.simpleMessage("全画面"),
     "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
       "ギャラリーから写真を選択します。",
     ),
@@ -255,6 +259,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "撮影前のカウントダウンを設定します。",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("タイマー"),
+    "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
+      "これらのボタンを使用して、正確にズームインまたはズームアウトします。",
+    ),
+    "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("ズーム"),
     "understood": MessageLookupByLibrary.simpleMessage("了解"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "虫眼鏡を使って色を選択",

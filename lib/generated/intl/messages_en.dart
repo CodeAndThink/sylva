@@ -249,6 +249,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Toggle flash modes (Auto, On, Off).",
     ),
     "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Flash Mode"),
+    "tutorialFullScreenDesc": MessageLookupByLibrary.simpleMessage(
+      "Tap here to view the original photo in full screen.",
+    ),
+    "tutorialFullScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Full Screen",
+    ),
     "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
       "Pick an existing photo from your gallery.",
     ),
@@ -297,6 +303,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Set a countdown timer before capturing.",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Timer"),
+    "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
+      "Use these buttons to zoom in or out precisely.",
+    ),
+    "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("Zoom"),
     "understood": MessageLookupByLibrary.simpleMessage("GOT IT"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Use magnifier to pick colors",

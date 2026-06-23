@@ -255,6 +255,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Bật/tắt đèn flash.",
     ),
     "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
+    "tutorialFullScreenDesc": MessageLookupByLibrary.simpleMessage(
+      "Chạm vào đây để xem bức ảnh gốc ở chế độ toàn màn hình.",
+    ),
+    "tutorialFullScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Toàn màn hình",
+    ),
     "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
       "Chọn ảnh có sẵn từ điện thoại.",
     ),
@@ -303,6 +309,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cài đặt đếm ngược trước khi chụp.",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
+    "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
+      "Sử dụng các nút này để phóng to hoặc thu nhỏ ảnh chính xác.",
+    ),
+    "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("Thu phóng"),
     "understood": MessageLookupByLibrary.simpleMessage("ĐÃ HIỂU"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Sử dụng kính lúp để lấy màu",

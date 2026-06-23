@@ -331,5 +331,13 @@
   "letGo": "开始吧",
   "@letGo": {},
   "fullScreen": "全屏",
-  "@fullScreen": {}
+  "@fullScreen": {},
+  "tutorialZoomTitle": "缩放",
+  "@tutorialZoomTitle": {},
+  "tutorialZoomDesc": "使用这些按钮精确放大或缩小图像。",
+  "@tutorialZoomDesc": {},
+  "tutorialFullScreenTitle": "全屏",
+  "@tutorialFullScreenTitle": {},
+  "tutorialFullScreenDesc": "点击此处全屏查看原照片。",
+  "@tutorialFullScreenDesc": {}
 }

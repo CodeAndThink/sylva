@@ -6,6 +6,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/presentation/app/app_cubit.dart';
+import 'package:sylva/presentation/app/interaction_cubit.dart';
 import 'package:sylva/presentation/app/locale_cubit.dart';
 import 'package:sylva/presentation/app/subscription_cubit.dart';
 import 'package:sylva/presentation/app/theme_cubit.dart';
@@ -63,6 +64,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => locator<AppCubit>()),
         BlocProvider(create: (context) => locator<ThemeCubit>()),
+        BlocProvider(create: (context) => locator<InteractionCubit>()),
         BlocProvider(create: (context) => locator<LocaleCubit>()),
         BlocProvider(create: (context) => locator<SubscriptionCubit>()..init()),
       ],

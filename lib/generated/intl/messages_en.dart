@@ -156,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS location data removed and saved as a new copy.",
     ),
+    "hapticFeedback": MessageLookupByLibrary.simpleMessage("Haptic Feedback"),
     "help": MessageLookupByLibrary.simpleMessage("Help"),
     "history": MessageLookupByLibrary.simpleMessage("History"),
     "historySort": MessageLookupByLibrary.simpleMessage("Sort History"),
@@ -165,6 +166,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "informationAndSupport": MessageLookupByLibrary.simpleMessage(
       "Information & Support",
+    ),
+    "interactionEffects": MessageLookupByLibrary.simpleMessage(
+      "Interaction Effects",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),
@@ -276,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
+    "soundEffects": MessageLookupByLibrary.simpleMessage("Sound Effects"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),

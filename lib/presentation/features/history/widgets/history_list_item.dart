@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sylva/core/extensions/date_time_extension.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/core/utils/throttle_utils.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sylva/generated/l10n.dart';
 
 class HistoryListItem extends StatefulWidget {
@@ -48,6 +49,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                   CustomSlidableAction(
                     autoClose: false,
                     onPressed: (context) {
+                      AppFeedback.playHeavy(context);
                       final slidable = Slidable.of(context);
                       if (slidable != null && widget.onDelete != null) {
                         slidable.dismiss(
@@ -147,7 +149,10 @@ class _HistoryListItemState extends State<HistoryListItem> {
                             children: [
                               const Spacer(),
                               InkWell(
-                                onTap: widget.onFavoritePressed,
+                                onTap: () {
+                                  AppFeedback.playInteract(context);
+                                  widget.onFavoritePressed?.call();
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: 24.borderRadius,

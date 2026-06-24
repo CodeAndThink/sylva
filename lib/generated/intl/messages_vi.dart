@@ -158,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "Đã xóa dữ liệu vị trí và lưu thành bản sao mới.",
     ),
+    "hapticFeedback": MessageLookupByLibrary.simpleMessage("Phản hồi rung"),
     "help": MessageLookupByLibrary.simpleMessage("Trợ giúp"),
     "history": MessageLookupByLibrary.simpleMessage("Lịch sử"),
     "historySort": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
@@ -167,6 +168,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "informationAndSupport": MessageLookupByLibrary.simpleMessage(
       "Thông tin & Hỗ trợ",
+    ),
+    "interactionEffects": MessageLookupByLibrary.simpleMessage(
+      "Hiệu ứng tương tác",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
     "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),
@@ -280,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
+    "soundEffects": MessageLookupByLibrary.simpleMessage("Hiệu ứng âm thanh"),
     "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),

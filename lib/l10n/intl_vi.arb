@@ -419,5 +419,8 @@
   "contactFormDeviceInfoHint": "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
   "@contactFormDeviceInfoHint": {},
   "contactFormDeviceInfoError": "Vui lòng nhập thông tin thiết bị",
-  "@contactFormDeviceInfoError": {}
+  "@contactFormDeviceInfoError": {},
+  "interactionEffects": "Hiệu ứng tương tác",
+  "hapticFeedback": "Phản hồi rung",
+  "soundEffects": "Hiệu ứng âm thanh"
 }

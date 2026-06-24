@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sylva/core/enums/contact_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/presentation/widgets/text_fields/app_text_field.dart';
-
-enum ContactType { bug, suggestion, other }
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -83,20 +82,9 @@ class _ContactPageState extends State<ContactPage> {
               AppTitleText(title: _l10n.contactType), 8.height,
               Wrap(
                 spacing: 8.0,
-                children: [
-                  _buildTypeChip(
-                    type: ContactType.bug,
-                    label: _l10n.contactFormTypeBug,
-                  ),
-                  _buildTypeChip(
-                    type: ContactType.suggestion,
-                    label: _l10n.contactFormTypeSuggestion,
-                  ),
-                  _buildTypeChip(
-                    type: ContactType.other,
-                    label: _l10n.contactFormTypeOther,
-                  ),
-                ],
+                children: ContactType.values.map((type) {
+                  return _buildTypeChip(type: type);
+                }).toList(),
               ),
               16.height,
 
@@ -141,12 +129,34 @@ class _ContactPageState extends State<ContactPage> {
     );
   }
 
-  Widget _buildTypeChip({required ContactType type, required String label}) {
+  Widget _buildTypeChip({required ContactType type}) {
     final isSelected = _selectedType == type;
     final theme = Theme.of(context);
 
+    Color getSelectedColor() {
+      switch (type) {
+        case ContactType.bug:
+          return theme.colorScheme.errorContainer;
+        case ContactType.suggestion:
+          return theme.colorScheme.primaryContainer;
+        case ContactType.other:
+          return theme.colorScheme.surfaceContainerHighest;
+      }
+    }
+
+    Color getOnSelectedColor() {
+      switch (type) {
+        case ContactType.bug:
+          return theme.colorScheme.onErrorContainer;
+        case ContactType.suggestion:
+          return theme.colorScheme.onPrimaryContainer;
+        case ContactType.other:
+          return theme.colorScheme.onSurfaceVariant;
+      }
+    }
+
     return ChoiceChip(
-      label: Text(label),
+      label: Text(type.label),
       selected: isSelected,
       onSelected: (selected) {
         if (selected) {
@@ -155,11 +165,10 @@ class _ContactPageState extends State<ContactPage> {
           });
         }
       },
-      selectedColor: theme.colorScheme.primaryContainer,
+      selectedColor: getSelectedColor(),
+      showCheckmark: false,
       labelStyle: _theme.textTheme.titleSmall?.copyWith(
-        color: isSelected
-            ? theme.colorScheme.onPrimaryContainer
-            : theme.colorScheme.onSurface,
+        color: isSelected ? getOnSelectedColor() : theme.colorScheme.onSurface,
         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
       ),
       shape: RoundedRectangleBorder(borderRadius: 20.borderRadius),

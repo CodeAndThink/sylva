@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
     "blur": MessageLookupByLibrary.simpleMessage("Làm mờ"),
     "brightness": MessageLookupByLibrary.simpleMessage("Độ sáng"),
+    "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
+    ),
     "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
       "Sylva cần quyền truy cập camera để chụp ảnh và trích xuất màu sắc.",
     ),
@@ -178,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restorePurchases": MessageLookupByLibrary.simpleMessage(
       "Khôi phục giao dịch (Restore Purchases)",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Lưu mới"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),

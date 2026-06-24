@@ -321,5 +321,7 @@
   "privacyPolicy": "プライバシーポリシー",
   "@privacyPolicy": {},
   "termsOfService": "利用規約",
-  "@termsOfService": {}
+  "@termsOfService": {},
+  "cameraPermissionDenied": "カメラへのアクセスが拒否されたか、デバイスにカメラがありません。",
+  "retry": "再試行"
 }

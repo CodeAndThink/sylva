@@ -36,6 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("戻る"),
     "blur": MessageLookupByLibrary.simpleMessage("ぼかし"),
     "brightness": MessageLookupByLibrary.simpleMessage("明るさ"),
+    "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "カメラへのアクセスが拒否されたか、デバイスにカメラがありません。",
+    ),
     "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
       "Sylvaは写真を撮り、色を抽出するためにカメラへのアクセスが必要です。",
     ),
@@ -150,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "購入を復元できなかったか、サブスクリプションがありません。",
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("購入の復元"),
+    "retry": MessageLookupByLibrary.simpleMessage("再試行"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("新しく保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),

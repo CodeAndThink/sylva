@@ -36,6 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("返回"),
     "blur": MessageLookupByLibrary.simpleMessage("模糊"),
     "brightness": MessageLookupByLibrary.simpleMessage("亮度"),
+    "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "拒绝访问相机或设备没有相机。",
+    ),
     "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
       "Sylva需要访问您的相机以拍摄照片并提取颜色。",
     ),
@@ -136,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "无法恢复购买或您没有订阅。",
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("恢复购买"),
+    "retry": MessageLookupByLibrary.simpleMessage("重试"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("保存为新记录"),
     "saveColor": MessageLookupByLibrary.simpleMessage("保存颜色"),

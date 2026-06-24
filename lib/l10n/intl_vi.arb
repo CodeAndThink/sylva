@@ -321,5 +321,7 @@
   "privacyPolicy": "Chính sách bảo mật",
   "@privacyPolicy": {},
   "termsOfService": "Điều khoản dịch vụ",
-  "@termsOfService": {}
+  "@termsOfService": {},
+  "cameraPermissionDenied": "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
+  "retry": "Thử lại"
 }

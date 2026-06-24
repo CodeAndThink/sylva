@@ -1248,6 +1248,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Camera access denied or device has no camera.`
+  String get cameraPermissionDenied {
+    return Intl.message(
+      'Camera access denied or device has no camera.',
+      name: 'cameraPermissionDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

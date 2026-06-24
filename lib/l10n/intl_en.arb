@@ -321,5 +321,7 @@
   "privacyPolicy": "Privacy Policy",
   "@privacyPolicy": {},
   "termsOfService": "Terms of Service",
-  "@termsOfService": {}
+  "@termsOfService": {},
+  "cameraPermissionDenied": "Camera access denied or device has no camera.",
+  "retry": "Retry"
 }

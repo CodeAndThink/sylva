@@ -38,6 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "blur": MessageLookupByLibrary.simpleMessage("Blur"),
     "brightness": MessageLookupByLibrary.simpleMessage("Brightness"),
+    "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "Camera access denied or device has no camera.",
+    ),
     "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
       "Sylva needs access to your camera to take photos and extract colors.",
     ),
@@ -172,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restorePurchases": MessageLookupByLibrary.simpleMessage(
       "Restore Purchases",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Save as new"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),

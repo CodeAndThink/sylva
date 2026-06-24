@@ -187,6 +187,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
       "Chúng tôi tôn trọng quyền riêng tư của bạn. Sylva xử lý dữ liệu camera cục bộ trên thiết bị của bạn bất cứ khi nào có thể. Chúng tôi không lưu trữ hoặc chia sẻ ảnh cá nhân của bạn nếu không có sự đồng ý rõ ràng.",
     ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi không thu thập hoặc lưu trữ bất kỳ ảnh cá nhân hay dữ liệu camera nào trên máy chủ. Toàn bộ quá trình xử lý camera được thực hiện cục bộ trên thiết bị của bạn.",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Bất kỳ dữ liệu nào được xử lý bởi Sylva chỉ được sử dụng với mục đích cung cấp tính năng camera và phân tích màu sắc trong ứng dụng.",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi áp dụng các biện pháp bảo mật tiêu chuẩn để bảo vệ dữ liệu của bạn. Do ảnh của bạn vẫn nằm trên thiết bị, bạn có toàn quyền kiểm soát quyền riêng tư của mình.",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage(
+      "Thu thập thông tin",
+    ),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage(
+      "Sử dụng thông tin",
+    ),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage(
+      "Bảo mật dữ liệu",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("Tiến trình"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Mua hàng thất bại hoặc bị hủy.",
@@ -239,6 +257,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Th 5"),
     "timer": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
     "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "Bằng việc tải xuống và sử dụng Sylva, bạn đồng ý với Điều khoản Dịch vụ này. Nếu bạn không đồng ý, vui lòng không sử dụng ứng dụng.",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "Bạn tự chịu trách nhiệm về bất kỳ nội dung nào bạn chụp hoặc xử lý bằng Sylva. Bạn đồng ý không sử dụng ứng dụng cho các hoạt động phi pháp hoặc bị cấm.",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylva và các nhà sáng tạo sẽ không chịu trách nhiệm cho bất kỳ thiệt hại hoặc mất mát nào phát sinh từ việc sử dụng ứng dụng. Dịch vụ được cung cấp \'nguyên trạng\'.",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("Chấp nhận điều khoản"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("Trách nhiệm người dùng"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage("Giới hạn trách nhiệm"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "Hủy thay đổi và quay lại camera.",
     ),

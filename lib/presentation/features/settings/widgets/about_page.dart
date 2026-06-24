@@ -34,12 +34,7 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             24.height,
-            Text(
-              AppConfigs.appName,
-              style: theme.textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text(AppConfigs.appName, style: theme.textTheme.headlineMedium),
             8.height,
             Text(
               S.of(context).version(AppConfigs.version),

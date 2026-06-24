@@ -21,7 +21,7 @@ class AcknowledgementsPage extends StatelessWidget {
         children: [
           Text(
             S.of(context).acknowledgementsIntro,
-            style: theme.textTheme.titleMedium,
+            style: theme.textTheme.bodyLarge,
           ),
           24.height,
           _buildCreditItem(

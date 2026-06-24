@@ -159,6 +159,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
       "私たちはあなたのプライバシーを尊重します。Sylvaは可能な限りデバイス上でカメラデータをローカルに処理します。明示的な同意なしに個人的な写真を保存または共有することはありません。",
     ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "私たちは個人の写真やカメラデータをサーバーに収集または保存しません。すべてのカメラ処理はデバイス上でローカルに実行されます。",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Sylvaによって処理されたデータは、アプリケーション内のカメラおよび色分析機能を提供するためにのみ使用されます。",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "私たちはデータを保護するために業界標準のセキュリティ対策を実施しています。写真はデバイス上に残るため、プライバシーを完全に管理できます。",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage("情報の収集"),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage("情報の利用"),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage("データセキュリティ"),
     "progress": MessageLookupByLibrary.simpleMessage("進捗"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "購入に失敗したか、キャンセルされました。",
@@ -203,6 +215,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("木"),
     "timer": MessageLookupByLibrary.simpleMessage("タイマー"),
     "today": MessageLookupByLibrary.simpleMessage("今日"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "Sylvaをダウンロードして使用することにより、これらの利用規約に同意したことになります。同意しない場合は、アプリケーションを使用しないでください。",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "Sylvaを使用してキャプチャまたは処理したコンテンツについては、ユーザーが責任を負います。アプリケーションを違法または禁止された活動に使用しないことに同意するものとします。",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylvaおよびその作成者は、アプリケーションの使用から生じるいかなる損害または損失についても責任を負いません。サービスは「現状有姿」で提供されます。",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("利用規約への同意"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("ユーザーの責任"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage("責任の制限"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "変更を破棄してカメラに戻ります。",
     ),

@@ -1398,6 +1398,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Information Collection`
+  String get privacyPolicyTitle1 {
+    return Intl.message(
+      'Information Collection',
+      name: 'privacyPolicyTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not collect or store any personal photos or camera data on our servers. All camera processing is performed locally on your device.`
+  String get privacyPolicyContent1 {
+    return Intl.message(
+      'We do not collect or store any personal photos or camera data on our servers. All camera processing is performed locally on your device.',
+      name: 'privacyPolicyContent1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use of Information`
+  String get privacyPolicyTitle2 {
+    return Intl.message(
+      'Use of Information',
+      name: 'privacyPolicyTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Any data processed by Sylva is used solely for providing the camera and color analysis features within the application.`
+  String get privacyPolicyContent2 {
+    return Intl.message(
+      'Any data processed by Sylva is used solely for providing the camera and color analysis features within the application.',
+      name: 'privacyPolicyContent2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Security`
+  String get privacyPolicyTitle3 {
+    return Intl.message(
+      'Data Security',
+      name: 'privacyPolicyTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.`
+  String get privacyPolicyContent3 {
+    return Intl.message(
+      'We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.',
+      name: 'privacyPolicyContent3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acceptance of Terms`
+  String get tosTitle1 {
+    return Intl.message(
+      'Acceptance of Terms',
+      name: 'tosTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By downloading and using Sylva, you agree to these Terms of Service. If you do not agree, please do not use the application.`
+  String get tosContent1 {
+    return Intl.message(
+      'By downloading and using Sylva, you agree to these Terms of Service. If you do not agree, please do not use the application.',
+      name: 'tosContent1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Responsibilities`
+  String get tosTitle2 {
+    return Intl.message(
+      'User Responsibilities',
+      name: 'tosTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are responsible for any content you capture or process using Sylva. You agree not to use the application for any unlawful or prohibited activities.`
+  String get tosContent2 {
+    return Intl.message(
+      'You are responsible for any content you capture or process using Sylva. You agree not to use the application for any unlawful or prohibited activities.',
+      name: 'tosContent2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Limitation of Liability`
+  String get tosTitle3 {
+    return Intl.message(
+      'Limitation of Liability',
+      name: 'tosTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided 'as is'.`
+  String get tosContent3 {
+    return Intl.message(
+      'Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided \'as is\'.',
+      name: 'tosContent3',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -147,6 +147,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
       "我们尊重您的隐私。Sylva会尽可能在本地处理您的相机数据。未经您的明确同意，我们不会存储或分享您的个人照片。",
     ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "我们不会在服务器上收集或存储任何个人照片或相机数据。所有相机处理都在您的设备上本地执行。",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Sylva处理的任何数据仅用于提供应用程序内的相机和颜色分析功能。",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "我们实施行业标准的安全措施来保护您的数据。由于您的照片保留在设备上，您可以完全控制自己的隐私。",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage("信息收集"),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage("信息使用"),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage("数据安全"),
     "progress": MessageLookupByLibrary.simpleMessage("进度"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "购买失败或已被取消。",
@@ -189,6 +201,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("四"),
     "timer": MessageLookupByLibrary.simpleMessage("定时器"),
     "today": MessageLookupByLibrary.simpleMessage("今天"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "下载并使用Sylva即表示您同意这些服务条款。如果您不同意，请勿使用该应用程序。",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "您对使用Sylva捕捉或处理的任何内容负责。您同意不将该应用程序用于任何非法或被禁止的活动。",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylva及其创作者对您使用该应用程序造成的任何损害或损失不承担任何责任。服务按“原样”提供。",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("接受条款"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("用户责任"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage("责任限制"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage("放弃更改并返回相机。"),
     "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("返回"),
     "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage("在前后摄像头之间切换。"),

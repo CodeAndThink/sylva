@@ -183,6 +183,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
       "We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.",
     ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "We do not collect or store any personal photos or camera data on our servers. All camera processing is performed locally on your device.",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Any data processed by Sylva is used solely for providing the camera and color analysis features within the application.",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage(
+      "Information Collection",
+    ),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage(
+      "Use of Information",
+    ),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage(
+      "Data Security",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("Progress"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Purchase failed or was cancelled.",
@@ -231,6 +249,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Thu"),
     "timer": MessageLookupByLibrary.simpleMessage("Timer"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "By downloading and using Sylva, you agree to these Terms of Service. If you do not agree, please do not use the application.",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "You are responsible for any content you capture or process using Sylva. You agree not to use the application for any unlawful or prohibited activities.",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided \'as is\'.",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("Acceptance of Terms"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("User Responsibilities"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage(
+      "Limitation of Liability",
+    ),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "Discard changes and return to the camera.",
     ),

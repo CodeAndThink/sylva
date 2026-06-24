@@ -127,7 +127,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                     16.height,
                     Text(
                       _l10n.onboardDesc,
-                      style: _theme.textTheme.titleMedium?.copyWith(
+                      style: _theme.textTheme.bodyLarge?.copyWith(
                         color: Colors.black,
                         height: 1.4,
                       ),

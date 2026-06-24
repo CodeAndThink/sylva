@@ -457,6 +457,13 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           _showMagnifier.value = true;
           _touchPosition.value = details.localPosition;
         },
+        onTapUp: (_) async {
+          if (_cubit.state.filteredImageBytes != null) return;
+          final color = await _getColorAtPosition(_touchPosition.value);
+          if (color != null) {
+            _cubit.setSelectedColor(color: color);
+          }
+        },
         onPanStart: (details) {
           if (_cubit.state.filteredImageBytes != null) return;
           _showMagnifier.value = true;

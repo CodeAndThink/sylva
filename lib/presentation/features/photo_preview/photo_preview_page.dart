@@ -60,7 +60,8 @@ class _PhotoPreviewChildPage extends StatefulWidget {
   State<_PhotoPreviewChildPage> createState() => __PhotoPreviewChildPageState();
 }
 
-class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
+class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
+    with TickerProviderStateMixin {
   late final PhotoPreviewCubit _cubit;
   final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
   final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
@@ -73,6 +74,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   final GlobalKey _keyBack = GlobalKey();
   final GlobalKey _keySave = GlobalKey();
   final GlobalKey _keyLibrary = GlobalKey();
+  final GlobalKey _keyZoomController = GlobalKey();
+  final GlobalKey _keyFullScreen = GlobalKey();
 
   TutorialCoachMark? tutorialCoachMark;
 
@@ -80,15 +83,28 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
   final TransformationController _transformationController =
       TransformationController();
 
+  late final AnimationController _zoomAnimationController;
+  Animation<Matrix4>? _zoomAnimation;
+
   @override
   void initState() {
     super.initState();
+    _zoomAnimationController =
+        AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 200),
+        )..addListener(() {
+          if (_zoomAnimation != null) {
+            _transformationController.value = _zoomAnimation!.value;
+          }
+        });
     _cubit = context.read<PhotoPreviewCubit>();
     _cubit.extractPalette(imagePath: widget.imagePath);
   }
 
   @override
   void dispose() {
+    _zoomAnimationController.dispose();
     _pageController.dispose();
     _transformationController.dispose();
     super.dispose();
@@ -111,8 +127,22 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         ..multiply(Matrix4.diagonal3Values(ratio, ratio, 1.0))
         ..multiply(Matrix4.translationValues(-center.dx, -center.dy, 0.0));
 
-      _transformationController.value = scaleMatrix * matrix;
+      _animateZoomTo(scaleMatrix * matrix);
     }
+  }
+
+  void _animateZoomTo(Matrix4 targetMatrix) {
+    _zoomAnimation =
+        Matrix4Tween(
+          begin: _transformationController.value,
+          end: targetMatrix,
+        ).animate(
+          CurvedAnimation(
+            parent: _zoomAnimationController,
+            curve: Curves.easeOut,
+          ),
+        );
+    _zoomAnimationController.forward(from: 0.0);
   }
 
   Future<Color?> _getColorAtPosition(Offset position) async {
@@ -276,7 +306,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                   bottom: 54,
                   left: 8,
                   right: 8,
-                  child: _buildZoomController(),
+                  child: KeyedSubtree(
+                    key: _keyZoomController,
+                    child: _buildZoomController(),
+                  ),
                 ),
                 Positioned(
                   bottom: 8,
@@ -287,6 +320,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
                     children: [
                       Expanded(child: _buildColorDetails()),
                       Tooltip(
+                        key: _keyFullScreen,
                         message: S.of(context).fullScreen,
                         child: Material(
                           color: Colors.black54,
@@ -679,6 +713,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
       builder: (context, matrix, child) {
         final double currentScale = matrix.getMaxScaleOnAxis();
         return Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 8,
           children: [
@@ -700,7 +735,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 onTap: () {
-                  _transformationController.value = Matrix4.identity();
+                  _animateZoomTo(Matrix4.identity());
                 },
                 child: Container(
                   width: 50,
@@ -878,6 +913,18 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage> {
         customPosition: CustomTargetContentPosition(
           bottom: MediaQuery.of(context).padding.bottom + 12,
         ),
+      ),
+      _buildTarget(
+        key: _keyZoomController,
+        title: S.of(context).tutorialZoomTitle,
+        desc: S.of(context).tutorialZoomDesc,
+        shape: ShapeLightFocus.RRect,
+        radius: 20,
+      ),
+      _buildTarget(
+        key: _keyFullScreen,
+        title: S.of(context).tutorialFullScreenTitle,
+        desc: S.of(context).tutorialFullScreenDesc,
       ),
       _buildTarget(
         key: _keyPalette,

@@ -219,20 +219,20 @@ class S {
     return Intl.message('Success', name: 'success', desc: '', args: []);
   }
 
-  /// `Permission Required`
+  /// `Photo Library Permission Required`
   String get permissionRequired {
     return Intl.message(
-      'Permission Required',
+      'Photo Library Permission Required',
       name: 'permissionRequired',
       desc: '',
       args: [],
     );
   }
 
-  /// `Twinfix needs access to your photo library to scan and clean duplicate photos.`
+  /// `Sylva needs access to your photo library to select photos and extract colors.`
   String get permissionDescription {
     return Intl.message(
-      'Twinfix needs access to your photo library to scan and clean duplicate photos.',
+      'Sylva needs access to your photo library to select photos and extract colors.',
       name: 'permissionDescription',
       desc: '',
       args: [],
@@ -552,126 +552,6 @@ class S {
       desc: '',
       args: [],
     );
-  }
-
-  /// `Premium`
-  String get premium {
-    return Intl.message('Premium', name: 'premium', desc: '', args: []);
-  }
-
-  /// `Action Required`
-  String get cancelMonthlyTitle {
-    return Intl.message(
-      'Action Required',
-      name: 'cancelMonthlyTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You've successfully upgraded to Lifetime! Since you previously had a Monthly subscription, please remember to cancel it in the App Store/Google Play to avoid being charged for both.`
-  String get cancelMonthlyMessage {
-    return Intl.message(
-      'You\'ve successfully upgraded to Lifetime! Since you previously had a Monthly subscription, please remember to cancel it in the App Store/Google Play to avoid being charged for both.',
-      name: 'cancelMonthlyMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Manage Subscriptions`
-  String get manageSubscriptions {
-    return Intl.message(
-      'Manage Subscriptions',
-      name: 'manageSubscriptions',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Privacy Policy`
-  String get privacyPolicy {
-    return Intl.message(
-      'Privacy Policy',
-      name: 'privacyPolicy',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Terms of Service`
-  String get termsOfService {
-    return Intl.message(
-      'Terms of Service',
-      name: 'termsOfService',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add Twinfix Widget`
-  String get homeWidgetDialogTitle {
-    return Intl.message(
-      'Add Twinfix Widget',
-      name: 'homeWidgetDialogTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You can add Twinfix widget to your home screen to quickly monitor device storage:`
-  String get homeWidgetDialogSubtitle {
-    return Intl.message(
-      'You can add Twinfix widget to your home screen to quickly monitor device storage:',
-      name: 'homeWidgetDialogSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `1. Go to your phone's home screen.`
-  String get homeWidgetStep1 {
-    return Intl.message(
-      '1. Go to your phone\'s home screen.',
-      name: 'homeWidgetStep1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `2. Touch and hold any empty space on the screen.`
-  String get homeWidgetStep2 {
-    return Intl.message(
-      '2. Touch and hold any empty space on the screen.',
-      name: 'homeWidgetStep2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `3. Select "Widgets".`
-  String get homeWidgetStep3 {
-    return Intl.message(
-      '3. Select "Widgets".',
-      name: 'homeWidgetStep3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `4. Find Twinfix and drag the widget to the screen.`
-  String get homeWidgetStep4 {
-    return Intl.message(
-      '4. Find Twinfix and drag the widget to the screen.',
-      name: 'homeWidgetStep4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `GOT IT`
-  String get understood {
-    return Intl.message('GOT IT', name: 'understood', desc: '', args: []);
   }
 
   /// `Auto Detect Colors`
@@ -1292,6 +1172,111 @@ class S {
   /// `Full Screen`
   String get fullScreen {
     return Intl.message('Full Screen', name: 'fullScreen', desc: '', args: []);
+  }
+
+  /// `Zoom`
+  String get tutorialZoomTitle {
+    return Intl.message('Zoom', name: 'tutorialZoomTitle', desc: '', args: []);
+  }
+
+  /// `Use these buttons to zoom in or out precisely.`
+  String get tutorialZoomDesc {
+    return Intl.message(
+      'Use these buttons to zoom in or out precisely.',
+      name: 'tutorialZoomDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Screen`
+  String get tutorialFullScreenTitle {
+    return Intl.message(
+      'Full Screen',
+      name: 'tutorialFullScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap here to view the original photo in full screen.`
+  String get tutorialFullScreenDesc {
+    return Intl.message(
+      'Tap here to view the original photo in full screen.',
+      name: 'tutorialFullScreenDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera Permission Required`
+  String get cameraPermissionRequired {
+    return Intl.message(
+      'Camera Permission Required',
+      name: 'cameraPermissionRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sylva needs access to your camera to take photos and extract colors.`
+  String get cameraPermissionDescription {
+    return Intl.message(
+      'Sylva needs access to your camera to take photos and extract colors.',
+      name: 'cameraPermissionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms of Service`
+  String get termsOfService {
+    return Intl.message(
+      'Terms of Service',
+      name: 'termsOfService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera access denied or device has no camera.`
+  String get cameraPermissionDenied {
+    return Intl.message(
+      'Camera access denied or device has no camera.',
+      name: 'cameraPermissionDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `No cameras found on device`
+  String get noCamerasFound {
+    return Intl.message(
+      'No cameras found on device',
+      name: 'noCamerasFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get errorPrefix {
+    return Intl.message('Error', name: 'errorPrefix', desc: '', args: []);
   }
 }
 

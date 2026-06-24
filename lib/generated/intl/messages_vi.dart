@@ -38,13 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
     "blur": MessageLookupByLibrary.simpleMessage("Làm mờ"),
     "brightness": MessageLookupByLibrary.simpleMessage("Độ sáng"),
+    "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
+    ),
+    "cameraPermissionDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva cần quyền truy cập camera để chụp ảnh và trích xuất màu sắc.",
+    ),
+    "cameraPermissionRequired": MessageLookupByLibrary.simpleMessage(
+      "Yêu cầu quyền Máy ảnh",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
-    "cancelMonthlyMessage": MessageLookupByLibrary.simpleMessage(
-      "Bạn đã nâng cấp Trọn đời thành công! Vì bạn đang sử dụng gói Tháng, vui lòng vào Cửa hàng ứng dụng (App Store/Google Play) để HỦY gói Tháng, tránh bị trừ tiền vào chu kỳ tới.",
-    ),
-    "cancelMonthlyTitle": MessageLookupByLibrary.simpleMessage(
-      "Hành động cần thiết",
-    ),
     "circle": MessageLookupByLibrary.simpleMessage("Hình tròn"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage(
       "Xoá tất cả lịch sử",
@@ -85,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email không được để trống",
     ),
     "error": m1,
+    "errorPrefix": MessageLookupByLibrary.simpleMessage("Lỗi"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Không thể tải màu",
     ),
@@ -102,24 +106,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "history": MessageLookupByLibrary.simpleMessage("Lịch sử"),
     "historySort": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
     "historyView": MessageLookupByLibrary.simpleMessage("Chế độ xem"),
-    "homeWidgetDialogSubtitle": MessageLookupByLibrary.simpleMessage(
-      "Bạn có thể thêm widget của Twinfix ra màn hình chính để theo dõi dung lượng thiết bị nhanh chóng:",
-    ),
-    "homeWidgetDialogTitle": MessageLookupByLibrary.simpleMessage(
-      "Thêm Widget Twinfix",
-    ),
-    "homeWidgetStep1": MessageLookupByLibrary.simpleMessage(
-      "1. Trở về màn hình chính của điện thoại.",
-    ),
-    "homeWidgetStep2": MessageLookupByLibrary.simpleMessage(
-      "2. Nhấn giữ vào một khoảng trống bất kỳ trên màn hình.",
-    ),
-    "homeWidgetStep3": MessageLookupByLibrary.simpleMessage(
-      "3. Chọn mục \"Tiện ích\" (hoặc \"Widgets\").",
-    ),
-    "homeWidgetStep4": MessageLookupByLibrary.simpleMessage(
-      "4. Tìm ứng dụng Twinfix và kéo widget ra màn hình.",
-    ),
     "imageSaved": MessageLookupByLibrary.simpleMessage(
       "Đã lưu ảnh thành công!",
     ),
@@ -135,9 +121,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
     "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
     "luminance": MessageLookupByLibrary.simpleMessage("Độ chói"),
-    "manageSubscriptions": MessageLookupByLibrary.simpleMessage(
-      "Quản lý Đăng ký",
-    ),
     "mon": MessageLookupByLibrary.simpleMessage("Th 2"),
     "myColors": MessageLookupByLibrary.simpleMessage("Màu Của Tôi"),
     "nameLength": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tên không được để trống",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+    "noCamerasFound": MessageLookupByLibrary.simpleMessage(
+      "Thiết bị không có camera",
+    ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Chưa chọn màu để sao chép",
@@ -172,15 +158,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Mật khẩu không trùng khớp",
     ),
     "permissionDescription": MessageLookupByLibrary.simpleMessage(
-      "Twinfix cần quyền truy cập vào thư viện ảnh để quét và dọn dẹp các ảnh trùng lặp.",
+      "Sylva cần quyền truy cập vào thư viện ảnh để chọn ảnh và trích xuất màu sắc.",
     ),
     "permissionRequired": MessageLookupByLibrary.simpleMessage(
-      "Yêu cầu quyền truy cập",
+      "Yêu cầu quyền Thư viện ảnh",
     ),
     "pickImageFromGallery": MessageLookupByLibrary.simpleMessage(
       "Chọn ảnh từ thư viện",
     ),
-    "premium": MessageLookupByLibrary.simpleMessage("Premium"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
     "progress": MessageLookupByLibrary.simpleMessage("Tiến trình"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -200,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "restorePurchases": MessageLookupByLibrary.simpleMessage(
       "Khôi phục giao dịch (Restore Purchases)",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Lưu mới"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
@@ -255,6 +241,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Bật/tắt đèn flash.",
     ),
     "tutorialFlashTitle": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
+    "tutorialFullScreenDesc": MessageLookupByLibrary.simpleMessage(
+      "Chạm vào đây để xem bức ảnh gốc ở chế độ toàn màn hình.",
+    ),
+    "tutorialFullScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Toàn màn hình",
+    ),
     "tutorialGalleryDesc": MessageLookupByLibrary.simpleMessage(
       "Chọn ảnh có sẵn từ điện thoại.",
     ),
@@ -303,7 +295,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cài đặt đếm ngược trước khi chụp.",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
-    "understood": MessageLookupByLibrary.simpleMessage("ĐÃ HIỂU"),
+    "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
+      "Sử dụng các nút này để phóng to hoặc thu nhỏ ảnh chính xác.",
+    ),
+    "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("Thu phóng"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Sử dụng kính lúp để lấy màu",
     ),

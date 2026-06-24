@@ -56,8 +56,8 @@ class PermissionService {
 
     if (status.isPermanentlyDenied) {
       await AppDialog(context).showConfirm(
-        title: S.current.permissionRequired,
-        message: S.current.permissionDescription,
+        title: S.current.cameraPermissionRequired,
+        message: S.current.cameraPermissionDescription,
         rightText: S.current.ok,
         leftText: S.current.cancel,
         onRight: () {
@@ -66,8 +66,8 @@ class PermissionService {
       );
     } else {
       await AppDialog(context).showError(
-        title: S.current.permissionRequired,
-        message: S.current.permissionDescription,
+        title: S.current.cameraPermissionRequired,
+        message: S.current.cameraPermissionDescription,
       );
     }
 

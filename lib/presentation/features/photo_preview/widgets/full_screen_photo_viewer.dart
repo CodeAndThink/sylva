@@ -35,12 +35,31 @@ class FullScreenPhotoViewer extends StatefulWidget {
   State<FullScreenPhotoViewer> createState() => _FullScreenPhotoViewerState();
 }
 
-class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer> {
+class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer>
+    with TickerProviderStateMixin {
   final TransformationController _transformationController =
       TransformationController();
 
+  late final AnimationController _zoomAnimationController;
+  Animation<Matrix4>? _zoomAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _zoomAnimationController =
+        AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 200),
+        )..addListener(() {
+          if (_zoomAnimation != null) {
+            _transformationController.value = _zoomAnimation!.value;
+          }
+        });
+  }
+
   @override
   void dispose() {
+    _zoomAnimationController.dispose();
     _transformationController.dispose();
     super.dispose();
   }
@@ -60,7 +79,21 @@ class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer> {
       ..multiply(Matrix4.diagonal3Values(ratio, ratio, 1.0))
       ..multiply(Matrix4.translationValues(-center.dx, -center.dy, 0.0));
 
-    _transformationController.value = scaleMatrix * matrix;
+    _animateZoomTo(scaleMatrix * matrix);
+  }
+
+  void _animateZoomTo(Matrix4 targetMatrix) {
+    _zoomAnimation =
+        Matrix4Tween(
+          begin: _transformationController.value,
+          end: targetMatrix,
+        ).animate(
+          CurvedAnimation(
+            parent: _zoomAnimationController,
+            curve: Curves.easeOut,
+          ),
+        );
+    _zoomAnimationController.forward(from: 0.0);
   }
 
   @override
@@ -113,8 +146,7 @@ class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer> {
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
                           onTap: () {
-                            _transformationController.value =
-                                Matrix4.identity();
+                            _animateZoomTo(Matrix4.identity());
                           },
                           child: Container(
                             width: 50,

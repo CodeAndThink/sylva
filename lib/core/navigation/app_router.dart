@@ -7,7 +7,7 @@ import 'package:sylva/presentation/features/paywall/paywall_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/about_page.dart';
-import 'package:sylva/presentation/features/settings/widgets/contact_page.dart';
+import 'package:sylva/presentation/features/contact/contact_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/acknowledgements_page.dart';

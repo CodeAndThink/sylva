@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -15,8 +14,13 @@ import 'package:sylva/presentation/theme/app_theme.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/core/enums/device_type.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:sylva/firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -25,8 +29,6 @@ void main() async {
 
   await configureDependencies();
 
-  // Load variables from .env
-  // await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 

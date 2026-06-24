@@ -17,4 +17,15 @@ extension ContactTypeExtension on ContactType {
         return S.current.contactFormTypeOther;
     }
   }
+
+  int get value {
+    switch (this) {
+      case ContactType.suggestion:
+        return 0;
+      case ContactType.bug:
+        return 1;
+      case ContactType.other:
+        return 2;
+    }
+  }
 }

@@ -30,9 +30,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(level) => "等级 ${level}";
 
+  static String m5(version) => "版本 ${version}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("关于"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva是一款相机应用程序，旨在帮助您轻松捕捉和发现世界的色彩。",
+    ),
     "acknowledgements": MessageLookupByLibrary.simpleMessage("鸣谢"),
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "我们在此感谢以下创作者提供本应用中使用的资源：",
@@ -139,6 +144,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "permissionRequired": MessageLookupByLibrary.simpleMessage("需要相册权限"),
     "pickImageFromGallery": MessageLookupByLibrary.simpleMessage("从图库选择图片"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "我们尊重您的隐私。Sylva会尽可能在本地处理您的相机数据。未经您的明确同意，我们不会存储或分享您的个人照片。",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("进度"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "购买失败或已被取消。",
@@ -168,6 +176,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("切换相机"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("服务条款"),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "使用Sylva即表示您同意我们的服务条款。您不得将该应用程序用于任何非法或未经授权的目的。服务和内容按\"原样\"提供，没有任何形式的保证。",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("文本"),
     "textAlign": MessageLookupByLibrary.simpleMessage("对齐文本"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage("感谢与参考文献"),
@@ -243,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("用户被封禁。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("未找到用户。"),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),

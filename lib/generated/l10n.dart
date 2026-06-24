@@ -1358,6 +1358,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Sylva is a camera application designed to help you capture and discover the world's colors effortlessly.`
+  String get aboutSylvaDescription {
+    return Intl.message(
+      'Sylva is a camera application designed to help you capture and discover the world\'s colors effortlessly.',
+      name: 'aboutSylvaDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version {version}`
+  String version(String version) {
+    return Intl.message(
+      'Version $version',
+      name: 'version',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.`
+  String get privacyPolicyContent {
+    return Intl.message(
+      'We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.',
+      name: 'privacyPolicyContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided "as is" without warranties of any kind.`
+  String get termsOfServiceContent {
+    return Intl.message(
+      'By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided "as is" without warranties of any kind.',
+      name: 'termsOfServiceContent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

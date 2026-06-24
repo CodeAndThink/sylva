@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sylva/core/configs/app_configs.dart';
+import 'package:sylva/core/constants/app_assets.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
+import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
 class AboutPage extends StatelessWidget {
@@ -7,15 +11,49 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AppScaffold(
       title: S.of(context).about,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Text(
-            S.of(context).about,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          24.0,
+          MediaQuery.of(context).padding.top + 75 + 24,
+          24.0,
+          MediaQuery.of(context).padding.bottom + 24.0,
+        ),
+        child: Column(
+          children: [
+            Center(
+              child: ClipRRect(
+                borderRadius: 24.borderRadius,
+                child: AppAssetImage(
+                  path: AppAssets.icAppIcon,
+                  width: 120,
+                  height: 120,
+                ),
+              ),
+            ),
+            24.height,
+            Text(
+              AppConfigs.appName,
+              style: theme.textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            8.height,
+            Text(
+              S.of(context).version(AppConfigs.version),
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            32.height,
+            Text(
+              S.of(context).aboutSylvaDescription,
+              style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );

@@ -343,5 +343,13 @@
   "designedByAuthorMagnific": "Thiết kế bởi {author} - Magnific.com",
   "@designedByAuthorMagnific": {},
   "rainbowHalftoneDotsBackground": "Hình nền chấm màu cầu vồng",
-  "@rainbowHalftoneDotsBackground": {}
+  "@rainbowHalftoneDotsBackground": {},
+  "aboutSylvaDescription": "Sylva là ứng dụng camera được thiết kế để giúp bạn chụp và khám phá màu sắc của thế giới một cách dễ dàng.",
+  "@aboutSylvaDescription": {},
+  "version": "Phiên bản {version}",
+  "@version": {},
+  "privacyPolicyContent": "Chúng tôi tôn trọng quyền riêng tư của bạn. Sylva xử lý dữ liệu camera cục bộ trên thiết bị của bạn bất cứ khi nào có thể. Chúng tôi không lưu trữ hoặc chia sẻ ảnh cá nhân của bạn nếu không có sự đồng ý rõ ràng.",
+  "@privacyPolicyContent": {},
+  "termsOfServiceContent": "Bằng việc sử dụng Sylva, bạn đồng ý với Điều khoản Dịch vụ của chúng tôi. Bạn không được sử dụng ứng dụng cho bất kỳ mục đích bất hợp pháp hoặc không được phép nào. Các dịch vụ và nội dung được cung cấp \"nguyên trạng\" mà không có bất kỳ hình thức bảo đảm nào.",
+  "@termsOfServiceContent": {}
 }

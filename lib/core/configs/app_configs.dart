@@ -1,10 +1,10 @@
 import 'package:sylva/core/configs/app_env_configs.dart';
 
 class AppConfigs {
-  static const String appName = "TwinFix";
+  static const String appName = "Sylva";
   static const String packageName = "com.truongngo.sylva";
-  static const String version = "0.2.0";
-  static const String buildNumber = "14";
+  static const String version = "0.1.0";
+  static const String buildNumber = "0";
 
   String get privacyPolicyLink => AppEnvConfigs.privacyPolicyLink;
   String get termsOfServiceLink => AppEnvConfigs.termsOfServiceLink;

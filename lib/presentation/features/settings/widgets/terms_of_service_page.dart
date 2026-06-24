@@ -7,14 +7,20 @@ class TermsOfServicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AppScaffold(
       title: S.of(context).termsOfService,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Text(
-            S.of(context).termsOfService,
-            style: Theme.of(context).textTheme.bodyLarge,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          16.0,
+          MediaQuery.of(context).padding.top + 75 + 16,
+          16.0,
+          MediaQuery.of(context).padding.bottom + 16.0,
+        ),
+        child: Text(
+          S.of(context).termsOfServiceContent,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            height: 1.6,
           ),
         ),
       ),

@@ -30,9 +30,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(level) => "Level ${level}";
 
+  static String m5(version) => "Version ${version}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva is a camera application designed to help you capture and discover the world\'s colors effortlessly.",
+    ),
     "acknowledgements": MessageLookupByLibrary.simpleMessage(
       "Acknowledgements",
     ),
@@ -175,6 +180,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pick image from gallery",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("Progress"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Purchase failed or was cancelled.",
@@ -208,6 +216,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided \"as is\" without warranties of any kind.",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Align text"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage(
@@ -319,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("User is banned."),
     "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage(
       "Password is too weak.",
     ),

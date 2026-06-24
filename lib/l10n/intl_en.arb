@@ -355,5 +355,19 @@
     }
   },
   "rainbowHalftoneDotsBackground": "Rainbow halftone dots background",
-  "@rainbowHalftoneDotsBackground": {}
+  "@rainbowHalftoneDotsBackground": {},
+  "aboutSylvaDescription": "Sylva is a camera application designed to help you capture and discover the world's colors effortlessly.",
+  "@aboutSylvaDescription": {},
+  "version": "Version {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicyContent": "We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.",
+  "@privacyPolicyContent": {},
+  "termsOfServiceContent": "By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided \"as is\" without warranties of any kind.",
+  "@termsOfServiceContent": {}
 }

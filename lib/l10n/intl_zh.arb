@@ -343,5 +343,13 @@
   "designedByAuthorMagnific": "由来自Magnific.com的{author}设计",
   "@designedByAuthorMagnific": {},
   "rainbowHalftoneDotsBackground": "彩虹半色调圆点背景",
-  "@rainbowHalftoneDotsBackground": {}
+  "@rainbowHalftoneDotsBackground": {},
+  "aboutSylvaDescription": "Sylva是一款相机应用程序，旨在帮助您轻松捕捉和发现世界的色彩。",
+  "@aboutSylvaDescription": {},
+  "version": "版本 {version}",
+  "@version": {},
+  "privacyPolicyContent": "我们尊重您的隐私。Sylva会尽可能在本地处理您的相机数据。未经您的明确同意，我们不会存储或分享您的个人照片。",
+  "@privacyPolicyContent": {},
+  "termsOfServiceContent": "使用Sylva即表示您同意我们的服务条款。您不得将该应用程序用于任何非法或未经授权的目的。服务和内容按\"原样\"提供，没有任何形式的保证。",
+  "@termsOfServiceContent": {}
 }

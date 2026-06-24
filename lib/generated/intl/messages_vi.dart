@@ -30,9 +30,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(level) => "Cấp ${level}";
 
+  static String m5(version) => "Phiên bản ${version}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva là ứng dụng camera được thiết kế để giúp bạn chụp và khám phá màu sắc của thế giới một cách dễ dàng.",
+    ),
     "acknowledgements": MessageLookupByLibrary.simpleMessage("Lời cảm ơn"),
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "Chúng tôi xin chân thành cảm ơn những nhà sáng tạo sau đây vì các tài nguyên được sử dụng trong ứng dụng này:",
@@ -179,6 +184,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Chọn ảnh từ thư viện",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi tôn trọng quyền riêng tư của bạn. Sylva xử lý dữ liệu camera cục bộ trên thiết bị của bạn bất cứ khi nào có thể. Chúng tôi không lưu trữ hoặc chia sẻ ảnh cá nhân của bạn nếu không có sự đồng ý rõ ràng.",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("Tiến trình"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Mua hàng thất bại hoặc bị hủy.",
@@ -215,6 +223,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(
       "Điều khoản dịch vụ",
+    ),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "Bằng việc sử dụng Sylva, bạn đồng ý với Điều khoản Dịch vụ của chúng tôi. Bạn không được sử dụng ứng dụng cho bất kỳ mục đích bất hợp pháp hoặc không được phép nào. Các dịch vụ và nội dung được cung cấp \"nguyên trạng\" mà không có bất kỳ hình thức bảo đảm nào.",
     ),
     "text": MessageLookupByLibrary.simpleMessage("Văn bản"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Căn lề chữ"),
@@ -327,6 +338,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userNotFound": MessageLookupByLibrary.simpleMessage(
       "Không tìm thấy người dùng.",
     ),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu quá yếu."),
     "wed": MessageLookupByLibrary.simpleMessage("Th 4"),
     "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),

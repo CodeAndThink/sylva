@@ -343,5 +343,13 @@
   "designedByAuthorMagnific": "Magnific.comの{author}によるデザイン",
   "@designedByAuthorMagnific": {},
   "rainbowHalftoneDotsBackground": "虹色のハーフトーンドット背景",
-  "@rainbowHalftoneDotsBackground": {}
+  "@rainbowHalftoneDotsBackground": {},
+  "aboutSylvaDescription": "Sylvaは、世界の色彩を簡単にキャプチャして発見できるように設計されたカメラアプリケーションです。",
+  "@aboutSylvaDescription": {},
+  "version": "バージョン {version}",
+  "@version": {},
+  "privacyPolicyContent": "私たちはあなたのプライバシーを尊重します。Sylvaは可能な限りデバイス上でカメラデータをローカルに処理します。明示的な同意なしに個人的な写真を保存または共有することはありません。",
+  "@privacyPolicyContent": {},
+  "termsOfServiceContent": "Sylvaを使用することにより、利用規約に同意したことになります。違法または無許可の目的でアプリケーションを使用してはなりません。サービスとコンテンツは「現状有姿」で提供され、いかなる種類の保証もありません。",
+  "@termsOfServiceContent": {}
 }

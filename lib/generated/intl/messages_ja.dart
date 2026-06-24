@@ -30,9 +30,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(level) => "レベル ${level}";
 
+  static String m5(version) => "バージョン ${version}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("約"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylvaは、世界の色彩を簡単にキャプチャして発見できるように設計されたカメラアプリケーションです。",
+    ),
     "acknowledgements": MessageLookupByLibrary.simpleMessage("謝辞"),
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
@@ -151,6 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "ライブラリから画像を選択",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("プライバシーポリシー"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "私たちはあなたのプライバシーを尊重します。Sylvaは可能な限りデバイス上でカメラデータをローカルに処理します。明示的な同意なしに個人的な写真を保存または共有することはありません。",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("進捗"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "購入に失敗したか、キャンセルされました。",
@@ -182,6 +190,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "Sylvaを使用することにより、利用規約に同意したことになります。違法または無許可の目的でアプリケーションを使用してはなりません。サービスとコンテンツは「現状有姿」で提供され、いかなる種類の保証もありません。",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("テキスト"),
     "textAlign": MessageLookupByLibrary.simpleMessage("文字揃え"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage("感謝と参考文献"),
@@ -275,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("ユーザーは利用停止されています。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザーが見つかりません。"),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage("パスワードが弱すぎます。"),
     "wed": MessageLookupByLibrary.simpleMessage("水"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),

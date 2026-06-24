@@ -1,14 +1,14 @@
 # Sylva
 
 <p align="center">
-  <img src="assets/icons/ic_app_icon.png" width="128" alt="Sylva App Icon"/>
+  <img src="assets/icons/ic_app_icon.png" width="128" style="border-radius: 24px;" alt="Sylva App Icon"/>
 </p>
 
 Sylva is a camera application designed to help you capture and discover the world's colors effortlessly. It processes camera data locally on your device to analyze and extract color palettes in real time.
 
 ## Features
 
-- **Real-time Color Extraction**: Point your camera at any object to instantly extract its colors and form a palette.
+- **Color Palette Extraction**: Take a photo using the built-in camera, and Sylva will instantly analyze the image to extract a beautiful color palette.
 - **Local Processing**: All camera analysis is done securely and locally on your device. No photos or data are uploaded to any server.
 - **Multi-language Support**: Full localization for English, Vietnamese, Japanese, and Chinese.
 - **Premium Design**: Built with a modern, clean, and responsive UI.

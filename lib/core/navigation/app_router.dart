@@ -6,6 +6,11 @@ import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
 import 'package:sylva/presentation/features/paywall/paywall_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
+import 'package:sylva/presentation/features/settings/widgets/about_page.dart';
+import 'package:sylva/presentation/features/settings/widgets/contact_page.dart';
+import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page.dart';
+import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
+import 'package:sylva/presentation/features/settings/widgets/acknowledgements_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
 import 'package:sylva/data/entities/history_record.dart';
 
@@ -30,6 +35,18 @@ class AppRouter {
 
   static const String contact = 'contact';
   static const String contactPath = '/contact';
+
+  static const String about = 'about';
+  static const String aboutPath = '/about';
+
+  static const String termsOfService = 'termsOfService';
+  static const String termsOfServicePath = '/termsOfService';
+
+  static const String privacyPolicy = 'privacyPolicy';
+  static const String privacyPolicyPath = '/privacyPolicy';
+
+  static const String acknowledgements = 'acknowledgements';
+  static const String acknowledgementsPath = '/acknowledgements';
 
   static const String paywall = 'paywall';
   static const String paywallPath = '/paywall';
@@ -70,6 +87,31 @@ class AppRouter {
         path: settingsPath,
         name: settings,
         builder: (context, state) => const SettingsPage(),
+      ),
+      GoRoute(
+        path: aboutPath,
+        name: about,
+        builder: (context, state) => const AboutPage(),
+      ),
+      GoRoute(
+        path: termsOfServicePath,
+        name: termsOfService,
+        builder: (context, state) => const TermsOfServicePage(),
+      ),
+      GoRoute(
+        path: privacyPolicyPath,
+        name: privacyPolicy,
+        builder: (context, state) => const PrivacyPolicyPage(),
+      ),
+      GoRoute(
+        path: contactPath,
+        name: contact,
+        builder: (context, state) => const ContactPage(),
+      ),
+      GoRoute(
+        path: acknowledgementsPath,
+        name: acknowledgements,
+        builder: (context, state) => const AcknowledgementsPage(),
       ),
       GoRoute(
         path: photoPreviewPath,

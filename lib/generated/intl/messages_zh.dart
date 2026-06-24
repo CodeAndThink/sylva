@@ -22,13 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "已将 ${color} 复制到剪贴板";
 
-  static String m1(message) => "错误: ${message}";
+  static String m1(author) => "由来自Flaticon的${author}设计";
 
-  static String m2(level) => "等级 ${level}";
+  static String m2(author) => "由来自Magnific.com的${author}设计";
+
+  static String m3(message) => "错误: ${message}";
+
+  static String m4(level) => "等级 ${level}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("关于"),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage("鸣谢"),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "我们在此感谢以下创作者提供本应用中使用的资源：",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("箭头"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("自动检测颜色"),
@@ -36,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("返回"),
     "blur": MessageLookupByLibrary.simpleMessage("模糊"),
     "brightness": MessageLookupByLibrary.simpleMessage("亮度"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("相机图标"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "拒绝访问相机或设备没有相机。",
     ),
@@ -52,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "color": MessageLookupByLibrary.simpleMessage("颜色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("复制颜色失败"),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("颜色图标"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "contact": MessageLookupByLibrary.simpleMessage("联系"),
@@ -63,13 +73,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
     "donation": MessageLookupByLibrary.simpleMessage("捐款"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重复项"),
     "email": MessageLookupByLibrary.simpleMessage("邮箱"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("无效的邮箱格式"),
     "emailNotConfirmed": MessageLookupByLibrary.simpleMessage("邮箱未确认。"),
     "emailRequired": MessageLookupByLibrary.simpleMessage("必须输入邮箱"),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("错误"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("加载颜色失败"),
     "file": MessageLookupByLibrary.simpleMessage("文件"),
@@ -92,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
     "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),
     "letGo": MessageLookupByLibrary.simpleMessage("开始吧"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("直线"),
     "login": MessageLookupByLibrary.simpleMessage("登录"),
     "logout": MessageLookupByLibrary.simpleMessage("退出登录"),
@@ -131,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "购买失败或已被取消。",
     ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "彩虹半色调圆点背景",
+    ),
     "ratio": MessageLookupByLibrary.simpleMessage("比例"),
     "rectangle": MessageLookupByLibrary.simpleMessage("矩形"),
     "register": MessageLookupByLibrary.simpleMessage("注册"),
@@ -142,6 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("恢复购买"),
     "retry": MessageLookupByLibrary.simpleMessage("重试"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage("路障图标"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("保存为新记录"),
     "saveColor": MessageLookupByLibrary.simpleMessage("保存颜色"),
@@ -154,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsOfService": MessageLookupByLibrary.simpleMessage("服务条款"),
     "text": MessageLookupByLibrary.simpleMessage("文本"),
     "textAlign": MessageLookupByLibrary.simpleMessage("对齐文本"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage("感谢与参考文献"),
     "theme": MessageLookupByLibrary.simpleMessage("主题"),
     "themeDark": MessageLookupByLibrary.simpleMessage("深色"),
     "themeLight": MessageLookupByLibrary.simpleMessage("浅色"),

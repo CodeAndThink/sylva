@@ -22,13 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "Copied ${color} to clipboard";
 
-  static String m1(message) => "Error: ${message}";
+  static String m1(author) => "Designed by ${author} from Flaticon";
 
-  static String m2(level) => "Level ${level}";
+  static String m2(author) => "Designed by ${author} - Magnific.com";
+
+  static String m3(message) => "Error: ${message}";
+
+  static String m4(level) => "Level ${level}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage(
+      "Acknowledgements",
+    ),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "We would like to thank the following creators for their assets used in this application:",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Arrow"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(
@@ -38,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "blur": MessageLookupByLibrary.simpleMessage("Blur"),
     "brightness": MessageLookupByLibrary.simpleMessage("Brightness"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("Camera icon"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "Camera access denied or device has no camera.",
     ),
@@ -60,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to copy color",
     ),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("Colors icon"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Confirm password is required",
@@ -73,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
     "donation": MessageLookupByLibrary.simpleMessage("Donation"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Duplicates"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -83,7 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email is not confirmed.",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Error"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Failed to load colors",
@@ -112,7 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),
     "last7Days": MessageLookupByLibrary.simpleMessage("Last 7 days"),
     "letGo": MessageLookupByLibrary.simpleMessage("Let\'s Go"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("Line"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -165,6 +179,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Purchase failed or was cancelled.",
     ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "Rainbow halftone dots background",
+    ),
     "ratio": MessageLookupByLibrary.simpleMessage("Ratio"),
     "rectangle": MessageLookupByLibrary.simpleMessage("Rectangle"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
@@ -180,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Restore Purchases",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage("Road block icon"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Save as new"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
@@ -192,6 +210,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Align text"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage(
+      "Thanks & Reference",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Theme"),
     "themeDark": MessageLookupByLibrary.simpleMessage("Dark"),
     "themeLight": MessageLookupByLibrary.simpleMessage("Light"),

@@ -33,6 +33,7 @@ class _SettingsChildPage extends StatefulWidget {
 class __SettingsChildPageState extends State<_SettingsChildPage> {
   late final ThemeCubit _themeCubit;
   late final LocaleCubit _localeCubit;
+  late final SettingsCubit _settingsCubit;
   late S _l10n;
   late ThemeData _theme;
 
@@ -41,6 +42,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     super.initState();
     _themeCubit = context.read<ThemeCubit>();
     _localeCubit = context.read<LocaleCubit>();
+    _settingsCubit = context.read<SettingsCubit>();
   }
 
   @override
@@ -55,7 +57,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           12,
           MediaQuery.of(context).padding.top + 75,
           12,
-          12,
+          MediaQuery.of(context).padding.bottom + 12,
         ),
         children: [
           _buildThemeSection(),
@@ -157,8 +159,8 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         AppTitleText(title: _l10n.informationAndSupport),
         Container(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFFF9A9E), Color(0xFFFECFEF)],
+            gradient: LinearGradient(
+              colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -171,83 +173,118 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
               ),
             ],
           ),
-          child: ListTile(
-            leading: const Icon(Icons.favorite, color: Colors.white, size: 28),
-            title: Text(
-              _l10n.donation,
-              style: _theme.textTheme.titleMedium?.copyWith(
-                color: Colors.white,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: 16.borderRadius,
+              onTap: () {
+                // TODO: Navigate to Donation
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 16.0,
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.favorite, color: Colors.white, size: 28),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        _l10n.donation,
+                        style: _theme.textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            onTap: () {
-              // TODO: Navigate to Donation
-            },
           ),
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: 16.borderRadius,
-          ),
-          child: ListTile(
-            leading: Icon(
-              Icons.info_outline_rounded,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            title: Text(
-              _l10n.about,
-              style: _theme.textTheme.titleMedium?.copyWith(
-                color: _theme.colorScheme.onPrimaryContainer,
-              ),
-            ),
-            onTap: () {
-              // TODO: Navigate to About
-            },
-          ),
+        _buildSettingFilledButton(
+          color: Theme.of(context).colorScheme.primary,
+          title: _l10n.about,
+          onTap: () {
+            _settingsCubit.navigator.goToAbout();
+          },
+          icon: Icons.info_outline_rounded,
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: 16.borderRadius,
-          ),
-          child: ListTile(
-            leading: Icon(
-              Icons.description_outlined,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            title: Text(
-              _l10n.termsOfService,
-              style: _theme.textTheme.titleMedium?.copyWith(
-                color: _theme.colorScheme.onPrimaryContainer,
-              ),
-            ),
-            onTap: () {
-              // TODO: Navigate to Terms of Service
-            },
-          ),
+        _buildSettingFilledButton(
+          color: Theme.of(context).colorScheme.primary,
+          title: _l10n.termsOfService,
+          onTap: () {
+            _settingsCubit.navigator.goToTermsOfService();
+          },
+          icon: Icons.description_outlined,
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            borderRadius: 16.borderRadius,
-          ),
-          child: ListTile(
-            leading: Icon(
-              Icons.contact_support_outlined,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            title: Text(
-              _l10n.contact,
-              style: _theme.textTheme.titleMedium?.copyWith(
-                color: _theme.colorScheme.onPrimaryContainer,
-              ),
-            ),
-            onTap: () {
-              // TODO: Navigate to Contact
-            },
-          ),
+        _buildSettingFilledButton(
+          color: Theme.of(context).colorScheme.primary,
+          title: _l10n.privacyPolicy,
+          onTap: () {
+            _settingsCubit.navigator.goToPrivacyPolicy();
+          },
+          icon: Icons.privacy_tip_outlined,
+        ),
+        _buildSettingFilledButton(
+          color: Theme.of(context).colorScheme.primary,
+          title: _l10n.contact,
+          onTap: () {
+            _settingsCubit.navigator.goToContact();
+          },
+          icon: Icons.contact_support_outlined,
+        ),
+        _buildSettingFilledButton(
+          color: Theme.of(context).colorScheme.primary,
+          title: _l10n.acknowledgements,
+          onTap: () {
+            _settingsCubit.navigator.goToThanksAndReference();
+          },
+          icon: Icons.format_quote,
         ),
       ],
+    );
+  }
+
+  Widget _buildSettingFilledButton({
+    required Color color,
+    required String title,
+    required VoidCallback onTap,
+    required IconData icon,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        borderRadius: 16.borderRadius,
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: 16.borderRadius,
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 16.0,
+            ),
+            child: Row(
+              children: [
+                Icon(icon, color: color),
+                16.width,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: _theme.textTheme.titleMedium?.copyWith(
+                      color: _theme.colorScheme.onPrimaryContainer,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

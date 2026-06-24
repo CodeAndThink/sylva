@@ -22,13 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "${color} をクリップボードにコピーしました";
 
-  static String m1(message) => "エラー: ${message}";
+  static String m1(author) => "Flaticonの${author}によるデザイン";
 
-  static String m2(level) => "レベル ${level}";
+  static String m2(author) => "Magnific.comの${author}によるデザイン";
+
+  static String m3(message) => "エラー: ${message}";
+
+  static String m4(level) => "レベル ${level}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("約"),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage("謝辞"),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("色を自動検出"),
@@ -36,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("戻る"),
     "blur": MessageLookupByLibrary.simpleMessage("ぼかし"),
     "brightness": MessageLookupByLibrary.simpleMessage("明るさ"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("カメラアイコン"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "カメラへのアクセスが拒否されたか、デバイスにカメラがありません。",
     ),
@@ -54,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "color": MessageLookupByLibrary.simpleMessage("色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("カラーアイコン"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "パスワードの確認が必要です",
@@ -67,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
     "donation": MessageLookupByLibrary.simpleMessage("寄付"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重複"),
     "email": MessageLookupByLibrary.simpleMessage("メール"),
@@ -75,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "メールアドレスが確認されていません。",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("メールアドレスが必要です"),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("エラー"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("色の読み込みに失敗しました"),
     "file": MessageLookupByLibrary.simpleMessage("ファイル"),
@@ -98,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("過去30日間"),
     "last7Days": MessageLookupByLibrary.simpleMessage("過去7日間"),
     "letGo": MessageLookupByLibrary.simpleMessage("行こう"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("直線"),
     "login": MessageLookupByLibrary.simpleMessage("ログイン"),
     "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
@@ -143,6 +155,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "購入に失敗したか、キャンセルされました。",
     ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "虹色のハーフトーンドット背景",
+    ),
     "ratio": MessageLookupByLibrary.simpleMessage("比率"),
     "rectangle": MessageLookupByLibrary.simpleMessage("長方形"),
     "register": MessageLookupByLibrary.simpleMessage("登録"),
@@ -156,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("購入の復元"),
     "retry": MessageLookupByLibrary.simpleMessage("再試行"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage("ロードブロックアイコン"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("新しく保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),
@@ -168,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
     "text": MessageLookupByLibrary.simpleMessage("テキスト"),
     "textAlign": MessageLookupByLibrary.simpleMessage("文字揃え"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage("感謝と参考文献"),
     "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
     "themeDark": MessageLookupByLibrary.simpleMessage("ダーク"),
     "themeLight": MessageLookupByLibrary.simpleMessage("ライト"),

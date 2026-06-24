@@ -1278,6 +1278,86 @@ class S {
   String get errorPrefix {
     return Intl.message('Error', name: 'errorPrefix', desc: '', args: []);
   }
+
+  /// `Thanks & Reference`
+  String get thanksAndReference {
+    return Intl.message(
+      'Thanks & Reference',
+      name: 'thanksAndReference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acknowledgements`
+  String get acknowledgements {
+    return Intl.message(
+      'Acknowledgements',
+      name: 'acknowledgements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We would like to thank the following creators for their assets used in this application:`
+  String get acknowledgementsIntro {
+    return Intl.message(
+      'We would like to thank the following creators for their assets used in this application:',
+      name: 'acknowledgementsIntro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Designed by {author} from Flaticon`
+  String designedByAuthorFromFlaticon(String author) {
+    return Intl.message(
+      'Designed by $author from Flaticon',
+      name: 'designedByAuthorFromFlaticon',
+      desc: '',
+      args: [author],
+    );
+  }
+
+  /// `Road block icon`
+  String get roadBlockIcon {
+    return Intl.message(
+      'Road block icon',
+      name: 'roadBlockIcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Colors icon`
+  String get colorsIcon {
+    return Intl.message('Colors icon', name: 'colorsIcon', desc: '', args: []);
+  }
+
+  /// `Camera icon`
+  String get cameraIcon {
+    return Intl.message('Camera icon', name: 'cameraIcon', desc: '', args: []);
+  }
+
+  /// `Designed by {author} - Magnific.com`
+  String designedByAuthorMagnific(String author) {
+    return Intl.message(
+      'Designed by $author - Magnific.com',
+      name: 'designedByAuthorMagnific',
+      desc: '',
+      args: [author],
+    );
+  }
+
+  /// `Rainbow halftone dots background`
+  String get rainbowHalftoneDotsBackground {
+    return Intl.message(
+      'Rainbow halftone dots background',
+      name: 'rainbowHalftoneDotsBackground',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

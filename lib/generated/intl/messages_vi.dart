@@ -22,13 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "Đã chép ${color} vào khay nhớ tạm";
 
-  static String m1(message) => "Lỗi: ${message}";
+  static String m1(author) => "Thiết kế bởi ${author} từ Flaticon";
 
-  static String m2(level) => "Cấp ${level}";
+  static String m2(author) => "Thiết kế bởi ${author} - Magnific.com";
+
+  static String m3(message) => "Lỗi: ${message}";
+
+  static String m4(level) => "Cấp ${level}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage("Lời cảm ơn"),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi xin chân thành cảm ơn những nhà sáng tạo sau đây vì các tài nguyên được sử dụng trong ứng dụng này:",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Mũi tên"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(
@@ -38,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
     "blur": MessageLookupByLibrary.simpleMessage("Làm mờ"),
     "brightness": MessageLookupByLibrary.simpleMessage("Độ sáng"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng máy ảnh"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
     ),
@@ -60,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sao chép màu thất bại",
     ),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng màu sắc"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
     ),
@@ -75,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
     "donation": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Ảnh trùng lặp"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -87,7 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailRequired": MessageLookupByLibrary.simpleMessage(
       "Email không được để trống",
     ),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Lỗi"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Không thể tải màu",
@@ -116,7 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),
     "last7Days": MessageLookupByLibrary.simpleMessage("7 ngày qua"),
     "letGo": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("Đường thẳng"),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
     "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
@@ -171,6 +183,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Mua hàng thất bại hoặc bị hủy.",
     ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "Hình nền chấm màu cầu vồng",
+    ),
     "ratio": MessageLookupByLibrary.simpleMessage("Tỷ lệ"),
     "rectangle": MessageLookupByLibrary.simpleMessage("Hình chữ nhật"),
     "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
@@ -186,6 +201,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Khôi phục giao dịch (Restore Purchases)",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage(
+      "Biểu tượng rào chắn",
+    ),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Lưu mới"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
@@ -200,6 +218,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "text": MessageLookupByLibrary.simpleMessage("Văn bản"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Căn lề chữ"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage(
+      "Cảm ơn & Tài liệu tham khảo",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Giao diện"),
     "themeDark": MessageLookupByLibrary.simpleMessage("Tối"),
     "themeLight": MessageLookupByLibrary.simpleMessage("Sáng"),

@@ -325,5 +325,35 @@
   "cameraPermissionDenied": "Camera access denied or device has no camera.",
   "retry": "Retry",
   "noCamerasFound": "No cameras found on device",
-  "errorPrefix": "Error"
+  "errorPrefix": "Error",
+  "thanksAndReference": "Thanks & Reference",
+  "@thanksAndReference": {},
+  "acknowledgements": "Acknowledgements",
+  "@acknowledgements": {},
+  "acknowledgementsIntro": "We would like to thank the following creators for their assets used in this application:",
+  "@acknowledgementsIntro": {},
+  "designedByAuthorFromFlaticon": "Designed by {author} from Flaticon",
+  "@designedByAuthorFromFlaticon": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
+  "roadBlockIcon": "Road block icon",
+  "@roadBlockIcon": {},
+  "colorsIcon": "Colors icon",
+  "@colorsIcon": {},
+  "cameraIcon": "Camera icon",
+  "@cameraIcon": {},
+  "designedByAuthorMagnific": "Designed by {author} - Magnific.com",
+  "@designedByAuthorMagnific": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
+  "rainbowHalftoneDotsBackground": "Rainbow halftone dots background",
+  "@rainbowHalftoneDotsBackground": {}
 }

@@ -235,6 +235,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
       "Chúng tôi áp dụng các biện pháp bảo mật tiêu chuẩn để bảo vệ dữ liệu của bạn. Do ảnh của bạn vẫn nằm trên thiết bị, bạn có toàn quyền kiểm soát quyền riêng tư của mình.",
     ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi sử dụng Firebase Crashlytics để thu thập các báo cáo lỗi ẩn danh. Điều này giúp chúng tôi xác định lỗi và cải thiện độ ổn định của ứng dụng. Dữ liệu được thu thập không chứa thông tin nhận dạng cá nhân.",
+    ),
     "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage(
       "Thu thập thông tin",
     ),
@@ -244,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage(
       "Bảo mật dữ liệu",
     ),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage("Báo cáo lỗi"),
     "progress": MessageLookupByLibrary.simpleMessage("Tiến trình"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Mua hàng thất bại hoặc bị hủy.",
@@ -306,9 +310,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "tosContent3": MessageLookupByLibrary.simpleMessage(
       "Sylva và các nhà sáng tạo sẽ không chịu trách nhiệm cho bất kỳ thiệt hại hoặc mất mát nào phát sinh từ việc sử dụng ứng dụng. Dịch vụ được cung cấp \'nguyên trạng\'.",
     ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylva sử dụng các dịch vụ của bên thứ ba như Firebase Crashlytics để giám sát độ ổn định của ứng dụng và thu thập báo cáo lỗi. Bằng cách sử dụng ứng dụng này, bạn đồng ý với việc thu thập dữ liệu hiệu suất và lỗi ẩn danh bởi các dịch vụ này.",
+    ),
     "tosTitle1": MessageLookupByLibrary.simpleMessage("Chấp nhận điều khoản"),
     "tosTitle2": MessageLookupByLibrary.simpleMessage("Trách nhiệm người dùng"),
     "tosTitle3": MessageLookupByLibrary.simpleMessage("Giới hạn trách nhiệm"),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("Dịch vụ bên thứ ba"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "Hủy thay đổi và quay lại camera.",
     ),

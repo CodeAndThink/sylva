@@ -1459,6 +1459,26 @@ class S {
     );
   }
 
+  /// `Crash Reporting`
+  String get privacyPolicyTitle4 {
+    return Intl.message(
+      'Crash Reporting',
+      name: 'privacyPolicyTitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We use Firebase Crashlytics to collect anonymized crash reports. This helps us identify bugs and improve the stability of the application. The collected data does not contain personally identifiable information.`
+  String get privacyPolicyContent4 {
+    return Intl.message(
+      'We use Firebase Crashlytics to collect anonymized crash reports. This helps us identify bugs and improve the stability of the application. The collected data does not contain personally identifiable information.',
+      name: 'privacyPolicyContent4',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Acceptance of Terms`
   String get tosTitle1 {
     return Intl.message(
@@ -1514,6 +1534,26 @@ class S {
     return Intl.message(
       'Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided \'as is\'.',
       name: 'tosContent3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Third-Party Services`
+  String get tosTitle4 {
+    return Intl.message(
+      'Third-Party Services',
+      name: 'tosTitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sylva utilizes third-party services such as Firebase Crashlytics to monitor application stability and collect crash reports. By using this app, you agree to the collection of anonymized crash and performance data by these services.`
+  String get tosContent4 {
+    return Intl.message(
+      'Sylva utilizes third-party services such as Firebase Crashlytics to monitor application stability and collect crash reports. By using this app, you agree to the collection of anonymized crash and performance data by these services.',
+      name: 'tosContent4',
       desc: '',
       args: [],
     );

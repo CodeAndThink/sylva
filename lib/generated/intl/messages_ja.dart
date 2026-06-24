@@ -203,9 +203,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
       "私たちはデータを保護するために業界標準のセキュリティ対策を実施しています。写真はデバイス上に残るため、プライバシーを完全に管理できます。",
     ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "匿名のクラッシュレポートを収集するためにFirebase Crashlyticsを使用しています。これにより、バグを特定し、アプリケーションの安定性を向上させることができます。収集されるデータに個人を特定できる情報は含まれていません。",
+    ),
     "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage("情報の収集"),
     "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage("情報の利用"),
     "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage("データセキュリティ"),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage("クラッシュレポート"),
     "progress": MessageLookupByLibrary.simpleMessage("進捗"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "購入に失敗したか、キャンセルされました。",
@@ -260,9 +264,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "tosContent3": MessageLookupByLibrary.simpleMessage(
       "Sylvaおよびその作成者は、アプリケーションの使用から生じるいかなる損害または損失についても責任を負いません。サービスは「現状有姿」で提供されます。",
     ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylvaは、アプリケーションの安定性を監視し、クラッシュレポートを収集するためにFirebase Crashlyticsなどのサードパーティサービスを利用しています。本アプリを使用することにより、これらのサービスによる匿名のクラッシュおよびパフォーマンスデータの収集に同意するものとします。",
+    ),
     "tosTitle1": MessageLookupByLibrary.simpleMessage("利用規約への同意"),
     "tosTitle2": MessageLookupByLibrary.simpleMessage("ユーザーの責任"),
     "tosTitle3": MessageLookupByLibrary.simpleMessage("責任の制限"),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("サードパーティサービス"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "変更を破棄してカメラに戻ります。",
     ),

@@ -36,6 +36,10 @@ class TermsOfServicePage extends StatelessWidget {
             AppTitleText(title: l10n.tosTitle3),
 
             Text(l10n.tosContent3, style: theme.textTheme.bodyLarge),
+            24.height,
+            AppTitleText(title: l10n.tosTitle4),
+
+            Text(l10n.tosContent4, style: theme.textTheme.bodyLarge),
           ],
         ),
       ),

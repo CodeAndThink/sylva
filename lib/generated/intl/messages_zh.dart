@@ -185,9 +185,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
       "我们实施行业标准的安全措施来保护您的数据。由于您的照片保留在设备上，您可以完全控制自己的隐私。",
     ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "我们使用 Firebase Crashlytics 收集匿名崩溃报告。这有助于我们识别错误并提高应用程序的稳定性。收集的数据不包含个人身份信息。",
+    ),
     "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage("信息收集"),
     "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage("信息使用"),
     "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage("数据安全"),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage("崩溃报告"),
     "progress": MessageLookupByLibrary.simpleMessage("进度"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "购买失败或已被取消。",
@@ -240,9 +244,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "tosContent3": MessageLookupByLibrary.simpleMessage(
       "Sylva及其创作者对您使用该应用程序造成的任何损害或损失不承担任何责任。服务按“原样”提供。",
     ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylva 利用 Firebase Crashlytics 等第三方服务来监控应用程序的稳定性并收集崩溃报告。使用本应用程序即表示您同意这些服务收集匿名崩溃和性能数据。",
+    ),
     "tosTitle1": MessageLookupByLibrary.simpleMessage("接受条款"),
     "tosTitle2": MessageLookupByLibrary.simpleMessage("用户责任"),
     "tosTitle3": MessageLookupByLibrary.simpleMessage("责任限制"),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("第三方服务"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage("放弃更改并返回相机。"),
     "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("返回"),
     "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage("在前后摄像头之间切换。"),

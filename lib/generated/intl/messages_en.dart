@@ -231,6 +231,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
       "We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.",
     ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "We use Firebase Crashlytics to collect anonymized crash reports. This helps us identify bugs and improve the stability of the application. The collected data does not contain personally identifiable information.",
+    ),
     "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage(
       "Information Collection",
     ),
@@ -239,6 +242,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage(
       "Data Security",
+    ),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage(
+      "Crash Reporting",
     ),
     "progress": MessageLookupByLibrary.simpleMessage("Progress"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
@@ -298,11 +304,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "tosContent3": MessageLookupByLibrary.simpleMessage(
       "Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided \'as is\'.",
     ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylva utilizes third-party services such as Firebase Crashlytics to monitor application stability and collect crash reports. By using this app, you agree to the collection of anonymized crash and performance data by these services.",
+    ),
     "tosTitle1": MessageLookupByLibrary.simpleMessage("Acceptance of Terms"),
     "tosTitle2": MessageLookupByLibrary.simpleMessage("User Responsibilities"),
     "tosTitle3": MessageLookupByLibrary.simpleMessage(
       "Limitation of Liability",
     ),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("Third-Party Services"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "Discard changes and return to the camera.",
     ),

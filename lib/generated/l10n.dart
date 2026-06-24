@@ -1653,6 +1653,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Device info (Model, OS) will be attached to help us support you better.`
+  String get contactFormDeviceInfoHint {
+    return Intl.message(
+      'Device info (Model, OS) will be attached to help us support you better.',
+      name: 'contactFormDeviceInfoHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter device info`
+  String get contactFormDeviceInfoError {
+    return Intl.message(
+      'Please enter device info',
+      name: 'contactFormDeviceInfoError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -9,7 +9,6 @@ import 'package:sylva/presentation/features/contact/contact_cubit.dart';
 import 'package:sylva/presentation/features/contact/contact_navigator.dart';
 import 'package:sylva/presentation/features/contact/contact_state.dart';
 import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
-import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/presentation/widgets/text_fields/app_text_field.dart';
@@ -40,8 +39,10 @@ class __ContactChildPageState extends State<_ContactChildPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
+  final TextEditingController _deviceInfoController = TextEditingController();
   final FocusNode _titleFocus = FocusNode();
   final FocusNode _descFocus = FocusNode();
+  final FocusNode _deviceInfoFocus = FocusNode();
   late ThemeData _theme;
   late S _l10n;
   late final ContactCubit _cubit;
@@ -57,14 +58,17 @@ class __ContactChildPageState extends State<_ContactChildPage> {
   void dispose() {
     _titleController.dispose();
     _descController.dispose();
+    _deviceInfoController.dispose();
     _titleFocus.dispose();
     _descFocus.dispose();
+    _deviceInfoFocus.dispose();
     super.dispose();
   }
 
   void unfocusAll() {
     _titleFocus.unfocus();
     _descFocus.unfocus();
+    _deviceInfoFocus.unfocus();
   }
 
   Future<void> _submit() async {
@@ -89,26 +93,22 @@ class __ContactChildPageState extends State<_ContactChildPage> {
             previous.summitStatus != current.summitStatus,
         listener: (context, state) {
           if (state.summitStatus.isSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(_l10n.contactSuccessMessage),
-                backgroundColor: Colors.green,
-              ),
-            );
             _titleController.clear();
             _descController.clear();
-            _cubit.changeTitle(value: '');
-            _cubit.changeDescription(value: '');
-          } else if (state.summitStatus.isFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(_l10n.contactErrorMessage),
-                backgroundColor: Theme.of(context).colorScheme.error,
-              ),
-            );
           }
         },
-        child: _buildBody(),
+        child: BlocListener<ContactCubit, ContactState>(
+          listenWhen: (previous, current) =>
+              previous.getDeviceStatus != current.getDeviceStatus,
+          listener: (context, state) {
+            if (state.getDeviceStatus.isSuccess) {
+              _deviceInfoController.text = state.deviceInfo;
+            } else if (state.getDeviceStatus.isInitial) {
+              _deviceInfoController.clear();
+            }
+          },
+          child: _buildBody(),
+        ),
       ),
     );
   }
@@ -217,16 +217,21 @@ class __ContactChildPageState extends State<_ContactChildPage> {
                   return Column(
                     children: [
                       8.height,
-                      AppTransparentContainer(
-                        padding: 8.paddingAll,
-                        border: 16.borderRadius,
-                        borderColor: _theme.colorScheme.onSurface,
-                        child: Text(
-                          '[Device: ${state.deviceInfo}]',
-                          style: _theme.textTheme.bodyMedium?.copyWith(
-                            color: _theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
+                      AppTextField(
+                        focusNode: _deviceInfoFocus,
+                        controller: _deviceInfoController,
+                        hintText: _l10n.contactFormDeviceInfoHint,
+                        maxLines: 2,
+                        onChanged: (value) {
+                          _cubit.changeDeviceInfo(value: value);
+                        },
+                        validator: (value) {
+                          if ((value == null || value.isEmpty) &&
+                              state.isAttached) {
+                            return _l10n.contactFormDeviceInfoError;
+                          }
+                          return null;
+                        },
                       ),
                     ],
                   );

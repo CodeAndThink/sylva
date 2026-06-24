@@ -87,6 +87,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "説明を入力...",
     ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "デバイス情報を入力してください",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "デバイス情報（モデル、OS）が添付されます。",
+    ),
     "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
       "サポート向上のため、基本的なデバイス情報（モデル、OS）が添付されます。",
     ),

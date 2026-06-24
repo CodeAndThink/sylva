@@ -407,5 +407,9 @@
   "deviceInfo": "设备信息",
   "@deviceInfo": {},
   "contactFormAttachDeviceInfo": "附加设备信息",
-  "@contactFormAttachDeviceInfo": {}
+  "@contactFormAttachDeviceInfo": {},
+  "contactFormDeviceInfoHint": "设备信息（型号、OS）将附带，以便我们更好地为您提供支持。",
+  "@contactFormDeviceInfoHint": {},
+  "contactFormDeviceInfoError": "请输入设备信息",
+  "@contactFormDeviceInfoError": {}
 }

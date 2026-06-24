@@ -81,6 +81,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "输入描述...",
     ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "请输入设备信息",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "设备信息（型号、OS）将附带，以便我们更好地为您提供支持。",
+    ),
     "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
       "将会附带基本设备信息（型号、操作系统），以帮助我们更好地为您提供支持。",
     ),

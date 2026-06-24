@@ -2,6 +2,7 @@ import 'package:sylva/core/enums/contact_type.dart';
 import 'package:sylva/core/enums/load_status.dart';
 import 'package:sylva/core/utils/device_info_helper.dart';
 import 'package:sylva/domain/usecases/submit_contact_usecase.dart';
+import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/contact/contact_navigator.dart';
 import 'package:sylva/presentation/features/contact/contact_state.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
@@ -41,6 +42,10 @@ class ContactCubit extends BaseCubit<ContactState> {
     emit(state.copyWith(description: value));
   }
 
+  void changeDeviceInfo({required String value}) {
+    emit(state.copyWith(deviceInfo: value));
+  }
+
   void toggleAttachDeviceInfo() {
     emit(state.copyWith(isAttached: !state.isAttached));
   }
@@ -62,9 +67,17 @@ class ContactCubit extends BaseCubit<ContactState> {
         type: state.selectedType,
       );
 
-      emit(state.copyWith(summitStatus: LoadStatus.success));
+      emit(
+        state.copyWith(
+          summitStatus: LoadStatus.success,
+          title: '',
+          description: '',
+        ),
+      );
+      navigator.flushBar.showSuccess(message: S.current.contactSuccessMessage);
     } catch (e) {
       emit(state.copyWith(summitStatus: LoadStatus.failure));
+      navigator.flushBar.showError(message: S.current.contactErrorMessage);
     }
   }
 }

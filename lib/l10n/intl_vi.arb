@@ -407,5 +407,9 @@
   "deviceInfo": "Thông tin thiết bị",
   "@deviceInfo": {},
   "contactFormAttachDeviceInfo": "Đính kèm thông tin thiết bị",
-  "@contactFormAttachDeviceInfo": {}
+  "@contactFormAttachDeviceInfo": {},
+  "contactFormDeviceInfoHint": "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
+  "@contactFormDeviceInfoHint": {},
+  "contactFormDeviceInfoError": "Vui lòng nhập thông tin thiết bị",
+  "@contactFormDeviceInfoError": {}
 }

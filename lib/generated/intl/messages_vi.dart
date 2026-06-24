@@ -97,6 +97,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "Nhập mô tả...",
     ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập thông tin thiết bị",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
+    ),
     "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
       "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
     ),

@@ -97,6 +97,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "Enter description",
     ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "Please enter device info",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "Device info (Model, OS) will be attached to help us support you better.",
+    ),
     "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
       "Basic device info (Model, OS) will be attached to help us support you better.",
     ),

@@ -407,5 +407,9 @@
   "deviceInfo": "デバイス情報",
   "@deviceInfo": {},
   "contactFormAttachDeviceInfo": "デバイス情報を添付する",
-  "@contactFormAttachDeviceInfo": {}
+  "@contactFormAttachDeviceInfo": {},
+  "contactFormDeviceInfoHint": "デバイス情報（モデル、OS）が添付されます。",
+  "@contactFormDeviceInfoHint": {},
+  "contactFormDeviceInfoError": "デバイス情報を入力してください",
+  "@contactFormDeviceInfoError": {}
 }

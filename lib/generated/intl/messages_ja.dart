@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("メールアドレスが必要です"),
     "error": m1,
+    "errorPrefix": MessageLookupByLibrary.simpleMessage("エラー"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("色の読み込みに失敗しました"),
     "file": MessageLookupByLibrary.simpleMessage("ファイル"),
     "files": MessageLookupByLibrary.simpleMessage("ファイル"),
@@ -107,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameLength": MessageLookupByLibrary.simpleMessage("名前は2文字以上である必要があります"),
     "nameRequired": MessageLookupByLibrary.simpleMessage("名前が必要です"),
     "next": MessageLookupByLibrary.simpleMessage("次へ"),
+    "noCamerasFound": MessageLookupByLibrary.simpleMessage("デバイスにカメラが見つかりません"),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("履歴はまだありません"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "コピーする色が選択されていません",

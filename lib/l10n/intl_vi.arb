@@ -323,5 +323,7 @@
   "termsOfService": "Điều khoản dịch vụ",
   "@termsOfService": {},
   "cameraPermissionDenied": "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
-  "retry": "Thử lại"
+  "retry": "Thử lại",
+  "noCamerasFound": "Thiết bị không có camera",
+  "errorPrefix": "Lỗi"
 }

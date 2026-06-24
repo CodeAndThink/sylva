@@ -323,5 +323,7 @@
   "termsOfService": "Terms of Service",
   "@termsOfService": {},
   "cameraPermissionDenied": "Camera access denied or device has no camera.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "noCamerasFound": "No cameras found on device",
+  "errorPrefix": "Error"
 }

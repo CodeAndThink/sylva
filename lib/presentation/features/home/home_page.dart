@@ -10,7 +10,6 @@ import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
-import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -62,7 +61,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
   int _countdownSeconds = 0;
   IconData? _centerIcon;
   Timer? _centerIconTimer;
-  bool _cameraPermissionDenied = false;
   late final HomeCubit _cubit;
   late ThemeData _theme;
 
@@ -75,29 +73,13 @@ class __HomeChildPageState extends State<_HomeChildPage>
   }
 
   Future<void> _initCamera() async {
-    if (mounted) {
-      setState(() {
-        _cameraPermissionDenied = false;
-      });
-    }
     try {
       _cameras = await availableCameras();
       if (_cameras.isNotEmpty) {
         _setCamera(_cameras[_selectedCameraIndex]);
-      } else {
-        if (mounted) {
-          setState(() {
-            _cameraPermissionDenied = true;
-          });
-        }
       }
     } catch (e) {
       debugPrint('Error initializing camera: $e');
-      if (mounted) {
-        setState(() {
-          _cameraPermissionDenied = true;
-        });
-      }
     }
   }
 
@@ -138,11 +120,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
       }
     } catch (e) {
       debugPrint('Error initializing camera controller: $e');
-      if (mounted) {
-        setState(() {
-          _cameraPermissionDenied = true;
-        });
-      }
     }
   }
 
@@ -170,17 +147,20 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      _initCamera();
-    } else if (state == AppLifecycleState.inactive) {
-      if (_controller != null && _controller!.value.isInitialized) {
-        if (mounted) {
-          setState(() {
-            _isCameraInitialized = false;
-          });
-        }
-        _controller!.dispose();
+    final CameraController? cameraController = _controller;
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      if (mounted) {
+        setState(() {
+          _isCameraInitialized = false;
+        });
       }
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _initCamera();
     }
   }
 
@@ -284,34 +264,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   }
 
   Widget _buildCameraPreview() {
-    if (_cameraPermissionDenied) {
-      return AppTransparentContainer(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.3,
-                child: AppAssetImage(path: AppAssets.icContruction),
-              ),
-              12.height,
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.7,
-                child: Text(
-                  S.current.cameraPermissionDenied,
-                  style: _theme.textTheme.titleMedium?.copyWith(
-                    color: _theme.colorScheme.onSurfaceVariant,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              16.height,
-              AppFilledButton(text: S.current.retry, onPressed: _initCamera),
-            ],
-          ),
-        ),
-      );
-    } else if (_isCameraInitialized && _controller != null) {
+    if (_isCameraInitialized && _controller != null) {
       return Stack(
         children: [
           SizedBox(

@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "error": m1,
+    "errorPrefix": MessageLookupByLibrary.simpleMessage("Error"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Failed to load colors",
     ),
@@ -123,6 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "nameRequired": MessageLookupByLibrary.simpleMessage("Name is required"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "noCamerasFound": MessageLookupByLibrary.simpleMessage(
+      "No cameras found on device",
+    ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("No history yet"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Nothing selected to copy",

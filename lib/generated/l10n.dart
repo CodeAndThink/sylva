@@ -1263,6 +1263,21 @@ class S {
   String get retry {
     return Intl.message('Retry', name: 'retry', desc: '', args: []);
   }
+
+  /// `No cameras found on device`
+  String get noCamerasFound {
+    return Intl.message(
+      'No cameras found on device',
+      name: 'noCamerasFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get errorPrefix {
+    return Intl.message('Error', name: 'errorPrefix', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

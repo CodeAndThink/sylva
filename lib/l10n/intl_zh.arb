@@ -323,5 +323,7 @@
   "termsOfService": "服务条款",
   "@termsOfService": {},
   "cameraPermissionDenied": "拒绝访问相机或设备没有相机。",
-  "retry": "重试"
+  "retry": "重试",
+  "noCamerasFound": "设备上未找到相机",
+  "errorPrefix": "错误"
 }

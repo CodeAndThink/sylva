@@ -323,5 +323,7 @@
   "termsOfService": "利用規約",
   "@termsOfService": {},
   "cameraPermissionDenied": "カメラへのアクセスが拒否されたか、デバイスにカメラがありません。",
-  "retry": "再試行"
+  "retry": "再試行",
+  "noCamerasFound": "デバイスにカメラが見つかりません",
+  "errorPrefix": "エラー"
 }

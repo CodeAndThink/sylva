@@ -88,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email không được để trống",
     ),
     "error": m1,
+    "errorPrefix": MessageLookupByLibrary.simpleMessage("Lỗi"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Không thể tải màu",
     ),
@@ -129,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tên không được để trống",
     ),
     "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+    "noCamerasFound": MessageLookupByLibrary.simpleMessage(
+      "Thiết bị không có camera",
+    ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Chưa chọn màu để sao chép",

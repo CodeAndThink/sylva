@@ -437,5 +437,8 @@
   "contactFormDeviceInfoHint": "Device info (Model, OS) will be attached to help us support you better.",
   "@contactFormDeviceInfoHint": {},
   "contactFormDeviceInfoError": "Please enter device info",
-  "@contactFormDeviceInfoError": {}
+  "@contactFormDeviceInfoError": {},
+  "interactionEffects": "Interaction Effects",
+  "hapticFeedback": "Haptic Feedback",
+  "soundEffects": "Sound Effects"
 }

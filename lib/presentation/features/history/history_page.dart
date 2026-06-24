@@ -5,6 +5,7 @@ import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/core/enums/time_group.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/history/history_cubit.dart';
 import 'package:sylva/presentation/features/history/history_navigator.dart';
@@ -324,6 +325,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               state.isGridView ? Icons.grid_view_rounded : Icons.list_outlined,
             ),
             onPressed: () {
+              AppFeedback.playInteract(context);
               if (_scrollController.hasClients) {
                 _scrollController.jumpTo(0);
               }
@@ -342,6 +344,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       child: InkWell(
         key: _keyFavoriteOnly,
         onTap: () {
+          AppFeedback.playInteract(context);
           if (_scrollController.hasClients) {
             _scrollController.jumpTo(0);
           }
@@ -376,6 +379,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       child: InkWell(
         key: _keySort,
         onTap: () {
+          AppFeedback.playInteract(context);
           if (_scrollController.hasClients) {
             _scrollController.jumpTo(0);
           }

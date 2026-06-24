@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/utils/color_utils.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
@@ -67,9 +68,11 @@ class ColorPaletteBottomSheet extends StatelessWidget {
                           hex: hex,
                           isSelected: false,
                           onTap: () {
+                            AppFeedback.playInteract(context);
                             onColorLongPress(color);
                           },
                           onLongPress: () {
+                            AppFeedback.playLongInteract(context);
                             onColorLongPress(color);
                           },
                         );
@@ -99,9 +102,11 @@ class ColorPaletteBottomSheet extends StatelessWidget {
                                 hex: hex,
                                 isSelected: false,
                                 onTap: () {
+                                  AppFeedback.playInteract(context);
                                   onColorLongPress(color);
                                 },
                                 onLongPress: () {
+                                  AppFeedback.playLongInteract(context);
                                   onColorLongPress(color);
                                 },
                               );

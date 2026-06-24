@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/navigation/app_router.dart';
@@ -173,6 +174,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
   void _toggleFlash() async {
     if (_controller == null || !_isCameraInitialized) return;
+    AppFeedback.playInteract(context);
 
     setState(() {
       if (_flashMode == FlashMode.off) {
@@ -204,6 +206,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_controller!.value.isTakingPicture || _isCapturing || _isCountingDown) {
       return;
     }
+    AppFeedback.playInteract(context);
 
     if (_timerSeconds > 0) {
       setState(() {

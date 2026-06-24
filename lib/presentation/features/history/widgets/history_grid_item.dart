@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sylva/core/extensions/date_time_extension.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
@@ -29,6 +30,7 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
   bool _isDeleting = false;
 
   void _handleDelete() {
+    AppFeedback.playHeavy(context);
     if (_isDeleting) return;
     setState(() {
       _isDeleting = true;
@@ -83,7 +85,10 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                         Row(
                           children: [
                             InkWell(
-                              onTap: widget.onFavoritePressed,
+                              onTap: () {
+                                AppFeedback.playInteract(context);
+                                widget.onFavoritePressed?.call();
+                              },
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: 24.borderRadius,

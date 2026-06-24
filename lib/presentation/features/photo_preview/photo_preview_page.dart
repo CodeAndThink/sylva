@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/utils/color_utils.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_cubit.dart';
@@ -562,6 +563,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                     _showMagnifier.value = false;
                                   },
                                   onLongPress: () {
+                                    AppFeedback.playLongInteract(context);
                                     _cubit.copyColor(color);
                                   },
                                 );
@@ -610,6 +612,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                           _showMagnifier.value = false;
                                         },
                                         onLongPress: () {
+                                          AppFeedback.playLongInteract(context);
                                           _cubit.copyColor(color);
                                         },
                                       );
@@ -786,6 +789,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           height: 38,
           padding: 8.paddingHorizontal,
           onTap: () {
+            AppFeedback.playInteract(context);
             _cubit.copyColorToClipboard(color: color);
           },
           borderRadius: 20,
@@ -859,6 +863,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           child: IconButton(
             key: _keySave,
             onPressed: () async {
+              AppFeedback.playInteract(context);
               if (widget.historyRecordId != null) {
                 SaveOptionsBottomSheet.show(
                   context: context,
@@ -882,7 +887,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           message: S.of(context).saveToLibrary,
           child: IconButton(
             key: _keyLibrary,
-            onPressed: () => _cubit.saveToLibrary(imagePath: widget.imagePath),
+            onPressed: () {
+              AppFeedback.playInteract(context);
+              _cubit.saveToLibrary(imagePath: widget.imagePath);
+            },
             icon: Icon(Icons.download_outlined, size: 30),
           ),
         ),

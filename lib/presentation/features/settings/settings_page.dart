@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
+import 'package:sylva/presentation/app/interaction_cubit.dart';
+import 'package:sylva/presentation/app/interaction_state.dart';
 import 'package:sylva/presentation/app/locale_cubit.dart';
 import 'package:sylva/presentation/app/theme_cubit.dart';
 import 'package:sylva/presentation/app/theme_state.dart';
@@ -34,6 +36,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   late final ThemeCubit _themeCubit;
   late final LocaleCubit _localeCubit;
   late final SettingsCubit _settingsCubit;
+  late final InteractionCubit _interactionCubit;
   late S _l10n;
   late ThemeData _theme;
 
@@ -43,6 +46,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     _themeCubit = context.read<ThemeCubit>();
     _localeCubit = context.read<LocaleCubit>();
     _settingsCubit = context.read<SettingsCubit>();
+    _interactionCubit = context.read<InteractionCubit>();
   }
 
   @override
@@ -60,6 +64,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           MediaQuery.of(context).padding.bottom + 12,
         ),
         children: [
+          _buildInteractionSection(),
           _buildThemeSection(),
           _buildLanguageSection(),
           _buildOtherSection(),
@@ -144,6 +149,33 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                 ],
               ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildInteractionSection() {
+    return BlocBuilder<InteractionCubit, InteractionState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppTitleText(title: _l10n.interactionEffects),
+            SwitchListTile(
+              title: Text(_l10n.hapticFeedback),
+              value: state.hapticEnabled,
+              onChanged: (value) {
+                _interactionCubit.toggleHaptic();
+              },
+            ),
+            SwitchListTile(
+              title: Text(_l10n.soundEffects),
+              value: state.soundEnabled,
+              onChanged: (value) {
+                _interactionCubit.toggleSound();
+              },
             ),
           ],
         );

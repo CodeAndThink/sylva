@@ -1713,6 +1713,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Interaction Effects`
+  String get interactionEffects {
+    return Intl.message(
+      'Interaction Effects',
+      name: 'interactionEffects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Haptic Feedback`
+  String get hapticFeedback {
+    return Intl.message(
+      'Haptic Feedback',
+      name: 'hapticFeedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sound Effects`
+  String get soundEffects {
+    return Intl.message(
+      'Sound Effects',
+      name: 'soundEffects',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

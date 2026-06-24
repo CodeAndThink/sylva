@@ -496,7 +496,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               children: <Widget>[
                 Text(
                   title,
-                  style: _theme.textTheme.headlineMedium?.copyWith(
+                  style: _theme.textTheme.headlineSmall?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -505,7 +505,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
                   child: Text(
                     desc,
-                    style: _theme.textTheme.bodyMedium?.copyWith(
+                    style: _theme.textTheme.bodyLarge?.copyWith(
                       color: Colors.white,
                     ),
                   ),
@@ -517,7 +517,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                       onPressed: controller.skip,
                       child: Text(
                         S.of(context).tutorialSkip,
-                        style: _theme.textTheme.titleSmall?.copyWith(
+                        style: _theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white70,
                         ),
                       ),
@@ -530,7 +530,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                       onPressed: controller.next,
                       child: Text(
                         S.of(context).tutorialNext,
-                        style: _theme.textTheme.titleSmall?.copyWith(
+                        style: _theme.textTheme.titleMedium?.copyWith(
                           color: _theme.colorScheme.surface,
                         ),
                       ),

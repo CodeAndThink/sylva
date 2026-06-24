@@ -34,7 +34,29 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             24.height,
-            Text(AppConfigs.appName, style: theme.textTheme.headlineMedium),
+            ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                colors: [
+                  Colors.red,
+                  Colors.orange,
+                  Colors.yellow,
+                  Colors.green,
+                  Colors.blue,
+                  Colors.indigo,
+                  Colors.purple,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+              child: Text(
+                AppConfigs.appName,
+                style: theme.textTheme.displaySmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  height: 1.1,
+                  color: Colors.white,
+                ),
+              ),
+            ),
             8.height,
             Text(
               S.of(context).version(AppConfigs.version),

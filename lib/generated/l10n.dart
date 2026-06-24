@@ -1518,6 +1518,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Title`
+  String get contactFormTitle {
+    return Intl.message('Title', name: 'contactFormTitle', desc: '', args: []);
+  }
+
+  /// `Enter title`
+  String get contactFormTitleHint {
+    return Intl.message(
+      'Enter title',
+      name: 'contactFormTitleHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get contactFormDescription {
+    return Intl.message(
+      'Description',
+      name: 'contactFormDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter description`
+  String get contactFormDescriptionHint {
+    return Intl.message(
+      'Enter description',
+      name: 'contactFormDescriptionHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bug`
+  String get contactFormTypeBug {
+    return Intl.message('Bug', name: 'contactFormTypeBug', desc: '', args: []);
+  }
+
+  /// `Suggestion`
+  String get contactFormTypeSuggestion {
+    return Intl.message(
+      'Suggestion',
+      name: 'contactFormTypeSuggestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get contactFormTypeOther {
+    return Intl.message(
+      'Other',
+      name: 'contactFormTypeOther',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `Thank you for your feedback!`
+  String get contactSuccessMessage {
+    return Intl.message(
+      'Thank you for your feedback!',
+      name: 'contactSuccessMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill in all fields`
+  String get contactErrorMessage {
+    return Intl.message(
+      'Please fill in all fields',
+      name: 'contactErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get contactType {
+    return Intl.message('Type', name: 'contactType', desc: '', args: []);
+  }
+
+  /// `Please enter a title`
+  String get contactFormTitleError {
+    return Intl.message(
+      'Please enter a title',
+      name: 'contactFormTitleError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a description`
+  String get contactFormDescriptionError {
+    return Intl.message(
+      'Please enter a description',
+      name: 'contactFormDescriptionError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

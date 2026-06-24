@@ -82,6 +82,32 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm password is required",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "Please fill in all fields",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "Please enter a description",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Enter description",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("Title"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
+      "Please enter a title",
+    ),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage("Enter title"),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("Bug"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("Other"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage(
+      "Suggestion",
+    ),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "Thank you for your feedback!",
+    ),
+    "contactType": MessageLookupByLibrary.simpleMessage("Type"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
     "createTime": MessageLookupByLibrary.simpleMessage("Time"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
@@ -231,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),

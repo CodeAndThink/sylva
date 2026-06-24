@@ -74,6 +74,28 @@ class MessageLookup extends MessageLookupByLibrary {
       "パスワードの確認が必要です",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("連絡先"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "すべてのフィールドに入力してください",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage("説明"),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "説明を入力してください",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "説明を入力...",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("タイトル"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
+      "タイトルを入力してください",
+    ),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage("タイトルを入力"),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("バグ"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("その他"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage("提案"),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "フィードバックありがとうございます！",
+    ),
+    "contactType": MessageLookupByLibrary.simpleMessage("種類"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
     "createTime": MessageLookupByLibrary.simpleMessage("時間"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
@@ -199,6 +221,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
+    "submit": MessageLookupByLibrary.simpleMessage("送信"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),

@@ -82,6 +82,32 @@ class MessageLookup extends MessageLookupByLibrary {
       "Xác nhận mật khẩu không được để trống",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Liên hệ"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng điền đầy đủ thông tin",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage(
+      "Mô tả chi tiết",
+    ),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập mô tả",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Nhập mô tả...",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập tiêu đề",
+    ),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage(
+      "Nhập tiêu đề",
+    ),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("Báo lỗi"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("Khác"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage("Góp ý"),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "Cảm ơn bạn đã gửi phản hồi!",
+    ),
+    "contactType": MessageLookupByLibrary.simpleMessage("Loại phản hồi"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
     "createTime": MessageLookupByLibrary.simpleMessage("Thời gian"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
@@ -237,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
+    "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(

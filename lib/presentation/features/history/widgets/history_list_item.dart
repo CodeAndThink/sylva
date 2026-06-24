@@ -78,7 +78,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                           4.height,
                           Text(
                             S.of(context).delete,
-                            style: theme.textTheme.titleSmall?.copyWith(
+                            style: theme.textTheme.titleMedium?.copyWith(
                               color: Colors.white,
                             ),
                           ),
@@ -190,11 +190,12 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                     ),
                               const Spacer(),
                               Text(
-                                widget.record.createdAt.toDateTimeString(),
+                                widget.record.createdAt.isToday
+                                    ? widget.record.createdAt.toFormattedTime()
+                                    : widget.record.createdAt.toFormattedDate(),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
+                                style: theme.textTheme.titleSmall?.copyWith(
                                   color: theme.colorScheme.onPrimaryContainer,
                                 ),
                               ),

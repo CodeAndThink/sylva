@@ -135,8 +135,10 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                                   8.height,
                                   Text(
                                     widget.record.createdAt.isToday
-                                        ? widget.record.createdAt.toFormattedTime()
-                                        : widget.record.createdAt.toFormattedDate(),
+                                        ? widget.record.createdAt
+                                              .toFormattedTime()
+                                        : widget.record.createdAt
+                                              .toFormattedDate(),
                                     style: theme.textTheme.titleSmall?.copyWith(
                                       color:
                                           theme.colorScheme.onPrimaryContainer,

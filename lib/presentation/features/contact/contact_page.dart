@@ -9,6 +9,7 @@ import 'package:sylva/presentation/features/contact/contact_cubit.dart';
 import 'package:sylva/presentation/features/contact/contact_navigator.dart';
 import 'package:sylva/presentation/features/contact/contact_state.dart';
 import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
+import 'package:sylva/presentation/widgets/loadings/app_loading_overlay.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/presentation/widgets/text_fields/app_text_field.dart';
@@ -92,6 +93,11 @@ class __ContactChildPageState extends State<_ContactChildPage> {
         listenWhen: (previous, current) =>
             previous.summitStatus != current.summitStatus,
         listener: (context, state) {
+          if (state.summitStatus.isLoading) {
+            AppLoadingOverlay.show(context);
+          } else {
+            AppLoadingOverlay.hide(context);
+          }
           if (state.summitStatus.isSuccess) {
             _titleController.clear();
             _descController.clear();

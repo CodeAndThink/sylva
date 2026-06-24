@@ -264,10 +264,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           borderRadius: 16.borderRadius,
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 16.0,
-            ),
+            padding: 16.paddingAll,
             child: Row(
               children: [
                 Icon(icon, color: color),
@@ -278,6 +275,8 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                     style: _theme.textTheme.titleMedium?.copyWith(
                       color: _theme.colorScheme.onPrimaryContainer,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

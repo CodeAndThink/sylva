@@ -37,7 +37,7 @@ void main() async {
   PlatformDispatcher.instance.onError = (error, stack) {
     // Hint: You can filter non-critical exceptions here.
     // For example, to ignore network errors (SocketException) or DioException:
-    // if (error is SocketException) return true; 
+    // if (error is SocketException) return true;
 
     // By default, record unhandled async errors as Fatal (Crash)
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);

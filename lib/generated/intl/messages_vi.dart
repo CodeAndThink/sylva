@@ -85,6 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Vui lòng điền đầy đủ thông tin",
     ),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "Đính kèm thông tin thiết bị",
+    ),
     "contactFormDescription": MessageLookupByLibrary.simpleMessage(
       "Mô tả chi tiết",
     ),
@@ -93,6 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "Nhập mô tả...",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
     ),
     "contactFormTitle": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
     "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
@@ -118,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "designedByAuthorFromFlaticon": m1,
     "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("Thông tin thiết bị"),
     "donation": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Ảnh trùng lặp"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),

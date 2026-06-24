@@ -85,6 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Please fill in all fields",
     ),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "Attach Device Info",
+    ),
     "contactFormDescription": MessageLookupByLibrary.simpleMessage(
       "Description",
     ),
@@ -93,6 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "Enter description",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "Basic device info (Model, OS) will be attached to help us support you better.",
     ),
     "contactFormTitle": MessageLookupByLibrary.simpleMessage("Title"),
     "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
@@ -118,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "designedByAuthorFromFlaticon": m1,
     "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("Device Info"),
     "donation": MessageLookupByLibrary.simpleMessage("Donation"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Duplicates"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),

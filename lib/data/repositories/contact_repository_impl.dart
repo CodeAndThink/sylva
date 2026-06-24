@@ -12,12 +12,14 @@ class ContactRepositoryImpl implements ContactRepository {
     required String title,
     required String description,
     required String deviceInfo,
+    required String uuid,
     required ContactType type,
   }) async {
     await _firestore.collection('feedbacks').add({
       'title': title,
       'description': description,
       'device_info': deviceInfo,
+      'uuid': uuid,
       'type': type.value,
       'create_at': FieldValue.serverTimestamp(),
     });

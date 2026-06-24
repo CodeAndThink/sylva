@@ -401,5 +401,11 @@
   "contactFormTitleError": "Vui lòng nhập tiêu đề",
   "@contactFormTitleError": {},
   "contactFormDescriptionError": "Vui lòng nhập mô tả",
-  "@contactFormDescriptionError": {}
+  "@contactFormDescriptionError": {},
+  "contactFormDeviceInfoNotice": "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
+  "@contactFormDeviceInfoNotice": {},
+  "deviceInfo": "Thông tin thiết bị",
+  "@deviceInfo": {},
+  "contactFormAttachDeviceInfo": "Đính kèm thông tin thiết bị",
+  "@contactFormAttachDeviceInfo": {}
 }

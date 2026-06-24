@@ -419,5 +419,11 @@
   "contactFormTitleError": "Please enter a title",
   "@contactFormTitleError": {},
   "contactFormDescriptionError": "Please enter a description",
-  "@contactFormDescriptionError": {}
+  "@contactFormDescriptionError": {},
+  "contactFormDeviceInfoNotice": "Basic device info (Model, OS) will be attached to help us support you better.",
+  "@contactFormDeviceInfoNotice": {},
+  "deviceInfo": "Device Info",
+  "@deviceInfo": {},
+  "contactFormAttachDeviceInfo": "Attach Device Info",
+  "@contactFormAttachDeviceInfo": {}
 }

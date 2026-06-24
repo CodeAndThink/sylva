@@ -401,5 +401,11 @@
   "contactFormTitleError": "タイトルを入力してください",
   "@contactFormTitleError": {},
   "contactFormDescriptionError": "説明を入力してください",
-  "@contactFormDescriptionError": {}
+  "@contactFormDescriptionError": {},
+  "contactFormDeviceInfoNotice": "サポート向上のため、基本的なデバイス情報（モデル、OS）が添付されます。",
+  "@contactFormDeviceInfoNotice": {},
+  "deviceInfo": "デバイス情報",
+  "@deviceInfo": {},
+  "contactFormAttachDeviceInfo": "デバイス情報を添付する",
+  "@contactFormAttachDeviceInfo": {}
 }

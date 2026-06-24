@@ -13,6 +13,22 @@ class ContactCubit extends BaseCubit<ContactState> {
   ContactCubit({required this.navigator, required this.submitContactUseCase})
     : super(const ContactState());
 
+  Future<void> loadDeviceInfo() async {
+    if (state.getDeviceStatus.isLoading) return;
+    safeEmit(state.copyWith(getDeviceStatus: LoadStatus.loading));
+    final deviceInfo = await DeviceInfoHelper.getBasicDeviceInfo();
+    safeEmit(
+      state.copyWith(
+        getDeviceStatus: LoadStatus.success,
+        deviceInfo: deviceInfo,
+      ),
+    );
+  }
+
+  void clearDeviceInfo() {
+    emit(state.copyWith(getDeviceStatus: LoadStatus.initial, deviceInfo: ''));
+  }
+
   void changeSelectedType({required ContactType type}) {
     emit(state.copyWith(selectedType: type));
   }
@@ -25,18 +41,24 @@ class ContactCubit extends BaseCubit<ContactState> {
     emit(state.copyWith(description: value));
   }
 
+  void toggleAttachDeviceInfo() {
+    emit(state.copyWith(isAttached: !state.isAttached));
+  }
+
   Future<void> submitContact() async {
     if (state.summitStatus.isLoading) return;
 
     emit(state.copyWith(summitStatus: LoadStatus.loading));
 
     try {
-      final deviceInfo = await DeviceInfoHelper.getBasicDeviceInfo();
+      final uuid = await DeviceInfoHelper.getDeviceUuid();
+      final deviceInfoString = state.isAttached ? state.deviceInfo : '';
 
       await submitContactUseCase(
         title: state.title,
         description: state.description,
-        deviceInfo: deviceInfo,
+        deviceInfo: deviceInfoString,
+        uuid: uuid,
         type: state.selectedType,
       );
 

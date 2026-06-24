@@ -401,5 +401,11 @@
   "contactFormTitleError": "请输入标题",
   "@contactFormTitleError": {},
   "contactFormDescriptionError": "请输入描述",
-  "@contactFormDescriptionError": {}
+  "@contactFormDescriptionError": {},
+  "contactFormDeviceInfoNotice": "将会附带基本设备信息（型号、操作系统），以帮助我们更好地为您提供支持。",
+  "@contactFormDeviceInfoNotice": {},
+  "deviceInfo": "设备信息",
+  "@deviceInfo": {},
+  "contactFormAttachDeviceInfo": "附加设备信息",
+  "@contactFormAttachDeviceInfo": {}
 }

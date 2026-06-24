@@ -5,6 +5,7 @@ abstract class ContactRepository {
     required String title,
     required String description,
     required String deviceInfo,
+    required String uuid,
     required ContactType type,
   });
 }

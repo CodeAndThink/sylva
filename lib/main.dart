@@ -14,13 +14,35 @@ import 'package:sylva/presentation/theme/app_theme.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/core/enums/device_type.dart';
 
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:sylva/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FlutterError.onError = (errorDetails) {
+    // Ignore or record silent errors (e.g. network image load failures) as Non-fatal
+    if (errorDetails.silent) {
+      FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+      return;
+    }
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    // Hint: You can filter non-critical exceptions here.
+    // For example, to ignore network errors (SocketException) or DioException:
+    // if (error is SocketException) return true; 
+
+    // By default, record unhandled async errors as Fatal (Crash)
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

@@ -56,7 +56,6 @@ class DefaultFirebaseOptions {
     projectId: 'sylva-c5669',
     storageBucket: 'sylva-c5669.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB8JDFp4r7EmacNgf3q2KHz6X9vt55Pi_U',
     appId: '1:912691573071:ios:37c93448a6aa0f156f153a',

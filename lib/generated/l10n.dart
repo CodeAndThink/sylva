@@ -1628,6 +1628,31 @@ class S {
       args: [],
     );
   }
+
+  /// `Basic device info (Model, OS) will be attached to help us support you better.`
+  String get contactFormDeviceInfoNotice {
+    return Intl.message(
+      'Basic device info (Model, OS) will be attached to help us support you better.',
+      name: 'contactFormDeviceInfoNotice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device Info`
+  String get deviceInfo {
+    return Intl.message('Device Info', name: 'deviceInfo', desc: '', args: []);
+  }
+
+  /// `Attach Device Info`
+  String get contactFormAttachDeviceInfo {
+    return Intl.message(
+      'Attach Device Info',
+      name: 'contactFormAttachDeviceInfo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

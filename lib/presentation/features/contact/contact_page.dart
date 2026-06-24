@@ -9,6 +9,7 @@ import 'package:sylva/presentation/features/contact/contact_cubit.dart';
 import 'package:sylva/presentation/features/contact/contact_navigator.dart';
 import 'package:sylva/presentation/features/contact/contact_state.dart';
 import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
+import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/presentation/widgets/text_fields/app_text_field.dart';
@@ -49,6 +50,7 @@ class __ContactChildPageState extends State<_ContactChildPage> {
   void initState() {
     super.initState();
     _cubit = context.read<ContactCubit>();
+    _cubit.loadDeviceInfo();
   }
 
   @override
@@ -178,6 +180,58 @@ class __ContactChildPageState extends State<_ContactChildPage> {
               },
               onChanged: (value) {
                 _cubit.changeDescription(value: value);
+              },
+            ),
+            16.height,
+
+            // Device Info
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppTitleText(title: _l10n.deviceInfo),
+                BlocSelector<ContactCubit, ContactState, bool>(
+                  selector: (state) => state.isAttached,
+                  builder: (context, isAttached) {
+                    return Switch(
+                      value: isAttached,
+                      onChanged: (_) {
+                        _cubit.toggleAttachDeviceInfo();
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+            Text(
+              _l10n.contactFormDeviceInfoNotice,
+              style: _theme.textTheme.bodyMedium?.copyWith(
+                color: _theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            BlocBuilder<ContactCubit, ContactState>(
+              buildWhen: (previous, current) =>
+                  previous.getDeviceStatus != current.getDeviceStatus ||
+                  previous.isAttached != current.isAttached,
+              builder: (context, state) {
+                if (state.isAttached) {
+                  return Column(
+                    children: [
+                      8.height,
+                      AppTransparentContainer(
+                        padding: 8.paddingAll,
+                        border: 16.borderRadius,
+                        borderColor: _theme.colorScheme.onSurface,
+                        child: Text(
+                          '[Device: ${state.deviceInfo}]',
+                          style: _theme.textTheme.bodyMedium?.copyWith(
+                            color: _theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
               },
             ),
             20.height,

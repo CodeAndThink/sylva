@@ -71,12 +71,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "contact": MessageLookupByLibrary.simpleMessage("联系"),
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage("请填写所有字段"),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "附加设备信息",
+    ),
     "contactFormDescription": MessageLookupByLibrary.simpleMessage("描述"),
     "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
       "请输入描述",
     ),
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "输入描述...",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "将会附带基本设备信息（型号、操作系统），以帮助我们更好地为您提供支持。",
     ),
     "contactFormTitle": MessageLookupByLibrary.simpleMessage("标题"),
     "contactFormTitleError": MessageLookupByLibrary.simpleMessage("请输入标题"),
@@ -96,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "designedByAuthorFromFlaticon": m1,
     "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("设备信息"),
     "donation": MessageLookupByLibrary.simpleMessage("捐款"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重复项"),
     "email": MessageLookupByLibrary.simpleMessage("邮箱"),

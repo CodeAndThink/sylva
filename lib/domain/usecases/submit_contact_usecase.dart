@@ -12,12 +12,14 @@ class SubmitContactUseCase {
     required String title,
     required String description,
     required String deviceInfo,
+    required String uuid,
     required ContactType type,
   }) async {
     return _repository.submitContact(
       title: title,
       description: description,
       deviceInfo: deviceInfo,
+      uuid: uuid,
       type: type,
     );
   }

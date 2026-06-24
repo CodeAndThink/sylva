@@ -77,12 +77,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
       "すべてのフィールドに入力してください",
     ),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "デバイス情報を添付する",
+    ),
     "contactFormDescription": MessageLookupByLibrary.simpleMessage("説明"),
     "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
       "説明を入力してください",
     ),
     "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
       "説明を入力...",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "サポート向上のため、基本的なデバイス情報（モデル、OS）が添付されます。",
     ),
     "contactFormTitle": MessageLookupByLibrary.simpleMessage("タイトル"),
     "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
@@ -106,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "designedByAuthorFromFlaticon": m1,
     "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("デバイス情報"),
     "donation": MessageLookupByLibrary.simpleMessage("寄付"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重複"),
     "email": MessageLookupByLibrary.simpleMessage("メール"),

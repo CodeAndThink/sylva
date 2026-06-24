@@ -19,9 +19,7 @@ class TermsOfServicePage extends StatelessWidget {
         ),
         child: Text(
           S.of(context).termsOfServiceContent,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            height: 1.6,
-          ),
+          style: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
         ),
       ),
     );

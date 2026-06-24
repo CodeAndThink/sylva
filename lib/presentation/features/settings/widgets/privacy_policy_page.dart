@@ -19,9 +19,7 @@ class PrivacyPolicyPage extends StatelessWidget {
         ),
         child: Text(
           S.of(context).privacyPolicyContent,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            height: 1.6,
-          ),
+          style: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
         ),
       ),
     );

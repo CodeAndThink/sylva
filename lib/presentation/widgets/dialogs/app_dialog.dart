@@ -22,7 +22,7 @@ class AppDialog {
       builder: (context) => _AppDialogWidget(
         headerIcon: Icon(
           Icons.warning_amber_rounded,
-          color: Colors.deepOrangeAccent,
+          color: Colors.red,
           size: 60,
         ),
         title: title,
@@ -134,14 +134,16 @@ class _AppDialogWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (headerIcon != null) ...[headerIcon!, 12.height],
-            Text(title, style: Theme.of(context).textTheme.titleLarge),
+            Text(title, style: Theme.of(context).textTheme.headlineSmall),
             12.height,
             Text(
               message,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
+              maxLines: 5,
+              overflow: TextOverflow.ellipsis,
             ),
             24.height,
             Row(

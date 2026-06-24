@@ -22,13 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "Đã chép ${color} vào khay nhớ tạm";
 
-  static String m1(message) => "Lỗi: ${message}";
+  static String m1(author) => "Thiết kế bởi ${author} từ Flaticon";
 
-  static String m2(level) => "Cấp ${level}";
+  static String m2(author) => "Thiết kế bởi ${author} - Magnific.com";
+
+  static String m3(message) => "Lỗi: ${message}";
+
+  static String m4(level) => "Cấp ${level}";
+
+  static String m5(version) => "Phiên bản ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva là ứng dụng camera được thiết kế để giúp bạn chụp và khám phá màu sắc của thế giới một cách dễ dàng.",
+    ),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage("Lời cảm ơn"),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi xin chân thành cảm ơn những nhà sáng tạo sau đây vì các tài nguyên được sử dụng trong ứng dụng này:",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Mũi tên"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(
@@ -38,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Quay lại"),
     "blur": MessageLookupByLibrary.simpleMessage("Làm mờ"),
     "brightness": MessageLookupByLibrary.simpleMessage("Độ sáng"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng máy ảnh"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
     ),
@@ -60,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sao chép màu thất bại",
     ),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng màu sắc"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
     ),
@@ -67,6 +82,44 @@ class MessageLookup extends MessageLookupByLibrary {
       "Xác nhận mật khẩu không được để trống",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Liên hệ"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng điền đầy đủ thông tin",
+    ),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "Đính kèm thông tin thiết bị",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage(
+      "Mô tả chi tiết",
+    ),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập mô tả",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Nhập mô tả...",
+    ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập thông tin thiết bị",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "Thông tin cơ bản về thiết bị (Dòng máy, OS) sẽ được gửi kèm để giúp chúng tôi hỗ trợ bạn sửa lỗi tốt hơn.",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng nhập tiêu đề",
+    ),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage(
+      "Nhập tiêu đề",
+    ),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("Báo lỗi"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("Khác"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage("Góp ý"),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "Cảm ơn bạn đã gửi phản hồi!",
+    ),
+    "contactType": MessageLookupByLibrary.simpleMessage("Loại phản hồi"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Tạo ảnh mới"),
     "createTime": MessageLookupByLibrary.simpleMessage("Thời gian"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
@@ -75,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("Thông tin thiết bị"),
     "donation": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Ảnh trùng lặp"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -87,7 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailRequired": MessageLookupByLibrary.simpleMessage(
       "Email không được để trống",
     ),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Lỗi"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Không thể tải màu",
@@ -116,7 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),
     "last7Days": MessageLookupByLibrary.simpleMessage("7 ngày qua"),
     "letGo": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("Đường thẳng"),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
     "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
@@ -167,9 +223,37 @@ class MessageLookup extends MessageLookupByLibrary {
       "Chọn ảnh từ thư viện",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi tôn trọng quyền riêng tư của bạn. Sylva xử lý dữ liệu camera cục bộ trên thiết bị của bạn bất cứ khi nào có thể. Chúng tôi không lưu trữ hoặc chia sẻ ảnh cá nhân của bạn nếu không có sự đồng ý rõ ràng.",
+    ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi không thu thập hoặc lưu trữ bất kỳ ảnh cá nhân hay dữ liệu camera nào trên máy chủ. Toàn bộ quá trình xử lý camera được thực hiện cục bộ trên thiết bị của bạn.",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Bất kỳ dữ liệu nào được xử lý bởi Sylva chỉ được sử dụng với mục đích cung cấp tính năng camera và phân tích màu sắc trong ứng dụng.",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi áp dụng các biện pháp bảo mật tiêu chuẩn để bảo vệ dữ liệu của bạn. Do ảnh của bạn vẫn nằm trên thiết bị, bạn có toàn quyền kiểm soát quyền riêng tư của mình.",
+    ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "Chúng tôi sử dụng Firebase Crashlytics để thu thập các báo cáo lỗi ẩn danh. Điều này giúp chúng tôi xác định lỗi và cải thiện độ ổn định của ứng dụng. Dữ liệu được thu thập không chứa thông tin nhận dạng cá nhân.",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage(
+      "Thu thập thông tin",
+    ),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage(
+      "Sử dụng thông tin",
+    ),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage(
+      "Bảo mật dữ liệu",
+    ),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage("Báo cáo lỗi"),
     "progress": MessageLookupByLibrary.simpleMessage("Tiến trình"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Mua hàng thất bại hoặc bị hủy.",
+    ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "Hình nền chấm màu cầu vồng",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("Tỷ lệ"),
     "rectangle": MessageLookupByLibrary.simpleMessage("Hình chữ nhật"),
@@ -186,6 +270,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Khôi phục giao dịch (Restore Purchases)",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage(
+      "Biểu tượng rào chắn",
+    ),
     "save": MessageLookupByLibrary.simpleMessage("Lưu"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Lưu mới"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
@@ -193,13 +280,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
+    "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(
       "Điều khoản dịch vụ",
     ),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "Bằng việc sử dụng Sylva, bạn đồng ý với Điều khoản Dịch vụ của chúng tôi. Bạn không được sử dụng ứng dụng cho bất kỳ mục đích bất hợp pháp hoặc không được phép nào. Các dịch vụ và nội dung được cung cấp \"nguyên trạng\" mà không có bất kỳ hình thức bảo đảm nào.",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("Văn bản"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Căn lề chữ"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage(
+      "Cảm ơn & Tài liệu tham khảo",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Giao diện"),
     "themeDark": MessageLookupByLibrary.simpleMessage("Tối"),
     "themeLight": MessageLookupByLibrary.simpleMessage("Sáng"),
@@ -207,6 +301,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Th 5"),
     "timer": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
     "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "Bằng việc tải xuống và sử dụng Sylva, bạn đồng ý với Điều khoản Dịch vụ này. Nếu bạn không đồng ý, vui lòng không sử dụng ứng dụng.",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "Bạn tự chịu trách nhiệm về bất kỳ nội dung nào bạn chụp hoặc xử lý bằng Sylva. Bạn đồng ý không sử dụng ứng dụng cho các hoạt động phi pháp hoặc bị cấm.",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylva và các nhà sáng tạo sẽ không chịu trách nhiệm cho bất kỳ thiệt hại hoặc mất mát nào phát sinh từ việc sử dụng ứng dụng. Dịch vụ được cung cấp \'nguyên trạng\'.",
+    ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylva sử dụng các dịch vụ của bên thứ ba như Firebase Crashlytics để giám sát độ ổn định của ứng dụng và thu thập báo cáo lỗi. Bằng cách sử dụng ứng dụng này, bạn đồng ý với việc thu thập dữ liệu hiệu suất và lỗi ẩn danh bởi các dịch vụ này.",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("Chấp nhận điều khoản"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("Trách nhiệm người dùng"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage("Giới hạn trách nhiệm"),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("Dịch vụ bên thứ ba"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "Hủy thay đổi và quay lại camera.",
     ),
@@ -306,6 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userNotFound": MessageLookupByLibrary.simpleMessage(
       "Không tìm thấy người dùng.",
     ),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu quá yếu."),
     "wed": MessageLookupByLibrary.simpleMessage("Th 4"),
     "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),

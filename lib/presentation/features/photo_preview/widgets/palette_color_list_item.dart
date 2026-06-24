@@ -61,7 +61,12 @@ class PaletteColorListItem extends StatelessWidget {
                     : null,
               ),
               5.height,
-              Text(hex, style: theme.textTheme.bodySmall),
+              Text(
+                hex,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),

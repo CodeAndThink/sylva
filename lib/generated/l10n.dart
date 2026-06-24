@@ -1278,6 +1278,441 @@ class S {
   String get errorPrefix {
     return Intl.message('Error', name: 'errorPrefix', desc: '', args: []);
   }
+
+  /// `Thanks & Reference`
+  String get thanksAndReference {
+    return Intl.message(
+      'Thanks & Reference',
+      name: 'thanksAndReference',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acknowledgements`
+  String get acknowledgements {
+    return Intl.message(
+      'Acknowledgements',
+      name: 'acknowledgements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We would like to thank the following creators for their assets used in this application:`
+  String get acknowledgementsIntro {
+    return Intl.message(
+      'We would like to thank the following creators for their assets used in this application:',
+      name: 'acknowledgementsIntro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Designed by {author} from Flaticon`
+  String designedByAuthorFromFlaticon(String author) {
+    return Intl.message(
+      'Designed by $author from Flaticon',
+      name: 'designedByAuthorFromFlaticon',
+      desc: '',
+      args: [author],
+    );
+  }
+
+  /// `Road block icon`
+  String get roadBlockIcon {
+    return Intl.message(
+      'Road block icon',
+      name: 'roadBlockIcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Colors icon`
+  String get colorsIcon {
+    return Intl.message('Colors icon', name: 'colorsIcon', desc: '', args: []);
+  }
+
+  /// `Camera icon`
+  String get cameraIcon {
+    return Intl.message('Camera icon', name: 'cameraIcon', desc: '', args: []);
+  }
+
+  /// `Designed by {author} - Magnific.com`
+  String designedByAuthorMagnific(String author) {
+    return Intl.message(
+      'Designed by $author - Magnific.com',
+      name: 'designedByAuthorMagnific',
+      desc: '',
+      args: [author],
+    );
+  }
+
+  /// `Rainbow halftone dots background`
+  String get rainbowHalftoneDotsBackground {
+    return Intl.message(
+      'Rainbow halftone dots background',
+      name: 'rainbowHalftoneDotsBackground',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sylva is a camera application designed to help you capture and discover the world's colors effortlessly.`
+  String get aboutSylvaDescription {
+    return Intl.message(
+      'Sylva is a camera application designed to help you capture and discover the world\'s colors effortlessly.',
+      name: 'aboutSylvaDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version {version}`
+  String version(String version) {
+    return Intl.message(
+      'Version $version',
+      name: 'version',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.`
+  String get privacyPolicyContent {
+    return Intl.message(
+      'We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.',
+      name: 'privacyPolicyContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided "as is" without warranties of any kind.`
+  String get termsOfServiceContent {
+    return Intl.message(
+      'By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided "as is" without warranties of any kind.',
+      name: 'termsOfServiceContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information Collection`
+  String get privacyPolicyTitle1 {
+    return Intl.message(
+      'Information Collection',
+      name: 'privacyPolicyTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We do not collect or store any personal photos or camera data on our servers. All camera processing is performed locally on your device.`
+  String get privacyPolicyContent1 {
+    return Intl.message(
+      'We do not collect or store any personal photos or camera data on our servers. All camera processing is performed locally on your device.',
+      name: 'privacyPolicyContent1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use of Information`
+  String get privacyPolicyTitle2 {
+    return Intl.message(
+      'Use of Information',
+      name: 'privacyPolicyTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Any data processed by Sylva is used solely for providing the camera and color analysis features within the application.`
+  String get privacyPolicyContent2 {
+    return Intl.message(
+      'Any data processed by Sylva is used solely for providing the camera and color analysis features within the application.',
+      name: 'privacyPolicyContent2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Security`
+  String get privacyPolicyTitle3 {
+    return Intl.message(
+      'Data Security',
+      name: 'privacyPolicyTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.`
+  String get privacyPolicyContent3 {
+    return Intl.message(
+      'We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.',
+      name: 'privacyPolicyContent3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crash Reporting`
+  String get privacyPolicyTitle4 {
+    return Intl.message(
+      'Crash Reporting',
+      name: 'privacyPolicyTitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We use Firebase Crashlytics to collect anonymized crash reports. This helps us identify bugs and improve the stability of the application. The collected data does not contain personally identifiable information.`
+  String get privacyPolicyContent4 {
+    return Intl.message(
+      'We use Firebase Crashlytics to collect anonymized crash reports. This helps us identify bugs and improve the stability of the application. The collected data does not contain personally identifiable information.',
+      name: 'privacyPolicyContent4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acceptance of Terms`
+  String get tosTitle1 {
+    return Intl.message(
+      'Acceptance of Terms',
+      name: 'tosTitle1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `By downloading and using Sylva, you agree to these Terms of Service. If you do not agree, please do not use the application.`
+  String get tosContent1 {
+    return Intl.message(
+      'By downloading and using Sylva, you agree to these Terms of Service. If you do not agree, please do not use the application.',
+      name: 'tosContent1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Responsibilities`
+  String get tosTitle2 {
+    return Intl.message(
+      'User Responsibilities',
+      name: 'tosTitle2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are responsible for any content you capture or process using Sylva. You agree not to use the application for any unlawful or prohibited activities.`
+  String get tosContent2 {
+    return Intl.message(
+      'You are responsible for any content you capture or process using Sylva. You agree not to use the application for any unlawful or prohibited activities.',
+      name: 'tosContent2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Limitation of Liability`
+  String get tosTitle3 {
+    return Intl.message(
+      'Limitation of Liability',
+      name: 'tosTitle3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided 'as is'.`
+  String get tosContent3 {
+    return Intl.message(
+      'Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided \'as is\'.',
+      name: 'tosContent3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Third-Party Services`
+  String get tosTitle4 {
+    return Intl.message(
+      'Third-Party Services',
+      name: 'tosTitle4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sylva utilizes third-party services such as Firebase Crashlytics to monitor application stability and collect crash reports. By using this app, you agree to the collection of anonymized crash and performance data by these services.`
+  String get tosContent4 {
+    return Intl.message(
+      'Sylva utilizes third-party services such as Firebase Crashlytics to monitor application stability and collect crash reports. By using this app, you agree to the collection of anonymized crash and performance data by these services.',
+      name: 'tosContent4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get contactFormTitle {
+    return Intl.message('Title', name: 'contactFormTitle', desc: '', args: []);
+  }
+
+  /// `Enter title`
+  String get contactFormTitleHint {
+    return Intl.message(
+      'Enter title',
+      name: 'contactFormTitleHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get contactFormDescription {
+    return Intl.message(
+      'Description',
+      name: 'contactFormDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter description`
+  String get contactFormDescriptionHint {
+    return Intl.message(
+      'Enter description',
+      name: 'contactFormDescriptionHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bug`
+  String get contactFormTypeBug {
+    return Intl.message('Bug', name: 'contactFormTypeBug', desc: '', args: []);
+  }
+
+  /// `Suggestion`
+  String get contactFormTypeSuggestion {
+    return Intl.message(
+      'Suggestion',
+      name: 'contactFormTypeSuggestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get contactFormTypeOther {
+    return Intl.message(
+      'Other',
+      name: 'contactFormTypeOther',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `Thank you for your feedback!`
+  String get contactSuccessMessage {
+    return Intl.message(
+      'Thank you for your feedback!',
+      name: 'contactSuccessMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill in all fields`
+  String get contactErrorMessage {
+    return Intl.message(
+      'Please fill in all fields',
+      name: 'contactErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get contactType {
+    return Intl.message('Type', name: 'contactType', desc: '', args: []);
+  }
+
+  /// `Please enter a title`
+  String get contactFormTitleError {
+    return Intl.message(
+      'Please enter a title',
+      name: 'contactFormTitleError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a description`
+  String get contactFormDescriptionError {
+    return Intl.message(
+      'Please enter a description',
+      name: 'contactFormDescriptionError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Basic device info (Model, OS) will be attached to help us support you better.`
+  String get contactFormDeviceInfoNotice {
+    return Intl.message(
+      'Basic device info (Model, OS) will be attached to help us support you better.',
+      name: 'contactFormDeviceInfoNotice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device Info`
+  String get deviceInfo {
+    return Intl.message('Device Info', name: 'deviceInfo', desc: '', args: []);
+  }
+
+  /// `Attach Device Info`
+  String get contactFormAttachDeviceInfo {
+    return Intl.message(
+      'Attach Device Info',
+      name: 'contactFormAttachDeviceInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device info (Model, OS) will be attached to help us support you better.`
+  String get contactFormDeviceInfoHint {
+    return Intl.message(
+      'Device info (Model, OS) will be attached to help us support you better.',
+      name: 'contactFormDeviceInfoHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter device info`
+  String get contactFormDeviceInfoError {
+    return Intl.message(
+      'Please enter device info',
+      name: 'contactFormDeviceInfoError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

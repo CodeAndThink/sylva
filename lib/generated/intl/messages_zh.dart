@@ -22,13 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "已将 ${color} 复制到剪贴板";
 
-  static String m1(message) => "错误: ${message}";
+  static String m1(author) => "由来自Flaticon的${author}设计";
 
-  static String m2(level) => "等级 ${level}";
+  static String m2(author) => "由来自Magnific.com的${author}设计";
+
+  static String m3(message) => "错误: ${message}";
+
+  static String m4(level) => "等级 ${level}";
+
+  static String m5(version) => "版本 ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("关于"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva是一款相机应用程序，旨在帮助您轻松捕捉和发现世界的色彩。",
+    ),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage("鸣谢"),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "我们在此感谢以下创作者提供本应用中使用的资源：",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("箭头"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("自动检测颜色"),
@@ -36,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("返回"),
     "blur": MessageLookupByLibrary.simpleMessage("模糊"),
     "brightness": MessageLookupByLibrary.simpleMessage("亮度"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("相机图标"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "拒绝访问相机或设备没有相机。",
     ),
@@ -52,9 +66,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "color": MessageLookupByLibrary.simpleMessage("颜色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("复制颜色失败"),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("颜色图标"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "contact": MessageLookupByLibrary.simpleMessage("联系"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage("请填写所有字段"),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "附加设备信息",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage("描述"),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "请输入描述",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "输入描述...",
+    ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "请输入设备信息",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "设备信息（型号、OS）将附带，以便我们更好地为您提供支持。",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "将会附带基本设备信息（型号、操作系统），以帮助我们更好地为您提供支持。",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("标题"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage("请输入标题"),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage("输入标题"),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("错误"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("其他"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage("建议"),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage("感谢您的反馈！"),
+    "contactType": MessageLookupByLibrary.simpleMessage("反馈类型"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("创建新图像"),
     "createTime": MessageLookupByLibrary.simpleMessage("时间"),
     "days": MessageLookupByLibrary.simpleMessage("天"),
@@ -63,13 +106,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("设备信息"),
     "donation": MessageLookupByLibrary.simpleMessage("捐款"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重复项"),
     "email": MessageLookupByLibrary.simpleMessage("邮箱"),
     "emailInvalid": MessageLookupByLibrary.simpleMessage("无效的邮箱格式"),
     "emailNotConfirmed": MessageLookupByLibrary.simpleMessage("邮箱未确认。"),
     "emailRequired": MessageLookupByLibrary.simpleMessage("必须输入邮箱"),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("错误"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("加载颜色失败"),
     "file": MessageLookupByLibrary.simpleMessage("文件"),
@@ -92,7 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
     "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),
     "letGo": MessageLookupByLibrary.simpleMessage("开始吧"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("直线"),
     "login": MessageLookupByLibrary.simpleMessage("登录"),
     "logout": MessageLookupByLibrary.simpleMessage("退出登录"),
@@ -127,9 +173,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "permissionRequired": MessageLookupByLibrary.simpleMessage("需要相册权限"),
     "pickImageFromGallery": MessageLookupByLibrary.simpleMessage("从图库选择图片"),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "我们尊重您的隐私。Sylva会尽可能在本地处理您的相机数据。未经您的明确同意，我们不会存储或分享您的个人照片。",
+    ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "我们不会在服务器上收集或存储任何个人照片或相机数据。所有相机处理都在您的设备上本地执行。",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Sylva处理的任何数据仅用于提供应用程序内的相机和颜色分析功能。",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "我们实施行业标准的安全措施来保护您的数据。由于您的照片保留在设备上，您可以完全控制自己的隐私。",
+    ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "我们使用 Firebase Crashlytics 收集匿名崩溃报告。这有助于我们识别错误并提高应用程序的稳定性。收集的数据不包含个人身份信息。",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage("信息收集"),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage("信息使用"),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage("数据安全"),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage("崩溃报告"),
     "progress": MessageLookupByLibrary.simpleMessage("进度"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "购买失败或已被取消。",
+    ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "彩虹半色调圆点背景",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("比例"),
     "rectangle": MessageLookupByLibrary.simpleMessage("矩形"),
@@ -142,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("恢复购买"),
     "retry": MessageLookupByLibrary.simpleMessage("重试"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage("路障图标"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("保存为新记录"),
     "saveColor": MessageLookupByLibrary.simpleMessage("保存颜色"),
@@ -149,11 +218,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("扫描限制"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),
+    "submit": MessageLookupByLibrary.simpleMessage("提交"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("切换相机"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("服务条款"),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "使用Sylva即表示您同意我们的服务条款。您不得将该应用程序用于任何非法或未经授权的目的。服务和内容按\"原样\"提供，没有任何形式的保证。",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("文本"),
     "textAlign": MessageLookupByLibrary.simpleMessage("对齐文本"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage("感谢与参考文献"),
     "theme": MessageLookupByLibrary.simpleMessage("主题"),
     "themeDark": MessageLookupByLibrary.simpleMessage("深色"),
     "themeLight": MessageLookupByLibrary.simpleMessage("浅色"),
@@ -161,6 +235,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("四"),
     "timer": MessageLookupByLibrary.simpleMessage("定时器"),
     "today": MessageLookupByLibrary.simpleMessage("今天"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "下载并使用Sylva即表示您同意这些服务条款。如果您不同意，请勿使用该应用程序。",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "您对使用Sylva捕捉或处理的任何内容负责。您同意不将该应用程序用于任何非法或被禁止的活动。",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylva及其创作者对您使用该应用程序造成的任何损害或损失不承担任何责任。服务按“原样”提供。",
+    ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylva 利用 Firebase Crashlytics 等第三方服务来监控应用程序的稳定性并收集崩溃报告。使用本应用程序即表示您同意这些服务收集匿名崩溃和性能数据。",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("接受条款"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("用户责任"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage("责任限制"),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("第三方服务"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage("放弃更改并返回相机。"),
     "tutorialBackTitle": MessageLookupByLibrary.simpleMessage("返回"),
     "tutorialCameraDesc": MessageLookupByLibrary.simpleMessage("在前后摄像头之间切换。"),
@@ -226,6 +316,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("用户被封禁。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("未找到用户。"),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),

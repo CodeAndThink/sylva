@@ -22,13 +22,28 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "Copied ${color} to clipboard";
 
-  static String m1(message) => "Error: ${message}";
+  static String m1(author) => "Designed by ${author} from Flaticon";
 
-  static String m2(level) => "Level ${level}";
+  static String m2(author) => "Designed by ${author} - Magnific.com";
+
+  static String m3(message) => "Error: ${message}";
+
+  static String m4(level) => "Level ${level}";
+
+  static String m5(version) => "Version ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva is a camera application designed to help you capture and discover the world\'s colors effortlessly.",
+    ),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage(
+      "Acknowledgements",
+    ),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "We would like to thank the following creators for their assets used in this application:",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Arrow"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(
@@ -38,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "blur": MessageLookupByLibrary.simpleMessage("Blur"),
     "brightness": MessageLookupByLibrary.simpleMessage("Brightness"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("Camera icon"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "Camera access denied or device has no camera.",
     ),
@@ -60,11 +76,50 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to copy color",
     ),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("Colors icon"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Confirm password is required",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "Please fill in all fields",
+    ),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "Attach Device Info",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage(
+      "Description",
+    ),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "Please enter a description",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Enter description",
+    ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "Please enter device info",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "Device info (Model, OS) will be attached to help us support you better.",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "Basic device info (Model, OS) will be attached to help us support you better.",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("Title"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
+      "Please enter a title",
+    ),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage("Enter title"),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("Bug"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("Other"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage(
+      "Suggestion",
+    ),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "Thank you for your feedback!",
+    ),
+    "contactType": MessageLookupByLibrary.simpleMessage("Type"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("Create New Image"),
     "createTime": MessageLookupByLibrary.simpleMessage("Time"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
@@ -73,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("Device Info"),
     "donation": MessageLookupByLibrary.simpleMessage("Donation"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Duplicates"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -83,7 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email is not confirmed.",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Error"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Failed to load colors",
@@ -112,7 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),
     "last7Days": MessageLookupByLibrary.simpleMessage("Last 7 days"),
     "letGo": MessageLookupByLibrary.simpleMessage("Let\'s Go"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("Line"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -161,9 +219,39 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pick image from gallery",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "We value your privacy. Sylva processes your camera data locally whenever possible. We do not store or share your personal photos without your explicit consent.",
+    ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "We do not collect or store any personal photos or camera data on our servers. All camera processing is performed locally on your device.",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Any data processed by Sylva is used solely for providing the camera and color analysis features within the application.",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "We implement industry-standard security measures to protect your data. Since your photos remain on your device, you have full control over your privacy.",
+    ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "We use Firebase Crashlytics to collect anonymized crash reports. This helps us identify bugs and improve the stability of the application. The collected data does not contain personally identifiable information.",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage(
+      "Information Collection",
+    ),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage(
+      "Use of Information",
+    ),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage(
+      "Data Security",
+    ),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage(
+      "Crash Reporting",
+    ),
     "progress": MessageLookupByLibrary.simpleMessage("Progress"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "Purchase failed or was cancelled.",
+    ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "Rainbow halftone dots background",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("Ratio"),
     "rectangle": MessageLookupByLibrary.simpleMessage("Rectangle"),
@@ -180,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Restore Purchases",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage("Road block icon"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Save as new"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
@@ -187,11 +276,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "By using Sylva, you agree to our Terms of Service. You must not use the application for any illegal or unauthorized purpose. The services and content are provided \"as is\" without warranties of any kind.",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Align text"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage(
+      "Thanks & Reference",
+    ),
     "theme": MessageLookupByLibrary.simpleMessage("Theme"),
     "themeDark": MessageLookupByLibrary.simpleMessage("Dark"),
     "themeLight": MessageLookupByLibrary.simpleMessage("Light"),
@@ -199,6 +295,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("Thu"),
     "timer": MessageLookupByLibrary.simpleMessage("Timer"),
     "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "By downloading and using Sylva, you agree to these Terms of Service. If you do not agree, please do not use the application.",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "You are responsible for any content you capture or process using Sylva. You agree not to use the application for any unlawful or prohibited activities.",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylva and its creators shall not be held liable for any damages or losses resulting from your use of the application. The service is provided \'as is\'.",
+    ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylva utilizes third-party services such as Firebase Crashlytics to monitor application stability and collect crash reports. By using this app, you agree to the collection of anonymized crash and performance data by these services.",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("Acceptance of Terms"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("User Responsibilities"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage(
+      "Limitation of Liability",
+    ),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("Third-Party Services"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "Discard changes and return to the camera.",
     ),
@@ -298,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("User is banned."),
     "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage(
       "Password is too weak.",
     ),

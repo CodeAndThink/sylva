@@ -22,13 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "${color} をクリップボードにコピーしました";
 
-  static String m1(message) => "エラー: ${message}";
+  static String m1(author) => "Flaticonの${author}によるデザイン";
 
-  static String m2(level) => "レベル ${level}";
+  static String m2(author) => "Magnific.comの${author}によるデザイン";
+
+  static String m3(message) => "エラー: ${message}";
+
+  static String m4(level) => "レベル ${level}";
+
+  static String m5(version) => "バージョン ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("約"),
+    "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylvaは、世界の色彩を簡単にキャプチャして発見できるように設計されたカメラアプリケーションです。",
+    ),
+    "acknowledgements": MessageLookupByLibrary.simpleMessage("謝辞"),
+    "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
+      "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
+    ),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("色を自動検出"),
@@ -36,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "back": MessageLookupByLibrary.simpleMessage("戻る"),
     "blur": MessageLookupByLibrary.simpleMessage("ぼかし"),
     "brightness": MessageLookupByLibrary.simpleMessage("明るさ"),
+    "cameraIcon": MessageLookupByLibrary.simpleMessage("カメラアイコン"),
     "cameraPermissionDenied": MessageLookupByLibrary.simpleMessage(
       "カメラへのアクセスが拒否されたか、デバイスにカメラがありません。",
     ),
@@ -54,11 +68,46 @@ class MessageLookup extends MessageLookupByLibrary {
     "color": MessageLookupByLibrary.simpleMessage("色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
+    "colorsIcon": MessageLookupByLibrary.simpleMessage("カラーアイコン"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "パスワードの確認が必要です",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("連絡先"),
+    "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
+      "すべてのフィールドに入力してください",
+    ),
+    "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
+      "デバイス情報を添付する",
+    ),
+    "contactFormDescription": MessageLookupByLibrary.simpleMessage("説明"),
+    "contactFormDescriptionError": MessageLookupByLibrary.simpleMessage(
+      "説明を入力してください",
+    ),
+    "contactFormDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "説明を入力...",
+    ),
+    "contactFormDeviceInfoError": MessageLookupByLibrary.simpleMessage(
+      "デバイス情報を入力してください",
+    ),
+    "contactFormDeviceInfoHint": MessageLookupByLibrary.simpleMessage(
+      "デバイス情報（モデル、OS）が添付されます。",
+    ),
+    "contactFormDeviceInfoNotice": MessageLookupByLibrary.simpleMessage(
+      "サポート向上のため、基本的なデバイス情報（モデル、OS）が添付されます。",
+    ),
+    "contactFormTitle": MessageLookupByLibrary.simpleMessage("タイトル"),
+    "contactFormTitleError": MessageLookupByLibrary.simpleMessage(
+      "タイトルを入力してください",
+    ),
+    "contactFormTitleHint": MessageLookupByLibrary.simpleMessage("タイトルを入力"),
+    "contactFormTypeBug": MessageLookupByLibrary.simpleMessage("バグ"),
+    "contactFormTypeOther": MessageLookupByLibrary.simpleMessage("その他"),
+    "contactFormTypeSuggestion": MessageLookupByLibrary.simpleMessage("提案"),
+    "contactSuccessMessage": MessageLookupByLibrary.simpleMessage(
+      "フィードバックありがとうございます！",
+    ),
+    "contactType": MessageLookupByLibrary.simpleMessage("種類"),
     "createNewImage": MessageLookupByLibrary.simpleMessage("新しい画像を作成"),
     "createTime": MessageLookupByLibrary.simpleMessage("時間"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
@@ -67,6 +116,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
     ),
+    "designedByAuthorFromFlaticon": m1,
+    "designedByAuthorMagnific": m2,
+    "deviceInfo": MessageLookupByLibrary.simpleMessage("デバイス情報"),
     "donation": MessageLookupByLibrary.simpleMessage("寄付"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重複"),
     "email": MessageLookupByLibrary.simpleMessage("メール"),
@@ -75,7 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "メールアドレスが確認されていません。",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("メールアドレスが必要です"),
-    "error": m1,
+    "error": m3,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("エラー"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("色の読み込みに失敗しました"),
     "file": MessageLookupByLibrary.simpleMessage("ファイル"),
@@ -98,7 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("過去30日間"),
     "last7Days": MessageLookupByLibrary.simpleMessage("過去7日間"),
     "letGo": MessageLookupByLibrary.simpleMessage("行こう"),
-    "level": m2,
+    "level": m4,
     "line": MessageLookupByLibrary.simpleMessage("直線"),
     "login": MessageLookupByLibrary.simpleMessage("ログイン"),
     "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
@@ -139,9 +191,31 @@ class MessageLookup extends MessageLookupByLibrary {
       "ライブラリから画像を選択",
     ),
     "privacyPolicy": MessageLookupByLibrary.simpleMessage("プライバシーポリシー"),
+    "privacyPolicyContent": MessageLookupByLibrary.simpleMessage(
+      "私たちはあなたのプライバシーを尊重します。Sylvaは可能な限りデバイス上でカメラデータをローカルに処理します。明示的な同意なしに個人的な写真を保存または共有することはありません。",
+    ),
+    "privacyPolicyContent1": MessageLookupByLibrary.simpleMessage(
+      "私たちは個人の写真やカメラデータをサーバーに収集または保存しません。すべてのカメラ処理はデバイス上でローカルに実行されます。",
+    ),
+    "privacyPolicyContent2": MessageLookupByLibrary.simpleMessage(
+      "Sylvaによって処理されたデータは、アプリケーション内のカメラおよび色分析機能を提供するためにのみ使用されます。",
+    ),
+    "privacyPolicyContent3": MessageLookupByLibrary.simpleMessage(
+      "私たちはデータを保護するために業界標準のセキュリティ対策を実施しています。写真はデバイス上に残るため、プライバシーを完全に管理できます。",
+    ),
+    "privacyPolicyContent4": MessageLookupByLibrary.simpleMessage(
+      "匿名のクラッシュレポートを収集するためにFirebase Crashlyticsを使用しています。これにより、バグを特定し、アプリケーションの安定性を向上させることができます。収集されるデータに個人を特定できる情報は含まれていません。",
+    ),
+    "privacyPolicyTitle1": MessageLookupByLibrary.simpleMessage("情報の収集"),
+    "privacyPolicyTitle2": MessageLookupByLibrary.simpleMessage("情報の利用"),
+    "privacyPolicyTitle3": MessageLookupByLibrary.simpleMessage("データセキュリティ"),
+    "privacyPolicyTitle4": MessageLookupByLibrary.simpleMessage("クラッシュレポート"),
     "progress": MessageLookupByLibrary.simpleMessage("進捗"),
     "purchaseFailureMessage": MessageLookupByLibrary.simpleMessage(
       "購入に失敗したか、キャンセルされました。",
+    ),
+    "rainbowHalftoneDotsBackground": MessageLookupByLibrary.simpleMessage(
+      "虹色のハーフトーンドット背景",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("比率"),
     "rectangle": MessageLookupByLibrary.simpleMessage("長方形"),
@@ -156,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "restorePurchases": MessageLookupByLibrary.simpleMessage("購入の復元"),
     "retry": MessageLookupByLibrary.simpleMessage("再試行"),
+    "roadBlockIcon": MessageLookupByLibrary.simpleMessage("ロードブロックアイコン"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveAsNew": MessageLookupByLibrary.simpleMessage("新しく保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),
@@ -163,11 +238,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
+    "submit": MessageLookupByLibrary.simpleMessage("送信"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
+    "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
+      "Sylvaを使用することにより、利用規約に同意したことになります。違法または無許可の目的でアプリケーションを使用してはなりません。サービスとコンテンツは「現状有姿」で提供され、いかなる種類の保証もありません。",
+    ),
     "text": MessageLookupByLibrary.simpleMessage("テキスト"),
     "textAlign": MessageLookupByLibrary.simpleMessage("文字揃え"),
+    "thanksAndReference": MessageLookupByLibrary.simpleMessage("感謝と参考文献"),
     "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
     "themeDark": MessageLookupByLibrary.simpleMessage("ダーク"),
     "themeLight": MessageLookupByLibrary.simpleMessage("ライト"),
@@ -175,6 +255,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "thu": MessageLookupByLibrary.simpleMessage("木"),
     "timer": MessageLookupByLibrary.simpleMessage("タイマー"),
     "today": MessageLookupByLibrary.simpleMessage("今日"),
+    "tosContent1": MessageLookupByLibrary.simpleMessage(
+      "Sylvaをダウンロードして使用することにより、これらの利用規約に同意したことになります。同意しない場合は、アプリケーションを使用しないでください。",
+    ),
+    "tosContent2": MessageLookupByLibrary.simpleMessage(
+      "Sylvaを使用してキャプチャまたは処理したコンテンツについては、ユーザーが責任を負います。アプリケーションを違法または禁止された活動に使用しないことに同意するものとします。",
+    ),
+    "tosContent3": MessageLookupByLibrary.simpleMessage(
+      "Sylvaおよびその作成者は、アプリケーションの使用から生じるいかなる損害または損失についても責任を負いません。サービスは「現状有姿」で提供されます。",
+    ),
+    "tosContent4": MessageLookupByLibrary.simpleMessage(
+      "Sylvaは、アプリケーションの安定性を監視し、クラッシュレポートを収集するためにFirebase Crashlyticsなどのサードパーティサービスを利用しています。本アプリを使用することにより、これらのサービスによる匿名のクラッシュおよびパフォーマンスデータの収集に同意するものとします。",
+    ),
+    "tosTitle1": MessageLookupByLibrary.simpleMessage("利用規約への同意"),
+    "tosTitle2": MessageLookupByLibrary.simpleMessage("ユーザーの責任"),
+    "tosTitle3": MessageLookupByLibrary.simpleMessage("責任の制限"),
+    "tosTitle4": MessageLookupByLibrary.simpleMessage("サードパーティサービス"),
     "tutorialBackDesc": MessageLookupByLibrary.simpleMessage(
       "変更を破棄してカメラに戻ります。",
     ),
@@ -258,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("ユーザーは利用停止されています。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザーが見つかりません。"),
+    "version": m5,
     "weakPassword": MessageLookupByLibrary.simpleMessage("パスワードが弱すぎます。"),
     "wed": MessageLookupByLibrary.simpleMessage("水"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),

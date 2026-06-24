@@ -123,31 +123,6 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     );
   }
 
-  Widget _buildChangeViewButton() {
-    return BlocBuilder<HistoryCubit, HistoryState>(
-      buildWhen: (previous, current) =>
-          previous.isGridView != current.isGridView,
-      builder: (context, state) {
-        return Tooltip(
-          message: S.of(context).historyView,
-          child: IconButton(
-            key: _keyChangeView,
-            icon: Icon(
-              state.isGridView ? Icons.grid_view_rounded : Icons.list_outlined,
-            ),
-            onPressed: () {
-              if (_scrollController.hasClients) {
-                _scrollController.jumpTo(0);
-              }
-              _cubit.toggleView();
-              _showScrollToTop.value = false;
-            },
-          ),
-        );
-      },
-    );
-  }
-
   Widget _buildBody() {
     return BlocBuilder<HistoryCubit, HistoryState>(
       buildWhen: (previous, current) =>
@@ -305,133 +280,171 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Tooltip(
-                    message: S.of(context).help,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.help_outline_outlined,
-                        color: _theme.colorScheme.onSurface,
-                        size: 24,
-                      ),
-                      onPressed: _showTutorial,
-                    ),
-                  ),
+                  _buildHelperButton(),
                   _buildChangeViewButton(),
-                  Tooltip(
-                    message: S.of(context).onlyFavorites,
-                    child: InkWell(
-                      key: _keyFavoriteOnly,
-                      onTap: () {
-                        if (_scrollController.hasClients) {
-                          _scrollController.jumpTo(0);
-                        }
-                        _cubit.toggleFavoriteOnly();
-                        _showScrollToTop.value = false;
-                      },
-                      customBorder: const CircleBorder(),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        child: BlocBuilder<HistoryCubit, HistoryState>(
-                          buildWhen: (p, c) =>
-                              p.isFavoriteOnly != c.isFavoriteOnly,
-                          builder: (context, state) {
-                            return Icon(
-                              state.isFavoriteOnly
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_outline_rounded,
-                              color: Colors.amber,
-                              size: 30,
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildFavoriteOnlyButton(),
                   8.width,
-
-                  Tooltip(
-                    message: S.of(context).historySort,
-                    child: InkWell(
-                      key: _keySort,
-                      onTap: () {
-                        if (_scrollController.hasClients) {
-                          _scrollController.jumpTo(0);
-                        }
-                        _cubit.toggleSort();
-                        _showScrollToTop.value = false;
-                      },
-                      customBorder: const CircleBorder(),
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: 30.borderRadius,
-                          color: _theme.colorScheme.primaryContainer,
-                        ),
-                        padding: 8.paddingHorizontal,
-                        child: BlocBuilder<HistoryCubit, HistoryState>(
-                          buildWhen: (p, c) =>
-                              p.isSortAscending != c.isSortAscending,
-                          builder: (context, state) {
-                            return Row(
-                              children: [
-                                Text(
-                                  S.of(context).createTime,
-                                  style: _theme.textTheme.titleSmall?.copyWith(
-                                    color:
-                                        _theme.colorScheme.onPrimaryContainer,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                8.width,
-                                Icon(
-                                  state.isSortAscending
-                                      ? Icons.expand_less_outlined
-                                      : Icons.expand_more_outlined,
-
-                                  size: 24,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildSortButton(),
+                  4.width,
                 ],
               ),
             ),
             12.width,
-            ValueListenableBuilder<bool>(
-              valueListenable: _showScrollToTop,
-              builder: (context, show, child) {
-                return AnimatedOpacity(
-                  opacity: show ? 1.0 : 0.0,
-                  duration: 200.milliseconds,
-                  child: IgnorePointer(
-                    ignoring: !show,
-                    child: FloatingActionButton(
-                      shape: const CircleBorder(),
-                      onPressed: () {
-                        _scrollController.animateTo(
-                          0,
-                          duration: 300.milliseconds,
-                          curve: Curves.easeOut,
-                        );
-                      },
-                      backgroundColor: _theme.colorScheme.primaryContainer,
-                      foregroundColor: _theme.colorScheme.onPrimaryContainer,
-                      child: const Icon(Icons.arrow_upward),
-                    ),
-                  ),
-                );
-              },
-            ),
+            _buildScrollToTopButton(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildHelperButton() {
+    return Tooltip(
+      message: S.of(context).help,
+      child: IconButton(
+        icon: Icon(
+          Icons.help_outline_outlined,
+          color: _theme.colorScheme.onSurface,
+          size: 24,
+        ),
+        onPressed: _showTutorial,
+      ),
+    );
+  }
+
+  Widget _buildChangeViewButton() {
+    return BlocBuilder<HistoryCubit, HistoryState>(
+      buildWhen: (previous, current) =>
+          previous.isGridView != current.isGridView,
+      builder: (context, state) {
+        return Tooltip(
+          message: S.of(context).historyView,
+          child: IconButton(
+            key: _keyChangeView,
+            icon: Icon(
+              state.isGridView ? Icons.grid_view_rounded : Icons.list_outlined,
+            ),
+            onPressed: () {
+              if (_scrollController.hasClients) {
+                _scrollController.jumpTo(0);
+              }
+              _cubit.toggleView();
+              _showScrollToTop.value = false;
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFavoriteOnlyButton() {
+    return Tooltip(
+      message: S.of(context).onlyFavorites,
+      child: InkWell(
+        key: _keyFavoriteOnly,
+        onTap: () {
+          if (_scrollController.hasClients) {
+            _scrollController.jumpTo(0);
+          }
+          _cubit.toggleFavoriteOnly();
+          _showScrollToTop.value = false;
+        },
+        customBorder: const CircleBorder(),
+        child: Container(
+          height: 40,
+          width: 40,
+          decoration: const BoxDecoration(shape: BoxShape.circle),
+          child: BlocBuilder<HistoryCubit, HistoryState>(
+            buildWhen: (p, c) => p.isFavoriteOnly != c.isFavoriteOnly,
+            builder: (context, state) {
+              return Icon(
+                state.isFavoriteOnly
+                    ? Icons.bookmark
+                    : Icons.bookmark_outline_rounded,
+                color: Colors.amber,
+                size: 30,
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSortButton() {
+    return Tooltip(
+      message: S.of(context).historySort,
+      child: InkWell(
+        key: _keySort,
+        onTap: () {
+          if (_scrollController.hasClients) {
+            _scrollController.jumpTo(0);
+          }
+          _cubit.toggleSort();
+          _showScrollToTop.value = false;
+        },
+        customBorder: const CircleBorder(),
+        child: Container(
+          height: 40,
+          decoration: BoxDecoration(
+            borderRadius: 30.borderRadius,
+            color: _theme.colorScheme.primaryContainer,
+          ),
+          padding: 8.paddingHorizontal,
+          child: BlocBuilder<HistoryCubit, HistoryState>(
+            buildWhen: (p, c) => p.isSortAscending != c.isSortAscending,
+            builder: (context, state) {
+              return Row(
+                children: [
+                  Text(
+                    S.of(context).createTime,
+                    style: _theme.textTheme.titleSmall?.copyWith(
+                      color: _theme.colorScheme.onPrimaryContainer,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  8.width,
+                  Icon(
+                    state.isSortAscending
+                        ? Icons.expand_less_outlined
+                        : Icons.expand_more_outlined,
+
+                    size: 24,
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildScrollToTopButton() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: _showScrollToTop,
+      builder: (context, show, child) {
+        return AnimatedOpacity(
+          opacity: show ? 1.0 : 0.0,
+          duration: 200.milliseconds,
+          child: IgnorePointer(
+            ignoring: !show,
+            child: FloatingActionButton(
+              shape: const CircleBorder(),
+              onPressed: () {
+                _scrollController.animateTo(
+                  0,
+                  duration: 300.milliseconds,
+                  curve: Curves.easeOut,
+                );
+              },
+              backgroundColor: _theme.colorScheme.primaryContainer,
+              foregroundColor: _theme.colorScheme.onPrimaryContainer,
+              child: const Icon(Icons.arrow_upward),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -496,7 +509,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               children: <Widget>[
                 Text(
                   title,
-                  style: _theme.textTheme.headlineMedium?.copyWith(
+                  style: _theme.textTheme.headlineSmall?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -505,7 +518,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
                   child: Text(
                     desc,
-                    style: _theme.textTheme.bodyMedium?.copyWith(
+                    style: _theme.textTheme.bodyLarge?.copyWith(
                       color: Colors.white,
                     ),
                   ),
@@ -517,7 +530,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                       onPressed: controller.skip,
                       child: Text(
                         S.of(context).tutorialSkip,
-                        style: _theme.textTheme.titleSmall?.copyWith(
+                        style: _theme.textTheme.titleMedium?.copyWith(
                           color: Colors.white70,
                         ),
                       ),
@@ -530,7 +543,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                       onPressed: controller.next,
                       child: Text(
                         S.of(context).tutorialNext,
-                        style: _theme.textTheme.titleSmall?.copyWith(
+                        style: _theme.textTheme.titleMedium?.copyWith(
                           color: _theme.colorScheme.surface,
                         ),
                       ),

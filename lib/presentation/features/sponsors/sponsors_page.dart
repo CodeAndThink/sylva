@@ -29,9 +29,15 @@ class _SponsorsChildPage extends StatefulWidget {
 }
 
 class __SponsorsChildPageState extends State<_SponsorsChildPage> {
+  late ThemeData _theme;
+  late S _l10n;
+
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(title: S.of(context).sponsorsTitle, body: _buildBody());
+    _theme = Theme.of(context);
+    _l10n = S.of(context);
+
+    return AppScaffold(title: _l10n.sponsorsTitle, body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -39,13 +45,13 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
         child: AppTransparentContainer(
-          padding: const EdgeInsets.all(32.0),
+          padding: 32.paddingAll,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.all(24),
+                padding: 24.paddingAll,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: const Color(0xFFFF5E5B).withValues(alpha: 0.1),
@@ -65,24 +71,24 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
               ),
               32.height,
               Text(
-                S.of(context).sponsorsTitle,
+                _l10n.sponsorsTitle,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: Theme.of(context).colorScheme.primary,
+                style: _theme.textTheme.headlineMedium?.copyWith(
+                  color: _theme.colorScheme.primary,
                 ),
               ),
               16.height,
               Text(
-                S.of(context).sponsorsDescription,
+                _l10n.sponsorsDescription,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                style: _theme.textTheme.bodyLarge?.copyWith(
                   height: 1.5,
-                  color: Theme.of(
-                    context,
-                  ).textTheme.bodyLarge?.color?.withValues(alpha: 0.8),
+                  color: _theme.textTheme.bodyLarge?.color?.withValues(
+                    alpha: 0.8,
+                  ),
                 ),
               ),
+
               40.height,
               AppFilledButton(
                 text: S.of(context).supportOnKofi,
@@ -93,9 +99,8 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
                   horizontal: 32,
                   vertical: 16,
                 ),
-                textStyle: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                textStyle: _theme.textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
                 ),
                 onPressed: () {
                   AppFeedback.playInteract(context);

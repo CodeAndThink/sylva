@@ -463,5 +463,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "seedColor": "アプリカラー",
+  "@seedColor": {}
 }

@@ -469,5 +469,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "seedColor": "Màu ứng dụng",
+  "@seedColor": {}
 }

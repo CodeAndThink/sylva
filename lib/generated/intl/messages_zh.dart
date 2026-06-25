@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "color": MessageLookupByLibrary.simpleMessage("颜色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("复制颜色失败"),
     "colorCopiedSuccess": m0,
+    "colorPickMode": MessageLookupByLibrary.simpleMessage("取色模式"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("颜色图标"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
@@ -307,6 +308,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "tutorialSortTitle": MessageLookupByLibrary.simpleMessage("排序"),
     "tutorialTimerDesc": MessageLookupByLibrary.simpleMessage("设置拍摄前的倒计时。"),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("定时器"),
+    "tutorialToggleModeDesc": MessageLookupByLibrary.simpleMessage(
+      "在取色模式和缩放模式之间切换。取色模式下点击图片可取色。缩放模式下可双指缩放和拖动图片。",
+    ),
+    "tutorialToggleModeTitle": MessageLookupByLibrary.simpleMessage("切换模式"),
     "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
       "使用这些按钮精确放大或缩小图像。",
     ),
@@ -320,5 +325,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),
+    "zoomMode": MessageLookupByLibrary.simpleMessage("缩放模式"),
   };
 }

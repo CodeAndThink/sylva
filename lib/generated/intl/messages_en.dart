@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to copy color",
     ),
     "colorCopiedSuccess": m0,
+    "colorPickMode": MessageLookupByLibrary.simpleMessage("Color Pick Mode"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Colors icon"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
@@ -408,6 +409,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Set a countdown timer before capturing.",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Timer"),
+    "tutorialToggleModeDesc": MessageLookupByLibrary.simpleMessage(
+      "Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.",
+    ),
+    "tutorialToggleModeTitle": MessageLookupByLibrary.simpleMessage(
+      "Toggle Mode",
+    ),
     "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
       "Use these buttons to zoom in or out precisely.",
     ),
@@ -423,5 +430,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "wed": MessageLookupByLibrary.simpleMessage("Wed"),
     "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
+    "zoomMode": MessageLookupByLibrary.simpleMessage("Zoom Mode"),
   };
 }

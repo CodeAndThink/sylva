@@ -134,12 +134,12 @@ class _AppDialogWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (headerIcon != null) ...[headerIcon!, 12.height],
-            Text(title, style: Theme.of(context).textTheme.headlineSmall),
+            Text(title, style: Theme.of(context).textTheme.titleLarge),
             12.height,
             Text(
               message,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               maxLines: 5,

@@ -440,5 +440,13 @@
   "@contactFormDeviceInfoError": {},
   "interactionEffects": "Interaction Effects",
   "hapticFeedback": "Haptic Feedback",
-  "soundEffects": "Sound Effects"
+  "soundEffects": "Sound Effects",
+  "colorPickMode": "Color Pick Mode",
+  "@colorPickMode": {},
+  "zoomMode": "Zoom Mode",
+  "@zoomMode": {},
+  "tutorialToggleModeTitle": "Toggle Mode",
+  "@tutorialToggleModeTitle": {},
+  "tutorialToggleModeDesc": "Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.",
+  "@tutorialToggleModeDesc": {}
 }

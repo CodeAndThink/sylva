@@ -20,6 +20,7 @@ import 'package:sylva/presentation/widgets/containers/app_transparent_container.
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
+import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class PhotoPreviewPage extends StatelessWidget {
@@ -65,6 +66,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     with TickerProviderStateMixin {
   late final PhotoPreviewCubit _cubit;
   final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> _isZoomMode = ValueNotifier<bool>(false);
   final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
     Offset.zero,
   );
@@ -77,6 +79,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   final GlobalKey _keyLibrary = GlobalKey();
   final GlobalKey _keyZoomController = GlobalKey();
   final GlobalKey _keyFullScreen = GlobalKey();
+  final GlobalKey _keyToggleMode = GlobalKey();
 
   TutorialCoachMark? tutorialCoachMark;
 
@@ -91,16 +94,21 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   void initState() {
     super.initState();
     _zoomAnimationController =
-        AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 200),
-        )..addListener(() {
-          if (_zoomAnimation != null) {
-            _transformationController.value = _zoomAnimation!.value;
-          }
-        });
+        AnimationController(vsync: this, duration: 200.milliseconds)
+          ..addListener(() {
+            if (_zoomAnimation != null) {
+              _transformationController.value = _zoomAnimation!.value;
+            }
+          });
     _cubit = context.read<PhotoPreviewCubit>();
     _cubit.extractPalette(imagePath: widget.imagePath);
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = AppTutorialHelper.showTutorial(
+      context: context,
+      targets: _createTargets(),
+    );
   }
 
   @override
@@ -220,98 +228,38 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             width: double.maxFinite,
             child: Stack(
               children: [
+                // Image
                 Positioned.fill(child: _buildImage()),
-                BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-                  buildWhen: (previous, current) =>
-                      current.filteredImageBytes != previous.filteredImageBytes,
-                  builder: (context, state) {
-                    final isFiltering = state.filteredImageBytes != null;
 
-                    if (isFiltering) {
-                      return Positioned(
-                        bottom: 50,
-                        right: 8,
-                        child: Tooltip(
-                          message: S.of(context).cancel,
-                          child: IconButton(
-                            color: Colors.red,
-                            onPressed: () {
-                              if (state.selectedColor != null) {
-                                _cubit.filterColor(
-                                  widget.imagePath,
-                                  state.selectedColor!,
-                                );
-                              }
-                            },
-                            icon: const Icon(Icons.close_rounded, size: 32),
-                          ),
-                        ),
-                      );
-                    }
+                // color Picker Controller
+                _buildPickerColorController(),
 
-                    return ValueListenableBuilder<bool>(
-                      valueListenable: _showMagnifier,
-                      builder: (context, showMagnifier, child) {
-                        if (!showMagnifier) return const SizedBox.shrink();
-                        return Positioned(
-                          bottom: 50,
-                          right: 8,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Tooltip(
-                                message: S.of(context).saveColor,
-                                child: IconButton(
-                                  color: Colors.green,
-                                  onPressed: () {
-                                    if (_cubit.state.selectedColor != null) {
-                                      _cubit.saveUserColor(
-                                        color: _cubit.state.selectedColor!,
-                                      );
-                                    }
-                                    _showMagnifier.value = false;
-                                    _pageController.animateToPage(
-                                      1,
-                                      duration: 200.milliseconds,
-                                      curve: Curves.easeInOut,
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    Icons.check_circle_outline,
-                                    size: 32,
-                                  ),
-                                ),
-                              ),
-                              Tooltip(
-                                message: S.of(context).cancel,
-                                child: IconButton(
-                                  color: Colors.red,
-                                  onPressed: () {
-                                    _showMagnifier.value = false;
-                                    _cubit.clearSelectedColor();
-                                  },
-                                  icon: const Icon(
-                                    Icons.block_outlined,
-                                    size: 32,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
+                // Filter Toggle Button
+                Positioned(
+                  key: _keyToggleMode,
+                  bottom: 54,
+                  right: 8,
+                  child: _buildPickerColorMode(),
                 ),
+
+                // Zoom Controller
                 Positioned(
                   bottom: 54,
                   left: 8,
                   right: 8,
-                  child: KeyedSubtree(
-                    key: _keyZoomController,
-                    child: _buildZoomController(),
+                  child: ValueListenableBuilder<bool>(
+                    valueListenable: _isZoomMode,
+                    builder: (context, isZoomMode, child) {
+                      if (!isZoomMode) return const SizedBox.shrink();
+                      return KeyedSubtree(
+                        key: _keyZoomController,
+                        child: _buildZoomController(),
+                      );
+                    },
                   ),
                 ),
+
+                // FullScreen Button and Color Details
                 Positioned(
                   bottom: 8,
                   left: 8,
@@ -320,127 +268,19 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     spacing: 8,
                     children: [
                       Expanded(child: _buildColorDetails()),
-                      Tooltip(
-                        key: _keyFullScreen,
-                        message: S.of(context).fullScreen,
-                        child: Material(
-                          color: Colors.black54,
-                          shape: const CircleBorder(),
-                          clipBehavior: Clip.hardEdge,
-                          child: InkWell(
-                            onTap: () {
-                              FullScreenPhotoViewer.show(
-                                context,
-                                imagePath: widget.imagePath,
-                                imageBytes: _cubit.state.filteredImageBytes,
-                              );
-                            },
-                            child: SizedBox(
-                              height: 38,
-                              width: 38,
-                              child: const Icon(
-                                Icons.zoom_out_map_rounded,
-                                size: 24,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      _buildFullScreenButton(),
                     ],
                   ),
                 ),
+
                 // Filter Loading Overlay
                 _buildColorOverlay(),
-                ValueListenableBuilder<bool>(
-                  valueListenable: _showMagnifier,
-                  builder: (context, showMagnifier, child) {
-                    if (!showMagnifier) return const SizedBox.shrink();
 
-                    return ValueListenableBuilder<Offset>(
-                      valueListenable: _touchPosition,
-                      builder: (context, touchPos, child) {
-                        final double radius = 60.0;
-                        final double offsetDistance = 100.0;
+                // Magnifier
+                _buildBigZoom(constraints: constraints),
 
-                        Offset getBestCenter() {
-                          Offset center = touchPos.translate(
-                            0,
-                            -offsetDistance,
-                          );
-                          return Offset(
-                            center.dx.clamp(
-                              radius,
-                              constraints.maxWidth - radius,
-                            ),
-                            center.dy.clamp(
-                              radius,
-                              constraints.maxHeight - radius,
-                            ),
-                          );
-                        }
-
-                        Offset magnifierCenter = getBestCenter();
-
-                        final double magnifierLeft =
-                            magnifierCenter.dx - radius;
-                        final double magnifierTop = magnifierCenter.dy - radius;
-
-                        final Offset actualMagnifierCenter = Offset(
-                          magnifierLeft + radius,
-                          magnifierTop + radius,
-                        );
-                        final Offset focalPointOffset =
-                            touchPos - actualMagnifierCenter;
-
-                        return Positioned(
-                          left: magnifierLeft,
-                          top: magnifierTop,
-                          child: RawMagnifier(
-                            size: const Size(120, 120),
-                            magnificationScale: 10.0,
-                            focalPointOffset: focalPointOffset,
-                            decoration: MagnifierDecoration(
-                              shape: CircleBorder(
-                                side: BorderSide(
-                                  color: _theme.colorScheme.surface,
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-                ValueListenableBuilder<bool>(
-                  valueListenable: _showMagnifier,
-                  builder: (context, showMagnifier, child) {
-                    if (!showMagnifier) return const SizedBox.shrink();
-
-                    return ValueListenableBuilder<Offset>(
-                      valueListenable: _touchPosition,
-                      builder: (context, touchPos, child) {
-                        return Positioned(
-                          left: touchPos.dx - 10,
-                          top: touchPos.dy - 10,
-                          child: Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: _theme.colorScheme.surface,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                // Magnifier UI
+                _buildSmallZoom(),
               ],
             ),
           );
@@ -452,54 +292,221 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildImage() {
     return AppTransparentContainer(
       padding: EdgeInsets.zero,
-      child: GestureDetector(
-        onTapDown: (details) {
-          if (_cubit.state.filteredImageBytes != null) return;
-          _showMagnifier.value = true;
-          _touchPosition.value = details.localPosition;
+      child: ValueListenableBuilder<bool>(
+        valueListenable: _isZoomMode,
+        builder: (context, isZoomMode, child) {
+          return GestureDetector(
+            onTapDown: isZoomMode
+                ? null
+                : (details) {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    _showMagnifier.value = true;
+                    _touchPosition.value = details.localPosition;
+                  },
+            onTapUp: isZoomMode
+                ? null
+                : (_) async {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    final color = await _getColorAtPosition(
+                      _touchPosition.value,
+                    );
+                    if (color != null) {
+                      _cubit.setSelectedColor(color: color);
+                    }
+                  },
+            onPanStart: isZoomMode
+                ? null
+                : (details) {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    _showMagnifier.value = true;
+                    _touchPosition.value = details.localPosition;
+                  },
+            onPanUpdate: isZoomMode
+                ? null
+                : (details) {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    _touchPosition.value = details.localPosition;
+                  },
+            onPanEnd: isZoomMode
+                ? null
+                : (_) async {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    final color = await _getColorAtPosition(
+                      _touchPosition.value,
+                    );
+                    if (color != null) {
+                      _cubit.setSelectedColor(color: color);
+                    }
+                  },
+            child: RepaintBoundary(
+              key: _imageKey,
+              child: InteractiveViewer(
+                transformationController: _transformationController,
+                panEnabled: isZoomMode,
+                scaleEnabled: isZoomMode,
+                minScale: 1.0,
+                maxScale: 20.0,
+                child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+                  buildWhen: (previous, current) =>
+                      current.filteredImageBytes != previous.filteredImageBytes,
+                  builder: (context, state) {
+                    if (state.filteredImageBytes != null) {
+                      return Image.memory(
+                        state.filteredImageBytes!,
+                        fit: BoxFit.cover,
+                      );
+                    }
+                    return AppFileImage(
+                      path: widget.imagePath,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
+              ),
+            ),
+          );
         },
-        onTapUp: (_) async {
-          if (_cubit.state.filteredImageBytes != null) return;
-          final color = await _getColorAtPosition(_touchPosition.value);
-          if (color != null) {
-            _cubit.setSelectedColor(color: color);
-          }
-        },
-        onPanStart: (details) {
-          if (_cubit.state.filteredImageBytes != null) return;
-          _showMagnifier.value = true;
-          _touchPosition.value = details.localPosition;
-        },
-        onPanUpdate: (details) {
-          if (_cubit.state.filteredImageBytes != null) return;
-          _touchPosition.value = details.localPosition;
-        },
-        onPanEnd: (_) async {
-          if (_cubit.state.filteredImageBytes != null) return;
-          final color = await _getColorAtPosition(_touchPosition.value);
-          if (color != null) {
-            _cubit.setSelectedColor(color: color);
-          }
-        },
-        child: RepaintBoundary(
-          key: _imageKey,
-          child: InteractiveViewer(
-            transformationController: _transformationController,
-            panEnabled: true,
-            minScale: 1.0,
-            maxScale: 20.0,
-            child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-              buildWhen: (previous, current) =>
-                  current.filteredImageBytes != previous.filteredImageBytes,
-              builder: (context, state) {
-                if (state.filteredImageBytes != null) {
-                  return Image.memory(
-                    state.filteredImageBytes!,
-                    fit: BoxFit.cover,
-                  );
+      ),
+    );
+  }
+
+  Widget _buildPickerColorMode() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: _isZoomMode,
+      builder: (context, isZoomMode, child) {
+        return Tooltip(
+          message: isZoomMode
+              ? S.of(context).colorPickMode
+              : S.of(context).zoomMode,
+          child: Material(
+            color: Colors.black54,
+            shape: const CircleBorder(),
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              onTap: () {
+                AppFeedback.playInteract(context);
+                _isZoomMode.value = !_isZoomMode.value;
+                if (_isZoomMode.value) {
+                  _showMagnifier.value = false;
                 }
-                return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
               },
+              child: SizedBox(
+                height: 38,
+                width: 38,
+                child: Icon(
+                  isZoomMode ? Icons.colorize_rounded : Icons.search_rounded,
+                  size: 24,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPickerColorController() {
+    return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+      buildWhen: (previous, current) =>
+          current.filteredImageBytes != previous.filteredImageBytes,
+      builder: (context, state) {
+        final isFiltering = state.filteredImageBytes != null;
+
+        if (isFiltering) {
+          return Positioned(
+            bottom: 50,
+            right: 8,
+            child: Tooltip(
+              message: S.of(context).cancel,
+              child: IconButton(
+                color: Colors.red,
+                onPressed: () {
+                  if (state.selectedColor != null) {
+                    _cubit.filterColor(widget.imagePath, state.selectedColor!);
+                  }
+                },
+                icon: const Icon(Icons.close_rounded, size: 32),
+              ),
+            ),
+          );
+        }
+
+        return ValueListenableBuilder<bool>(
+          valueListenable: _showMagnifier,
+          builder: (context, showMagnifier, child) {
+            if (!showMagnifier) return const SizedBox.shrink();
+            return Positioned(
+              bottom: 88,
+              right: 4,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Tooltip(
+                    message: S.of(context).saveColor,
+                    child: IconButton(
+                      color: Colors.green,
+                      onPressed: () {
+                        AppFeedback.playInteract(context);
+                        if (_cubit.state.selectedColor != null) {
+                          _cubit.saveUserColor(
+                            color: _cubit.state.selectedColor!,
+                          );
+                        }
+                        _showMagnifier.value = false;
+                        _pageController.animateToPage(
+                          1,
+                          duration: 200.milliseconds,
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      icon: const Icon(Icons.check_circle_outline, size: 32),
+                    ),
+                  ),
+                  Tooltip(
+                    message: S.of(context).cancel,
+                    child: IconButton(
+                      color: Colors.red,
+                      onPressed: () {
+                        AppFeedback.playInteract(context);
+                        _showMagnifier.value = false;
+                        _cubit.clearSelectedColor();
+                      },
+                      icon: const Icon(Icons.block_outlined, size: 32),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildFullScreenButton() {
+    return Tooltip(
+      key: _keyFullScreen,
+      message: S.of(context).fullScreen,
+      child: Material(
+        color: Colors.black54,
+        shape: const CircleBorder(),
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          onTap: () {
+            FullScreenPhotoViewer.show(
+              context,
+              imagePath: widget.imagePath,
+              imageBytes: _cubit.state.filteredImageBytes,
+            );
+          },
+          child: SizedBox(
+            height: 38,
+            width: 38,
+            child: const Icon(
+              Icons.zoom_out_map_rounded,
+              size: 24,
+              color: Colors.white,
             ),
           ),
         ),
@@ -635,6 +642,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                         child: InkWell(
                           key: _keyExpandPalette,
                           onTap: () {
+                            AppFeedback.playInteract(context);
                             ColorPaletteBottomSheet.show(
                               context: context,
                               paletteColors: _cubit.state.paletteColors,
@@ -723,7 +731,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       builder: (context, matrix, child) {
         final double currentScale = matrix.getMaxScaleOnAxis();
         return Row(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 8,
           children: [
@@ -733,9 +740,14 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 onTap: () => _updateZoom(-0.5),
-                child: Padding(
-                  padding: 8.paddingAll,
-                  child: const Icon(Icons.remove, color: Colors.white),
+                child: SizedBox(
+                  height: 38,
+                  width: 38,
+                  child: const Icon(
+                    Icons.remove,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                 ),
               ),
             ),
@@ -766,13 +778,98 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 onTap: () => _updateZoom(0.5),
-                child: Padding(
-                  padding: 8.paddingAll,
-                  child: const Icon(Icons.add, color: Colors.white),
+                child: SizedBox(
+                  height: 38,
+                  width: 38,
+                  child: const Icon(Icons.add, color: Colors.white, size: 24),
                 ),
               ),
             ),
           ],
+        );
+      },
+    );
+  }
+
+  Widget _buildBigZoom({required BoxConstraints constraints}) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: _showMagnifier,
+      builder: (context, showMagnifier, child) {
+        if (!showMagnifier) return const SizedBox.shrink();
+
+        return ValueListenableBuilder<Offset>(
+          valueListenable: _touchPosition,
+          builder: (context, touchPos, child) {
+            final double radius = 60.0;
+            final double offsetDistance = 100.0;
+
+            Offset getBestCenter() {
+              Offset center = touchPos.translate(0, -offsetDistance);
+              return Offset(
+                center.dx.clamp(radius, constraints.maxWidth - radius),
+                center.dy.clamp(radius, constraints.maxHeight - radius),
+              );
+            }
+
+            Offset magnifierCenter = getBestCenter();
+
+            final double magnifierLeft = magnifierCenter.dx - radius;
+            final double magnifierTop = magnifierCenter.dy - radius;
+
+            final Offset actualMagnifierCenter = Offset(
+              magnifierLeft + radius,
+              magnifierTop + radius,
+            );
+            final Offset focalPointOffset = touchPos - actualMagnifierCenter;
+
+            return Positioned(
+              left: magnifierLeft,
+              top: magnifierTop,
+              child: RawMagnifier(
+                size: const Size(120, 120),
+                magnificationScale: 10.0,
+                focalPointOffset: focalPointOffset,
+                decoration: MagnifierDecoration(
+                  shape: CircleBorder(
+                    side: BorderSide(
+                      color: _theme.colorScheme.surface,
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildSmallZoom() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: _showMagnifier,
+      builder: (context, showMagnifier, child) {
+        if (!showMagnifier) return const SizedBox.shrink();
+
+        return ValueListenableBuilder<Offset>(
+          valueListenable: _touchPosition,
+          builder: (context, touchPos, child) {
+            return Positioned(
+              left: touchPos.dx - 10,
+              top: touchPos.dy - 10,
+              child: Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: _theme.colorScheme.surface,
+                    width: 2,
+                  ),
+                ),
+              ),
+            );
+          },
         );
       },
     );
@@ -879,7 +976,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 _cubit.navigator.safePop();
               }
             },
-            icon: const Icon(Icons.save_outlined, size: 30),
+            icon: const Icon(Icons.data_saver_on_outlined, size: 30),
           ),
         ),
         48.width,
@@ -891,7 +988,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               AppFeedback.playInteract(context);
               _cubit.saveToLibrary(imagePath: widget.imagePath);
             },
-            icon: Icon(Icons.download_outlined, size: 30),
+            icon: Icon(Icons.download_rounded, size: 30),
           ),
         ),
         48.width,
@@ -899,26 +996,17 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           message: S.of(context).help,
           child: IconButton(
             onPressed: _showTutorial,
-            icon: Icon(Icons.help_outline_outlined, size: 28),
+            icon: Icon(Icons.help_outline_outlined, size: 30),
           ),
         ),
       ],
     );
   }
 
-  void _showTutorial() {
-    tutorialCoachMark = TutorialCoachMark(
-      targets: _createTargets(),
-      colorShadow: Colors.black,
-      hideSkip: true,
-      paddingFocus: 10,
-      opacityShadow: 0.8,
-    )..show(context: context);
-  }
-
   List<TargetFocus> _createTargets() {
     return [
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _imageKey,
         title: S.of(context).tutorialImageTitle,
         desc: S.of(context).tutorialImageDesc,
@@ -929,123 +1017,50 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           bottom: MediaQuery.of(context).padding.bottom + 12,
         ),
       ),
-      _buildTarget(
-        key: _keyZoomController,
-        title: S.of(context).tutorialZoomTitle,
-        desc: S.of(context).tutorialZoomDesc,
-        shape: ShapeLightFocus.RRect,
-        radius: 20,
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyToggleMode,
+        title: S.of(context).tutorialToggleModeTitle,
+        desc: S.of(context).tutorialToggleModeDesc,
       ),
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _keyFullScreen,
         title: S.of(context).tutorialFullScreenTitle,
         desc: S.of(context).tutorialFullScreenDesc,
       ),
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _keyPalette,
         title: S.of(context).tutorialPaletteTitle,
         desc: S.of(context).tutorialPaletteDesc,
         shape: ShapeLightFocus.RRect,
         radius: 28,
       ),
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _keyExpandPalette,
         title: S.of(context).tutorialExpandPaletteTitle,
         desc: S.of(context).tutorialExpandPaletteDesc,
       ),
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _keyBack,
         title: S.of(context).tutorialBackTitle,
         desc: S.of(context).tutorialBackDesc,
       ),
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _keySave,
         title: S.of(context).tutorialSaveTitle,
         desc: S.of(context).tutorialSaveDesc,
       ),
-      _buildTarget(
+      AppTutorialHelper.buildTarget(
+        context: context,
         key: _keyLibrary,
         title: S.of(context).tutorialLibraryTitle,
         desc: S.of(context).tutorialLibraryDesc,
       ),
     ];
-  }
-
-  TargetFocus _buildTarget({
-    required GlobalKey key,
-    required String title,
-    required String desc,
-    Alignment alignSkip = Alignment.topRight,
-    ContentAlign contentAlign = ContentAlign.top,
-    CustomTargetContentPosition? customPosition,
-    ShapeLightFocus? shape,
-    double? radius,
-  }) {
-    return TargetFocus(
-      identify: key,
-      keyTarget: key,
-      alignSkip: alignSkip,
-      shape: shape,
-      radius: radius,
-      focusAnimationDuration: 400.milliseconds,
-      unFocusAnimationDuration: 400.milliseconds,
-      contents: [
-        TargetContent(
-          align: customPosition != null ? ContentAlign.custom : contentAlign,
-          customPosition: customPosition,
-          builder: (context, controller) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: _theme.textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-                  child: Text(
-                    desc,
-                    style: _theme.textTheme.bodyLarge?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: controller.skip,
-                      child: Text(
-                        S.of(context).tutorialSkip,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
-                    8.width,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _theme.colorScheme.primary,
-                      ),
-                      onPressed: controller.next,
-                      child: Text(
-                        S.of(context).tutorialNext,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: _theme.colorScheme.surface,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-          },
-        ),
-      ],
-    );
   }
 }

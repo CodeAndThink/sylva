@@ -18,6 +18,7 @@ import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
+import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -82,6 +83,46 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
         _cubit.clearHistory();
       },
     );
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = AppTutorialHelper.showTutorial(
+      context: context,
+      targets: _createTargets(),
+    );
+  }
+
+  List<TargetFocus> _createTargets() {
+    return [
+      if (_cubit.state.records.isNotEmpty)
+        AppTutorialHelper.buildTarget(
+          context: context,
+          key: _keyDeleteAll,
+          title: S.of(context).tutorialDeleteAllTitle,
+          desc: S.of(context).tutorialDeleteAllDesc,
+        ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyChangeView,
+        title: S.of(context).tutorialHistoryViewTitle,
+        desc: S.of(context).tutorialHistoryViewDesc,
+        contentAlign: ContentAlign.top,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyFavoriteOnly,
+        title: S.of(context).tutorialFavoritesTitle,
+        desc: S.of(context).tutorialFavoritesDesc,
+        contentAlign: ContentAlign.top,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keySort,
+        title: S.of(context).tutorialSortTitle,
+        desc: S.of(context).tutorialSortDesc,
+        contentAlign: ContentAlign.top,
+      ),
+    ];
   }
 
   @override
@@ -363,7 +404,9 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 state.isFavoriteOnly
                     ? Icons.bookmark
                     : Icons.bookmark_outline_rounded,
-                color: Colors.amber,
+                color: state.isFavoriteOnly
+                    ? Colors.amber
+                    : _theme.colorScheme.onSurfaceVariant,
                 size: 30,
               );
             },
@@ -449,116 +492,6 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           ),
         );
       },
-    );
-  }
-
-  void _showTutorial() {
-    tutorialCoachMark = TutorialCoachMark(
-      targets: _createTargets(),
-      colorShadow: Colors.black,
-      hideSkip: true,
-      paddingFocus: 10,
-      opacityShadow: 0.8,
-    )..show(context: context);
-  }
-
-  List<TargetFocus> _createTargets() {
-    return [
-      if (_cubit.state.records.isNotEmpty)
-        _buildTarget(
-          key: _keyDeleteAll,
-          title: S.of(context).tutorialDeleteAllTitle,
-          desc: S.of(context).tutorialDeleteAllDesc,
-        ),
-      _buildTarget(
-        key: _keyChangeView,
-        title: S.of(context).tutorialHistoryViewTitle,
-        desc: S.of(context).tutorialHistoryViewDesc,
-        contentAlign: ContentAlign.top,
-      ),
-      _buildTarget(
-        key: _keyFavoriteOnly,
-        title: S.of(context).tutorialFavoritesTitle,
-        desc: S.of(context).tutorialFavoritesDesc,
-        contentAlign: ContentAlign.top,
-      ),
-      _buildTarget(
-        key: _keySort,
-        title: S.of(context).tutorialSortTitle,
-        desc: S.of(context).tutorialSortDesc,
-        contentAlign: ContentAlign.top,
-      ),
-    ];
-  }
-
-  TargetFocus _buildTarget({
-    required GlobalKey key,
-    required String title,
-    required String desc,
-    ContentAlign contentAlign = ContentAlign.bottom,
-  }) {
-    return TargetFocus(
-      identify: key,
-      keyTarget: key,
-      alignSkip: Alignment.topRight,
-      focusAnimationDuration: 400.milliseconds,
-      unFocusAnimationDuration: 400.milliseconds,
-      contents: [
-        TargetContent(
-          align: contentAlign,
-          builder: (context, controller) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: _theme.textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-                  child: Text(
-                    desc,
-                    style: _theme.textTheme.bodyLarge?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: controller.skip,
-                      child: Text(
-                        S.of(context).tutorialSkip,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
-                    8.width,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _theme.colorScheme.primary,
-                      ),
-                      onPressed: controller.next,
-                      child: Text(
-                        S.of(context).tutorialNext,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: _theme.colorScheme.surface,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-          },
-        ),
-      ],
     );
   }
 }

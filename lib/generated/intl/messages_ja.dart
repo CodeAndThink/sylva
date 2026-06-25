@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "color": MessageLookupByLibrary.simpleMessage("色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
+    "colorPickMode": MessageLookupByLibrary.simpleMessage("カラーピックモード"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("カラーアイコン"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
@@ -345,6 +346,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "撮影前のカウントダウンを設定します。",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("タイマー"),
+    "tutorialToggleModeDesc": MessageLookupByLibrary.simpleMessage(
+      "カラーピックモードとズームモードを切り替えます。カラーピックモードでは画像をタップして色を選択できます。ズームモードではピンチでズーム、ドラッグで移動できます。",
+    ),
+    "tutorialToggleModeTitle": MessageLookupByLibrary.simpleMessage("モード切替"),
     "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
       "これらのボタンを使用して、正確にズームインまたはズームアウトします。",
     ),
@@ -358,5 +363,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "weakPassword": MessageLookupByLibrary.simpleMessage("パスワードが弱すぎます。"),
     "wed": MessageLookupByLibrary.simpleMessage("水"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),
+    "zoomMode": MessageLookupByLibrary.simpleMessage("ズームモード"),
   };
 }

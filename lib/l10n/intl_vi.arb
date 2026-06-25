@@ -422,5 +422,13 @@
   "@contactFormDeviceInfoError": {},
   "interactionEffects": "Hiệu ứng tương tác",
   "hapticFeedback": "Phản hồi rung",
-  "soundEffects": "Hiệu ứng âm thanh"
+  "soundEffects": "Hiệu ứng âm thanh",
+  "colorPickMode": "Chế độ chọn màu",
+  "@colorPickMode": {},
+  "zoomMode": "Chế độ thu phóng",
+  "@zoomMode": {},
+  "tutorialToggleModeTitle": "Chuyển đổi chế độ",
+  "@tutorialToggleModeTitle": {},
+  "tutorialToggleModeDesc": "Chuyển đổi giữa chế độ Chọn màu và Thu phóng. Ở chế độ Chọn màu, chạm vào ảnh để chọn màu. Ở chế độ Thu phóng, dùng hai ngón để phóng to và kéo ảnh.",
+  "@tutorialToggleModeDesc": {}
 }

@@ -1743,6 +1743,41 @@ class S {
       args: [],
     );
   }
+
+  /// `Color Pick Mode`
+  String get colorPickMode {
+    return Intl.message(
+      'Color Pick Mode',
+      name: 'colorPickMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zoom Mode`
+  String get zoomMode {
+    return Intl.message('Zoom Mode', name: 'zoomMode', desc: '', args: []);
+  }
+
+  /// `Toggle Mode`
+  String get tutorialToggleModeTitle {
+    return Intl.message(
+      'Toggle Mode',
+      name: 'tutorialToggleModeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.`
+  String get tutorialToggleModeDesc {
+    return Intl.message(
+      'Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.',
+      name: 'tutorialToggleModeDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -415,8 +415,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
 
         if (isFiltering) {
           return Positioned(
-            bottom: 50,
-            right: 8,
+            bottom: 88,
+            right: 4,
             child: Tooltip(
               message: S.of(context).cancel,
               child: IconButton(

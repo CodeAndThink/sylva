@@ -250,12 +250,17 @@ class __ContactChildPageState extends State<_ContactChildPage> {
             // Submit Button
             BlocBuilder<ContactCubit, ContactState>(
               buildWhen: (previous, current) =>
-                  previous.summitStatus != current.summitStatus,
+                  previous.summitStatus != current.summitStatus ||
+                  previous.cooldownRemaining != current.cooldownRemaining,
               builder: (context, state) {
+                final isCooldown = state.isCooldown;
                 return AppFilledButton(
-                  onPressed: _submit,
-                  text: _l10n.submit,
+                  onPressed: isCooldown ? null : _submit,
+                  text: isCooldown
+                      ? _l10n.contactCooldownMessage(state.cooldownRemaining)
+                      : _l10n.submit,
                   isLoading: state.summitStatus.isLoading,
+                  enabled: !isCooldown,
                 );
               },
             ),

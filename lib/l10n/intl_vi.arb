@@ -331,9 +331,13 @@
   "termsOfService": "Điều khoản dịch vụ",
   "@termsOfService": {},
   "cameraPermissionDenied": "Không có quyền truy cập camera\nhoặc thiết bị không có camera.",
+  "@cameraPermissionDenied": {},
   "retry": "Thử lại",
+  "@retry": {},
   "noCamerasFound": "Thiết bị không có camera",
+  "@noCamerasFound": {},
   "errorPrefix": "Lỗi",
+  "@errorPrefix": {},
   "thanksAndReference": "Cảm ơn & Tài liệu tham khảo",
   "@thanksAndReference": {},
   "acknowledgements": "Lời cảm ơn",
@@ -341,7 +345,13 @@
   "acknowledgementsIntro": "Chúng tôi xin chân thành cảm ơn những nhà sáng tạo sau đây vì các tài nguyên được sử dụng trong ứng dụng này:",
   "@acknowledgementsIntro": {},
   "designedByAuthorFromFlaticon": "Thiết kế bởi {author} từ Flaticon",
-  "@designedByAuthorFromFlaticon": {},
+  "@designedByAuthorFromFlaticon": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
   "roadBlockIcon": "Biểu tượng rào chắn",
   "@roadBlockIcon": {},
   "colorsIcon": "Biểu tượng màu sắc",
@@ -349,13 +359,25 @@
   "cameraIcon": "Biểu tượng máy ảnh",
   "@cameraIcon": {},
   "designedByAuthorMagnific": "Thiết kế bởi {author} - Magnific.com",
-  "@designedByAuthorMagnific": {},
+  "@designedByAuthorMagnific": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
   "rainbowHalftoneDotsBackground": "Hình nền chấm màu cầu vồng",
   "@rainbowHalftoneDotsBackground": {},
   "aboutSylvaDescription": "Sylva là ứng dụng camera được thiết kế để giúp bạn chụp và khám phá màu sắc của thế giới một cách dễ dàng.",
   "@aboutSylvaDescription": {},
   "version": "Phiên bản {version}",
-  "@version": {},
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "privacyPolicyContent": "Chúng tôi tôn trọng quyền riêng tư của bạn. Sylva xử lý dữ liệu camera cục bộ trên thiết bị của bạn bất cứ khi nào có thể. Chúng tôi không lưu trữ hoặc chia sẻ ảnh cá nhân của bạn nếu không có sự đồng ý rõ ràng.",
   "@privacyPolicyContent": {},
   "termsOfServiceContent": "Bằng việc sử dụng Sylva, bạn đồng ý với Điều khoản Dịch vụ của chúng tôi. Bạn không được sử dụng ứng dụng cho bất kỳ mục đích bất hợp pháp hoặc không được phép nào. Các dịch vụ và nội dung được cung cấp \"nguyên trạng\" mà không có bất kỳ hình thức bảo đảm nào.",
@@ -429,14 +451,23 @@
   "contactFormDeviceInfoError": "Vui lòng nhập thông tin thiết bị",
   "@contactFormDeviceInfoError": {},
   "interactionEffects": "Hiệu ứng tương tác",
+  "@interactionEffects": {},
   "hapticFeedback": "Phản hồi rung",
+  "@hapticFeedback": {},
   "soundEffects": "Hiệu ứng âm thanh",
+  "@soundEffects": {},
   "colorPickMode": "Chế độ chọn màu",
   "@colorPickMode": {},
   "zoomMode": "Chế độ thu phóng",
   "@zoomMode": {},
   "tutorialToggleModeTitle": "Chuyển đổi chế độ",
   "@tutorialToggleModeTitle": {},
-  "tutorialToggleModeDesc": "Chuyển đổi giữa chế độ Chọn màu và Thu phóng. Ở chế độ Chọn màu, chạm vào ảnh để chọn màu. Ở chế độ Thu phóng, dùng hai ngón để phóng to và kéo ảnh.",
-  "@tutorialToggleModeDesc": {}
+  "contactCooldownMessage": "Vui lòng chờ {seconds} giây trước khi gửi lại",
+  "@contactCooldownMessage": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  }
 }

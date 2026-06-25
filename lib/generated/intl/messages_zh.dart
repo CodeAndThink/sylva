@@ -22,15 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "已将 ${color} 复制到剪贴板";
 
-  static String m1(author) => "由来自Flaticon的${author}设计";
+  static String m1(seconds) => "请等待${seconds}秒后再发送";
 
-  static String m2(author) => "由来自Magnific.com的${author}设计";
+  static String m2(author) => "由来自Flaticon的${author}设计";
 
-  static String m3(message) => "错误: ${message}";
+  static String m3(author) => "由来自Magnific.com的${author}设计";
 
-  static String m4(level) => "等级 ${level}";
+  static String m4(message) => "错误: ${message}";
 
-  static String m5(version) => "版本 ${version}";
+  static String m5(level) => "等级 ${level}";
+
+  static String m6(version) => "版本 ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -71,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "contact": MessageLookupByLibrary.simpleMessage("联系"),
+    "contactCooldownMessage": m1,
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage("请填写所有字段"),
     "contactFormAttachDeviceInfo": MessageLookupByLibrary.simpleMessage(
       "附加设备信息",
@@ -107,8 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
     ),
-    "designedByAuthorFromFlaticon": m1,
-    "designedByAuthorMagnific": m2,
+    "designedByAuthorFromFlaticon": m2,
+    "designedByAuthorMagnific": m3,
     "deviceInfo": MessageLookupByLibrary.simpleMessage("设备信息"),
     "donation": MessageLookupByLibrary.simpleMessage("捐款"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重复项"),
@@ -116,7 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailInvalid": MessageLookupByLibrary.simpleMessage("无效的邮箱格式"),
     "emailNotConfirmed": MessageLookupByLibrary.simpleMessage("邮箱未确认。"),
     "emailRequired": MessageLookupByLibrary.simpleMessage("必须输入邮箱"),
-    "error": m3,
+    "error": m4,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("错误"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("加载颜色失败"),
     "file": MessageLookupByLibrary.simpleMessage("文件"),
@@ -139,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
     "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),
     "letGo": MessageLookupByLibrary.simpleMessage("开始吧"),
-    "level": m4,
+    "level": m5,
     "line": MessageLookupByLibrary.simpleMessage("直线"),
     "login": MessageLookupByLibrary.simpleMessage("登录"),
     "logout": MessageLookupByLibrary.simpleMessage("退出登录"),
@@ -326,7 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("用户被封禁。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("未找到用户。"),
-    "version": m5,
+    "version": m6,
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),

@@ -22,15 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "Copied ${color} to clipboard";
 
-  static String m1(author) => "Designed by ${author} from Flaticon";
+  static String m1(seconds) =>
+      "Please wait ${seconds} seconds before sending again";
 
-  static String m2(author) => "Designed by ${author} - Magnific.com";
+  static String m2(author) => "Designed by ${author} from Flaticon";
 
-  static String m3(message) => "Error: ${message}";
+  static String m3(author) => "Designed by ${author} - Magnific.com";
 
-  static String m4(level) => "Level ${level}";
+  static String m4(message) => "Error: ${message}";
 
-  static String m5(version) => "Version ${version}";
+  static String m5(level) => "Level ${level}";
+
+  static String m6(version) => "Version ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -83,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm password is required",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+    "contactCooldownMessage": m1,
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Please fill in all fields",
     ),
@@ -129,8 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
     ),
-    "designedByAuthorFromFlaticon": m1,
-    "designedByAuthorMagnific": m2,
+    "designedByAuthorFromFlaticon": m2,
+    "designedByAuthorMagnific": m3,
     "deviceInfo": MessageLookupByLibrary.simpleMessage("Device Info"),
     "donation": MessageLookupByLibrary.simpleMessage("Donation"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Duplicates"),
@@ -142,7 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email is not confirmed.",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
-    "error": m3,
+    "error": m4,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Error"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Failed to load colors",
@@ -175,7 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("Last 30 days"),
     "last7Days": MessageLookupByLibrary.simpleMessage("Last 7 days"),
     "letGo": MessageLookupByLibrary.simpleMessage("Let\'s Go"),
-    "level": m4,
+    "level": m5,
     "line": MessageLookupByLibrary.simpleMessage("Line"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -429,7 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("User is banned."),
     "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
-    "version": m5,
+    "version": m6,
     "weakPassword": MessageLookupByLibrary.simpleMessage(
       "Password is too weak.",
     ),

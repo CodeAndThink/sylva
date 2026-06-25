@@ -1803,6 +1803,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please wait {seconds} seconds before sending again`
+  String contactCooldownMessage(int seconds) {
+    return Intl.message(
+      'Please wait $seconds seconds before sending again',
+      name: 'contactCooldownMessage',
+      desc: '',
+      args: [seconds],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

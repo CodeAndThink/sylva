@@ -210,7 +210,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             child: InkWell(
               borderRadius: 16.borderRadius,
               onTap: () {
-                // TODO: Navigate to Donation
+                _settingsCubit.navigator.goToSponsors();
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(

@@ -239,8 +239,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
+    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
+      "このアプリを気に入っていただけたら、開発をサポートしてください。コーヒーを奢ってください！",
+    ),
+    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("スポンサー"),
     "submit": MessageLookupByLibrary.simpleMessage("送信"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
+    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Ko-fiでサポート"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
@@ -317,9 +322,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialHistoryViewTitle": MessageLookupByLibrary.simpleMessage("表示の変更"),
     "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
-      "写真の上で指を動かして拡大し、色を選択します。",
+      "写真の上で指をスライドさせて拡大し、任意の色を選択します。",
     ),
-    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("写真プレビュー"),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("写真のプレビュー"),
     "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
       "この写真をデバイスのギャラリーにエクスポートします。",
     ),

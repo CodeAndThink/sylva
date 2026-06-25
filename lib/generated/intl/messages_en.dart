@@ -282,8 +282,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Sound Effects"),
+    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
+      "If you like this app, consider supporting the development. Buy me a coffee!",
+    ),
+    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("Sponsors"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
+    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Support on Ko-fi"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(

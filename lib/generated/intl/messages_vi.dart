@@ -286,8 +286,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Hiệu ứng âm thanh"),
+    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
+      "Nếu bạn yêu thích ứng dụng này, hãy ủng hộ để giúp dự án phát triển hơn nhé. Mời tôi một ly cà phê nha!",
+    ),
+    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Ủng hộ qua Ko-fi"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(
       "Điều khoản dịch vụ",

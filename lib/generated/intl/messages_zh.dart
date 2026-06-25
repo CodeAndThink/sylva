@@ -219,8 +219,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("扫描限制"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),
+    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
+      "如果您喜欢这个应用，请考虑支持开发。请我喝杯咖啡吧！",
+    ),
+    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("赞助"),
     "submit": MessageLookupByLibrary.simpleMessage("提交"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
+    "supportOnKofi": MessageLookupByLibrary.simpleMessage("在 Ko-fi 上支持"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("切换相机"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("服务条款"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
@@ -285,7 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialHistoryViewTitle": MessageLookupByLibrary.simpleMessage("更改视图"),
     "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
-      "在照片上移动手指放大并选择任何颜色。",
+      "在照片上滑动手指以放大并选择任何颜色。",
     ),
     "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("照片预览"),
     "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(

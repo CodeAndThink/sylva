@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class PaywallState extends Equatable {
-  const PaywallState();
+class SponsorsState extends Equatable {
+  const SponsorsState();
 
   @override
   List<Object?> get props => [];

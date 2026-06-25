@@ -7,4 +7,5 @@ class AppEnvConfigs {
   static final String signUpRedirectUrl = 'sylva://auth-success';
   static final String mapUrlTemplate =
       'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png';
+  static final String koFiLink = 'https://ko-fi.com/solvelabs';
 }

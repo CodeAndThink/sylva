@@ -889,6 +889,41 @@ class S {
     );
   }
 
+  /// `Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.`
+  String get tutorialToggleModeDesc {
+    return Intl.message(
+      'Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.',
+      name: 'tutorialToggleModeDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sponsors`
+  String get sponsorsTitle {
+    return Intl.message('Sponsors', name: 'sponsorsTitle', desc: '', args: []);
+  }
+
+  /// `If you like this app, consider supporting the development. Buy me a coffee!`
+  String get sponsorsDescription {
+    return Intl.message(
+      'If you like this app, consider supporting the development. Buy me a coffee!',
+      name: 'sponsorsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Support on Ko-fi`
+  String get supportOnKofi {
+    return Intl.message(
+      'Support on Ko-fi',
+      name: 'supportOnKofi',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Color Palette`
   String get tutorialPaletteTitle {
     return Intl.message(
@@ -1769,13 +1804,13 @@ class S {
     );
   }
 
-  /// `Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.`
-  String get tutorialToggleModeDesc {
+  /// `Please wait {seconds} seconds before sending again`
+  String contactCooldownMessage(int seconds) {
     return Intl.message(
-      'Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.',
-      name: 'tutorialToggleModeDesc',
+      'Please wait $seconds seconds before sending again',
+      name: 'contactCooldownMessage',
       desc: '',
-      args: [],
+      args: [seconds],
     );
   }
 }

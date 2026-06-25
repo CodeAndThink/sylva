@@ -22,15 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "${color} をクリップボードにコピーしました";
 
-  static String m1(author) => "Flaticonの${author}によるデザイン";
+  static String m1(seconds) => "再送信まであと${seconds}秒お待ちください";
 
-  static String m2(author) => "Magnific.comの${author}によるデザイン";
+  static String m2(author) => "Flaticonの${author}によるデザイン";
 
-  static String m3(message) => "エラー: ${message}";
+  static String m3(author) => "Magnific.comの${author}によるデザイン";
 
-  static String m4(level) => "レベル ${level}";
+  static String m4(message) => "エラー: ${message}";
 
-  static String m5(version) => "バージョン ${version}";
+  static String m5(level) => "レベル ${level}";
+
+  static String m6(version) => "バージョン ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -75,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "パスワードの確認が必要です",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("連絡先"),
+    "contactCooldownMessage": m1,
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
       "すべてのフィールドに入力してください",
     ),
@@ -117,8 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
     ),
-    "designedByAuthorFromFlaticon": m1,
-    "designedByAuthorMagnific": m2,
+    "designedByAuthorFromFlaticon": m2,
+    "designedByAuthorMagnific": m3,
     "deviceInfo": MessageLookupByLibrary.simpleMessage("デバイス情報"),
     "donation": MessageLookupByLibrary.simpleMessage("寄付"),
     "duplicates": MessageLookupByLibrary.simpleMessage("重複"),
@@ -128,7 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "メールアドレスが確認されていません。",
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("メールアドレスが必要です"),
-    "error": m3,
+    "error": m4,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("エラー"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("色の読み込みに失敗しました"),
     "file": MessageLookupByLibrary.simpleMessage("ファイル"),
@@ -151,7 +154,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("過去30日間"),
     "last7Days": MessageLookupByLibrary.simpleMessage("過去7日間"),
     "letGo": MessageLookupByLibrary.simpleMessage("行こう"),
-    "level": m4,
+    "level": m5,
     "line": MessageLookupByLibrary.simpleMessage("直線"),
     "login": MessageLookupByLibrary.simpleMessage("ログイン"),
     "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
@@ -239,8 +242,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
+    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
+      "このアプリを気に入っていただけたら、開発をサポートしてください。コーヒーを奢ってください！",
+    ),
+    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("スポンサー"),
     "submit": MessageLookupByLibrary.simpleMessage("送信"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
+    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Ko-fiでサポート"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
@@ -317,9 +325,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialHistoryViewTitle": MessageLookupByLibrary.simpleMessage("表示の変更"),
     "tutorialImageDesc": MessageLookupByLibrary.simpleMessage(
-      "写真の上で指を動かして拡大し、色を選択します。",
+      "写真の上で指をスライドさせて拡大し、任意の色を選択します。",
     ),
-    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("写真プレビュー"),
+    "tutorialImageTitle": MessageLookupByLibrary.simpleMessage("写真のプレビュー"),
     "tutorialLibraryDesc": MessageLookupByLibrary.simpleMessage(
       "この写真をデバイスのギャラリーにエクスポートします。",
     ),
@@ -359,7 +367,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userBanned": MessageLookupByLibrary.simpleMessage("ユーザーは利用停止されています。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザーが見つかりません。"),
-    "version": m5,
+    "version": m6,
     "weakPassword": MessageLookupByLibrary.simpleMessage("パスワードが弱すぎます。"),
     "wed": MessageLookupByLibrary.simpleMessage("水"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),

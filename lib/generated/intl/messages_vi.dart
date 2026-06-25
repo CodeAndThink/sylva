@@ -22,15 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(color) => "Đã chép ${color} vào khay nhớ tạm";
 
-  static String m1(author) => "Thiết kế bởi ${author} từ Flaticon";
+  static String m1(seconds) => "Vui lòng chờ ${seconds} giây trước khi gửi lại";
 
-  static String m2(author) => "Thiết kế bởi ${author} - Magnific.com";
+  static String m2(author) => "Thiết kế bởi ${author} từ Flaticon";
 
-  static String m3(message) => "Lỗi: ${message}";
+  static String m3(author) => "Thiết kế bởi ${author} - Magnific.com";
 
-  static String m4(level) => "Cấp ${level}";
+  static String m4(message) => "Lỗi: ${message}";
 
-  static String m5(version) => "Phiên bản ${version}";
+  static String m5(level) => "Cấp ${level}";
+
+  static String m6(version) => "Phiên bản ${version}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -83,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Xác nhận mật khẩu không được để trống",
     ),
     "contact": MessageLookupByLibrary.simpleMessage("Liên hệ"),
+    "contactCooldownMessage": m1,
     "contactErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Vui lòng điền đầy đủ thông tin",
     ),
@@ -129,8 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
     ),
-    "designedByAuthorFromFlaticon": m1,
-    "designedByAuthorMagnific": m2,
+    "designedByAuthorFromFlaticon": m2,
+    "designedByAuthorMagnific": m3,
     "deviceInfo": MessageLookupByLibrary.simpleMessage("Thông tin thiết bị"),
     "donation": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "duplicates": MessageLookupByLibrary.simpleMessage("Ảnh trùng lặp"),
@@ -144,7 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailRequired": MessageLookupByLibrary.simpleMessage(
       "Email không được để trống",
     ),
-    "error": m3,
+    "error": m4,
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Lỗi"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Không thể tải màu",
@@ -177,7 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last30Days": MessageLookupByLibrary.simpleMessage("30 ngày qua"),
     "last7Days": MessageLookupByLibrary.simpleMessage("7 ngày qua"),
     "letGo": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
-    "level": m4,
+    "level": m5,
     "line": MessageLookupByLibrary.simpleMessage("Đường thẳng"),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
     "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
@@ -286,8 +289,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Hiệu ứng âm thanh"),
+    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
+      "Nếu bạn yêu thích ứng dụng này, hãy ủng hộ để giúp dự án phát triển hơn nhé. Mời tôi một ly cà phê nha!",
+    ),
+    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Ủng hộ qua Ko-fi"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(
       "Điều khoản dịch vụ",
@@ -428,7 +436,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userNotFound": MessageLookupByLibrary.simpleMessage(
       "Không tìm thấy người dùng.",
     ),
-    "version": m5,
+    "version": m6,
     "weakPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu quá yếu."),
     "wed": MessageLookupByLibrary.simpleMessage("Th 4"),
     "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),

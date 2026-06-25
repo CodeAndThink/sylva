@@ -79,8 +79,8 @@ abstract class BaseNavigator {
     );
   }
 
-  Future<void> goToPaywall() async {
-    await pushNamed(AppRouter.paywall);
+  Future<void> goToSponsors() async {
+    await pushNamed(AppRouter.sponsors);
   }
 }
 

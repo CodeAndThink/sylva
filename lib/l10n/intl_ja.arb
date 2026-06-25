@@ -238,14 +238,22 @@
   "@tutorialNext": {},
   "tutorialSkip": "スキップ",
   "@tutorialSkip": {},
-  "tutorialImageTitle": "写真プレビュー",
+  "tutorialImageTitle": "写真のプレビュー",
   "@tutorialImageTitle": {},
-  "tutorialImageDesc": "写真の上で指を動かして拡大し、色を選択します。",
+  "tutorialImageDesc": "写真の上で指をスライドさせて拡大し、任意の色を選択します。",
   "@tutorialImageDesc": {},
+  "tutorialToggleModeDesc": "カラーピックモードとズームモードを切り替えます。カラーピックモードでは画像をタップして色を選択できます。ズームモードではピンチでズーム、ドラッグで移動できます。",
+  "@tutorialToggleModeDesc": {},
   "tutorialPaletteTitle": "カラーパレット",
   "@tutorialPaletteTitle": {},
   "tutorialPaletteDesc": "色をタップしてフィルター、長押しで16進数コードをコピーします。",
   "@tutorialPaletteDesc": {},
+  "sponsorsTitle": "スポンサー",
+  "@sponsorsTitle": {},
+  "sponsorsDescription": "このアプリを気に入っていただけたら、開発をサポートしてください。コーヒーを奢ってください！",
+  "@sponsorsDescription": {},
+  "supportOnKofi": "Ko-fiでサポート",
+  "@supportOnKofi": {},
   "tutorialExpandPaletteTitle": "パレットを拡大",
   "@tutorialExpandPaletteTitle": {},
   "tutorialExpandPaletteDesc": "抽出・選択したすべての色を表示します。",
@@ -323,9 +331,13 @@
   "termsOfService": "利用規約",
   "@termsOfService": {},
   "cameraPermissionDenied": "カメラへのアクセスが拒否されたか、デバイスにカメラがありません。",
+  "@cameraPermissionDenied": {},
   "retry": "再試行",
+  "@retry": {},
   "noCamerasFound": "デバイスにカメラが見つかりません",
+  "@noCamerasFound": {},
   "errorPrefix": "エラー",
+  "@errorPrefix": {},
   "thanksAndReference": "感謝と参考文献",
   "@thanksAndReference": {},
   "acknowledgements": "謝辞",
@@ -333,7 +345,13 @@
   "acknowledgementsIntro": "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
   "@acknowledgementsIntro": {},
   "designedByAuthorFromFlaticon": "Flaticonの{author}によるデザイン",
-  "@designedByAuthorFromFlaticon": {},
+  "@designedByAuthorFromFlaticon": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
   "roadBlockIcon": "ロードブロックアイコン",
   "@roadBlockIcon": {},
   "colorsIcon": "カラーアイコン",
@@ -341,13 +359,25 @@
   "cameraIcon": "カメラアイコン",
   "@cameraIcon": {},
   "designedByAuthorMagnific": "Magnific.comの{author}によるデザイン",
-  "@designedByAuthorMagnific": {},
+  "@designedByAuthorMagnific": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
   "rainbowHalftoneDotsBackground": "虹色のハーフトーンドット背景",
   "@rainbowHalftoneDotsBackground": {},
   "aboutSylvaDescription": "Sylvaは、世界の色彩を簡単にキャプチャして発見できるように設計されたカメラアプリケーションです。",
   "@aboutSylvaDescription": {},
   "version": "バージョン {version}",
-  "@version": {},
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "privacyPolicyContent": "私たちはあなたのプライバシーを尊重します。Sylvaは可能な限りデバイス上でカメラデータをローカルに処理します。明示的な同意なしに個人的な写真を保存または共有することはありません。",
   "@privacyPolicyContent": {},
   "termsOfServiceContent": "Sylvaを使用することにより、利用規約に同意したことになります。違法または無許可の目的でアプリケーションを使用してはなりません。サービスとコンテンツは「現状有姿」で提供され、いかなる種類の保証もありません。",
@@ -426,6 +456,12 @@
   "@zoomMode": {},
   "tutorialToggleModeTitle": "モード切替",
   "@tutorialToggleModeTitle": {},
-  "tutorialToggleModeDesc": "カラーピックモードとズームモードを切り替えます。カラーピックモードでは画像をタップして色を選択できます。ズームモードではピンチでズーム、ドラッグで移動できます。",
-  "@tutorialToggleModeDesc": {}
+  "contactCooldownMessage": "再送信まであと{seconds}秒お待ちください",
+  "@contactCooldownMessage": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  }
 }

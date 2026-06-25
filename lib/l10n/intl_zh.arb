@@ -240,12 +240,20 @@
   "@tutorialSkip": {},
   "tutorialImageTitle": "照片预览",
   "@tutorialImageTitle": {},
-  "tutorialImageDesc": "在照片上移动手指放大并选择任何颜色。",
+  "tutorialImageDesc": "在照片上滑动手指以放大并选择任何颜色。",
   "@tutorialImageDesc": {},
+  "tutorialToggleModeDesc": "在取色模式和缩放模式之间切换。取色模式下点击图片可取色。缩放模式下可双指缩放和拖动图片。",
+  "@tutorialToggleModeDesc": {},
   "tutorialPaletteTitle": "调色板",
   "@tutorialPaletteTitle": {},
   "tutorialPaletteDesc": "点击颜色进行过滤，长按复制其十六进制代码。",
   "@tutorialPaletteDesc": {},
+  "sponsorsTitle": "赞助",
+  "@sponsorsTitle": {},
+  "sponsorsDescription": "如果您喜欢这个应用，请考虑支持开发。请我喝杯咖啡吧！",
+  "@sponsorsDescription": {},
+  "supportOnKofi": "在 Ko-fi 上支持",
+  "@supportOnKofi": {},
   "tutorialExpandPaletteTitle": "展开调色板",
   "@tutorialExpandPaletteTitle": {},
   "tutorialExpandPaletteDesc": "查看所有提取和挑选的颜色。",
@@ -323,9 +331,13 @@
   "termsOfService": "服务条款",
   "@termsOfService": {},
   "cameraPermissionDenied": "拒绝访问相机或设备没有相机。",
+  "@cameraPermissionDenied": {},
   "retry": "重试",
+  "@retry": {},
   "noCamerasFound": "设备上未找到相机",
+  "@noCamerasFound": {},
   "errorPrefix": "错误",
+  "@errorPrefix": {},
   "thanksAndReference": "感谢与参考文献",
   "@thanksAndReference": {},
   "acknowledgements": "鸣谢",
@@ -333,7 +345,13 @@
   "acknowledgementsIntro": "我们在此感谢以下创作者提供本应用中使用的资源：",
   "@acknowledgementsIntro": {},
   "designedByAuthorFromFlaticon": "由来自Flaticon的{author}设计",
-  "@designedByAuthorFromFlaticon": {},
+  "@designedByAuthorFromFlaticon": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
   "roadBlockIcon": "路障图标",
   "@roadBlockIcon": {},
   "colorsIcon": "颜色图标",
@@ -341,13 +359,25 @@
   "cameraIcon": "相机图标",
   "@cameraIcon": {},
   "designedByAuthorMagnific": "由来自Magnific.com的{author}设计",
-  "@designedByAuthorMagnific": {},
+  "@designedByAuthorMagnific": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
   "rainbowHalftoneDotsBackground": "彩虹半色调圆点背景",
   "@rainbowHalftoneDotsBackground": {},
   "aboutSylvaDescription": "Sylva是一款相机应用程序，旨在帮助您轻松捕捉和发现世界的色彩。",
   "@aboutSylvaDescription": {},
   "version": "版本 {version}",
-  "@version": {},
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "privacyPolicyContent": "我们尊重您的隐私。Sylva会尽可能在本地处理您的相机数据。未经您的明确同意，我们不会存储或分享您的个人照片。",
   "@privacyPolicyContent": {},
   "termsOfServiceContent": "使用Sylva即表示您同意我们的服务条款。您不得将该应用程序用于任何非法或未经授权的目的。服务和内容按\"原样\"提供，没有任何形式的保证。",
@@ -426,6 +456,12 @@
   "@zoomMode": {},
   "tutorialToggleModeTitle": "切换模式",
   "@tutorialToggleModeTitle": {},
-  "tutorialToggleModeDesc": "在取色模式和缩放模式之间切换。取色模式下点击图片可取色。缩放模式下可双指缩放和拖动图片。",
-  "@tutorialToggleModeDesc": {}
+  "contactCooldownMessage": "请等待{seconds}秒后再发送",
+  "@contactCooldownMessage": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  }
 }

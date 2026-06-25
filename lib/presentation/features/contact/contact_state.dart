@@ -10,6 +10,7 @@ class ContactState extends Equatable {
   final String title;
   final String description;
   final String deviceInfo;
+  final int cooldownRemaining;
 
   const ContactState({
     this.selectedType = ContactType.suggestion,
@@ -19,7 +20,10 @@ class ContactState extends Equatable {
     this.title = '',
     this.description = '',
     this.deviceInfo = '',
+    this.cooldownRemaining = 0,
   });
+
+  bool get isCooldown => cooldownRemaining > 0;
 
   ContactState copyWith({
     ContactType? selectedType,
@@ -29,6 +33,7 @@ class ContactState extends Equatable {
     String? title,
     String? description,
     String? deviceInfo,
+    int? cooldownRemaining,
   }) {
     return ContactState(
       selectedType: selectedType ?? this.selectedType,
@@ -38,6 +43,7 @@ class ContactState extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       deviceInfo: deviceInfo ?? this.deviceInfo,
+      cooldownRemaining: cooldownRemaining ?? this.cooldownRemaining,
     );
   }
 
@@ -50,5 +56,6 @@ class ContactState extends Equatable {
     title,
     description,
     deviceInfo,
+    cooldownRemaining,
   ];
 }

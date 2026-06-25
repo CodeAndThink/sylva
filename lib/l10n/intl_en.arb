@@ -242,6 +242,14 @@
   "@tutorialImageTitle": {},
   "tutorialImageDesc": "Pan your finger on the photo to magnify and pick any color.",
   "@tutorialImageDesc": {},
+  "tutorialToggleModeDesc": "Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.",
+  "@tutorialToggleModeDesc": {},
+  "sponsorsTitle": "Sponsors",
+  "@sponsorsTitle": {},
+  "sponsorsDescription": "If you like this app, consider supporting the development. Buy me a coffee!",
+  "@sponsorsDescription": {},
+  "supportOnKofi": "Support on Ko-fi",
+  "@supportOnKofi": {},
   "tutorialPaletteTitle": "Color Palette",
   "@tutorialPaletteTitle": {},
   "tutorialPaletteDesc": "Tap a color to filter, long press to copy its hex code.",
@@ -323,9 +331,13 @@
   "termsOfService": "Terms of Service",
   "@termsOfService": {},
   "cameraPermissionDenied": "Camera access denied or device has no camera.",
+  "@cameraPermissionDenied": {},
   "retry": "Retry",
+  "@retry": {},
   "noCamerasFound": "No cameras found on device",
+  "@noCamerasFound": {},
   "errorPrefix": "Error",
+  "@errorPrefix": {},
   "thanksAndReference": "Thanks & Reference",
   "@thanksAndReference": {},
   "acknowledgements": "Acknowledgements",
@@ -439,14 +451,23 @@
   "contactFormDeviceInfoError": "Please enter device info",
   "@contactFormDeviceInfoError": {},
   "interactionEffects": "Interaction Effects",
+  "@interactionEffects": {},
   "hapticFeedback": "Haptic Feedback",
+  "@hapticFeedback": {},
   "soundEffects": "Sound Effects",
+  "@soundEffects": {},
   "colorPickMode": "Color Pick Mode",
   "@colorPickMode": {},
   "zoomMode": "Zoom Mode",
   "@zoomMode": {},
   "tutorialToggleModeTitle": "Toggle Mode",
   "@tutorialToggleModeTitle": {},
-  "tutorialToggleModeDesc": "Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.",
-  "@tutorialToggleModeDesc": {}
+  "contactCooldownMessage": "Please wait {seconds} seconds before sending again",
+  "@contactCooldownMessage": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  }
 }

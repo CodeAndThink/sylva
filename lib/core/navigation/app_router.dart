@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sylva/presentation/features/history/history_page.dart';
 import 'package:sylva/presentation/features/home/home_page.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
-import 'package:sylva/presentation/features/paywall/paywall_page.dart';
+import 'package:sylva/presentation/features/sponsors/sponsors_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/about_page.dart';
@@ -48,8 +48,8 @@ class AppRouter {
   static const String acknowledgements = 'acknowledgements';
   static const String acknowledgementsPath = '/acknowledgements';
 
-  static const String paywall = 'paywall';
-  static const String paywallPath = '/paywall';
+  static const String sponsors = 'sponsors';
+  static const String sponsorsPath = '/sponsors';
 
   static const String photoPreview = 'photoPreview';
   static const String photoPreviewPath = '/photoPreview';
@@ -69,9 +69,9 @@ class AppRouter {
         builder: (context, state) => const OnboardingPage(),
       ),
       GoRoute(
-        path: paywallPath,
-        name: paywall,
-        builder: (context, state) => const PaywallPage(),
+        path: sponsorsPath,
+        name: sponsors,
+        builder: (context, state) => const SponsorsPage(),
       ),
       GoRoute(
         path: homePath,

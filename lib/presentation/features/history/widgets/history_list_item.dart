@@ -95,7 +95,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
           onTap: () {
             ThrottleUtils.safeOnTap(() async {
               setState(() => _width = 0);
-              await Future.delayed(350.milliseconds);
+              await Future.delayed(250.milliseconds);
               widget.onTap?.call();
               if (mounted) setState(() => _width = 88);
             }, delayMs: 1000);
@@ -124,7 +124,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
               Row(
                 children: [
                   AnimatedContainer(
-                    duration: 300.milliseconds,
+                    duration: 250.milliseconds,
                     curve: Curves.easeInOutCubic,
                     width: _width,
                   ),
@@ -156,9 +156,13 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: 24.borderRadius,
-                                    color: theme.colorScheme.surface,
+                                    color: widget.isFavorite
+                                        ? Colors.yellow.shade100
+                                        : theme.colorScheme.surface,
                                     border: Border.all(
-                                      color: Colors.orange,
+                                      color: widget.isFavorite
+                                          ? Colors.orange
+                                          : theme.colorScheme.onSurfaceVariant,
                                       width: 1,
                                     ),
                                   ),
@@ -167,7 +171,9 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                     widget.isFavorite
                                         ? Icons.bookmark
                                         : Icons.bookmark_outline_rounded,
-                                    color: Colors.amber,
+                                    color: widget.isFavorite
+                                        ? Colors.amber
+                                        : theme.colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ),
@@ -182,8 +188,8 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                     .take(5)
                                     .map(
                                       (c) => Container(
-                                        width: 16,
-                                        height: 16,
+                                        width: 20,
+                                        height: 20,
                                         decoration: BoxDecoration(
                                           color: Color(c),
                                           shape: BoxShape.circle,

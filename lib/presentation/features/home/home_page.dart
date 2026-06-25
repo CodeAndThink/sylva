@@ -14,6 +14,7 @@ import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
+import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomePage extends StatelessWidget {
@@ -122,6 +123,60 @@ class __HomeChildPageState extends State<_HomeChildPage>
     } catch (e) {
       debugPrint('Error initializing camera controller: $e');
     }
+  }
+
+  void _showTutorial() {
+    tutorialCoachMark = AppTutorialHelper.showTutorial(
+      context: context,
+      targets: _createTargets(),
+    );
+  }
+
+  List<TargetFocus> _createTargets() {
+    return [
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keySettings,
+        title: S.of(context).tutorialSettingsTitle,
+        desc: S.of(context).tutorialSettingsDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyFlash,
+        title: S.of(context).tutorialFlashTitle,
+        desc: S.of(context).tutorialFlashDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyTimer,
+        title: S.of(context).tutorialTimerTitle,
+        desc: S.of(context).tutorialTimerDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keySwitchCamera,
+        title: S.of(context).tutorialCameraTitle,
+        desc: S.of(context).tutorialCameraDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyHistory,
+        title: S.of(context).tutorialHistoryTitle,
+        desc: S.of(context).tutorialHistoryDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyCapture,
+        title: S.of(context).tutorialCaptureTitle,
+        desc: S.of(context).tutorialCaptureDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyUpload,
+        title: S.of(context).tutorialGalleryTitle,
+        desc: S.of(context).tutorialGalleryDesc,
+      ),
+    ];
   }
 
   @override
@@ -597,125 +652,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
           ),
         ),
       ),
-    );
-  }
-
-  void _showTutorial() {
-    tutorialCoachMark = TutorialCoachMark(
-      targets: _createTargets(),
-      colorShadow: Colors.black,
-      hideSkip: true,
-      paddingFocus: 10,
-      opacityShadow: 0.8,
-    )..show(context: context);
-  }
-
-  List<TargetFocus> _createTargets() {
-    return [
-      _buildTarget(
-        key: _keySettings,
-        title: S.of(context).tutorialSettingsTitle,
-        desc: S.of(context).tutorialSettingsDesc,
-      ),
-      _buildTarget(
-        key: _keyFlash,
-        title: S.of(context).tutorialFlashTitle,
-        desc: S.of(context).tutorialFlashDesc,
-      ),
-      _buildTarget(
-        key: _keyTimer,
-        title: S.of(context).tutorialTimerTitle,
-        desc: S.of(context).tutorialTimerDesc,
-      ),
-      _buildTarget(
-        key: _keySwitchCamera,
-        title: S.of(context).tutorialCameraTitle,
-        desc: S.of(context).tutorialCameraDesc,
-      ),
-      _buildTarget(
-        key: _keyHistory,
-        title: S.of(context).tutorialHistoryTitle,
-        desc: S.of(context).tutorialHistoryDesc,
-      ),
-      _buildTarget(
-        key: _keyCapture,
-        title: S.of(context).tutorialCaptureTitle,
-        desc: S.of(context).tutorialCaptureDesc,
-      ),
-      _buildTarget(
-        key: _keyUpload,
-        title: S.of(context).tutorialGalleryTitle,
-        desc: S.of(context).tutorialGalleryDesc,
-      ),
-    ];
-  }
-
-  TargetFocus _buildTarget({
-    required GlobalKey key,
-    required String title,
-    required String desc,
-  }) {
-    return TargetFocus(
-      identify: key,
-      keyTarget: key,
-      alignSkip: Alignment.topRight,
-      focusAnimationDuration: 400.milliseconds,
-      unFocusAnimationDuration: 400.milliseconds,
-      contents: [
-        TargetContent(
-          align: ContentAlign.top,
-          builder: (context, controller) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: _theme.textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-                  child: Text(
-                    desc,
-                    style: _theme.textTheme.bodyLarge?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: controller.skip,
-                      child: Text(
-                        S.of(context).tutorialSkip,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
-                    8.width,
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _theme.colorScheme.primary,
-                      ),
-                      onPressed: controller.next,
-                      child: Text(
-                        S.of(context).tutorialNext,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: _theme.colorScheme.surface,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-          },
-        ),
-      ],
     );
   }
 }

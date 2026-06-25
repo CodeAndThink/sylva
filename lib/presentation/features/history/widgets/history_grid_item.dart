@@ -92,9 +92,13 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: 24.borderRadius,
-                                  color: theme.colorScheme.surface,
+                                  color: widget.isFavorite
+                                      ? Colors.yellow.shade100
+                                      : theme.colorScheme.surface,
                                   border: Border.all(
-                                    color: Colors.orange,
+                                    color: widget.isFavorite
+                                        ? Colors.orange
+                                        : theme.colorScheme.onSurfaceVariant,
                                     width: 1,
                                   ),
                                 ),
@@ -103,7 +107,9 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                                   widget.isFavorite
                                       ? Icons.bookmark
                                       : Icons.bookmark_outline_rounded,
-                                  color: Colors.amber,
+                                  color: widget.isFavorite
+                                      ? Colors.amber
+                                      : theme.colorScheme.onSurfaceVariant,
                                 ),
                               ),
                             ),

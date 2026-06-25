@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sao chép màu thất bại",
     ),
     "colorCopiedSuccess": m0,
+    "colorPickMode": MessageLookupByLibrary.simpleMessage("Chế độ chọn màu"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng màu sắc"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
@@ -410,6 +411,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cài đặt đếm ngược trước khi chụp.",
     ),
     "tutorialTimerTitle": MessageLookupByLibrary.simpleMessage("Hẹn giờ"),
+    "tutorialToggleModeDesc": MessageLookupByLibrary.simpleMessage(
+      "Chuyển đổi giữa chế độ Chọn màu và Thu phóng. Ở chế độ Chọn màu, chạm vào ảnh để chọn màu. Ở chế độ Thu phóng, dùng hai ngón để phóng to và kéo ảnh.",
+    ),
+    "tutorialToggleModeTitle": MessageLookupByLibrary.simpleMessage(
+      "Chuyển đổi chế độ",
+    ),
     "tutorialZoomDesc": MessageLookupByLibrary.simpleMessage(
       "Sử dụng các nút này để phóng to hoặc thu nhỏ ảnh chính xác.",
     ),
@@ -425,5 +432,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "weakPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu quá yếu."),
     "wed": MessageLookupByLibrary.simpleMessage("Th 4"),
     "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),
+    "zoomMode": MessageLookupByLibrary.simpleMessage("Chế độ thu phóng"),
   };
 }

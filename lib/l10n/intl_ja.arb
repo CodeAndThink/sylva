@@ -419,5 +419,13 @@
   "contactFormDeviceInfoHint": "デバイス情報（モデル、OS）が添付されます。",
   "@contactFormDeviceInfoHint": {},
   "contactFormDeviceInfoError": "デバイス情報を入力してください",
-  "@contactFormDeviceInfoError": {}
+  "@contactFormDeviceInfoError": {},
+  "colorPickMode": "カラーピックモード",
+  "@colorPickMode": {},
+  "zoomMode": "ズームモード",
+  "@zoomMode": {},
+  "tutorialToggleModeTitle": "モード切替",
+  "@tutorialToggleModeTitle": {},
+  "tutorialToggleModeDesc": "カラーピックモードとズームモードを切り替えます。カラーピックモードでは画像をタップして色を選択できます。ズームモードではピンチでズーム、ドラッグで移動できます。",
+  "@tutorialToggleModeDesc": {}
 }

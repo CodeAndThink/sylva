@@ -65,6 +65,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     with TickerProviderStateMixin {
   late final PhotoPreviewCubit _cubit;
   final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> _isZoomMode = ValueNotifier<bool>(false);
   final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
     Offset.zero,
   );
@@ -77,6 +78,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   final GlobalKey _keyLibrary = GlobalKey();
   final GlobalKey _keyZoomController = GlobalKey();
   final GlobalKey _keyFullScreen = GlobalKey();
+  final GlobalKey _keyToggleMode = GlobalKey();
 
   TutorialCoachMark? tutorialCoachMark;
 
@@ -254,8 +256,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       builder: (context, showMagnifier, child) {
                         if (!showMagnifier) return const SizedBox.shrink();
                         return Positioned(
-                          bottom: 50,
-                          right: 8,
+                          bottom: 88,
+                          right: 4,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -304,14 +306,58 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                   },
                 ),
                 Positioned(
+                  key: _keyToggleMode,
+                  bottom: 50,
+                  right: 8,
+                  child: ValueListenableBuilder<bool>(
+                    valueListenable: _isZoomMode,
+                    builder: (context, isZoomMode, child) {
+                      return Tooltip(
+                        message: isZoomMode
+                            ? S.of(context).colorPickMode
+                            : S.of(context).zoomMode,
+                        child: Material(
+                          color: Colors.black54,
+                          shape: const CircleBorder(),
+                          clipBehavior: Clip.hardEdge,
+                          child: InkWell(
+                            onTap: () {
+                              _isZoomMode.value = !_isZoomMode.value;
+                              if (_isZoomMode.value) {
+                                _showMagnifier.value = false;
+                              }
+                            },
+                            child: SizedBox(
+                              height: 38,
+                              width: 38,
+                              child: Icon(
+                                isZoomMode ? Icons.colorize : Icons.zoom_in,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Positioned(
                   bottom: 54,
                   left: 8,
                   right: 8,
-                  child: KeyedSubtree(
-                    key: _keyZoomController,
-                    child: _buildZoomController(),
+                  child: ValueListenableBuilder<bool>(
+                    valueListenable: _isZoomMode,
+                    builder: (context, isZoomMode, child) {
+                      if (!isZoomMode) return const SizedBox.shrink();
+                      return KeyedSubtree(
+                        key: _keyZoomController,
+                        child: _buildZoomController(),
+                      );
+                    },
                   ),
                 ),
+
                 Positioned(
                   bottom: 8,
                   left: 8,
@@ -452,57 +498,80 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildImage() {
     return AppTransparentContainer(
       padding: EdgeInsets.zero,
-      child: GestureDetector(
-        onTapDown: (details) {
-          if (_cubit.state.filteredImageBytes != null) return;
-          _showMagnifier.value = true;
-          _touchPosition.value = details.localPosition;
-        },
-        onTapUp: (_) async {
-          if (_cubit.state.filteredImageBytes != null) return;
-          final color = await _getColorAtPosition(_touchPosition.value);
-          if (color != null) {
-            _cubit.setSelectedColor(color: color);
-          }
-        },
-        onPanStart: (details) {
-          if (_cubit.state.filteredImageBytes != null) return;
-          _showMagnifier.value = true;
-          _touchPosition.value = details.localPosition;
-        },
-        onPanUpdate: (details) {
-          if (_cubit.state.filteredImageBytes != null) return;
-          _touchPosition.value = details.localPosition;
-        },
-        onPanEnd: (_) async {
-          if (_cubit.state.filteredImageBytes != null) return;
-          final color = await _getColorAtPosition(_touchPosition.value);
-          if (color != null) {
-            _cubit.setSelectedColor(color: color);
-          }
-        },
-        child: RepaintBoundary(
-          key: _imageKey,
-          child: InteractiveViewer(
-            transformationController: _transformationController,
-            panEnabled: true,
-            minScale: 1.0,
-            maxScale: 20.0,
-            child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
-              buildWhen: (previous, current) =>
-                  current.filteredImageBytes != previous.filteredImageBytes,
-              builder: (context, state) {
-                if (state.filteredImageBytes != null) {
-                  return Image.memory(
-                    state.filteredImageBytes!,
-                    fit: BoxFit.cover,
-                  );
-                }
-                return AppFileImage(path: widget.imagePath, fit: BoxFit.cover);
-              },
+      child: ValueListenableBuilder<bool>(
+        valueListenable: _isZoomMode,
+        builder: (context, isZoomMode, child) {
+          return GestureDetector(
+            onTapDown: isZoomMode
+                ? null
+                : (details) {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    _showMagnifier.value = true;
+                    _touchPosition.value = details.localPosition;
+                  },
+            onTapUp: isZoomMode
+                ? null
+                : (_) async {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    final color = await _getColorAtPosition(
+                      _touchPosition.value,
+                    );
+                    if (color != null) {
+                      _cubit.setSelectedColor(color: color);
+                    }
+                  },
+            onPanStart: isZoomMode
+                ? null
+                : (details) {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    _showMagnifier.value = true;
+                    _touchPosition.value = details.localPosition;
+                  },
+            onPanUpdate: isZoomMode
+                ? null
+                : (details) {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    _touchPosition.value = details.localPosition;
+                  },
+            onPanEnd: isZoomMode
+                ? null
+                : (_) async {
+                    if (_cubit.state.filteredImageBytes != null) return;
+                    final color = await _getColorAtPosition(
+                      _touchPosition.value,
+                    );
+                    if (color != null) {
+                      _cubit.setSelectedColor(color: color);
+                    }
+                  },
+            child: RepaintBoundary(
+              key: _imageKey,
+              child: InteractiveViewer(
+                transformationController: _transformationController,
+                panEnabled: isZoomMode,
+                scaleEnabled: isZoomMode,
+                minScale: 1.0,
+                maxScale: 20.0,
+                child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+                  buildWhen: (previous, current) =>
+                      current.filteredImageBytes != previous.filteredImageBytes,
+                  builder: (context, state) {
+                    if (state.filteredImageBytes != null) {
+                      return Image.memory(
+                        state.filteredImageBytes!,
+                        fit: BoxFit.cover,
+                      );
+                    }
+                    return AppFileImage(
+                      path: widget.imagePath,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -879,7 +948,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 _cubit.navigator.safePop();
               }
             },
-            icon: const Icon(Icons.save_outlined, size: 30),
+            icon: const Icon(Icons.data_saver_on_outlined, size: 30),
           ),
         ),
         48.width,
@@ -891,7 +960,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               AppFeedback.playInteract(context);
               _cubit.saveToLibrary(imagePath: widget.imagePath);
             },
-            icon: Icon(Icons.download_outlined, size: 30),
+            icon: Icon(Icons.download_rounded, size: 30),
           ),
         ),
         48.width,
@@ -899,7 +968,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           message: S.of(context).help,
           child: IconButton(
             onPressed: _showTutorial,
-            icon: Icon(Icons.help_outline_outlined, size: 28),
+            icon: Icon(Icons.help_outline_outlined, size: 30),
           ),
         ),
       ],
@@ -930,11 +999,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
         ),
       ),
       _buildTarget(
-        key: _keyZoomController,
-        title: S.of(context).tutorialZoomTitle,
-        desc: S.of(context).tutorialZoomDesc,
-        shape: ShapeLightFocus.RRect,
-        radius: 20,
+        key: _keyToggleMode,
+        title: S.of(context).tutorialToggleModeTitle,
+        desc: S.of(context).tutorialToggleModeDesc,
       ),
       _buildTarget(
         key: _keyFullScreen,

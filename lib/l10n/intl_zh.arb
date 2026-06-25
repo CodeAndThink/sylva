@@ -419,5 +419,13 @@
   "contactFormDeviceInfoHint": "设备信息（型号、OS）将附带，以便我们更好地为您提供支持。",
   "@contactFormDeviceInfoHint": {},
   "contactFormDeviceInfoError": "请输入设备信息",
-  "@contactFormDeviceInfoError": {}
+  "@contactFormDeviceInfoError": {},
+  "colorPickMode": "取色模式",
+  "@colorPickMode": {},
+  "zoomMode": "缩放模式",
+  "@zoomMode": {},
+  "tutorialToggleModeTitle": "切换模式",
+  "@tutorialToggleModeTitle": {},
+  "tutorialToggleModeDesc": "在取色模式和缩放模式之间切换。取色模式下点击图片可取色。缩放模式下可双指缩放和拖动图片。",
+  "@tutorialToggleModeDesc": {}
 }

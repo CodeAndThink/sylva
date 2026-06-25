@@ -46,6 +46,7 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
         child: AppTransparentContainer(
           padding: 32.paddingAll,
+          borderColor: const Color(0xFFFF5E5B).withValues(alpha: 0.3),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,8 +74,8 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
               Text(
                 _l10n.sponsorsTitle,
                 textAlign: TextAlign.center,
-                style: _theme.textTheme.headlineMedium?.copyWith(
-                  color: _theme.colorScheme.primary,
+                style: _theme.textTheme.headlineSmall?.copyWith(
+                  color: Color(0xFFFF5E5B),
                 ),
               ),
               16.height,
@@ -83,9 +84,7 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
                 textAlign: TextAlign.center,
                 style: _theme.textTheme.bodyLarge?.copyWith(
                   height: 1.5,
-                  color: _theme.textTheme.bodyLarge?.color?.withValues(
-                    alpha: 0.8,
-                  ),
+                  color: _theme.colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
               ),
 

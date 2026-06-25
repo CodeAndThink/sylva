@@ -1803,16 +1803,6 @@ class S {
       args: [],
     );
   }
-
-  /// `Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.`
-  String get tutorialToggleModeDesc {
-    return Intl.message(
-      'Switch between Color Pick mode and Zoom mode. In Color Pick mode, tap on the image to pick colors. In Zoom mode, pinch to zoom and pan the image.',
-      name: 'tutorialToggleModeDesc',
-      desc: '',
-      args: [],
-    );
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

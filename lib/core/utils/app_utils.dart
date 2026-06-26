@@ -3,9 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:path_provider/path_provider.dart';
-// import 'package:share_plus/share_plus.dart';
-import 'package:sylva/core/configs/app_configs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppUtils {
@@ -20,50 +17,6 @@ class AppUtils {
     return "${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}";
   }
 
-  /// Calculate current Level based on total deleted photos/videos
-  static int getLevelFromCount(int totalCount) {
-    for (int i = AppConfigs.levelMilestones.length - 1; i >= 0; i--) {
-      if (totalCount >= AppConfigs.levelMilestones[i]) {
-        return i + 1;
-      }
-    }
-    return 1;
-  }
-
-  /// Calculate the progression percentage of current Level (from 0.0 to 1.0)
-  static double getLevelProgress(int totalCount) {
-    final currentLevel = getLevelFromCount(totalCount);
-
-    // If reached max level in config
-    if (currentLevel >= AppConfigs.levelMilestones.length) {
-      return 1.0;
-    }
-
-    final currentMilestone = AppConfigs.levelMilestones[currentLevel - 1];
-    final nextMilestone = AppConfigs.levelMilestones[currentLevel];
-
-    final progress =
-        (totalCount - currentMilestone) / (nextMilestone - currentMilestone);
-    return progress.clamp(0.0, 1.0);
-  }
-
-  /// Get the number of additional photos to delete to reach next level
-  static int getPhotosToNextLevel(int totalCount) {
-    final currentLevel = getLevelFromCount(totalCount);
-    if (currentLevel >= AppConfigs.levelMilestones.length) return 0;
-
-    return (AppConfigs.levelMilestones[currentLevel] - totalCount).toInt();
-  }
-
-  /// Get the target milestone (number of photos) of next level
-  static double getNextMilestone(int totalCount) {
-    final currentLevel = getLevelFromCount(totalCount);
-    if (currentLevel >= AppConfigs.levelMilestones.length) {
-      return AppConfigs.levelMilestones.last;
-    }
-    return AppConfigs.levelMilestones[currentLevel];
-  }
-
   static Future<XFile?> pickImage() async {
     try {
       return await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -72,25 +25,6 @@ class AppUtils {
       return null;
     }
   }
-
-  /// Save image bytes to temp directory and open system share sheet
-  // static Future<void> shareImage(
-  //   Uint8List imageBytes, {
-  //   String? fileName,
-  // }) async {
-  //   try {
-  //     final tempDir = await getTemporaryDirectory();
-  //     final ext = _detectExtension(imageBytes);
-  //     final name =
-  //         fileName ??
-  //         'shared_image_${DateTime.now().millisecondsSinceEpoch}$ext';
-  //     final file = await File('${tempDir.path}/$name').create();
-  //     await file.writeAsBytes(imageBytes);
-  //     await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
-  //   } catch (e) {
-  //     debugPrint('Error sharing image: $e');
-  //   }
-  // }
 
   static String detectExtension(Uint8List bytes) {
     if (bytes.length >= 3 &&

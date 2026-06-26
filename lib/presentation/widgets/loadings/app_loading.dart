@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 
 class AppLoading extends StatelessWidget {
@@ -13,12 +14,7 @@ class AppLoading extends StatelessWidget {
     final color = loadingColor ?? theme.colorScheme.primary;
 
     return Center(
-      child: size.square(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(color),
-          strokeWidth: 3,
-        ),
-      ),
+      child: size.square(child: SpinKitRipple(color: color)),
     );
   }
 }

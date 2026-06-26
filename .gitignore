@@ -43,3 +43,21 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+lib/generated_plugin_registrant.dart
+
+# Environment variables
+.env
+.env.*
+
+# Additional build/platform folders
+ios/Pods/
+ios/.symlinks/
+macos/Pods/
+macos/Flutter/ephemeral/
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/

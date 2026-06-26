@@ -1,4 +1,4 @@
-package com.example.sylva
+package com.truongngo.sylva
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -69,6 +69,7 @@ abstract class BaseNavigator {
     required ValueChanged<bool> onOptionSelected,
   }) {
     return showModalBottomSheet<bool>(
+      showDragHandle: true,
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => SaveOptionsBottomSheet(
@@ -78,8 +79,8 @@ abstract class BaseNavigator {
     );
   }
 
-  Future<void> goToPaywall() async {
-    await pushNamed(AppRouter.paywall);
+  Future<void> goToSponsors() async {
+    await pushNamed(AppRouter.sponsors);
   }
 }
 

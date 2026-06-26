@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart';
 
 class DatetimeUtils {
+  DatetimeUtils._();
+
   static DateTime fromMillisecondsSinceEpoch({
     required int millisecondsSinceEpoch,
   }) {

@@ -240,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("ライブラリに保存"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
+    "seedColor": MessageLookupByLibrary.simpleMessage("アプリカラー"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
     "sponsorsDescription": MessageLookupByLibrary.simpleMessage(

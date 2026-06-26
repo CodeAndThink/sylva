@@ -70,7 +70,8 @@ class MainApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         buildWhen: (previous, current) =>
-            previous.themeMode != current.themeMode,
+            previous.themeMode != current.themeMode ||
+            previous.seedColor != current.seedColor,
         builder: (context, themeState) {
           return BlocBuilder<LocaleCubit, LocaleState>(
             buildWhen: (previous, current) => previous.locale != current.locale,
@@ -88,8 +89,8 @@ class MainApp extends StatelessWidget {
                 supportedLocales: S.delegate.supportedLocales,
                 locale: localeState.locale,
                 themeMode: themeState.themeMode,
-                theme: AppTheme.light(),
-                darkTheme: AppTheme.dark(),
+                theme: AppTheme.light(seedColor: themeState.seedColor),
+                darkTheme: AppTheme.dark(seedColor: themeState.seedColor),
                 builder: (context, child) {
                   return ResponsiveBreakpoints.builder(
                     child: MediaQuery(

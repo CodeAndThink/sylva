@@ -463,5 +463,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "seedColor": "应用颜色",
+  "@seedColor": {}
 }

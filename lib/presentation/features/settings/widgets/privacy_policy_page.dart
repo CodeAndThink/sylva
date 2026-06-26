@@ -16,7 +16,7 @@ class PrivacyPolicyPage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
           16.0,
-          MediaQuery.of(context).padding.top + 75 + 16,
+          MediaQuery.of(context).padding.top + 60 + 16,
           16.0,
           MediaQuery.of(context).padding.bottom + 16.0,
         ),

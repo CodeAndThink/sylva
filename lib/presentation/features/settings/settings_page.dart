@@ -59,7 +59,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(
           12,
-          MediaQuery.of(context).padding.top + 75,
+          MediaQuery.of(context).padding.top + 60,
           12,
           MediaQuery.of(context).padding.bottom + 12,
         ),

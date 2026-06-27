@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
@@ -113,17 +114,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     );
   }
 
-  static const List<Color> _presetColors = [
-    Color(0xFF00DE6B), // Green (default)
-    Color(0xFF2196F3), // Blue
-    Color(0xFF9C27B0), // Purple
-    Color(0xFF009688), // Teal
-    Color(0xFFFF9800), // Orange
-    Color(0xFFE91E63), // Pink
-    Color(0xFFF44336), // Red
-    Color(0xFF3F51B5), // Indigo
-  ];
-
   Widget _buildSeedColorSection() {
     return BlocBuilder<ThemeCubit, ThemeState>(
       buildWhen: (previous, current) => previous.seedColor != current.seedColor,
@@ -140,7 +130,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
-                children: _presetColors.map((color) {
+                children: AppColors.presetColors.map((color) {
                   final isSelected =
                       state.seedColor.toARGB32() == color.toARGB32();
                   return GestureDetector(

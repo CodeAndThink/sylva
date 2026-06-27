@@ -18,6 +18,7 @@ import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
+import 'package:sylva/core/exceptions/app_failures.dart';
 
 class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   final PhotoPreviewNavigator navigator;
@@ -228,7 +229,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       navigator.flushBar.showSuccess(message: S.current.success);
     } catch (e) {
       debugPrint('Error saving history: $e');
-      navigator.flushBar.showError(message: S.current.error(e.toString()));
+      navigator.flushBar.showError(message: AppFailures.mapErrorToMessage(e: e));
     }
   }
 
@@ -253,7 +254,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       navigator.flushBar.showSuccess(message: S.current.success);
     } catch (e) {
       debugPrint('Error updating history: $e');
-      navigator.flushBar.showError(message: S.current.error(e.toString()));
+      navigator.flushBar.showError(message: AppFailures.mapErrorToMessage(e: e));
     }
   }
 
@@ -290,12 +291,12 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
         navigator.flushBar.showSuccess(message: S.current.imageSaved);
       } else {
         navigator.flushBar.showError(
-          message: S.current.error('Failed to save image'),
+          message: AppFailures.mapErrorToMessage(e: Exception('Failed to save image')),
         );
       }
     } catch (e) {
       debugPrint('Error saving to library: $e');
-      navigator.flushBar.showError(message: S.current.error(e.toString()));
+      navigator.flushBar.showError(message: AppFailures.mapErrorToMessage(e: e));
     }
   }
 }

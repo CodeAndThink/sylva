@@ -465,5 +465,17 @@
     }
   },
   "seedColor": "アプリカラー",
-  "@seedColor": {}
+  "@seedColor": {},
+  "errorStorageFull": "デバイスのストレージ容量が不足しています。空き容量を増やして再度お試しください。",
+  "errorPermissionDenied": "この操作を実行するにはアクセス権限を付与してください。",
+  "errorFileNotFound": "ファイルが見つかりません。削除または移動された可能性があります。",
+  "errorDatabaseFull": "アプリのストレージがいっぱいです。これ以上データを保存できません。",
+  "errorStoreUnavailable": "アプリストアに接続できません。通信状況を確認してください。",
+  "errorAlreadyPurchased": "すでにこのアイテムを所有しています。",
+  "errorCameraPermission": "アプリに権限がありません。設定からアクセス権限を付与してください。",
+  "errorNetwork": "ネットワーク接続が失われました。インターネット接続を確認してください。",
+  "errorUserCanceled": "操作がキャンセルされました。",
+  "errorOutOfMemory": "処理に必要なRAMが不足しています。小さい画像でお試しください。",
+  "errorInvalidImage": "無効な画像フォーマットまたはファイルが破損しています。",
+  "errorSomethingWentWrong": "予期せぬエラーが発生しました。後でもう一度お試しください。"
 }

@@ -132,7 +132,41 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("メールアドレスが必要です"),
     "error": m4,
+    "errorAlreadyPurchased": MessageLookupByLibrary.simpleMessage(
+      "すでにこのアイテムを所有しています。",
+    ),
+    "errorCameraPermission": MessageLookupByLibrary.simpleMessage(
+      "アプリに権限がありません。設定からアクセス権限を付与してください。",
+    ),
+    "errorDatabaseFull": MessageLookupByLibrary.simpleMessage(
+      "アプリのストレージがいっぱいです。これ以上データを保存できません。",
+    ),
+    "errorFileNotFound": MessageLookupByLibrary.simpleMessage(
+      "ファイルが見つかりません。削除または移動された可能性があります。",
+    ),
+    "errorInvalidImage": MessageLookupByLibrary.simpleMessage(
+      "無効な画像フォーマットまたはファイルが破損しています。",
+    ),
+    "errorNetwork": MessageLookupByLibrary.simpleMessage(
+      "ネットワーク接続が失われました。インターネット接続を確認してください。",
+    ),
+    "errorOutOfMemory": MessageLookupByLibrary.simpleMessage(
+      "処理に必要なRAMが不足しています。小さい画像でお試しください。",
+    ),
+    "errorPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "この操作を実行するにはアクセス権限を付与してください。",
+    ),
     "errorPrefix": MessageLookupByLibrary.simpleMessage("エラー"),
+    "errorSomethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "予期せぬエラーが発生しました。後でもう一度お試しください。",
+    ),
+    "errorStorageFull": MessageLookupByLibrary.simpleMessage(
+      "デバイスのストレージ容量が不足しています。空き容量を増やして再度お試しください。",
+    ),
+    "errorStoreUnavailable": MessageLookupByLibrary.simpleMessage(
+      "アプリストアに接続できません。通信状況を確認してください。",
+    ),
+    "errorUserCanceled": MessageLookupByLibrary.simpleMessage("操作がキャンセルされました。"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("色の読み込みに失敗しました"),
     "file": MessageLookupByLibrary.simpleMessage("ファイル"),
     "files": MessageLookupByLibrary.simpleMessage("ファイル"),

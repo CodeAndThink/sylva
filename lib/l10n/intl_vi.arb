@@ -471,5 +471,17 @@
     }
   },
   "seedColor": "Màu ứng dụng",
-  "@seedColor": {}
+  "@seedColor": {},
+  "errorStorageFull": "Không đủ dung lượng trống trên thiết bị. Vui lòng dọn dẹp và thử lại.",
+  "errorPermissionDenied": "Vui lòng cấp quyền truy cập để thực hiện thao tác này.",
+  "errorFileNotFound": "Không tìm thấy tệp tin. Có thể tệp đã bị xóa hoặc di chuyển.",
+  "errorDatabaseFull": "Bộ nhớ ứng dụng đã đầy. Không thể lưu thêm.",
+  "errorStoreUnavailable": "Không thể kết nối đến cửa hàng ứng dụng. Vui lòng kiểm tra lại.",
+  "errorAlreadyPurchased": "Bạn đã sở hữu gói này rồi.",
+  "errorCameraPermission": "Ứng dụng chưa được cấp quyền. Vui lòng vào Cài đặt để cấp quyền.",
+  "errorNetwork": "Mất kết nối mạng. Vui lòng kiểm tra lại Internet.",
+  "errorUserCanceled": "Thao tác đã bị hủy.",
+  "errorOutOfMemory": "Thiết bị không đủ RAM để xử lý. Vui lòng thử ảnh nhỏ hơn.",
+  "errorInvalidImage": "Định dạng ảnh không hợp lệ hoặc file bị hỏng.",
+  "errorSomethingWentWrong": "Đã xảy ra sự cố ngoài ý muốn. Vui lòng thử lại sau."
 }

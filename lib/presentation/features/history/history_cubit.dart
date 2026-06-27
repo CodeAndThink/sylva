@@ -11,26 +11,57 @@ import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 class HistoryCubit extends BaseCubit<HistoryState> {
   final HistoryNavigator navigator;
   final Isar isarService;
+  static const int _pageSize = 30;
+
   HistoryCubit({required this.navigator, required this.isarService})
     : super(const HistoryState());
 
-  Future<void> loadHistory() async {
-    if (state.status.isLoading) return;
-    emit(state.copyWith(status: LoadStatus.loading));
-    try {
-      final records = await isarService.historyRecords
-          .where()
-          .sortByCreatedAtDesc()
-          .findAll();
-      final sortedRecords = List<HistoryRecord>.from(records);
+  Future<List<HistoryRecord>> _fetchPage(int offset) async {
+    if (state.isFavoriteOnly) {
       if (state.isSortAscending) {
-        sortedRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        return await isarService.historyRecords
+            .filter()
+            .isFavoriteEqualTo(true)
+            .sortByCreatedAt()
+            .offset(offset)
+            .limit(_pageSize)
+            .findAll();
       } else {
-        sortedRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        return await isarService.historyRecords
+            .filter()
+            .isFavoriteEqualTo(true)
+            .sortByCreatedAtDesc()
+            .offset(offset)
+            .limit(_pageSize)
+            .findAll();
       }
+    } else {
+      if (state.isSortAscending) {
+        return await isarService.historyRecords
+            .where()
+            .sortByCreatedAt()
+            .offset(offset)
+            .limit(_pageSize)
+            .findAll();
+      } else {
+        return await isarService.historyRecords
+            .where()
+            .sortByCreatedAtDesc()
+            .offset(offset)
+            .limit(_pageSize)
+            .findAll();
+      }
+    }
+  }
+
+  Future<void> loadHistory({bool isRefresh = false}) async {
+    if (state.status.isLoading && !isRefresh) return;
+    emit(state.copyWith(status: LoadStatus.loading, hasReachedMax: false));
+    try {
+      final newRecords = await _fetchPage(0);
 
       final groupedItems = _computeGroupedItems(
-        records: sortedRecords,
+        records: newRecords,
         isAscending: state.isSortAscending,
         isFavoriteOnly: state.isFavoriteOnly,
       );
@@ -38,13 +69,53 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       emit(
         state.copyWith(
           status: LoadStatus.success,
-          records: sortedRecords,
+          records: newRecords,
           groupedItems: groupedItems,
+          hasReachedMax: newRecords.length < _pageSize,
         ),
       );
     } catch (e) {
       debugPrint('Error loading history: $e');
       emit(state.copyWith(status: LoadStatus.failure));
+    }
+  }
+
+  Future<void> loadMoreHistory() async {
+    if (state.isLoadingMore ||
+        state.hasReachedMax ||
+        state.status != LoadStatus.success)
+      return;
+
+    emit(state.copyWith(isLoadingMore: true));
+    try {
+      final offset = state.records.length;
+      final newRecords = await _fetchPage(offset);
+
+      if (newRecords.isEmpty) {
+        emit(state.copyWith(hasReachedMax: true, isLoadingMore: false));
+        return;
+      }
+
+      final updatedRecords = List<HistoryRecord>.from(state.records)
+        ..addAll(newRecords);
+
+      final groupedItems = _computeGroupedItems(
+        records: updatedRecords,
+        isAscending: state.isSortAscending,
+        isFavoriteOnly: state.isFavoriteOnly,
+      );
+
+      emit(
+        state.copyWith(
+          records: updatedRecords,
+          groupedItems: groupedItems,
+          hasReachedMax: newRecords.length < _pageSize,
+          isLoadingMore: false,
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error loading more history: $e');
+      emit(state.copyWith(isLoadingMore: false));
     }
   }
 
@@ -82,8 +153,55 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   }
 
   void goToPhotoPreview({required HistoryRecord record}) async {
+    final timeBeforeNavigation = DateTime.now();
     await navigator.goToPhotoPreview(record);
-    loadHistory();
+
+    // 1. Fetch only the current record to update it locally
+    final updatedRecord = await isarService.historyRecords.get(record.id);
+
+    // 2. Find any newly created records (e.g. from 'Save As New') while the user was on the Preview screen
+    final newRecords = await isarService.historyRecords
+        .filter()
+        .createdAtGreaterThan(timeBeforeNavigation)
+        .findAll();
+
+    final currentRecords = List<HistoryRecord>.from(state.records);
+    bool hasChanges = false;
+
+    if (updatedRecord != null) {
+      final index = currentRecords.indexWhere((e) => e.id == record.id);
+      if (index != -1) {
+        if (state.isFavoriteOnly && !updatedRecord.isFavorite) {
+          // If in favorite mode and the record is no longer a favorite, remove it
+          currentRecords.removeAt(index);
+          hasChanges = true;
+        } else {
+          currentRecords[index] = updatedRecord;
+          hasChanges = true;
+        }
+      }
+    }
+
+    if (newRecords.isNotEmpty) {
+      currentRecords.addAll(newRecords);
+      // Re-sort the list since new items were added
+      if (state.isSortAscending) {
+        currentRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      } else {
+        currentRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      }
+      hasChanges = true;
+    }
+
+    if (hasChanges) {
+      final groupedItems = _computeGroupedItems(
+        records: currentRecords,
+        isAscending: state.isSortAscending,
+        isFavoriteOnly: state.isFavoriteOnly,
+      );
+
+      emit(state.copyWith(records: currentRecords, groupedItems: groupedItems));
+    }
   }
 
   void toggleView() {
@@ -91,25 +209,8 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   }
 
   void toggleSort() {
-    final newAscending = !state.isSortAscending;
-    final sortedRecords = List<HistoryRecord>.from(state.records);
-    if (newAscending) {
-      sortedRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-    } else {
-      sortedRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    }
-    final groupedItems = _computeGroupedItems(
-      records: sortedRecords,
-      isAscending: newAscending,
-      isFavoriteOnly: state.isFavoriteOnly,
-    );
-    emit(
-      state.copyWith(
-        isSortAscending: newAscending,
-        records: sortedRecords,
-        groupedItems: groupedItems,
-      ),
-    );
+    emit(state.copyWith(isSortAscending: !state.isSortAscending));
+    loadHistory(isRefresh: true);
   }
 
   List<Object> _computeGroupedItems({
@@ -158,18 +259,8 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   }
 
   void toggleFavoriteOnly() {
-    final newFavoriteOnly = !state.isFavoriteOnly;
-    final groupedItems = _computeGroupedItems(
-      records: state.records,
-      isAscending: state.isSortAscending,
-      isFavoriteOnly: newFavoriteOnly,
-    );
-    emit(
-      state.copyWith(
-        isFavoriteOnly: newFavoriteOnly,
-        groupedItems: groupedItems,
-      ),
-    );
+    emit(state.copyWith(isFavoriteOnly: !state.isFavoriteOnly));
+    loadHistory(isRefresh: true);
   }
 
   void toggleFavorite(int id) async {

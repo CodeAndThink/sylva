@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -36,29 +35,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Container(
           height: preferredSize.height + MediaQuery.of(context).padding.top,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [const Color(0xCC09161B), const Color(0xB3153035)]
-                  : [
-                      Colors.white.withValues(alpha: 0.78),
-                      const Color(0xD8E4FFF7),
-                    ],
-            ),
+            // gradient: LinearGradient(
+            //   begin: Alignment.topLeft,
+            //   end: Alignment.bottomRight,
+            //   colors: isDark
+            //       ? [
+            //           theme.colorScheme.primary.withValues(alpha: 0.4),
+            //           theme.colorScheme.primary.withValues(alpha: 0.5),
+            //         ]
+            //       : [
+            //           theme.colorScheme.primary.withValues(alpha: 0.2),
+            //           theme.colorScheme.primary.withValues(alpha: 0.3),
+            //         ],
+            // ),
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(36),
               bottomRight: Radius.circular(36),
             ),
-            border: Border.all(
-              color: isDark
-                  ? AppColors.glassStroke
-                  : theme.colorScheme.secondary.withValues(alpha: 0.28),
-              width: 1.5,
-            ),
+            // border: Border.all(
+            //   color: isDark
+            //       ? AppColors.glassStroke
+            //       : theme.colorScheme.secondary.withValues(alpha: 0.28),
+            //   width: 1.5,
+            // ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.seed.withValues(alpha: isDark ? 0.18 : 0.08),
+                color: theme.colorScheme.primary.withValues(
+                  alpha: isDark ? 0.28 : 0.18,
+                ),
                 blurRadius: 32,
                 spreadRadius: -8,
               ),
@@ -74,11 +78,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     leading:
                         leading ??
                         (automaticallyImplyLeading
-                            ? IconButton(
-                                icon: Icon(Icons.arrow_back_ios_new),
-                                onPressed:
-                                    onLeadingPressed ??
-                                    () => Navigator.pop(context),
+                            ? SizedBox(
+                                width: 44,
+                                child: Center(
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_back_ios_new,
+                                      color: theme.colorScheme.primary,
+                                    ),
+                                    onPressed:
+                                        onLeadingPressed ??
+                                        () => Navigator.pop(context),
+                                  ),
+                                ),
                               )
                             : null),
                     middle: Text(
@@ -109,5 +121,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize =>
-      Size.fromHeight(75 + (bottom?.preferredSize.height ?? 0));
+      Size.fromHeight(60 + (bottom?.preferredSize.height ?? 0));
 }

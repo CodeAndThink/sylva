@@ -1813,6 +1813,11 @@ class S {
       args: [seconds],
     );
   }
+
+  /// `App Color`
+  String get seedColor {
+    return Intl.message('App Color', name: 'seedColor', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

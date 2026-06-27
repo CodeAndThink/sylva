@@ -92,9 +92,9 @@ class AppTheme {
     );
   }
 
-  static ThemeData light() {
+  static ThemeData light({Color seedColor = AppColors.seed}) {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: AppColors.seed,
+      seedColor: seedColor,
       brightness: Brightness.light,
       error: Colors.red,
     );
@@ -117,9 +117,9 @@ class AppTheme {
     );
   }
 
-  static ThemeData dark() {
+  static ThemeData dark({Color seedColor = AppColors.seed}) {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: AppColors.seed,
+      seedColor: seedColor,
       brightness: Brightness.dark,
       error: Colors.red,
     );

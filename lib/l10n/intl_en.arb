@@ -469,5 +469,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "seedColor": "App Color",
+  "@seedColor": {}
 }

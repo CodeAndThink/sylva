@@ -14,7 +14,7 @@ class AcknowledgementsPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.fromLTRB(
           12.0,
-          MediaQuery.of(context).padding.top + 75 + 12,
+          MediaQuery.of(context).padding.top + 60 + 12,
           12.0,
           MediaQuery.of(context).padding.bottom + 12.0,
         ),

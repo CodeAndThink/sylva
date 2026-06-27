@@ -17,7 +17,7 @@ class AboutPage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
           24.0,
-          MediaQuery.of(context).padding.top + 75 + 24,
+          MediaQuery.of(context).padding.top + 60 + 24,
           24.0,
           MediaQuery.of(context).padding.bottom + 24.0,
         ),

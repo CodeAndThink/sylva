@@ -283,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Save to library"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
+    "seedColor": MessageLookupByLibrary.simpleMessage("App Color"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Sound Effects"),

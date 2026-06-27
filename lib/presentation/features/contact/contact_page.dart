@@ -123,7 +123,7 @@ class __ContactChildPageState extends State<_ContactChildPage> {
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         12.0,
-        MediaQuery.of(context).padding.top + 75 + 12,
+        MediaQuery.of(context).padding.top + 60 + 12,
         12.0,
         MediaQuery.of(context).padding.bottom + 12.0,
       ),

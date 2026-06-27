@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
@@ -59,13 +60,14 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(
           12,
-          MediaQuery.of(context).padding.top + 75,
+          MediaQuery.of(context).padding.top + 60,
           12,
           MediaQuery.of(context).padding.bottom + 12,
         ),
         children: [
           _buildInteractionSection(),
           _buildThemeSection(),
+          _buildSeedColorSection(),
           _buildLanguageSection(),
           _buildOtherSection(),
         ],
@@ -104,6 +106,71 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                     value: ThemeMode.dark,
                   ),
                 ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildSeedColorSection() {
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      buildWhen: (previous, current) => previous.seedColor != current.seedColor,
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppTitleText(title: _l10n.seedColor),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 8.0,
+              ),
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: AppColors.presetColors.map((color) {
+                  final isSelected =
+                      state.seedColor.toARGB32() == color.toARGB32();
+                  return GestureDetector(
+                    onTap: () {
+                      _themeCubit.updateSeedColor(color: color);
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: color,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isSelected
+                              ? _theme.colorScheme.onSurface
+                              : Colors.transparent,
+                          width: 2.5,
+                        ),
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: color.withValues(alpha: 0.45),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                            : null,
+                      ),
+                      child: isSelected
+                          ? const Icon(
+                              Icons.check_rounded,
+                              color: Colors.white,
+                              size: 22,
+                            )
+                          : null,
+                    ),
+                  );
+                }).toList(),
               ),
             ),
           ],

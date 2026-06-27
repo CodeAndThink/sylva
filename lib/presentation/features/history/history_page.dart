@@ -100,6 +100,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           key: _keyDeleteAll,
           title: S.of(context).tutorialDeleteAllTitle,
           desc: S.of(context).tutorialDeleteAllDesc,
+          contentAlign: ContentAlign.bottom,
         ),
       AppTutorialHelper.buildTarget(
         context: context,

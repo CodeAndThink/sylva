@@ -120,7 +120,35 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailNotConfirmed": MessageLookupByLibrary.simpleMessage("邮箱未确认。"),
     "emailRequired": MessageLookupByLibrary.simpleMessage("必须输入邮箱"),
     "error": m4,
+    "errorAlreadyPurchased": MessageLookupByLibrary.simpleMessage("您已经拥有此物品。"),
+    "errorCameraPermission": MessageLookupByLibrary.simpleMessage(
+      "应用没有权限。请前往设置授予权限。",
+    ),
+    "errorDatabaseFull": MessageLookupByLibrary.simpleMessage(
+      "应用存储已满。无法保存更多数据。",
+    ),
+    "errorFileNotFound": MessageLookupByLibrary.simpleMessage(
+      "找不到文件。可能已被删除或移动。",
+    ),
+    "errorInvalidImage": MessageLookupByLibrary.simpleMessage("无效的图像格式或文件已损坏。"),
+    "errorNetwork": MessageLookupByLibrary.simpleMessage("网络连接断开。请检查您的互联网。"),
+    "errorOutOfMemory": MessageLookupByLibrary.simpleMessage(
+      "设备没有足够的RAM来处理。请尝试较小的图像。",
+    ),
+    "errorPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "请授予访问权限以执行此操作。",
+    ),
     "errorPrefix": MessageLookupByLibrary.simpleMessage("错误"),
+    "errorSomethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "发生了意外错误。请稍后再试。",
+    ),
+    "errorStorageFull": MessageLookupByLibrary.simpleMessage(
+      "设备存储空间不足。请清理后重试。",
+    ),
+    "errorStoreUnavailable": MessageLookupByLibrary.simpleMessage(
+      "无法连接到应用商店。请检查您的连接。",
+    ),
+    "errorUserCanceled": MessageLookupByLibrary.simpleMessage("操作已取消。"),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage("加载颜色失败"),
     "file": MessageLookupByLibrary.simpleMessage("文件"),
     "files": MessageLookupByLibrary.simpleMessage("文件"),

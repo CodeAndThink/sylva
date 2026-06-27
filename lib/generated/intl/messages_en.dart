@@ -147,7 +147,43 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emailRequired": MessageLookupByLibrary.simpleMessage("Email is required"),
     "error": m4,
+    "errorAlreadyPurchased": MessageLookupByLibrary.simpleMessage(
+      "You already own this item.",
+    ),
+    "errorCameraPermission": MessageLookupByLibrary.simpleMessage(
+      "App does not have permission. Please go to Settings to grant access.",
+    ),
+    "errorDatabaseFull": MessageLookupByLibrary.simpleMessage(
+      "App storage is full. Cannot save more data.",
+    ),
+    "errorFileNotFound": MessageLookupByLibrary.simpleMessage(
+      "File not found. It may have been deleted or moved.",
+    ),
+    "errorInvalidImage": MessageLookupByLibrary.simpleMessage(
+      "Invalid image format or corrupted file.",
+    ),
+    "errorNetwork": MessageLookupByLibrary.simpleMessage(
+      "Network connection lost. Please check your Internet.",
+    ),
+    "errorOutOfMemory": MessageLookupByLibrary.simpleMessage(
+      "Device does not have enough RAM to process. Please try a smaller image.",
+    ),
+    "errorPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "Please grant access permission to perform this action.",
+    ),
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Error"),
+    "errorSomethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "An unexpected error occurred. Please try again later.",
+    ),
+    "errorStorageFull": MessageLookupByLibrary.simpleMessage(
+      "Not enough storage space on the device. Please clean up and try again.",
+    ),
+    "errorStoreUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Cannot connect to the app store. Please check your connection.",
+    ),
+    "errorUserCanceled": MessageLookupByLibrary.simpleMessage(
+      "Operation was canceled.",
+    ),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Failed to load colors",
     ),

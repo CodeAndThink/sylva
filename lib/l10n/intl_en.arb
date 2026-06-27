@@ -471,5 +471,17 @@
     }
   },
   "seedColor": "App Color",
-  "@seedColor": {}
+  "@seedColor": {},
+  "errorStorageFull": "Not enough storage space on the device. Please clean up and try again.",
+  "errorPermissionDenied": "Please grant access permission to perform this action.",
+  "errorFileNotFound": "File not found. It may have been deleted or moved.",
+  "errorDatabaseFull": "App storage is full. Cannot save more data.",
+  "errorStoreUnavailable": "Cannot connect to the app store. Please check your connection.",
+  "errorAlreadyPurchased": "You already own this item.",
+  "errorCameraPermission": "App does not have permission. Please go to Settings to grant access.",
+  "errorNetwork": "Network connection lost. Please check your Internet.",
+  "errorUserCanceled": "Operation was canceled.",
+  "errorOutOfMemory": "Device does not have enough RAM to process. Please try a smaller image.",
+  "errorInvalidImage": "Invalid image format or corrupted file.",
+  "errorSomethingWentWrong": "An unexpected error occurred. Please try again later."
 }

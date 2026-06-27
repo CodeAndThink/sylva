@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as p;
@@ -20,6 +21,7 @@ import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 
 class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   final PhotoPreviewNavigator navigator;
+  Isolate? _filterIsolate;
 
   PhotoPreviewCubit({
     required this.navigator,
@@ -31,6 +33,12 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
            selectedColor: initialSelectedColor,
          ),
        );
+
+  @override
+  Future<void> close() {
+    _filterIsolate?.kill(priority: Isolate.immediate);
+    return super.close();
+  }
 
   void setSelectedColor({required Color color}) {
     safeEmit(state.copyWith(selectedColor: color));
@@ -117,7 +125,9 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     Color targetColor, {
     Color? replacementColor,
   }) async {
-    if (state.filterColorStatus.isLoading) return;
+    // Hủy isolate cũ nếu đang chạy để ưu tiên thao tác mới
+    _filterIsolate?.kill(priority: Isolate.immediate);
+    _filterIsolate = null;
 
     // Toggle off if the same color is tapped
     if (state.selectedColor == targetColor) {
@@ -139,21 +149,31 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     );
 
     try {
+      final receivePort = ReceivePort();
       final Map<String, dynamic> params = {
         'imagePath': imagePath,
         'targetColorValue': targetColor.toARGB32(),
         'threshold': 10.0, // RGB distance threshold
         'replacementColorValue': replacementColor?.toARGB32(),
+        'sendPort': receivePort.sendPort,
       };
 
-      final Uint8List result = await compute(_processImageIsolate, params);
+      _filterIsolate = await Isolate.spawn(_processImageIsolate, params);
 
-      safeEmit(
-        state.copyWith(
-          filteredImageBytes: result,
-          filterColorStatus: LoadStatus.success,
-        ),
-      );
+      final result = await receivePort.first;
+      receivePort.close();
+      _filterIsolate = null;
+
+      if (result is Uint8List) {
+        safeEmit(
+          state.copyWith(
+            filteredImageBytes: result,
+            filterColorStatus: LoadStatus.success,
+          ),
+        );
+      } else if (result is Exception || result is Error) {
+        throw result;
+      }
     } catch (e) {
       debugPrint('Error filtering color: $e');
       safeEmit(state.copyWith(filterColorStatus: LoadStatus.failure));
@@ -280,66 +300,74 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   }
 }
 
-Future<Uint8List> _processImageIsolate(Map<String, dynamic> params) async {
-  final String path = params['imagePath'];
-  final int colorValue = params['targetColorValue'];
-  final double threshold = params['threshold'];
-  final int? replacementColorValue = params['replacementColorValue'];
+Future<void> _processImageIsolate(Map<String, dynamic> params) async {
+  final SendPort sendPort = params['sendPort'];
+  try {
+    final String path = params['imagePath'];
+    final int colorValue = params['targetColorValue'];
+    final double threshold = params['threshold'];
+    final int? replacementColorValue = params['replacementColorValue'];
 
-  final targetR = (colorValue >> 16) & 0xFF;
-  final targetG = (colorValue >> 8) & 0xFF;
-  final targetB = colorValue & 0xFF;
+    final targetR = (colorValue >> 16) & 0xFF;
+    final targetG = (colorValue >> 8) & 0xFF;
+    final targetB = colorValue & 0xFF;
 
-  // Use squared threshold to avoid expensive math.sqrt in the loop
-  final double thresholdSq = threshold * threshold;
+    // Use squared threshold to avoid expensive math.sqrt in the loop
+    final double thresholdSq = threshold * threshold;
 
-  final bytes = File(path).readAsBytesSync();
-  final image = img.decodeImage(bytes);
-  if (image == null) return bytes;
+    final bytes = File(path).readAsBytesSync();
+    final image = img.decodeImage(bytes);
+    if (image == null) {
+      sendPort.send(bytes);
+      return;
+    }
 
-  // Scale down if image is too large to speed up preview processing
-  img.Image processImage = image;
-  if (image.width > 1200 || image.height > 1200) {
-    processImage = img.copyResize(image, width: 1080);
-  }
+    // Scale down if image is too large to speed up preview processing
+    img.Image processImage = image;
+    if (image.width > 1200 || image.height > 1200) {
+      processImage = img.copyResize(image, width: 1080);
+    }
 
-  // Pre-calculate replacement colors to avoid bitwise ops inside the loop
-  final num? repR = replacementColorValue != null
-      ? (replacementColorValue >> 16) & 0xFF
-      : null;
-  final num? repG = replacementColorValue != null
-      ? (replacementColorValue >> 8) & 0xFF
-      : null;
-  final num? repB = replacementColorValue != null
-      ? replacementColorValue & 0xFF
-      : null;
+    // Pre-calculate replacement colors to avoid bitwise ops inside the loop
+    final num? repR = replacementColorValue != null
+        ? (replacementColorValue >> 16) & 0xFF
+        : null;
+    final num? repG = replacementColorValue != null
+        ? (replacementColorValue >> 8) & 0xFF
+        : null;
+    final num? repB = replacementColorValue != null
+        ? replacementColorValue & 0xFF
+        : null;
 
-  for (var pixel in processImage) {
-    final num r = pixel.r;
-    final num g = pixel.g;
-    final num b = pixel.b;
+    for (var pixel in processImage) {
+      final num r = pixel.r;
+      final num g = pixel.g;
+      final num b = pixel.b;
 
-    final num dr = r - targetR;
-    final num dg = g - targetG;
-    final num db = b - targetB;
+      final num dr = r - targetR;
+      final num dg = g - targetG;
+      final num db = b - targetB;
 
-    // Fast distance squared calculation
-    final num distSq = (dr * dr) + (dg * dg) + (db * db);
+      // Fast distance squared calculation
+      final num distSq = (dr * dr) + (dg * dg) + (db * db);
 
-    if (distSq > thresholdSq) {
-      if (repR != null && repG != null && repB != null) {
-        pixel.r = repR;
-        pixel.g = repG;
-        pixel.b = repB;
-      } else {
-        // Fast inline grayscale conversion (luminance)
-        final num luminance = r * 0.299 + g * 0.587 + b * 0.114;
-        pixel.r = luminance;
-        pixel.g = luminance;
-        pixel.b = luminance;
+      if (distSq > thresholdSq) {
+        if (repR != null && repG != null && repB != null) {
+          pixel.r = repR;
+          pixel.g = repG;
+          pixel.b = repB;
+        } else {
+          // Fast inline grayscale conversion (luminance)
+          final num luminance = r * 0.299 + g * 0.587 + b * 0.114;
+          pixel.r = luminance;
+          pixel.g = luminance;
+          pixel.b = luminance;
+        }
       }
     }
-  }
 
-  return img.encodeJpg(processImage, quality: 85);
+    sendPort.send(img.encodeJpg(processImage, quality: 85));
+  } catch (e) {
+    sendPort.send(Exception(e.toString()));
+  }
 }

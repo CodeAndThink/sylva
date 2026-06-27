@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:isar_community/isar.dart';
 import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/di/injection.dart';
@@ -69,6 +70,11 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       if (_showScrollToTop.value != shouldShow) {
         _showScrollToTop.value = shouldShow;
       }
+
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent * 0.9) {
+        _cubit.loadMoreHistory();
+      }
     });
   }
 
@@ -100,6 +106,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           key: _keyDeleteAll,
           title: S.of(context).tutorialDeleteAllTitle,
           desc: S.of(context).tutorialDeleteAllDesc,
+          contentAlign: ContentAlign.bottom,
         ),
       AppTutorialHelper.buildTarget(
         context: context,
@@ -214,6 +221,17 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                             slivers: _buildGridSlivers(state.groupedItems),
                           ),
                         ),
+                        if (state.isLoadingMore)
+                          SliverToBoxAdapter(
+                            child: Padding(
+                              padding: 16.paddingAll,
+                              child: Center(
+                                child: SpinKitRipple(
+                                  color: _theme.colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ),
                         SliverToBoxAdapter(child: 100.height),
                       ],
                     )
@@ -225,8 +243,21 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                         12,
                         100,
                       ),
-                      itemCount: state.groupedItems.length,
+                      itemCount:
+                          state.groupedItems.length +
+                          (state.isLoadingMore ? 1 : 0),
                       itemBuilder: (context, index) {
+                        if (index == state.groupedItems.length) {
+                          return Padding(
+                            padding: 16.paddingAll,
+                            child: Center(
+                              child: SpinKitRipple(
+                                color: _theme.colorScheme.primary,
+                              ),
+                            ),
+                          );
+                        }
+
                         final item = state.groupedItems[index];
                         if (item is TimeGroup) {
                           return Padding(
@@ -235,6 +266,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                           );
                         } else if (item is HistoryRecord) {
                           return HistoryListItem(
+                            key: ValueKey('list_${item.id}'),
                             record: item,
                             onDelete: () => _cubit.deleteRecord(id: item.id),
                             onTap: () => _cubit.goToPhotoPreview(record: item),
@@ -277,6 +309,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
             delegate: SliverChildBuilderDelegate((context, index) {
               final record = records[index];
               return HistoryGridItem(
+                key: ValueKey('grid_${record.id}'),
                 record: record,
                 onDelete: () => _cubit.deleteRecord(id: record.id),
                 onTap: () => _cubit.goToPhotoPreview(record: record),

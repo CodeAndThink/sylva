@@ -117,6 +117,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                     child: AppFileImage(
                       path: widget.record.imagePath,
                       fit: BoxFit.cover,
+                      cacheHeight: 250,
                     ),
                   ),
                 ),
@@ -137,7 +138,10 @@ class _HistoryListItemState extends State<HistoryListItem> {
                         ),
                         color: theme.colorScheme.primaryContainer,
                         image: DecorationImage(
-                          image: FileImage(File(widget.record.imagePath)),
+                          image: ResizeImage(
+                            FileImage(File(widget.record.imagePath)),
+                            height: 250,
+                          ),
                           fit: BoxFit.cover,
                           opacity: 0.2,
                         ),

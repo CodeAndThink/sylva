@@ -148,7 +148,43 @@ class MessageLookup extends MessageLookupByLibrary {
       "Email không được để trống",
     ),
     "error": m4,
+    "errorAlreadyPurchased": MessageLookupByLibrary.simpleMessage(
+      "Bạn đã sở hữu gói này rồi.",
+    ),
+    "errorCameraPermission": MessageLookupByLibrary.simpleMessage(
+      "Ứng dụng chưa được cấp quyền. Vui lòng vào Cài đặt để cấp quyền.",
+    ),
+    "errorDatabaseFull": MessageLookupByLibrary.simpleMessage(
+      "Bộ nhớ ứng dụng đã đầy. Không thể lưu thêm.",
+    ),
+    "errorFileNotFound": MessageLookupByLibrary.simpleMessage(
+      "Không tìm thấy tệp tin. Có thể tệp đã bị xóa hoặc di chuyển.",
+    ),
+    "errorInvalidImage": MessageLookupByLibrary.simpleMessage(
+      "Định dạng ảnh không hợp lệ hoặc file bị hỏng.",
+    ),
+    "errorNetwork": MessageLookupByLibrary.simpleMessage(
+      "Mất kết nối mạng. Vui lòng kiểm tra lại Internet.",
+    ),
+    "errorOutOfMemory": MessageLookupByLibrary.simpleMessage(
+      "Thiết bị không đủ RAM để xử lý. Vui lòng thử ảnh nhỏ hơn.",
+    ),
+    "errorPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "Vui lòng cấp quyền truy cập để thực hiện thao tác này.",
+    ),
     "errorPrefix": MessageLookupByLibrary.simpleMessage("Lỗi"),
+    "errorSomethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "Đã xảy ra sự cố ngoài ý muốn. Vui lòng thử lại sau.",
+    ),
+    "errorStorageFull": MessageLookupByLibrary.simpleMessage(
+      "Không đủ dung lượng trống trên thiết bị. Vui lòng dọn dẹp và thử lại.",
+    ),
+    "errorStoreUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Không thể kết nối đến cửa hàng ứng dụng. Vui lòng kiểm tra lại.",
+    ),
+    "errorUserCanceled": MessageLookupByLibrary.simpleMessage(
+      "Thao tác đã bị hủy.",
+    ),
     "failedToLoadColors": MessageLookupByLibrary.simpleMessage(
       "Không thể tải màu",
     ),

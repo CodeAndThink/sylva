@@ -1818,6 +1818,126 @@ class S {
   String get seedColor {
     return Intl.message('App Color', name: 'seedColor', desc: '', args: []);
   }
+
+  /// `Not enough storage space on the device. Please clean up and try again.`
+  String get errorStorageFull {
+    return Intl.message(
+      'Not enough storage space on the device. Please clean up and try again.',
+      name: 'errorStorageFull',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please grant access permission to perform this action.`
+  String get errorPermissionDenied {
+    return Intl.message(
+      'Please grant access permission to perform this action.',
+      name: 'errorPermissionDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `File not found. It may have been deleted or moved.`
+  String get errorFileNotFound {
+    return Intl.message(
+      'File not found. It may have been deleted or moved.',
+      name: 'errorFileNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App storage is full. Cannot save more data.`
+  String get errorDatabaseFull {
+    return Intl.message(
+      'App storage is full. Cannot save more data.',
+      name: 'errorDatabaseFull',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cannot connect to the app store. Please check your connection.`
+  String get errorStoreUnavailable {
+    return Intl.message(
+      'Cannot connect to the app store. Please check your connection.',
+      name: 'errorStoreUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You already own this item.`
+  String get errorAlreadyPurchased {
+    return Intl.message(
+      'You already own this item.',
+      name: 'errorAlreadyPurchased',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App does not have permission. Please go to Settings to grant access.`
+  String get errorCameraPermission {
+    return Intl.message(
+      'App does not have permission. Please go to Settings to grant access.',
+      name: 'errorCameraPermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network connection lost. Please check your Internet.`
+  String get errorNetwork {
+    return Intl.message(
+      'Network connection lost. Please check your Internet.',
+      name: 'errorNetwork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operation was canceled.`
+  String get errorUserCanceled {
+    return Intl.message(
+      'Operation was canceled.',
+      name: 'errorUserCanceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device does not have enough RAM to process. Please try a smaller image.`
+  String get errorOutOfMemory {
+    return Intl.message(
+      'Device does not have enough RAM to process. Please try a smaller image.',
+      name: 'errorOutOfMemory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid image format or corrupted file.`
+  String get errorInvalidImage {
+    return Intl.message(
+      'Invalid image format or corrupted file.',
+      name: 'errorInvalidImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An unexpected error occurred. Please try again later.`
+  String get errorSomethingWentWrong {
+    return Intl.message(
+      'An unexpected error occurred. Please try again later.',
+      name: 'errorSomethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

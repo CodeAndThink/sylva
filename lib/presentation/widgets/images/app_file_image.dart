@@ -7,12 +7,17 @@ class AppFileImage extends StatelessWidget {
   final String path;
   final double? width;
   final double? height;
+  final int? cacheWidth;
+  final int? cacheHeight;
   final BoxFit fit;
+
   const AppFileImage({
     super.key,
     required this.path,
     this.width,
     this.height,
+    this.cacheWidth,
+    this.cacheHeight,
     this.fit = BoxFit.cover,
   });
 
@@ -22,6 +27,8 @@ class AppFileImage extends StatelessWidget {
       File(path),
       width: width,
       height: height,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
       fit: fit,
       errorBuilder: (_, _, _) => const Center(
         child: Icon(

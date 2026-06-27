@@ -60,7 +60,11 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                AppFileImage(path: widget.record.imagePath, fit: BoxFit.cover),
+                AppFileImage(
+                  path: widget.record.imagePath,
+                  fit: BoxFit.cover,
+                  cacheHeight: 400,
+                ),
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(

@@ -7,16 +7,18 @@ class AppFailures {
 
   static String mapErrorToMessage({dynamic e}) {
     if (e == null) {
-      return S.current.error('Unknown'); 
+      return S.current.error('Unknown');
     }
 
     final errorString = e.toString().toLowerCase();
 
     // 1. Storage & Filesystem
-    if (errorString.contains('no space left') || errorString.contains('errno = 28')) {
+    if (errorString.contains('no space left') ||
+        errorString.contains('errno = 28')) {
       return S.current.errorStorageFull;
     }
-    if (errorString.contains('permission denied') || errorString.contains('errno = 13')) {
+    if (errorString.contains('permission denied') ||
+        errorString.contains('errno = 13')) {
       return S.current.errorPermissionDenied;
     }
     if (e is PathNotFoundException || errorString.contains('path not found')) {
@@ -48,10 +50,12 @@ class AppFailures {
     }
 
     // 4. Memory / Image Processing
-    if (errorString.contains('out of memory') || errorString.contains('exhausted memory')) {
+    if (errorString.contains('out of memory') ||
+        errorString.contains('exhausted memory')) {
       return S.current.errorOutOfMemory;
     }
-    if (errorString.contains('invalid image format') || errorString.contains('corrupt')) {
+    if (errorString.contains('invalid image format') ||
+        errorString.contains('corrupt')) {
       return S.current.errorInvalidImage;
     }
 

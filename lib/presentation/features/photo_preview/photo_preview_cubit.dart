@@ -229,7 +229,9 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       navigator.flushBar.showSuccess(message: S.current.success);
     } catch (e) {
       debugPrint('Error saving history: $e');
-      navigator.flushBar.showError(message: AppFailures.mapErrorToMessage(e: e));
+      navigator.flushBar.showError(
+        message: AppFailures.mapErrorToMessage(e: e),
+      );
     }
   }
 
@@ -254,7 +256,9 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       navigator.flushBar.showSuccess(message: S.current.success);
     } catch (e) {
       debugPrint('Error updating history: $e');
-      navigator.flushBar.showError(message: AppFailures.mapErrorToMessage(e: e));
+      navigator.flushBar.showError(
+        message: AppFailures.mapErrorToMessage(e: e),
+      );
     }
   }
 
@@ -291,12 +295,16 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
         navigator.flushBar.showSuccess(message: S.current.imageSaved);
       } else {
         navigator.flushBar.showError(
-          message: AppFailures.mapErrorToMessage(e: Exception('Failed to save image')),
+          message: AppFailures.mapErrorToMessage(
+            e: Exception('Failed to save image'),
+          ),
         );
       }
     } catch (e) {
       debugPrint('Error saving to library: $e');
-      navigator.flushBar.showError(message: AppFailures.mapErrorToMessage(e: e));
+      navigator.flushBar.showError(
+        message: AppFailures.mapErrorToMessage(e: e),
+      );
     }
   }
 }

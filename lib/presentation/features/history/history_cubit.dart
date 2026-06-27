@@ -83,8 +83,9 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   Future<void> loadMoreHistory() async {
     if (state.isLoadingMore ||
         state.hasReachedMax ||
-        state.status != LoadStatus.success)
+        state.status != LoadStatus.success) {
       return;
+    }
 
     emit(state.copyWith(isLoadingMore: true));
     try {

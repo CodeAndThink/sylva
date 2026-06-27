@@ -266,6 +266,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                           );
                         } else if (item is HistoryRecord) {
                           return HistoryListItem(
+                            key: ValueKey('list_${item.id}'),
                             record: item,
                             onDelete: () => _cubit.deleteRecord(id: item.id),
                             onTap: () => _cubit.goToPhotoPreview(record: item),
@@ -308,6 +309,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
             delegate: SliverChildBuilderDelegate((context, index) {
               final record = records[index];
               return HistoryGridItem(
+                key: ValueKey('grid_${record.id}'),
                 record: record,
                 onDelete: () => _cubit.deleteRecord(id: record.id),
                 onTap: () => _cubit.goToPhotoPreview(record: record),

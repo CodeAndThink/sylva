@@ -3,11 +3,9 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
-import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
@@ -289,7 +287,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     try {
       final XFile file = await _controller!.takePicture();
       if (mounted) {
-        context.pushNamed(AppRouter.photoPreview, extra: file.path);
+        _cubit.navigator.goToPhotoPreview(imagePath: file.path);
       }
     } catch (e) {
       debugPrint('Error taking picture: $e');

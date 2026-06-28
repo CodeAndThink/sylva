@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/color_utils.dart';
+import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
@@ -45,33 +48,47 @@ class __ShareChildPageState extends State<_ShareChildPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(title: 'Share Image', body: _buildBody());
+    return AppScaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
-    return Column(
-      children: [
-        Expanded(
-          child: AppTransparentContainer(
-            child: AppFileImage(path: widget.args.imagePath),
-          ),
+    return SafeArea(
+      child: Padding(
+        padding: 12.paddingAll,
+        child: Column(
+          children: [
+            Expanded(
+              child: AppTransparentContainer(
+                child: AppFileImage(path: widget.args.imagePath),
+              ),
+            ),
+            12.height,
+            _buildTemplateList(),
+          ],
         ),
-        _buildTemplateList(),
-      ],
+      ),
     );
   }
 
   Widget _buildTemplateList() {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('Template $index'),
-          onTap: () {
-            // _cubit.selectTemplate(index);
-          },
-        );
-      },
+    return SizedBox(
+      height: 80,
+      width: double.maxFinite,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.args.colors.length,
+        separatorBuilder: (context, index) => 10.width,
+        itemBuilder: (context, index) {
+          final hex = ColorUtils.colorToHex(color: widget.args.colors[index]);
+          return PaletteColorListItem(
+            color: widget.args.colors[index],
+            hex: hex,
+            onTap: () {
+              // _cubit.selectTemplate(index);
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -33,8 +33,6 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   }) : super(const PhotoPreviewState());
 
   void init({required PhotoPreviewArguments args}) {
-    if (state.imagePath != null && (state.imagePath?.isNotEmpty == true))
-      return;
     extractPalette(imagePath: args.imagePath);
     safeEmit(
       state.copyWith(
@@ -320,15 +318,13 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   }
 
   void navigateToShare() {
-    if (state.imagePath == null || state.userColors.isEmpty) {
+    if (state.imagePath == null) {
       navigator.flushBar.showError(message: S.current.noImageToShare);
       return;
     }
+    final List<Color> colors = [...state.userColors, ...state.paletteColors];
     navigator.navigateToShare(
-      args: ShareArguments(
-        imagePath: state.imagePath!,
-        colors: state.userColors,
-      ),
+      args: ShareArguments(imagePath: state.imagePath!, colors: colors),
     );
   }
 }

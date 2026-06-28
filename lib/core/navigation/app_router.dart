@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sylva/presentation/features/history/history_page.dart';
 import 'package:sylva/presentation/features/home/home_page.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
+import 'package:sylva/presentation/features/share/share_page.dart';
 import 'package:sylva/presentation/features/sponsors/sponsors_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
@@ -53,6 +54,9 @@ class AppRouter {
 
   static const String photoPreview = 'photoPreview';
   static const String photoPreviewPath = '/photoPreview';
+
+  static const String share = 'share';
+  static const String sharePath = '/share';
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -131,6 +135,11 @@ class AppRouter {
           final imagePath = state.extra as String;
           return PhotoPreviewPage(imagePath: imagePath);
         },
+      ),
+      GoRoute(
+        path: sharePath,
+        name: share,
+        builder: (context, state) => const SharePage(),
       ),
     ],
   );

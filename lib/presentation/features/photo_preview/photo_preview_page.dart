@@ -943,9 +943,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
 
   Widget _buildBottomActions() {
     return AppTransparentContainer(
-      padding: 12.paddingAll,
+      padding: 4.paddingAll,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Tooltip(
             message: S.of(context).back,
@@ -957,7 +957,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               icon: const Icon(Icons.navigate_before_rounded, size: 36),
             ),
           ),
-          48.width,
           Tooltip(
             message: S.of(context).save,
             child: IconButton(
@@ -982,7 +981,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               icon: const Icon(Icons.data_saver_on_outlined, size: 30),
             ),
           ),
-          48.width,
           Tooltip(
             message: S.of(context).saveToLibrary,
             child: IconButton(
@@ -994,19 +992,17 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               icon: Icon(Icons.download_rounded, size: 30),
             ),
           ),
-          48.width,
           Tooltip(
             message: S.of(context).tutorialShareTitle,
             child: IconButton(
               key: _keyShare,
               onPressed: () {
                 AppFeedback.playInteract(context);
-                // _cubit.sharedImage(imagePath: widget.imagePath);
+                _cubit.navigator.navigateToShare();
               },
-              icon: Icon(Icons.share_rounded, size: 30),
+              icon: Icon(Icons.share_rounded, size: 25),
             ),
           ),
-          48.width,
           Tooltip(
             message: S.of(context).help,
             child: IconButton(

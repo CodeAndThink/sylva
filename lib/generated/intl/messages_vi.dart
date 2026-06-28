@@ -447,6 +447,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tùy chỉnh các thiết lập của ứng dụng.",
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
+      "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
+    ),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "Sắp xếp lịch sử tăng dần hoặc giảm dần theo thời gian.",

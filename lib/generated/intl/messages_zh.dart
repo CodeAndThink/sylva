@@ -340,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "tutorialSaveTitle": MessageLookupByLibrary.simpleMessage("保存到应用"),
     "tutorialSettingsDesc": MessageLookupByLibrary.simpleMessage("自定义应用设置。"),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("设置"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage("分享图片和颜色信息给朋友"),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("分享"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("跳过"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage("按时间升序或降序排序历史记录。"),
     "tutorialSortTitle": MessageLookupByLibrary.simpleMessage("排序"),

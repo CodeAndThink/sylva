@@ -495,5 +495,9 @@
   "errorInvalidImage": "Invalid image format or corrupted file.",
   "@errorInvalidImage": {},
   "errorSomethingWentWrong": "An unexpected error occurred. Please try again later.",
-  "@errorSomethingWentWrong": {}
+  "@errorSomethingWentWrong": {},
+  "tutorialShareTitle": "Share",
+  "@tutorialShareTitle": {},
+  "tutorialShareDesc": "Share photos with color information with your friends",
+  "@tutorialShareDesc": {}
 }

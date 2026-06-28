@@ -495,5 +495,9 @@
   "errorInvalidImage": "Định dạng ảnh không hợp lệ hoặc file bị hỏng.",
   "@errorInvalidImage": {},
   "errorSomethingWentWrong": "Đã xảy ra sự cố ngoài ý muốn. Vui lòng thử lại sau.",
-  "@errorSomethingWentWrong": {}
+  "@errorSomethingWentWrong": {},
+  "tutorialShareTitle": "Chia sẻ",
+  "@tutorialShareTitle": {},
+  "tutorialShareDesc": "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
+  "@tutorialShareDesc": {}
 }

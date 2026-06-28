@@ -80,6 +80,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   final GlobalKey _keyZoomController = GlobalKey();
   final GlobalKey _keyFullScreen = GlobalKey();
   final GlobalKey _keyToggleMode = GlobalKey();
+  final GlobalKey _keyShare = GlobalKey();
 
   TutorialCoachMark? tutorialCoachMark;
 
@@ -941,65 +942,80 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   }
 
   Widget _buildBottomActions() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Tooltip(
-          message: S.of(context).back,
-          child: IconButton(
-            key: _keyBack,
-            onPressed: () {
-              _cubit.navigator.safePop();
-            },
-            icon: const Icon(Icons.navigate_before_rounded, size: 36),
-          ),
-        ),
-        48.width,
-        Tooltip(
-          message: S.of(context).save,
-          child: IconButton(
-            key: _keySave,
-            onPressed: () async {
-              AppFeedback.playInteract(context);
-              if (widget.historyRecordId != null) {
-                SaveOptionsBottomSheet.show(
-                  context: context,
-                  onSaveAsNew: () =>
-                      _cubit.saveHistory(imagePath: widget.imagePath),
-                  onReplaceExisting: () => _cubit.updateHistory(
-                    imagePath: widget.imagePath,
-                    id: widget.historyRecordId!,
-                  ),
-                );
-              } else {
-                await _cubit.saveHistory(imagePath: widget.imagePath);
+    return AppTransparentContainer(
+      padding: 12.paddingAll,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Tooltip(
+            message: S.of(context).back,
+            child: IconButton(
+              key: _keyBack,
+              onPressed: () {
                 _cubit.navigator.safePop();
-              }
-            },
-            icon: const Icon(Icons.data_saver_on_outlined, size: 30),
+              },
+              icon: const Icon(Icons.navigate_before_rounded, size: 36),
+            ),
           ),
-        ),
-        48.width,
-        Tooltip(
-          message: S.of(context).saveToLibrary,
-          child: IconButton(
-            key: _keyLibrary,
-            onPressed: () {
-              AppFeedback.playInteract(context);
-              _cubit.saveToLibrary(imagePath: widget.imagePath);
-            },
-            icon: Icon(Icons.download_rounded, size: 30),
+          48.width,
+          Tooltip(
+            message: S.of(context).save,
+            child: IconButton(
+              key: _keySave,
+              onPressed: () async {
+                AppFeedback.playInteract(context);
+                if (widget.historyRecordId != null) {
+                  SaveOptionsBottomSheet.show(
+                    context: context,
+                    onSaveAsNew: () =>
+                        _cubit.saveHistory(imagePath: widget.imagePath),
+                    onReplaceExisting: () => _cubit.updateHistory(
+                      imagePath: widget.imagePath,
+                      id: widget.historyRecordId!,
+                    ),
+                  );
+                } else {
+                  await _cubit.saveHistory(imagePath: widget.imagePath);
+                  _cubit.navigator.safePop();
+                }
+              },
+              icon: const Icon(Icons.data_saver_on_outlined, size: 30),
+            ),
           ),
-        ),
-        48.width,
-        Tooltip(
-          message: S.of(context).help,
-          child: IconButton(
-            onPressed: _showTutorial,
-            icon: Icon(Icons.help_outline_outlined, size: 30),
+          48.width,
+          Tooltip(
+            message: S.of(context).saveToLibrary,
+            child: IconButton(
+              key: _keyLibrary,
+              onPressed: () {
+                AppFeedback.playInteract(context);
+                _cubit.saveToLibrary(imagePath: widget.imagePath);
+              },
+              icon: Icon(Icons.download_rounded, size: 30),
+            ),
           ),
-        ),
-      ],
+          48.width,
+          Tooltip(
+            message: S.of(context).tutorialShareTitle,
+            child: IconButton(
+              key: _keyShare,
+              onPressed: () {
+                AppFeedback.playInteract(context);
+                // _cubit.sharedImage(imagePath: widget.imagePath);
+              },
+              icon: Icon(Icons.share_rounded, size: 30),
+            ),
+          ),
+          48.width,
+          Tooltip(
+            message: S.of(context).help,
+            child: IconButton(
+              onPressed: _showTutorial,
+              icon: Icon(Icons.help_outline_outlined, size: 30),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -1060,6 +1076,12 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
         key: _keyLibrary,
         title: S.of(context).tutorialLibraryTitle,
         desc: S.of(context).tutorialLibraryDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyShare,
+        title: S.of(context).tutorialShareTitle,
+        desc: S.of(context).tutorialShareDesc,
       ),
     ];
   }

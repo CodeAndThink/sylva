@@ -1938,6 +1938,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Share`
+  String get tutorialShareTitle {
+    return Intl.message(
+      'Share',
+      name: 'tutorialShareTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share photos with color information with your friends`
+  String get tutorialShareDesc {
+    return Intl.message(
+      'Share photos with color information with your friends',
+      name: 'tutorialShareDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

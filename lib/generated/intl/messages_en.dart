@@ -446,6 +446,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Customize your app preferences here.",
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
+      "Share photos with color information with your friends",
+    ),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Share"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Skip"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "Sort your history ascending or descending by time.",

@@ -231,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No cameras found on device",
     ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("No history yet"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage("No image to share"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Nothing selected to copy",
     ),

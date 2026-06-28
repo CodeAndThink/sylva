@@ -234,6 +234,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Thiết bị không có camera",
     ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage(
+      "Không có ảnh để chia sẻ",
+    ),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Chưa chọn màu để sao chép",
     ),

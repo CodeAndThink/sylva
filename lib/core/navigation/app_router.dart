@@ -13,7 +13,6 @@ import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page
 import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/acknowledgements_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
-import 'package:sylva/data/entities/history_record.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -121,25 +120,15 @@ class AppRouter {
         path: photoPreviewPath,
         name: photoPreview,
         builder: (context, state) {
-          if (state.extra is HistoryRecord) {
-            final record = state.extra as HistoryRecord;
-            return PhotoPreviewPage(
-              imagePath: record.imagePath,
-              initialColors: record.userColors.map((c) => Color(c)).toList(),
-              initialSelectedColor: record.selectedColor != null
-                  ? Color(record.selectedColor!)
-                  : null,
-              historyRecordId: record.id,
-            );
-          }
-          final imagePath = state.extra as String;
-          return PhotoPreviewPage(imagePath: imagePath);
+          return PhotoPreviewPage(args: state.extra as PhotoPreviewArguments);
         },
       ),
       GoRoute(
         path: sharePath,
         name: share,
-        builder: (context, state) => const SharePage(),
+        builder: (context, state) {
+          return SharePage(args: state.extra as ShareArguments);
+        },
       ),
     ],
   );

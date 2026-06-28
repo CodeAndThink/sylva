@@ -200,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("次へ"),
     "noCamerasFound": MessageLookupByLibrary.simpleMessage("デバイスにカメラが見つかりません"),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("履歴はまだありません"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage("共有する画像がありません"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "コピーする色が選択されていません",
     ),

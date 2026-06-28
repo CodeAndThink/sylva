@@ -493,5 +493,7 @@
   "tutorialShareTitle": "分享",
   "@tutorialShareTitle": {},
   "tutorialShareDesc": "分享图片和颜色信息给朋友",
-  "@tutorialShareDesc": {}
+  "@tutorialShareDesc": {},
+  "noImageToShare": "没有图片可分享",
+  "@noImageToShare": {}
 }

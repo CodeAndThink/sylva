@@ -493,5 +493,7 @@
   "tutorialShareTitle": "共有",
   "@tutorialShareTitle": {},
   "tutorialShareDesc": "画像とカラー情報を友達と共有する",
-  "@tutorialShareDesc": {}
+  "@tutorialShareDesc": {},
+  "noImageToShare": "共有する画像がありません",
+  "@noImageToShare": {}
 }

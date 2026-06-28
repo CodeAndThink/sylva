@@ -1958,6 +1958,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No image to share`
+  String get noImageToShare {
+    return Intl.message(
+      'No image to share',
+      name: 'noImageToShare',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

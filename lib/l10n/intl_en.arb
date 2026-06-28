@@ -499,5 +499,7 @@
   "tutorialShareTitle": "Share",
   "@tutorialShareTitle": {},
   "tutorialShareDesc": "Share photos with color information with your friends",
-  "@tutorialShareDesc": {}
+  "@tutorialShareDesc": {},
+  "noImageToShare": "No image to share",
+  "@noImageToShare": {}
 }

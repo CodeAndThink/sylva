@@ -182,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("下一步"),
     "noCamerasFound": MessageLookupByLibrary.simpleMessage("设备上未找到相机"),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("暂无记录"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage("没有图片可分享"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage("未选择要复制的颜色"),
     "ok": MessageLookupByLibrary.simpleMessage("确定"),
     "older": MessageLookupByLibrary.simpleMessage("更早"),

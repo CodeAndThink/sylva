@@ -16,7 +16,9 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/color_utils.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
+import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
+import 'package:sylva/presentation/features/share/share_page.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 import 'package:sylva/core/exceptions/app_failures.dart';
 
@@ -28,12 +30,21 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     required this.navigator,
     List<Color>? initialColors,
     Color? initialSelectedColor,
-  }) : super(
-         PhotoPreviewState(
-           userColors: initialColors ?? const [],
-           selectedColor: initialSelectedColor,
-         ),
-       );
+  }) : super(const PhotoPreviewState());
+
+  void init({required PhotoPreviewArguments args}) {
+    if (state.imagePath != null && (state.imagePath?.isNotEmpty == true))
+      return;
+    extractPalette(imagePath: args.imagePath);
+    safeEmit(
+      state.copyWith(
+        imagePath: args.imagePath,
+        userColors: args.initialColors ?? const [],
+        selectedColor: args.initialSelectedColor,
+        historyRecordId: args.historyRecordId,
+      ),
+    );
+  }
 
   @override
   Future<void> close() {
@@ -306,6 +317,19 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
         message: AppFailures.mapErrorToMessage(e: e),
       );
     }
+  }
+
+  void navigateToShare() {
+    if (state.imagePath == null || state.userColors.isEmpty) {
+      navigator.flushBar.showError(message: S.current.noImageToShare);
+      return;
+    }
+    navigator.navigateToShare(
+      args: ShareArguments(
+        imagePath: state.imagePath!,
+        colors: state.userColors,
+      ),
+    );
   }
 }
 

@@ -499,5 +499,7 @@
   "tutorialShareTitle": "Chia sẻ",
   "@tutorialShareTitle": {},
   "tutorialShareDesc": "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
-  "@tutorialShareDesc": {}
+  "@tutorialShareDesc": {},
+  "noImageToShare": "Không có ảnh để chia sẻ",
+  "@noImageToShare": {}
 }

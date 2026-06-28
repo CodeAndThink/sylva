@@ -23,40 +23,38 @@ import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-class PhotoPreviewPage extends StatelessWidget {
+class PhotoPreviewArguments {
   final String imagePath;
   final List<Color>? initialColors;
   final Color? initialSelectedColor;
   final int? historyRecordId;
 
-  const PhotoPreviewPage({
-    super.key,
+  PhotoPreviewArguments({
     required this.imagePath,
     this.initialColors,
     this.initialSelectedColor,
     this.historyRecordId,
   });
+}
+
+class PhotoPreviewPage extends StatelessWidget {
+  final PhotoPreviewArguments args;
+
+  const PhotoPreviewPage({super.key, required this.args});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PhotoPreviewCubit(
-        navigator: PhotoPreviewNavigator(context),
-        initialColors: initialColors,
-        initialSelectedColor: initialSelectedColor,
-      ),
-      child: _PhotoPreviewChildPage(
-        imagePath: imagePath,
-        historyRecordId: historyRecordId,
-      ),
+      create: (_) =>
+          PhotoPreviewCubit(navigator: PhotoPreviewNavigator(context)),
+      child: _PhotoPreviewChildPage(args: args),
     );
   }
 }
 
 class _PhotoPreviewChildPage extends StatefulWidget {
-  final String imagePath;
-  final int? historyRecordId;
-  const _PhotoPreviewChildPage({required this.imagePath, this.historyRecordId});
+  final PhotoPreviewArguments args;
+  const _PhotoPreviewChildPage({required this.args});
 
   @override
   State<_PhotoPreviewChildPage> createState() => __PhotoPreviewChildPageState();
@@ -102,7 +100,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             }
           });
     _cubit = context.read<PhotoPreviewCubit>();
-    _cubit.extractPalette(imagePath: widget.imagePath);
+    _cubit.init(args: widget.args);
   }
 
   void _showTutorial() {
@@ -358,7 +356,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       );
                     }
                     return AppFileImage(
-                      path: widget.imagePath,
+                      path: widget.args.imagePath,
                       fit: BoxFit.cover,
                     );
                   },
@@ -424,7 +422,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 color: Colors.red,
                 onPressed: () {
                   if (state.selectedColor != null) {
-                    _cubit.filterColor(widget.imagePath, state.selectedColor!);
+                    _cubit.filterColor(
+                      widget.args.imagePath,
+                      state.selectedColor!,
+                    );
                   }
                 },
                 icon: const Icon(Icons.close_rounded, size: 32),
@@ -497,7 +498,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           onTap: () {
             FullScreenPhotoViewer.show(
               context,
-              imagePath: widget.imagePath,
+              imagePath: widget.args.imagePath,
               imageBytes: _cubit.state.filteredImageBytes,
             );
           },
@@ -567,7 +568,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                   hex: hex,
                                   isSelected: state.selectedColor == color,
                                   onTap: () {
-                                    _cubit.filterColor(widget.imagePath, color);
+                                    _cubit.filterColor(
+                                      widget.args.imagePath,
+                                      color,
+                                    );
                                     _showMagnifier.value = false;
                                   },
                                   onLongPress: () {
@@ -614,7 +618,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                             state.selectedColor == color,
                                         onTap: () {
                                           _cubit.filterColor(
-                                            widget.imagePath,
+                                            widget.args.imagePath,
                                             color,
                                           );
                                           _showMagnifier.value = false;
@@ -649,7 +653,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                               paletteColors: _cubit.state.paletteColors,
                               userColors: _cubit.state.userColors,
                               onColorTap: (color) {
-                                _cubit.filterColor(widget.imagePath, color);
+                                _cubit.filterColor(
+                                  widget.args.imagePath,
+                                  color,
+                                );
                                 _showMagnifier.value = false;
                               },
                               onColorLongPress: (color) =>
@@ -942,76 +949,73 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   }
 
   Widget _buildBottomActions() {
-    return AppTransparentContainer(
-      padding: 4.paddingAll,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Tooltip(
-            message: S.of(context).back,
-            child: IconButton(
-              key: _keyBack,
-              onPressed: () {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Tooltip(
+          message: S.of(context).back,
+          child: IconButton(
+            key: _keyBack,
+            onPressed: () {
+              _cubit.navigator.safePop();
+            },
+            icon: const Icon(Icons.navigate_before_rounded, size: 36),
+          ),
+        ),
+        Tooltip(
+          message: S.of(context).save,
+          child: IconButton(
+            key: _keySave,
+            onPressed: () async {
+              AppFeedback.playInteract(context);
+              if (widget.args.historyRecordId != null) {
+                SaveOptionsBottomSheet.show(
+                  context: context,
+                  onSaveAsNew: () =>
+                      _cubit.saveHistory(imagePath: widget.args.imagePath),
+                  onReplaceExisting: () => _cubit.updateHistory(
+                    imagePath: widget.args.imagePath,
+                    id: widget.args.historyRecordId!,
+                  ),
+                );
+              } else {
+                await _cubit.saveHistory(imagePath: widget.args.imagePath);
                 _cubit.navigator.safePop();
-              },
-              icon: const Icon(Icons.navigate_before_rounded, size: 36),
-            ),
+              }
+            },
+            icon: const Icon(Icons.data_saver_on_outlined, size: 30),
           ),
-          Tooltip(
-            message: S.of(context).save,
-            child: IconButton(
-              key: _keySave,
-              onPressed: () async {
-                AppFeedback.playInteract(context);
-                if (widget.historyRecordId != null) {
-                  SaveOptionsBottomSheet.show(
-                    context: context,
-                    onSaveAsNew: () =>
-                        _cubit.saveHistory(imagePath: widget.imagePath),
-                    onReplaceExisting: () => _cubit.updateHistory(
-                      imagePath: widget.imagePath,
-                      id: widget.historyRecordId!,
-                    ),
-                  );
-                } else {
-                  await _cubit.saveHistory(imagePath: widget.imagePath);
-                  _cubit.navigator.safePop();
-                }
-              },
-              icon: const Icon(Icons.data_saver_on_outlined, size: 30),
-            ),
+        ),
+        Tooltip(
+          message: S.of(context).saveToLibrary,
+          child: IconButton(
+            key: _keyLibrary,
+            onPressed: () {
+              AppFeedback.playInteract(context);
+              _cubit.saveToLibrary(imagePath: widget.args.imagePath);
+            },
+            icon: Icon(Icons.download_rounded, size: 30),
           ),
-          Tooltip(
-            message: S.of(context).saveToLibrary,
-            child: IconButton(
-              key: _keyLibrary,
-              onPressed: () {
-                AppFeedback.playInteract(context);
-                _cubit.saveToLibrary(imagePath: widget.imagePath);
-              },
-              icon: Icon(Icons.download_rounded, size: 30),
-            ),
+        ),
+        Tooltip(
+          message: S.of(context).tutorialShareTitle,
+          child: IconButton(
+            key: _keyShare,
+            onPressed: () {
+              AppFeedback.playInteract(context);
+              _cubit.navigateToShare();
+            },
+            icon: Icon(Icons.share_rounded, size: 25),
           ),
-          Tooltip(
-            message: S.of(context).tutorialShareTitle,
-            child: IconButton(
-              key: _keyShare,
-              onPressed: () {
-                AppFeedback.playInteract(context);
-                _cubit.navigator.navigateToShare();
-              },
-              icon: Icon(Icons.share_rounded, size: 25),
-            ),
+        ),
+        Tooltip(
+          message: S.of(context).help,
+          child: IconButton(
+            onPressed: _showTutorial,
+            icon: Icon(Icons.help_outline_outlined, size: 30),
           ),
-          Tooltip(
-            message: S.of(context).help,
-            child: IconButton(
-              onPressed: _showTutorial,
-              icon: Icon(Icons.help_outline_outlined, size: 30),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

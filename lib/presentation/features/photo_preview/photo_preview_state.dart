@@ -10,6 +10,8 @@ class PhotoPreviewState extends Equatable {
   final List<Color> userColors;
   final Color? selectedColor;
   final Uint8List? filteredImageBytes;
+  final String? imagePath;
+  final int? historyRecordId;
 
   const PhotoPreviewState({
     this.paletteColors = const [],
@@ -18,6 +20,8 @@ class PhotoPreviewState extends Equatable {
     this.filterColorStatus = LoadStatus.initial,
     this.selectedColor,
     this.filteredImageBytes,
+    this.imagePath,
+    this.historyRecordId,
   });
 
   PhotoPreviewState copyWith({
@@ -27,6 +31,8 @@ class PhotoPreviewState extends Equatable {
     LoadStatus? filterColorStatus,
     Color? selectedColor,
     Uint8List? filteredImageBytes,
+    String? imagePath,
+    int? historyRecordId,
   }) {
     return PhotoPreviewState(
       paletteColors: paletteColors ?? this.paletteColors,
@@ -43,6 +49,8 @@ class PhotoPreviewState extends Equatable {
       filteredImageBytes: filterColorStatus == LoadStatus.initial
           ? null
           : (filteredImageBytes ?? this.filteredImageBytes),
+      imagePath: imagePath ?? this.imagePath,
+      historyRecordId: historyRecordId ?? this.historyRecordId,
     );
   }
 
@@ -54,5 +62,7 @@ class PhotoPreviewState extends Equatable {
     filterColorStatus,
     selectedColor,
     filteredImageBytes,
+    imagePath,
+    historyRecordId,
   ];
 }

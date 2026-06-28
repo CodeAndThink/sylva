@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:isar_community/isar.dart';
 import 'package:sylva/core/enums/load_status.dart';
@@ -6,6 +8,7 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/presentation/features/history/history_navigator.dart';
 import 'package:sylva/presentation/features/history/history_state.dart';
+import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 
 class HistoryCubit extends BaseCubit<HistoryState> {
@@ -155,7 +158,16 @@ class HistoryCubit extends BaseCubit<HistoryState> {
 
   void goToPhotoPreview({required HistoryRecord record}) async {
     final timeBeforeNavigation = DateTime.now();
-    await navigator.goToPhotoPreview(record);
+    await navigator.goToPhotoPreview(
+      args: PhotoPreviewArguments(
+        imagePath: record.imagePath,
+        initialColors: record.userColors.map((c) => Color(c)).toList(),
+        initialSelectedColor: record.selectedColor != null
+            ? Color(record.selectedColor!)
+            : null,
+        historyRecordId: record.id,
+      ),
+    );
 
     // 1. Fetch only the current record to update it locally
     final updatedRecord = await isarService.historyRecords.get(record.id);

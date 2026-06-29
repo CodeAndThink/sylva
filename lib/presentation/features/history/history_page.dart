@@ -347,7 +347,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: 16.paddingBottom,
+        padding: 12.paddingBottom,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

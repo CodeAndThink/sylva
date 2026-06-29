@@ -14,11 +14,11 @@ import 'package:palette_generator_master/palette_generator_master.dart';
 import 'package:sylva/core/enums/load_status.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/color_utils.dart';
+import 'package:sylva/data/models/process_image_model.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_navigator.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_state.dart';
-import 'package:sylva/presentation/features/share/share_page.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 import 'package:sylva/core/exceptions/app_failures.dart';
 
@@ -323,8 +323,8 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       return;
     }
     final List<Color> colors = [...state.userColors, ...state.paletteColors];
-    navigator.navigateToShare(
-      args: ShareArguments(imagePath: state.imagePath!, colors: colors),
+    navigator.navigateToTemplateList(
+      args: ProcessImageModel(imagePath: state.imagePath!, colors: colors),
     );
   }
 }

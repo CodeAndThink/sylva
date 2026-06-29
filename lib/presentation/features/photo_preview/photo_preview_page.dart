@@ -949,77 +949,81 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   }
 
   Widget _buildBottomActions() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Tooltip(
-          message: _l10n.back,
-          child: IconButton(
-            key: _keyBack,
-            onPressed: () {
-              AppFeedback.playInteract(context);
-              _cubit.navigator.safePop();
-            },
-            icon: const Icon(Icons.navigate_before_rounded, size: 36),
-          ),
-        ),
-        Tooltip(
-          message: _l10n.save,
-          child: IconButton(
-            key: _keySave,
-            onPressed: () async {
-              AppFeedback.playInteract(context);
-              if (widget.args.historyRecordId != null) {
-                SaveOptionsBottomSheet.show(
-                  context: context,
-                  onSaveAsNew: () =>
-                      _cubit.saveHistory(imagePath: widget.args.imagePath),
-                  onReplaceExisting: () => _cubit.updateHistory(
-                    imagePath: widget.args.imagePath,
-                    id: widget.args.historyRecordId!,
-                  ),
-                );
-              } else {
-                await _cubit.saveHistory(imagePath: widget.args.imagePath);
+    return AppTransparentContainer(
+      padding: 4.paddingAll,
+      child: Row(
+        spacing: 4,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Tooltip(
+            message: _l10n.back,
+            child: IconButton(
+              key: _keyBack,
+              onPressed: () {
+                AppFeedback.playInteract(context);
                 _cubit.navigator.safePop();
-              }
-            },
-            icon: const Icon(Icons.data_saver_on_outlined, size: 30),
+              },
+              icon: const Icon(Icons.navigate_before_rounded, size: 36),
+            ),
           ),
-        ),
-        Tooltip(
-          message: _l10n.saveToLibrary,
-          child: IconButton(
-            key: _keyLibrary,
-            onPressed: () {
-              AppFeedback.playInteract(context);
-              _cubit.saveToLibrary(imagePath: widget.args.imagePath);
-            },
-            icon: Icon(Icons.download_rounded, size: 30),
+          Tooltip(
+            message: _l10n.save,
+            child: IconButton(
+              key: _keySave,
+              onPressed: () async {
+                AppFeedback.playInteract(context);
+                if (widget.args.historyRecordId != null) {
+                  SaveOptionsBottomSheet.show(
+                    context: context,
+                    onSaveAsNew: () =>
+                        _cubit.saveHistory(imagePath: widget.args.imagePath),
+                    onReplaceExisting: () => _cubit.updateHistory(
+                      imagePath: widget.args.imagePath,
+                      id: widget.args.historyRecordId!,
+                    ),
+                  );
+                } else {
+                  await _cubit.saveHistory(imagePath: widget.args.imagePath);
+                  _cubit.navigator.safePop();
+                }
+              },
+              icon: const Icon(Icons.data_saver_on_outlined, size: 30),
+            ),
           ),
-        ),
-        Tooltip(
-          message: _l10n.tutorialShareTitle,
-          child: IconButton(
-            key: _keyShare,
-            onPressed: () {
-              AppFeedback.playInteract(context);
-              _cubit.navigateToShare();
-            },
-            icon: Icon(Icons.share_rounded, size: 25),
+          Tooltip(
+            message: _l10n.saveToLibrary,
+            child: IconButton(
+              key: _keyLibrary,
+              onPressed: () {
+                AppFeedback.playInteract(context);
+                _cubit.saveToLibrary(imagePath: widget.args.imagePath);
+              },
+              icon: Icon(Icons.download_rounded, size: 30),
+            ),
           ),
-        ),
-        Tooltip(
-          message: _l10n.help,
-          child: IconButton(
-            onPressed: () {
-              AppFeedback.playInteract(context);
-              _showTutorial();
-            },
-            icon: Icon(Icons.help_outline_outlined, size: 30),
+          Tooltip(
+            message: _l10n.tutorialShareTitle,
+            child: IconButton(
+              key: _keyShare,
+              onPressed: () {
+                AppFeedback.playInteract(context);
+                _cubit.navigateToShare();
+              },
+              icon: Icon(Icons.share_rounded, size: 25),
+            ),
           ),
-        ),
-      ],
+          Tooltip(
+            message: _l10n.help,
+            child: IconButton(
+              onPressed: () {
+                AppFeedback.playInteract(context);
+                _showTutorial();
+              },
+              icon: Icon(Icons.help_outline_outlined, size: 30),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

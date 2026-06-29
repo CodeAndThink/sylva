@@ -3,23 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/utils/color_utils.dart';
+import 'package:sylva/data/models/process_image_model.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
+import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
-class ShareArguments {
-  final String imagePath;
-  final List<Color> colors;
-
-  ShareArguments({required this.imagePath, required this.colors});
-}
-
 class SharePage extends StatelessWidget {
-  final ShareArguments args;
+  final ProcessImageModel args;
   const SharePage({super.key, required this.args});
 
   @override
@@ -32,7 +27,7 @@ class SharePage extends StatelessWidget {
 }
 
 class _ShareChildPage extends StatefulWidget {
-  final ShareArguments args;
+  final ProcessImageModel args;
   const _ShareChildPage({required this.args});
 
   @override
@@ -89,17 +84,26 @@ class __ShareChildPageState extends State<_ShareChildPage> {
     return SizedBox(
       height: 80,
       width: double.maxFinite,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.args.colors.length,
-        separatorBuilder: (context, index) => 10.width,
-        itemBuilder: (context, index) {
-          final hex = ColorUtils.colorToHex(color: widget.args.colors[index]);
-          return PaletteColorListItem(
-            color: widget.args.colors[index],
-            hex: hex,
-            onTap: () {
-              // _cubit.selectTemplate(index);
+      child: BlocBuilder<ShareCubit, ShareState>(
+        buildWhen: (previous, current) {
+          return previous.selectedColors != current.selectedColors;
+        },
+        builder: (context, state) {
+          return ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: widget.args.colors.length,
+            separatorBuilder: (context, index) => 10.width,
+            itemBuilder: (context, index) {
+              final Color color = widget.args.colors[index];
+              final hex = ColorUtils.colorToHex(color: color);
+              return PaletteColorListItem(
+                color: color,
+                hex: hex,
+                isSelected: state.selectedColors.contains(color),
+                onTap: () {
+                  _cubit.toggleSelectedColor(color: color);
+                },
+              );
             },
           );
         },
@@ -117,6 +121,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
             key: _keyBack,
             onPressed: () {
               AppFeedback.playInteract(context);
+              _cubit.navigator.safePop();
             },
             icon: const Icon(Icons.navigate_before_rounded, size: 36),
           ),

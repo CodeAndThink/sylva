@@ -501,5 +501,17 @@
   "tutorialShareDesc": "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
   "@tutorialShareDesc": {},
   "noImageToShare": "Không có ảnh để chia sẻ",
-  "@noImageToShare": {}
+  "@noImageToShare": {},
+  "textOptionNone": "Không",
+  "@textOptionNone": {},
+  "textPositionTop": "Trên",
+  "@textPositionTop": {},
+  "textPositionBottom": "Dưới",
+  "@textPositionBottom": {},
+  "textPositionLeft": "Trái",
+  "@textPositionLeft": {},
+  "textPositionRight": "Phải",
+  "@textPositionRight": {},
+  "textPositionInside": "Bên trong",
+  "@textPositionInside": {}
 }

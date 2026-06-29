@@ -84,28 +84,35 @@ class ShareImagePreview extends StatelessWidget {
         alignment: alignment,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // Estimate size. We want the shapes to be a reasonable size relative to the image.
-            // But TemplateListItem takes up constraints.maxWidth/3 if left unbounded it might expand.
-            // Let's constrain the size based on the available area.
-            final size = constraints.maxWidth * 0.2;
+            // Estimate size based on available area and selected size.
+            final boxSize = constraints.maxWidth * state.shapeSize;
+            final padding = boxSize * 0.2;
+            final spacing = boxSize * state.shapeSpacing;
+            final size = boxSize - padding * 2;
 
-            Widget list = isVertical
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: _buildShapes(
-                      state.selectedShape,
-                      state.selectedColors.toList(),
-                      size,
+            Widget list = Container(
+              child: isVertical
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: spacing,
+                      children: _buildShapes(
+                        state.selectedShape,
+                        state.selectedColors.toList(),
+                        size,
+                        state,
+                      ),
+                    )
+                  : Row(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: spacing,
+                      children: _buildShapes(
+                        state.selectedShape,
+                        state.selectedColors.toList(),
+                        size,
+                        state,
+                      ),
                     ),
-                  )
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: _buildShapes(
-                      state.selectedShape,
-                      state.selectedColors.toList(),
-                      size,
-                    ),
-                  );
+            );
 
             return list;
           },
@@ -118,21 +125,103 @@ class ShareImagePreview extends StatelessWidget {
     PaletteShape shape,
     List<Color> colors,
     double size,
+    ShareState state,
   ) {
     if (colors.isEmpty) {
       colors = [Colors.white, Colors.white, Colors.white]; // fallback
     }
 
-    // We only display up to 3 colors for simplicity or loop through all selected colors.
-    // The TemplateListItem shows 3. If we dynamically build it here based on selected colors:
     final List<Widget> children = [];
-    for (int i = 0; i < colors.length; i++) {
+    for (int i = 0; i < 3; i++) {
       final color = colors.isNotEmpty
           ? colors[i % colors.length]
           : Colors.white;
-      children.add(_buildShapeWidget(shape, color, size));
+      children.add(_buildShapeWithText(shape, color, size, state));
     }
     return children;
+  }
+
+  Widget _buildShapeWithText(
+    PaletteShape shape,
+    Color color,
+    double size,
+    ShareState state,
+  ) {
+    Widget shapeWidget = _buildShapeWidget(shape, color, size);
+
+    if (state.textOption == ShareTextOption.none) {
+      return shapeWidget;
+    }
+
+    String textStr = '';
+    if (state.textOption == ShareTextOption.hex) {
+      textStr =
+          '#${(color.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+    } else if (state.textOption == ShareTextOption.rgba) {
+      textStr =
+          'rgba(${(color.r * 255).round()}, ${(color.g * 255).round()}, ${(color.b * 255).round()}, ${color.a.toStringAsFixed(1)})';
+    }
+
+    final textColor = state.textColor ?? Colors.white;
+    final textStyle = TextStyle(
+      color: textColor,
+      fontSize: 8 + state.textSize * 16,
+      fontWeight: state.isTextBold ? FontWeight.bold : FontWeight.normal,
+      fontStyle: state.isTextItalic ? FontStyle.italic : FontStyle.normal,
+      decoration: state.isTextUnderline
+          ? TextDecoration.underline
+          : TextDecoration.none,
+      decorationColor: textColor,
+    );
+
+    final textWidget = Text(textStr, style: textStyle);
+
+    switch (state.textPosition) {
+      case ShareTextPosition.top:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [textWidget, const SizedBox(height: 4), shapeWidget],
+        );
+      case ShareTextPosition.bottom:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [shapeWidget, const SizedBox(height: 4), textWidget],
+        );
+      case ShareTextPosition.left:
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [textWidget, const SizedBox(width: 4), shapeWidget],
+        );
+      case ShareTextPosition.right:
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [shapeWidget, const SizedBox(width: 4), textWidget],
+        );
+      case ShareTextPosition.inside:
+        final brightness = ThemeData.estimateBrightnessForColor(color);
+        final insideTextColor =
+            state.textColor ??
+            (brightness == Brightness.dark ? Colors.white : Colors.black);
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            shapeWidget,
+            SizedBox(
+              width: size * 0.9,
+              child: Text(
+                textStr,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: textStyle.copyWith(
+                  color: insideTextColor,
+                  decorationColor: insideTextColor,
+                ),
+              ),
+            ),
+          ],
+        );
+    }
   }
 
   Widget _buildShapeWidget(PaletteShape shape, Color color, double size) {

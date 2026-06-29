@@ -1968,6 +1968,46 @@ class S {
       args: [],
     );
   }
+
+  /// `None`
+  String get textOptionNone {
+    return Intl.message('None', name: 'textOptionNone', desc: '', args: []);
+  }
+
+  /// `Top`
+  String get textPositionTop {
+    return Intl.message('Top', name: 'textPositionTop', desc: '', args: []);
+  }
+
+  /// `Bottom`
+  String get textPositionBottom {
+    return Intl.message(
+      'Bottom',
+      name: 'textPositionBottom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Left`
+  String get textPositionLeft {
+    return Intl.message('Left', name: 'textPositionLeft', desc: '', args: []);
+  }
+
+  /// `Right`
+  String get textPositionRight {
+    return Intl.message('Right', name: 'textPositionRight', desc: '', args: []);
+  }
+
+  /// `Inside`
+  String get textPositionInside {
+    return Intl.message(
+      'Inside',
+      name: 'textPositionInside',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

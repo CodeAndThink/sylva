@@ -495,5 +495,17 @@
   "tutorialShareDesc": "分享图片和颜色信息给朋友",
   "@tutorialShareDesc": {},
   "noImageToShare": "没有图片可分享",
-  "@noImageToShare": {}
+  "@noImageToShare": {},
+  "textOptionNone": "无",
+  "@textOptionNone": {},
+  "textPositionTop": "上",
+  "@textPositionTop": {},
+  "textPositionBottom": "下",
+  "@textPositionBottom": {},
+  "textPositionLeft": "左",
+  "@textPositionLeft": {},
+  "textPositionRight": "右",
+  "@textPositionRight": {},
+  "textPositionInside": "内部",
+  "@textPositionInside": {}
 }

@@ -21,3 +21,7 @@ enum PaletteShape {
   card,
   roundedSquare,
 }
+
+enum ShareTextOption { none, hex, rgba }
+
+enum ShareTextPosition { top, bottom, left, right, inside }

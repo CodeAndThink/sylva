@@ -338,6 +338,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Align text"),
+    "textOptionNone": MessageLookupByLibrary.simpleMessage("None"),
+    "textPositionBottom": MessageLookupByLibrary.simpleMessage("Bottom"),
+    "textPositionInside": MessageLookupByLibrary.simpleMessage("Inside"),
+    "textPositionLeft": MessageLookupByLibrary.simpleMessage("Left"),
+    "textPositionRight": MessageLookupByLibrary.simpleMessage("Right"),
+    "textPositionTop": MessageLookupByLibrary.simpleMessage("Top"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage(
       "Thanks & Reference",
     ),

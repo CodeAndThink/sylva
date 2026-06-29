@@ -501,5 +501,17 @@
   "tutorialShareDesc": "Share photos with color information with your friends",
   "@tutorialShareDesc": {},
   "noImageToShare": "No image to share",
-  "@noImageToShare": {}
+  "@noImageToShare": {},
+  "textOptionNone": "None",
+  "@textOptionNone": {},
+  "textPositionTop": "Top",
+  "@textPositionTop": {},
+  "textPositionBottom": "Bottom",
+  "@textPositionBottom": {},
+  "textPositionLeft": "Left",
+  "@textPositionLeft": {},
+  "textPositionRight": "Right",
+  "@textPositionRight": {},
+  "textPositionInside": "Inside",
+  "@textPositionInside": {}
 }

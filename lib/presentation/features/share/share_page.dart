@@ -157,6 +157,15 @@ class __ShareChildPageState extends State<_ShareChildPage> {
       position: state.selectedPosition,
       direction: state.selectedDirection,
       colors: state.selectedColors.toList(),
+      shapeSize: state.shapeSize,
+      shapeSpacing: state.shapeSpacing,
+      textOption: state.textOption,
+      textPosition: state.textPosition,
+      textSize: state.textSize,
+      isTextBold: state.isTextBold,
+      isTextItalic: state.isTextItalic,
+      isTextUnderline: state.isTextUnderline,
+      textColor: state.textColor,
     );
 
     if (mounted) Navigator.pop(context);
@@ -188,6 +197,15 @@ class __ShareChildPageState extends State<_ShareChildPage> {
       position: state.selectedPosition,
       direction: state.selectedDirection,
       colors: state.selectedColors.toList(),
+      shapeSize: state.shapeSize,
+      shapeSpacing: state.shapeSpacing,
+      textOption: state.textOption,
+      textPosition: state.textPosition,
+      textSize: state.textSize,
+      isTextBold: state.isTextBold,
+      isTextItalic: state.isTextItalic,
+      isTextUnderline: state.isTextUnderline,
+      textColor: state.textColor,
     );
 
     if (mounted) Navigator.pop(context);

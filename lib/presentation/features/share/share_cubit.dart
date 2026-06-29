@@ -37,4 +37,40 @@ class ShareCubit extends BaseCubit<ShareState> {
   void selectDirection(PaletteDirection direction) {
     emit(state.copyWith(selectedDirection: direction));
   }
+
+  void changeShapeSize(double size) {
+    emit(state.copyWith(shapeSize: size));
+  }
+
+  void changeShapeSpacing(double spacing) {
+    emit(state.copyWith(shapeSpacing: spacing));
+  }
+
+  void changeTextOption(ShareTextOption option) {
+    emit(state.copyWith(textOption: option));
+  }
+
+  void changeTextPosition(ShareTextPosition position) {
+    emit(state.copyWith(textPosition: position));
+  }
+
+  void changeTextSize(double size) {
+    emit(state.copyWith(textSize: size));
+  }
+
+  void toggleTextBold() {
+    emit(state.copyWith(isTextBold: !state.isTextBold));
+  }
+
+  void toggleTextItalic() {
+    emit(state.copyWith(isTextItalic: !state.isTextItalic));
+  }
+
+  void toggleTextUnderline() {
+    emit(state.copyWith(isTextUnderline: !state.isTextUnderline));
+  }
+
+  void changeTextColor(Color? color) {
+    emit(state.copyWith(textColor: color, clearTextColor: color == null));
+  }
 }

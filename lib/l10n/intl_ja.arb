@@ -495,5 +495,17 @@
   "tutorialShareDesc": "画像とカラー情報を友達と共有する",
   "@tutorialShareDesc": {},
   "noImageToShare": "共有する画像がありません",
-  "@noImageToShare": {}
+  "@noImageToShare": {},
+  "textOptionNone": "なし",
+  "@textOptionNone": {},
+  "textPositionTop": "上",
+  "@textPositionTop": {},
+  "textPositionBottom": "下",
+  "@textPositionBottom": {},
+  "textPositionLeft": "左",
+  "@textPositionLeft": {},
+  "textPositionRight": "右",
+  "@textPositionRight": {},
+  "textPositionInside": "内側",
+  "@textPositionInside": {}
 }

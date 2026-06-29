@@ -345,6 +345,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "text": MessageLookupByLibrary.simpleMessage("Văn bản"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Căn lề chữ"),
+    "textOptionNone": MessageLookupByLibrary.simpleMessage("Không"),
+    "textPositionBottom": MessageLookupByLibrary.simpleMessage("Dưới"),
+    "textPositionInside": MessageLookupByLibrary.simpleMessage("Bên trong"),
+    "textPositionLeft": MessageLookupByLibrary.simpleMessage("Trái"),
+    "textPositionRight": MessageLookupByLibrary.simpleMessage("Phải"),
+    "textPositionTop": MessageLookupByLibrary.simpleMessage("Trên"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage(
       "Cảm ơn & Tài liệu tham khảo",
     ),

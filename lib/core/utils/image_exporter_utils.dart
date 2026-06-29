@@ -11,6 +11,15 @@ class ImageExporterUtils {
     required PalettePosition position,
     required PaletteDirection direction,
     required List<Color> colors,
+    required double shapeSize,
+    required double shapeSpacing,
+    required ShareTextOption textOption,
+    required ShareTextPosition textPosition,
+    required double textSize,
+    required bool isTextBold,
+    required bool isTextItalic,
+    required bool isTextUnderline,
+    Color? textColor,
   }) async {
     try {
       // 1. Load image
@@ -32,7 +41,24 @@ class ImageExporterUtils {
       canvas.drawImage(image, Offset.zero, paint);
 
       if (shape != PaletteShape.none) {
-        _drawOverlay(canvas, width, height, shape, position, direction, colors);
+        _drawOverlay(
+          canvas,
+          width,
+          height,
+          shape,
+          position,
+          direction,
+          colors,
+          shapeSize,
+          shapeSpacing,
+          textOption,
+          textPosition,
+          textSize,
+          isTextBold,
+          isTextItalic,
+          isTextUnderline,
+          textColor,
+        );
       }
 
       // 3. Export
@@ -66,6 +92,15 @@ class ImageExporterUtils {
     PalettePosition position,
     PaletteDirection direction,
     List<Color> colors,
+    double shapeSizeState,
+    double shapeSpacingState,
+    ShareTextOption textOption,
+    ShareTextPosition textPosition,
+    double textSizeState,
+    bool isTextBold,
+    bool isTextItalic,
+    bool isTextUnderline,
+    Color? textColorState,
   ) {
     if (colors.isEmpty) {
       colors = [Colors.white, Colors.white, Colors.white];
@@ -76,21 +111,60 @@ class ImageExporterUtils {
       colors.length > 2 ? colors[2 % colors.length] : colors[0],
     ];
 
-    // Determine scale based on image size. E.g., 20% of image width.
-    final boxSize = imageWidth * 0.2;
+    // Determine scale based on image size and selected size.
+    final boxSize = imageWidth * shapeSizeState;
 
     // Draw background container
     final isVertical = direction == PaletteDirection.vertical;
     final padding = boxSize * 0.2;
-    final spacing = boxSize * 0.2;
+    final spacing = boxSize * shapeSpacingState;
     final shapeSize = boxSize - padding * 2;
 
+    // Calculate text dimensions if text is enabled
+    double textHeight = 0;
+    double textWidth = 0;
+    ui.Paragraph? sampleParagraph;
+    if (textOption != ShareTextOption.none) {
+      final actualFontSize = shapeSize * (0.08 + textSizeState * 0.16);
+      ui.TextStyle textStyle = ui.TextStyle(
+        color: Colors.white,
+        fontSize: actualFontSize,
+        fontWeight: isTextBold ? FontWeight.bold : FontWeight.normal,
+        fontStyle: isTextItalic ? FontStyle.italic : FontStyle.normal,
+        decoration: isTextUnderline
+            ? TextDecoration.underline
+            : TextDecoration.none,
+      );
+      final paragraphStyle = ui.ParagraphStyle(textAlign: TextAlign.center);
+      final paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
+        ..pushStyle(textStyle)
+        ..addText('#FFFFFF'); // dummy text for measurement
+      sampleParagraph = paragraphBuilder.build()
+        ..layout(ui.ParagraphConstraints(width: double.infinity));
+      textHeight = sampleParagraph.height;
+      textWidth = sampleParagraph.maxIntrinsicWidth;
+    }
+
+    double blockWidth = shapeSize;
+    double blockHeight = shapeSize;
+    if (textOption != ShareTextOption.none) {
+      if (textPosition == ShareTextPosition.top ||
+          textPosition == ShareTextPosition.bottom) {
+        blockHeight = shapeSize + textHeight + 4;
+        blockWidth = shapeSize > textWidth ? shapeSize : textWidth;
+      } else if (textPosition == ShareTextPosition.left ||
+          textPosition == ShareTextPosition.right) {
+        blockWidth = shapeSize + textWidth + 4;
+        blockHeight = shapeSize > textHeight ? shapeSize : textHeight;
+      }
+    }
+
     final containerWidth = isVertical
-        ? boxSize
-        : (boxSize * 3 + spacing * 2 - padding * 4);
+        ? (blockWidth + padding * 2)
+        : (blockWidth * 3 + spacing * 2 + padding * 2);
     final containerHeight = isVertical
-        ? (boxSize * 3 + spacing * 2 - padding * 4)
-        : boxSize;
+        ? (blockHeight * 3 + spacing * 2 + padding * 2)
+        : (blockHeight + padding * 2);
 
     // Position
     double dx = 0;
@@ -151,9 +225,145 @@ class ImageExporterUtils {
 
     // Draw shapes
     for (int i = 0; i < 3; i++) {
-      final sDx = dx + padding + (isVertical ? 0 : i * (shapeSize + spacing));
-      final sDy = dy + padding + (isVertical ? i * (shapeSize + spacing) : 0);
-      _drawShape(canvas, sDx, sDy, shapeSize, shape, colorsToDraw[i]);
+      final sDx =
+          dx +
+          padding +
+          (isVertical
+              ? (blockWidth - shapeSize) / 2
+              : i * (blockWidth + spacing) + (blockWidth - shapeSize) / 2);
+      final sDy =
+          dy +
+          padding +
+          (isVertical
+              ? i * (blockHeight + spacing) + (blockHeight - shapeSize) / 2
+              : (blockHeight - shapeSize) / 2);
+      _drawShapeWithText(
+        canvas,
+        sDx,
+        sDy,
+        shapeSize,
+        shape,
+        colorsToDraw[i],
+        textOption,
+        textPosition,
+        textSizeState,
+        isTextBold,
+        isTextItalic,
+        isTextUnderline,
+        textColorState,
+      );
+    }
+  }
+
+  static void _drawShapeWithText(
+    Canvas canvas,
+    double x,
+    double y,
+    double size,
+    PaletteShape shape,
+    Color color,
+    ShareTextOption textOption,
+    ShareTextPosition textPosition,
+    double textSizeState,
+    bool isTextBold,
+    bool isTextItalic,
+    bool isTextUnderline,
+    Color? textColorState,
+  ) {
+    if (textOption == ShareTextOption.none) {
+      _drawShape(canvas, x, y, size, shape, color);
+      return;
+    }
+
+    String textStr = '';
+    if (textOption == ShareTextOption.hex) {
+      textStr =
+          '#${(color.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+    } else if (textOption == ShareTextOption.rgba) {
+      textStr =
+          'rgba(${(color.r * 255).round()}, ${(color.g * 255).round()}, ${(color.b * 255).round()}, ${color.a.toStringAsFixed(1)})';
+    }
+
+    // Let's use proportional font size based on the shape size.
+    final actualFontSize = size * (0.08 + textSizeState * 0.16);
+
+    final textColor = textColorState ?? Colors.white;
+
+    ui.TextStyle textStyle = ui.TextStyle(
+      color: textColor,
+      fontSize: actualFontSize,
+      fontWeight: isTextBold ? FontWeight.bold : FontWeight.normal,
+      fontStyle: isTextItalic ? FontStyle.italic : FontStyle.normal,
+      decoration: isTextUnderline
+          ? TextDecoration.underline
+          : TextDecoration.none,
+      decorationColor: textColor,
+    );
+
+    final paragraphStyle = ui.ParagraphStyle(textAlign: TextAlign.center);
+    final paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
+      ..pushStyle(textStyle)
+      ..addText(textStr);
+    final paragraph = paragraphBuilder.build()
+      ..layout(ui.ParagraphConstraints(width: double.infinity));
+
+    double textDx = x;
+    double textDy = y;
+
+    if (textPosition == ShareTextPosition.top) {
+      textDx = x + (size - paragraph.maxIntrinsicWidth) / 2;
+      textDy = y - paragraph.height - 4;
+      canvas.drawParagraph(paragraph, Offset(textDx, textDy));
+      _drawShape(canvas, x, y, size, shape, color);
+    } else if (textPosition == ShareTextPosition.bottom) {
+      textDx = x + (size - paragraph.maxIntrinsicWidth) / 2;
+      textDy = y + size + 4;
+      _drawShape(canvas, x, y, size, shape, color);
+      canvas.drawParagraph(paragraph, Offset(textDx, textDy));
+    } else if (textPosition == ShareTextPosition.left) {
+      textDx = x - paragraph.maxIntrinsicWidth - 4;
+      textDy = y + (size - paragraph.height) / 2;
+      canvas.drawParagraph(paragraph, Offset(textDx, textDy));
+      _drawShape(canvas, x, y, size, shape, color);
+    } else if (textPosition == ShareTextPosition.right) {
+      textDx = x + size + 4;
+      textDy = y + (size - paragraph.height) / 2;
+      _drawShape(canvas, x, y, size, shape, color);
+      canvas.drawParagraph(paragraph, Offset(textDx, textDy));
+    } else if (textPosition == ShareTextPosition.inside) {
+      _drawShape(canvas, x, y, size, shape, color);
+      final brightness = ThemeData.estimateBrightnessForColor(color);
+      final insideTextColor =
+          textColorState ??
+          (brightness == Brightness.dark ? Colors.white : Colors.black);
+
+      final insideTextStyle = ui.TextStyle(
+        color: insideTextColor,
+        fontSize: actualFontSize,
+        fontWeight: isTextBold ? FontWeight.bold : FontWeight.normal,
+        fontStyle: isTextItalic ? FontStyle.italic : FontStyle.normal,
+        decoration: isTextUnderline
+            ? TextDecoration.underline
+            : TextDecoration.none,
+        decorationColor: insideTextColor,
+      );
+
+      final insideParagraphStyle = ui.ParagraphStyle(
+        textAlign: TextAlign.center,
+        maxLines: 1,
+        ellipsis: '...',
+      );
+
+      final pb = ui.ParagraphBuilder(insideParagraphStyle)
+        ..pushStyle(insideTextStyle)
+        ..addText(textStr);
+
+      final maxWidth = size * 0.9;
+      final p = pb.build()..layout(ui.ParagraphConstraints(width: maxWidth));
+
+      textDx = x + (size - p.width) / 2;
+      textDy = y + (size - p.height) / 2;
+      canvas.drawParagraph(p, Offset(textDx, textDy));
     }
   }
 

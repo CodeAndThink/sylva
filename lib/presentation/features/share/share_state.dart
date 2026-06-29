@@ -7,12 +7,14 @@ enum ShareFeatureTab {
   focus,
   shapes,
   colors,
-  direction;
+  direction,
+  text;
 
   bool get isFocus => this == ShareFeatureTab.focus;
   bool get isShapes => this == ShareFeatureTab.shapes;
   bool get isColors => this == ShareFeatureTab.colors;
   bool get isDirection => this == ShareFeatureTab.direction;
+  bool get isText => this == ShareFeatureTab.text;
 }
 
 class ShareState extends Equatable {
@@ -21,6 +23,16 @@ class ShareState extends Equatable {
   final PaletteShape selectedShape;
   final PalettePosition selectedPosition;
   final PaletteDirection selectedDirection;
+  final double shapeSize;
+  final double shapeSpacing;
+
+  final ShareTextOption textOption;
+  final ShareTextPosition textPosition;
+  final double textSize;
+  final bool isTextBold;
+  final bool isTextItalic;
+  final bool isTextUnderline;
+  final Color? textColor;
 
   const ShareState({
     this.selectedColors = const {},
@@ -28,6 +40,15 @@ class ShareState extends Equatable {
     this.selectedShape = PaletteShape.none,
     this.selectedPosition = PalettePosition.center,
     this.selectedDirection = PaletteDirection.vertical,
+    this.shapeSize = 0.2,
+    this.shapeSpacing = 0.2,
+    this.textOption = ShareTextOption.none,
+    this.textPosition = ShareTextPosition.bottom,
+    this.textSize = 0.5,
+    this.isTextBold = false,
+    this.isTextItalic = false,
+    this.isTextUnderline = false,
+    this.textColor,
   });
 
   ShareState copyWith({
@@ -36,6 +57,16 @@ class ShareState extends Equatable {
     PaletteShape? selectedShape,
     PalettePosition? selectedPosition,
     PaletteDirection? selectedDirection,
+    double? shapeSize,
+    double? shapeSpacing,
+    ShareTextOption? textOption,
+    ShareTextPosition? textPosition,
+    double? textSize,
+    bool? isTextBold,
+    bool? isTextItalic,
+    bool? isTextUnderline,
+    Color? textColor,
+    bool clearTextColor = false,
   }) {
     return ShareState(
       selectedColors: selectedColors ?? this.selectedColors,
@@ -43,6 +74,15 @@ class ShareState extends Equatable {
       selectedShape: selectedShape ?? this.selectedShape,
       selectedPosition: selectedPosition ?? this.selectedPosition,
       selectedDirection: selectedDirection ?? this.selectedDirection,
+      shapeSize: shapeSize ?? this.shapeSize,
+      shapeSpacing: shapeSpacing ?? this.shapeSpacing,
+      textOption: textOption ?? this.textOption,
+      textPosition: textPosition ?? this.textPosition,
+      textSize: textSize ?? this.textSize,
+      isTextBold: isTextBold ?? this.isTextBold,
+      isTextItalic: isTextItalic ?? this.isTextItalic,
+      isTextUnderline: isTextUnderline ?? this.isTextUnderline,
+      textColor: clearTextColor ? null : (textColor ?? this.textColor),
     );
   }
 
@@ -53,5 +93,14 @@ class ShareState extends Equatable {
     selectedShape,
     selectedPosition,
     selectedDirection,
+    shapeSize,
+    shapeSpacing,
+    textOption,
+    textPosition,
+    textSize,
+    isTextBold,
+    isTextItalic,
+    isTextUnderline,
+    textColor,
   ];
 }

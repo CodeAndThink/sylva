@@ -39,7 +39,7 @@ class TemplateListItem extends StatelessWidget {
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(
                         context,
-                      ).colorScheme.primaryContainer.withValues(alpha: 0.8),
+                      ).colorScheme.primary.withValues(alpha: 0.8),
                 borderRadius: 10.borderRadius,
                 // border: Border.all(
                 //   color: theme.colorScheme.onSurface,

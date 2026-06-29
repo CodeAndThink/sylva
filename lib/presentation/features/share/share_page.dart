@@ -5,13 +5,17 @@ import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/data/models/process_image_model.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/widgets/share_colors_tab.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:photo_manager/photo_manager.dart';
+import 'package:sylva/core/utils/image_exporter_utils.dart';
 import 'package:sylva/presentation/features/share/widgets/share_shapes_tab.dart';
 import 'package:sylva/presentation/features/share/widgets/share_focus_tab.dart';
+import 'package:sylva/presentation/features/share/widgets/share_direction_tab.dart';
+import 'package:sylva/presentation/features/share/widgets/share_image_preview.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
-import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
 class SharePage extends StatelessWidget {
@@ -61,12 +65,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
         child: Column(
           children: [
             Expanded(
-              child: Center(
-                child: AppFileImage(
-                  path: widget.args.imagePath,
-                  fit: BoxFit.contain,
-                ),
-              ),
+              child: ShareImagePreview(imagePath: widget.args.imagePath),
             ),
             12.height,
             _buildTemplateList(),
@@ -100,6 +99,8 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                     return const ShareFocusTab();
                   case ShareFeatureTab.shapes:
                     return const ShareShapesTab();
+                  case ShareFeatureTab.direction:
+                    return const ShareDirectionTab();
                   case ShareFeatureTab.colors:
                     return ShareColorsTab(colors: widget.args.colors);
                 }
@@ -130,6 +131,12 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                 icon: Icons.center_focus_strong,
                 isSelected: currentTab.isFocus,
                 onTap: () => _cubit.changeTab(ShareFeatureTab.focus),
+                primaryColor: primaryColor,
+              ),
+              _buildFeatureButton(
+                icon: Icons.screen_rotation_outlined,
+                isSelected: currentTab.isDirection,
+                onTap: () => _cubit.changeTab(ShareFeatureTab.direction),
                 primaryColor: primaryColor,
               ),
               _buildFeatureButton(
@@ -197,20 +204,22 @@ class __ShareChildPageState extends State<_ShareChildPage> {
             message: _l10n.saveToLibrary,
             child: IconButton(
               key: _keyLibrary,
-              onPressed: () {
+              onPressed: () async {
                 AppFeedback.playInteract(context);
+                await _exportAndSave();
               },
-              icon: Icon(Icons.download_rounded, size: 30),
+              icon: const Icon(Icons.download_rounded, size: 30),
             ),
           ),
           Tooltip(
             message: _l10n.tutorialShareTitle,
             child: IconButton(
               key: _keyShare,
-              onPressed: () {
+              onPressed: () async {
                 AppFeedback.playInteract(context);
+                await _exportAndShare();
               },
-              icon: Icon(Icons.share_rounded, size: 25),
+              icon: const Icon(Icons.share_rounded, size: 25),
             ),
           ),
           Tooltip(
@@ -225,5 +234,59 @@ class __ShareChildPageState extends State<_ShareChildPage> {
         ],
       ),
     );
+  }
+
+  Future<void> _exportAndSave() async {
+    final state = _cubit.state;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (c) => const Center(child: CircularProgressIndicator()),
+    );
+
+    final file = await ImageExporterUtils.exportImageWithOverlay(
+      imagePath: widget.args.imagePath,
+      shape: state.selectedShape,
+      position: state.selectedPosition,
+      direction: state.selectedDirection,
+      colors: state.selectedColors.toList(),
+    );
+
+    if (mounted) Navigator.pop(context);
+
+    if (file != null) {
+      await PhotoManager.editor.saveImageWithPath(
+        file.path,
+        title: 'sylva_export.png',
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(_l10n.success)));
+      }
+    }
+  }
+
+  Future<void> _exportAndShare() async {
+    final state = _cubit.state;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (c) => const Center(child: CircularProgressIndicator()),
+    );
+
+    final file = await ImageExporterUtils.exportImageWithOverlay(
+      imagePath: widget.args.imagePath,
+      shape: state.selectedShape,
+      position: state.selectedPosition,
+      direction: state.selectedDirection,
+      colors: state.selectedColors.toList(),
+    );
+
+    if (mounted) Navigator.pop(context);
+
+    if (file != null) {
+      await Share.shareXFiles([XFile(file.path)]);
+    }
   }
 }

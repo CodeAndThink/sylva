@@ -107,16 +107,7 @@ class ShareImagePreview extends StatelessWidget {
                     ),
                   );
 
-            return Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Theme.of(
-                  context,
-                ).colorScheme.primaryContainer.withValues(alpha: 0.8),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: list,
-            );
+            return list;
           },
         ),
       ),
@@ -135,14 +126,11 @@ class ShareImagePreview extends StatelessWidget {
     // We only display up to 3 colors for simplicity or loop through all selected colors.
     // The TemplateListItem shows 3. If we dynamically build it here based on selected colors:
     final List<Widget> children = [];
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < colors.length; i++) {
       final color = colors.isNotEmpty
           ? colors[i % colors.length]
           : Colors.white;
       children.add(_buildShapeWidget(shape, color, size));
-      if (i < 2) {
-        children.add(const SizedBox(width: 8, height: 8)); // spacing
-      }
     }
     return children;
   }

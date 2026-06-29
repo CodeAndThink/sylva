@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
-import 'package:sylva/data/models/process_image_model.dart';
-import 'package:sylva/generated/l10n.dart';
-import 'package:sylva/presentation/features/share/widgets/share_colors_tab.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:sylva/core/utils/image_exporter_utils.dart';
-import 'package:sylva/presentation/features/share/widgets/share_shapes_tab.dart';
-import 'package:sylva/presentation/features/share/widgets/share_focus_tab.dart';
-import 'package:sylva/presentation/features/share/widgets/share_direction_tab.dart';
+import 'package:sylva/data/models/process_image_model.dart';
+import 'package:sylva/generated/l10n.dart';
+import 'package:sylva/presentation/features/share/widgets/share_edit_bottom_sheet.dart';
 import 'package:sylva/presentation/features/share/widgets/share_image_preview.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
-import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
@@ -68,115 +64,8 @@ class __ShareChildPageState extends State<_ShareChildPage> {
               child: ShareImagePreview(imagePath: widget.args.imagePath),
             ),
             12.height,
-            _buildTemplateList(),
-            8.height,
             _buildBottomActions(),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTemplateList() {
-    return SizedBox(
-      height: 100,
-      width: double.maxFinite,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildFeatureActions(),
-          5.height,
-          SizedBox(
-            height: 55,
-            child: BlocBuilder<ShareCubit, ShareState>(
-              buildWhen: (previous, current) {
-                return previous.currentTab != current.currentTab ||
-                    previous.selectedColors != current.selectedColors;
-              },
-              builder: (context, state) {
-                switch (state.currentTab) {
-                  case ShareFeatureTab.focus:
-                    return const ShareFocusTab();
-                  case ShareFeatureTab.shapes:
-                    return const ShareShapesTab();
-                  case ShareFeatureTab.direction:
-                    return const ShareDirectionTab();
-                  case ShareFeatureTab.colors:
-                    return ShareColorsTab(colors: widget.args.colors);
-                }
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFeatureActions() {
-    return BlocBuilder<ShareCubit, ShareState>(
-      buildWhen: (previous, current) =>
-          previous.currentTab != current.currentTab,
-      builder: (context, state) {
-        final currentTab = state.currentTab;
-        final primaryColor = Theme.of(context).colorScheme.primary;
-
-        return SizedBox(
-          width: double.maxFinite,
-          height: 40,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            spacing: 8,
-            children: [
-              _buildFeatureButton(
-                icon: Icons.center_focus_strong,
-                isSelected: currentTab.isFocus,
-                onTap: () => _cubit.changeTab(ShareFeatureTab.focus),
-                primaryColor: primaryColor,
-              ),
-              _buildFeatureButton(
-                icon: Icons.screen_rotation_outlined,
-                isSelected: currentTab.isDirection,
-                onTap: () => _cubit.changeTab(ShareFeatureTab.direction),
-                primaryColor: primaryColor,
-              ),
-              _buildFeatureButton(
-                icon: Icons.shape_line_outlined,
-                isSelected: currentTab.isShapes,
-                onTap: () => _cubit.changeTab(ShareFeatureTab.shapes),
-                primaryColor: primaryColor,
-              ),
-              _buildFeatureButton(
-                icon: Icons.color_lens_outlined,
-                isSelected: currentTab.isColors,
-                onTap: () => _cubit.changeTab(ShareFeatureTab.colors),
-                primaryColor: primaryColor,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildFeatureButton({
-    required IconData icon,
-    required bool isSelected,
-    required VoidCallback onTap,
-    required Color primaryColor,
-  }) {
-    return Tooltip(
-      message: _l10n.fullScreen,
-      child: Material(
-        color: isSelected ? primaryColor : Colors.black54,
-        shape: const CircleBorder(),
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: onTap,
-          child: SizedBox(
-            height: 38,
-            width: 38,
-            child: Icon(icon, size: 24, color: Colors.white),
-          ),
         ),
       ),
     );
@@ -198,6 +87,24 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                 _cubit.navigator.safePop();
               },
               icon: const Icon(Icons.navigate_before_rounded, size: 36),
+            ),
+          ),
+          Tooltip(
+            message: _l10n.tutorialShareTitle, // fallback
+            child: IconButton(
+              onPressed: () {
+                AppFeedback.playInteract(context);
+                showModalBottomSheet(
+                  context: context,
+                  showDragHandle: true,
+                  isScrollControlled: true,
+                  builder: (context) => BlocProvider.value(
+                    value: _cubit,
+                    child: ShareEditBottomSheet(colors: widget.args.colors),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.tune_rounded, size: 30),
             ),
           ),
           Tooltip(

@@ -69,6 +69,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     Offset.zero,
   );
   late ThemeData _theme;
+  late S _l10n;
   final GlobalKey _imageKey = GlobalKey();
   final GlobalKey _keyPalette = GlobalKey();
   final GlobalKey _keyExpandPalette = GlobalKey();
@@ -197,6 +198,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
+    _l10n = S.of(context);
     return AppScaffold(showAppBar: false, body: _buildBody());
   }
 
@@ -374,9 +376,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       valueListenable: _isZoomMode,
       builder: (context, isZoomMode, child) {
         return Tooltip(
-          message: isZoomMode
-              ? S.of(context).colorPickMode
-              : S.of(context).zoomMode,
+          message: isZoomMode ? _l10n.colorPickMode : _l10n.zoomMode,
           child: Material(
             color: Colors.black54,
             shape: const CircleBorder(),
@@ -417,7 +417,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             bottom: 88,
             right: 4,
             child: Tooltip(
-              message: S.of(context).cancel,
+              message: _l10n.cancel,
               child: IconButton(
                 color: Colors.red,
                 onPressed: () {
@@ -445,7 +445,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Tooltip(
-                    message: S.of(context).saveColor,
+                    message: _l10n.saveColor,
                     child: IconButton(
                       color: Colors.green,
                       onPressed: () {
@@ -466,7 +466,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     ),
                   ),
                   Tooltip(
-                    message: S.of(context).cancel,
+                    message: _l10n.cancel,
                     child: IconButton(
                       color: Colors.red,
                       onPressed: () {
@@ -489,7 +489,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildFullScreenButton() {
     return Tooltip(
       key: _keyFullScreen,
-      message: S.of(context).fullScreen,
+      message: _l10n.fullScreen,
       child: Material(
         color: Colors.black54,
         shape: const CircleBorder(),
@@ -535,7 +535,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             key: const ValueKey('failure'),
             padding: 8.paddingAll,
             child: Text(
-              S.of(context).failedToLoadColors,
+              _l10n.failedToLoadColors,
               style: _theme.textTheme.bodyMedium?.copyWith(color: Colors.red),
             ),
           );
@@ -553,7 +553,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       // Page 1: Auto-detected colors
                       Column(
                         children: [
-                          AppTitleText(title: S.of(context).autoDetectColors),
+                          AppTitleText(title: _l10n.autoDetectColors),
                           SizedBox(
                             height: 80,
                             child: ListView.separated(
@@ -587,13 +587,13 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          AppTitleText(title: S.of(context).myColors),
+                          AppTitleText(title: _l10n.myColors),
                           SizedBox(
                             height: 80,
                             child: state.userColors.isEmpty
                                 ? Center(
                                     child: Text(
-                                      S.of(context).useMagnifierToPickColors,
+                                      _l10n.useMagnifierToPickColors,
                                       style: _theme.textTheme.bodyMedium
                                           ?.copyWith(
                                             color: _theme.colorScheme.onSurface
@@ -953,17 +953,18 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Tooltip(
-          message: S.of(context).back,
+          message: _l10n.back,
           child: IconButton(
             key: _keyBack,
             onPressed: () {
+              AppFeedback.playInteract(context);
               _cubit.navigator.safePop();
             },
             icon: const Icon(Icons.navigate_before_rounded, size: 36),
           ),
         ),
         Tooltip(
-          message: S.of(context).save,
+          message: _l10n.save,
           child: IconButton(
             key: _keySave,
             onPressed: () async {
@@ -987,7 +988,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           ),
         ),
         Tooltip(
-          message: S.of(context).saveToLibrary,
+          message: _l10n.saveToLibrary,
           child: IconButton(
             key: _keyLibrary,
             onPressed: () {
@@ -998,7 +999,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           ),
         ),
         Tooltip(
-          message: S.of(context).tutorialShareTitle,
+          message: _l10n.tutorialShareTitle,
           child: IconButton(
             key: _keyShare,
             onPressed: () {
@@ -1009,9 +1010,12 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           ),
         ),
         Tooltip(
-          message: S.of(context).help,
+          message: _l10n.help,
           child: IconButton(
-            onPressed: _showTutorial,
+            onPressed: () {
+              AppFeedback.playInteract(context);
+              _showTutorial();
+            },
             icon: Icon(Icons.help_outline_outlined, size: 30),
           ),
         ),
@@ -1024,8 +1028,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       AppTutorialHelper.buildTarget(
         context: context,
         key: _imageKey,
-        title: S.of(context).tutorialImageTitle,
-        desc: S.of(context).tutorialImageDesc,
+        title: _l10n.tutorialImageTitle,
+        desc: _l10n.tutorialImageDesc,
         contentAlign: ContentAlign.bottom,
         shape: ShapeLightFocus.RRect,
         radius: 28,
@@ -1036,52 +1040,52 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyToggleMode,
-        title: S.of(context).tutorialToggleModeTitle,
-        desc: S.of(context).tutorialToggleModeDesc,
+        title: _l10n.tutorialToggleModeTitle,
+        desc: _l10n.tutorialToggleModeDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyFullScreen,
-        title: S.of(context).tutorialFullScreenTitle,
-        desc: S.of(context).tutorialFullScreenDesc,
+        title: _l10n.tutorialFullScreenTitle,
+        desc: _l10n.tutorialFullScreenDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyPalette,
-        title: S.of(context).tutorialPaletteTitle,
-        desc: S.of(context).tutorialPaletteDesc,
+        title: _l10n.tutorialPaletteTitle,
+        desc: _l10n.tutorialPaletteDesc,
         shape: ShapeLightFocus.RRect,
         radius: 28,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyExpandPalette,
-        title: S.of(context).tutorialExpandPaletteTitle,
-        desc: S.of(context).tutorialExpandPaletteDesc,
+        title: _l10n.tutorialExpandPaletteTitle,
+        desc: _l10n.tutorialExpandPaletteDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyBack,
-        title: S.of(context).tutorialBackTitle,
-        desc: S.of(context).tutorialBackDesc,
+        title: _l10n.tutorialBackTitle,
+        desc: _l10n.tutorialBackDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keySave,
-        title: S.of(context).tutorialSaveTitle,
-        desc: S.of(context).tutorialSaveDesc,
+        title: _l10n.tutorialSaveTitle,
+        desc: _l10n.tutorialSaveDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyLibrary,
-        title: S.of(context).tutorialLibraryTitle,
-        desc: S.of(context).tutorialLibraryDesc,
+        title: _l10n.tutorialLibraryTitle,
+        desc: _l10n.tutorialLibraryDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyShare,
-        title: S.of(context).tutorialShareTitle,
-        desc: S.of(context).tutorialShareDesc,
+        title: _l10n.tutorialShareTitle,
+        desc: _l10n.tutorialShareDesc,
       ),
     ];
   }

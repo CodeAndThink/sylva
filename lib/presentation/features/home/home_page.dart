@@ -63,6 +63,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   Timer? _centerIconTimer;
   late final HomeCubit _cubit;
   late ThemeData _theme;
+  late S _l10n;
 
   @override
   void initState() {
@@ -135,44 +136,44 @@ class __HomeChildPageState extends State<_HomeChildPage>
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keySettings,
-        title: S.of(context).tutorialSettingsTitle,
-        desc: S.of(context).tutorialSettingsDesc,
+        title: _l10n.tutorialSettingsTitle,
+        desc: _l10n.tutorialSettingsDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyFlash,
-        title: S.of(context).tutorialFlashTitle,
-        desc: S.of(context).tutorialFlashDesc,
+        title: _l10n.tutorialFlashTitle,
+        desc: _l10n.tutorialFlashDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyTimer,
-        title: S.of(context).tutorialTimerTitle,
-        desc: S.of(context).tutorialTimerDesc,
+        title: _l10n.tutorialTimerTitle,
+        desc: _l10n.tutorialTimerDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keySwitchCamera,
-        title: S.of(context).tutorialCameraTitle,
-        desc: S.of(context).tutorialCameraDesc,
+        title: _l10n.tutorialCameraTitle,
+        desc: _l10n.tutorialCameraDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyHistory,
-        title: S.of(context).tutorialHistoryTitle,
-        desc: S.of(context).tutorialHistoryDesc,
+        title: _l10n.tutorialHistoryTitle,
+        desc: _l10n.tutorialHistoryDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyCapture,
-        title: S.of(context).tutorialCaptureTitle,
-        desc: S.of(context).tutorialCaptureDesc,
+        title: _l10n.tutorialCaptureTitle,
+        desc: _l10n.tutorialCaptureDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyUpload,
-        title: S.of(context).tutorialGalleryTitle,
-        desc: S.of(context).tutorialGalleryDesc,
+        title: _l10n.tutorialGalleryTitle,
+        desc: _l10n.tutorialGalleryDesc,
       ),
     ];
   }
@@ -303,6 +304,8 @@ class __HomeChildPageState extends State<_HomeChildPage>
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
+    _l10n = S.of(context);
+
     return AppScaffold(
       showAppBar: false,
       body: SafeArea(
@@ -443,7 +446,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
             mainAxisSize: MainAxisSize.min,
             children: [
               Tooltip(
-                message: S.of(context).help,
+                message: _l10n.help,
                 child: IconButton(
                   icon: Icon(
                     Icons.help_outline_outlined,
@@ -454,7 +457,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               Tooltip(
-                message: S.of(context).settings,
+                message: _l10n.settings,
                 child: IconButton(
                   key: _keySettings,
                   icon: Icon(
@@ -468,7 +471,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 ),
               ),
               Tooltip(
-                message: S.of(context).flashMode,
+                message: _l10n.flashMode,
                 child: IconButton(
                   key: _keyFlash,
                   icon: AnimatedSwitcher(
@@ -496,7 +499,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               ),
               PopupMenuButton<int>(
                 key: _keyTimer,
-                tooltip: S.of(context).timer,
+                tooltip: _l10n.timer,
                 menuPadding: EdgeInsets.zero,
                 color: Colors.black54,
                 constraints: const BoxConstraints(minWidth: 48, maxWidth: 48),
@@ -536,7 +539,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
               ),
 
               Tooltip(
-                message: S.of(context).switchCamera,
+                message: _l10n.switchCamera,
                 child: IconButton(
                   key: _keySwitchCamera,
                   icon: Icon(
@@ -553,7 +556,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Tooltip(
-                message: S.of(context).history,
+                message: _l10n.history,
                 child: IconButton(
                   key: _keyHistory,
                   icon: Icon(

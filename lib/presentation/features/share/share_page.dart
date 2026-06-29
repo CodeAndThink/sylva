@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/utils/color_utils.dart';
+import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
@@ -39,6 +41,11 @@ class _ShareChildPage extends StatefulWidget {
 
 class __ShareChildPageState extends State<_ShareChildPage> {
   late final ShareCubit _cubit;
+  late S _l10n;
+  late ThemeData _theme;
+  final GlobalKey _keyBack = GlobalKey();
+  final GlobalKey _keyLibrary = GlobalKey();
+  final GlobalKey _keyShare = GlobalKey();
 
   @override
   void initState() {
@@ -48,6 +55,8 @@ class __ShareChildPageState extends State<_ShareChildPage> {
 
   @override
   Widget build(BuildContext context) {
+    _l10n = S.of(context);
+    _theme = Theme.of(context);
     return AppScaffold(body: _buildBody());
   }
 
@@ -59,11 +68,17 @@ class __ShareChildPageState extends State<_ShareChildPage> {
           children: [
             Expanded(
               child: AppTransparentContainer(
-                child: AppFileImage(path: widget.args.imagePath),
+                child: Center(
+                  child: AppFileImage(
+                    path: widget.args.imagePath,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
             12.height,
             _buildTemplateList(),
+            _buildBottomActions(),
           ],
         ),
       ),
@@ -89,6 +104,53 @@ class __ShareChildPageState extends State<_ShareChildPage> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildBottomActions() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Tooltip(
+          message: _l10n.back,
+          child: IconButton(
+            key: _keyBack,
+            onPressed: () {
+              AppFeedback.playInteract(context);
+            },
+            icon: const Icon(Icons.navigate_before_rounded, size: 36),
+          ),
+        ),
+        Tooltip(
+          message: _l10n.saveToLibrary,
+          child: IconButton(
+            key: _keyLibrary,
+            onPressed: () {
+              AppFeedback.playInteract(context);
+            },
+            icon: Icon(Icons.download_rounded, size: 30),
+          ),
+        ),
+        Tooltip(
+          message: _l10n.tutorialShareTitle,
+          child: IconButton(
+            key: _keyShare,
+            onPressed: () {
+              AppFeedback.playInteract(context);
+            },
+            icon: Icon(Icons.share_rounded, size: 25),
+          ),
+        ),
+        Tooltip(
+          message: _l10n.help,
+          child: IconButton(
+            onPressed: () {
+              AppFeedback.playInteract(context);
+            },
+            icon: Icon(Icons.help_outline_outlined, size: 30),
+          ),
+        ),
+      ],
     );
   }
 }

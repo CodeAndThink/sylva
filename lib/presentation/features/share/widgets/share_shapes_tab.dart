@@ -15,7 +15,6 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final shapes = PaletteShape.values
         .where((s) => s != PaletteShape.none)
         .toList();
@@ -28,31 +27,14 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
         final shape = shapes[index];
         final isSelected = _selectedShape == shape;
 
-        return InkWell(
+        return TemplateListItem(
+          shape: shape,
+          isSelected: isSelected,
           onTap: () {
             setState(() {
               _selectedShape = shape;
             });
           },
-          borderRadius: 10.borderRadius,
-          child: SizedBox(
-            width: 55,
-            height: 55,
-
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: ClipRRect(
-                    borderRadius: 10.borderRadius,
-                    child: TemplateListItem(
-                      shape: shape,
-                      isSelected: isSelected,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
         );
       },
     );

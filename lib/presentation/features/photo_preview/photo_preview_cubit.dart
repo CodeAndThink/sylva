@@ -323,7 +323,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       return;
     }
     final List<Color> colors = [...state.userColors, ...state.paletteColors];
-    navigator.navigateToTemplateList(
+    navigator.navigateToShare(
       args: ProcessImageModel(imagePath: state.imagePath!, colors: colors),
     );
   }

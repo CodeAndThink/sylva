@@ -14,7 +14,6 @@ import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page
 import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/acknowledgements_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
-import 'package:sylva/presentation/features/template_list/template_list_page.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -55,9 +54,6 @@ class AppRouter {
 
   static const String photoPreview = 'photoPreview';
   static const String photoPreviewPath = '/photoPreview';
-
-  static const String templateList = 'templateList';
-  static const String templateListPath = '/templateList';
 
   static const String share = 'share';
   static const String sharePath = '/share';
@@ -126,13 +122,6 @@ class AppRouter {
         name: photoPreview,
         builder: (context, state) {
           return PhotoPreviewPage(args: state.extra as PhotoPreviewArguments);
-        },
-      ),
-      GoRoute(
-        path: templateListPath,
-        name: templateList,
-        builder: (context, state) {
-          return TemplateListPage(args: state.extra as ProcessImageModel);
         },
       ),
       GoRoute(

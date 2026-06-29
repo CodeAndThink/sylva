@@ -5,7 +5,7 @@ import 'package:sylva/data/models/process_image_model.dart';
 class PhotoPreviewNavigator extends BaseNavigator {
   PhotoPreviewNavigator(super.context);
 
-  void navigateToTemplateList({required ProcessImageModel args}) {
-    pushNamed(AppRouter.templateList, extra: args);
+  void navigateToShare({required ProcessImageModel args}) {
+    pushNamed(AppRouter.share, extra: args);
   }
 }

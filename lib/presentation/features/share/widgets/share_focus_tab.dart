@@ -1,0 +1,103 @@
+import 'package:flutter/material.dart';
+import 'package:sylva/core/enums/template_enums.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
+
+class ShareFocusTab extends StatefulWidget {
+  const ShareFocusTab({super.key});
+
+  @override
+  State<ShareFocusTab> createState() => _ShareFocusTabState();
+}
+
+class _ShareFocusTabState extends State<ShareFocusTab> {
+  PalettePosition _selectedPosition = PalettePosition.center;
+
+  Alignment _getAlignment(PalettePosition position) {
+    switch (position) {
+      case PalettePosition.topLeft:
+        return Alignment.topLeft;
+      case PalettePosition.topCenter:
+        return Alignment.topCenter;
+      case PalettePosition.topRight:
+        return Alignment.topRight;
+      case PalettePosition.centerLeft:
+        return Alignment.centerLeft;
+      case PalettePosition.center:
+        return Alignment.center;
+      case PalettePosition.centerRight:
+        return Alignment.centerRight;
+      case PalettePosition.bottomLeft:
+        return Alignment.bottomLeft;
+      case PalettePosition.bottomCenter:
+        return Alignment.bottomCenter;
+      case PalettePosition.bottomRight:
+        return Alignment.bottomRight;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final positions = PalettePosition.values;
+
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: positions.length,
+      separatorBuilder: (context, index) => 10.width,
+      itemBuilder: (context, index) {
+        final position = positions[index];
+        final isSelected = _selectedPosition == position;
+
+        return InkWell(
+          onTap: () {
+            setState(() {
+              _selectedPosition = position;
+            });
+          },
+          borderRadius: 10.borderRadius,
+          child: Container(
+            width: 55,
+            height: 55,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surfaceContainerHighest,
+              borderRadius: 10.borderRadius,
+              border: Border.all(color: theme.colorScheme.onSurface, width: 1),
+            ),
+            child: Stack(
+              children: [
+                Align(
+                  alignment: _getAlignment(position),
+                  child: Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+                if (isSelected)
+                  Center(
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.onSurface,
+                        borderRadius: 10.borderRadius,
+                      ),
+                      child: Icon(
+                        Icons.check_rounded,
+                        color: theme.colorScheme.surface,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

@@ -18,4 +18,10 @@ class ShareCubit extends BaseCubit<ShareState> {
     }
     emit(state.copyWith(selectedColors: set));
   }
+
+  void changeTab(ShareFeatureTab tab) {
+    if (state.currentTab != tab) {
+      emit(state.copyWith(currentTab: tab));
+    }
+  }
 }

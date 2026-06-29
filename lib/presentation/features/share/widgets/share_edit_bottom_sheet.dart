@@ -16,36 +16,38 @@ class ShareEditBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: 12.paddingAll,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildFeatureActions(context),
-          16.height,
-          SizedBox(
-            height: 55,
-            child: BlocBuilder<ShareCubit, ShareState>(
-              buildWhen: (previous, current) {
-                return previous.currentTab != current.currentTab ||
-                    previous.selectedColors != current.selectedColors;
-              },
-              builder: (context, state) {
-                switch (state.currentTab) {
-                  case ShareFeatureTab.focus:
-                    return const ShareFocusTab();
-                  case ShareFeatureTab.shapes:
-                    return const ShareShapesTab();
-                  case ShareFeatureTab.direction:
-                    return const ShareDirectionTab();
-                  case ShareFeatureTab.colors:
-                    return ShareColorsTab(colors: colors);
-                }
-              },
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: 12.paddingAll,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildFeatureActions(context),
+            16.height,
+            SizedBox(
+              height: 55,
+              child: BlocBuilder<ShareCubit, ShareState>(
+                buildWhen: (previous, current) {
+                  return previous.currentTab != current.currentTab ||
+                      previous.selectedColors != current.selectedColors;
+                },
+                builder: (context, state) {
+                  switch (state.currentTab) {
+                    case ShareFeatureTab.focus:
+                      return const ShareFocusTab();
+                    case ShareFeatureTab.shapes:
+                      return const ShareShapesTab();
+                    case ShareFeatureTab.direction:
+                      return const ShareDirectionTab();
+                    case ShareFeatureTab.colors:
+                      return ShareColorsTab(colors: colors);
+                  }
+                },
+              ),
             ),
-          ),
-          SafeArea(child: 8.height),
-        ],
+          ],
+        ),
       ),
     );
   }

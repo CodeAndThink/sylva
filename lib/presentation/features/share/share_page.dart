@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:share_plus/share_plus.dart';
@@ -38,6 +39,7 @@ class _ShareChildPage extends StatefulWidget {
 class __ShareChildPageState extends State<_ShareChildPage> {
   late final ShareCubit _cubit;
   late S _l10n;
+  late ThemeData _theme;
   final GlobalKey _keyBack = GlobalKey();
   final GlobalKey _keyLibrary = GlobalKey();
   final GlobalKey _keyShare = GlobalKey();
@@ -51,6 +53,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
   @override
   Widget build(BuildContext context) {
     _l10n = S.of(context);
+    _theme = Theme.of(context);
     return AppScaffold(body: _buildBody());
   }
 
@@ -154,7 +157,12 @@ class __ShareChildPageState extends State<_ShareChildPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (c) => const Center(child: CircularProgressIndicator()),
+      builder: (c) => Center(
+        child: SpinKitRipple(
+          color: _theme.colorScheme.primary,
+          size: MediaQuery.sizeOf(context).width * 0.5,
+        ),
+      ),
     );
 
     final file = await ImageExporterUtils.exportImageWithOverlay(
@@ -174,7 +182,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
       textColor: state.textColor,
     );
 
-    if (mounted) Navigator.pop(context);
+    _cubit.navigator.safePop();
 
     if (file != null) {
       await PhotoManager.editor.saveImageWithPath(
@@ -182,9 +190,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
         title: 'sylva_export.png',
       );
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(_l10n.success)));
+        _cubit.navigator.flushBar.showSuccess(message: _l10n.success);
       }
     }
   }
@@ -194,7 +200,12 @@ class __ShareChildPageState extends State<_ShareChildPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (c) => const Center(child: CircularProgressIndicator()),
+      builder: (c) => Center(
+        child: SpinKitRipple(
+          color: _theme.colorScheme.primary,
+          size: MediaQuery.sizeOf(context).width * 0.5,
+        ),
+      ),
     );
 
     final file = await ImageExporterUtils.exportImageWithOverlay(
@@ -214,7 +225,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
       textColor: state.textColor,
     );
 
-    if (mounted) Navigator.pop(context);
+    _cubit.navigator.safePop();
 
     if (file != null) {
       await Share.shareXFiles([XFile(file.path)]);

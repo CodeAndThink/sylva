@@ -519,5 +519,7 @@
   "colorPickerSelectShade": "Select color shade",
   "@colorPickerSelectShade": {},
   "colorPickerShades": "Selected color and its shades",
-  "@colorPickerShades": {}
+  "@colorPickerShades": {},
+  "clearColor": "Clear color",
+  "@clearColor": {}
 }

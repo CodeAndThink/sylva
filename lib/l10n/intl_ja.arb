@@ -513,5 +513,7 @@
   "colorPickerSelectShade": "色の濃淡を選択",
   "@colorPickerSelectShade": {},
   "colorPickerShades": "選択した色とその濃淡",
-  "@colorPickerShades": {}
+  "@colorPickerShades": {},
+  "clearColor": "色をクリア",
+  "@clearColor": {}
 }

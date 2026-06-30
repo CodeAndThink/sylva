@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/enums/template_enums.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
@@ -92,18 +93,14 @@ class ShareEditBottomSheet extends StatelessWidget {
         final currentTab = state.currentTab;
         final cubit = context.read<ShareCubit>();
 
-        final tabs = [
-          (ShareFeatureTab.focus, Icons.center_focus_strong),
-          (ShareFeatureTab.direction, Icons.screen_rotation_outlined),
-          (ShareFeatureTab.shapes, Icons.shape_line_outlined),
-          (ShareFeatureTab.text, Icons.text_fields_outlined),
-          (ShareFeatureTab.colors, Icons.color_lens_outlined),
-        ];
+        final tabs = ShareFeatureTab.values
+            .map((tab) => (tab, Icon(tab.icon)))
+            .toList();
 
         return AppSlidingSegmentedControl<ShareFeatureTab>(
           selectedValue: currentTab,
           onValueChanged: cubit.changeTab,
-          segments: tabs.map((t) => (t.$1, Icon(t.$2) as Widget)).toList(),
+          segments: tabs,
         );
       },
     );

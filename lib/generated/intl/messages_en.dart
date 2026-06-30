@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to clear all history? This action cannot be undone.",
     ),
+    "clearColor": MessageLookupByLibrary.simpleMessage("Clear color"),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Failed to copy color",

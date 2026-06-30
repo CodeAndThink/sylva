@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "すべての履歴を消去してもよろしいですか？この操作は元に戻せません。",
     ),
+    "clearColor": MessageLookupByLibrary.simpleMessage("色をクリア"),
     "color": MessageLookupByLibrary.simpleMessage("色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,

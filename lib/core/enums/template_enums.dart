@@ -1,3 +1,36 @@
+import 'package:flutter/material.dart';
+
+enum ShareFeatureTab {
+  focus,
+  shapes,
+  colors,
+  direction,
+  text;
+
+  bool get isFocus => this == ShareFeatureTab.focus;
+  bool get isShapes => this == ShareFeatureTab.shapes;
+  bool get isColors => this == ShareFeatureTab.colors;
+  bool get isDirection => this == ShareFeatureTab.direction;
+  bool get isText => this == ShareFeatureTab.text;
+}
+
+extension ShareFeatureTabExtension on ShareFeatureTab {
+  IconData get icon {
+    switch (this) {
+      case ShareFeatureTab.focus:
+        return Icons.center_focus_strong;
+      case ShareFeatureTab.shapes:
+        return Icons.shape_line_outlined;
+      case ShareFeatureTab.colors:
+        return Icons.color_lens_outlined;
+      case ShareFeatureTab.direction:
+        return Icons.directions_rounded;
+      case ShareFeatureTab.text:
+        return Icons.abc_rounded;
+    }
+  }
+}
+
 enum PaletteDirection {
   horizontal,
   vertical;
@@ -7,6 +40,7 @@ enum PaletteDirection {
 }
 
 enum PalettePosition {
+  center,
   topLeft,
   topRight,
   topCenter,
@@ -14,8 +48,7 @@ enum PalettePosition {
   bottomRight,
   bottomCenter,
   centerLeft,
-  centerRight,
-  center;
+  centerRight;
 
   bool get isTopLeft => this == PalettePosition.topLeft;
   bool get isTopRight => this == PalettePosition.topRight;

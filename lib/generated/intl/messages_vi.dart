@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "Bạn có chắc chắn muốn xoá tất cả lịch sử? Hành động này không thể hoàn tác.",
     ),
+    "clearColor": MessageLookupByLibrary.simpleMessage("Bỏ chọn màu"),
     "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Sao chép màu thất bại",

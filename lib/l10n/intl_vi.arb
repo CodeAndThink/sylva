@@ -519,5 +519,7 @@
   "colorPickerSelectShade": "Chọn độ đậm nhạt",
   "@colorPickerSelectShade": {},
   "colorPickerShades": "Màu đã chọn và các độ đậm nhạt",
-  "@colorPickerShades": {}
+  "@colorPickerShades": {},
+  "clearColor": "Bỏ chọn màu",
+  "@clearColor": {}
 }

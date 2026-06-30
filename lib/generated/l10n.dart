@@ -2038,6 +2038,11 @@ class S {
       args: [],
     );
   }
+
+  /// `Clear color`
+  String get clearColor {
+    return Intl.message('Clear color', name: 'clearColor', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

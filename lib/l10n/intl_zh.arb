@@ -513,5 +513,7 @@
   "colorPickerSelectShade": "选择颜色深浅",
   "@colorPickerSelectShade": {},
   "colorPickerShades": "所选颜色及其深浅",
-  "@colorPickerShades": {}
+  "@colorPickerShades": {},
+  "clearColor": "清除颜色",
+  "@clearColor": {}
 }

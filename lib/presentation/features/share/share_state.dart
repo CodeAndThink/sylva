@@ -3,20 +3,6 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:sylva/core/enums/template_enums.dart';
 
-enum ShareFeatureTab {
-  focus,
-  shapes,
-  colors,
-  direction,
-  text;
-
-  bool get isFocus => this == ShareFeatureTab.focus;
-  bool get isShapes => this == ShareFeatureTab.shapes;
-  bool get isColors => this == ShareFeatureTab.colors;
-  bool get isDirection => this == ShareFeatureTab.direction;
-  bool get isText => this == ShareFeatureTab.text;
-}
-
 class ShareState extends Equatable {
   final Set<Color> selectedColors;
   final ShareFeatureTab currentTab;

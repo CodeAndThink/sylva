@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "您确定要清除所有历史记录吗？此操作无法撤销。",
     ),
+    "clearColor": MessageLookupByLibrary.simpleMessage("清除颜色"),
     "color": MessageLookupByLibrary.simpleMessage("颜色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("复制颜色失败"),
     "colorCopiedSuccess": m0,

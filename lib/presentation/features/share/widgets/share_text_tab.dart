@@ -82,7 +82,31 @@ class _ShareTextTabState extends State<ShareTextTab> {
                     children: [
                       const Icon(Icons.color_lens),
                       4.width,
-                      const Text('RGBA'),
+                      Text.rich(
+                        TextSpan(
+                          style: _theme.textTheme.titleSmall,
+                          children: [
+                            const TextSpan(
+                              text: 'R',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            const TextSpan(
+                              text: 'G',
+                              style: TextStyle(color: Colors.green),
+                            ),
+                            const TextSpan(
+                              text: 'B',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                            TextSpan(
+                              text: 'A',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -101,7 +125,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                   (
                     ShareTextPosition.top,
                     _buildPositionSegment(
-                      icon: Icons.vertical_align_top,
+                      icon: Icons.align_vertical_top_outlined,
                       label: _l10n.textPositionTop,
                       isSelected: state.textPosition.isTop,
                     ),
@@ -109,7 +133,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                   (
                     ShareTextPosition.bottom,
                     _buildPositionSegment(
-                      icon: Icons.vertical_align_bottom,
+                      icon: Icons.align_vertical_bottom_outlined,
                       label: _l10n.textPositionBottom,
                       isSelected: state.textPosition.isBottom,
                     ),
@@ -117,7 +141,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                   (
                     ShareTextPosition.left,
                     _buildPositionSegment(
-                      icon: Icons.align_horizontal_left,
+                      icon: Icons.align_horizontal_left_outlined,
                       label: _l10n.textPositionLeft,
                       isSelected: state.textPosition.isLeft,
                     ),
@@ -125,7 +149,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                   (
                     ShareTextPosition.right,
                     _buildPositionSegment(
-                      icon: Icons.align_horizontal_right,
+                      icon: Icons.align_horizontal_right_outlined,
                       label: _l10n.textPositionRight,
                       isSelected: state.textPosition.isRight,
                     ),
@@ -141,18 +165,10 @@ class _ShareTextTabState extends State<ShareTextTab> {
                 ],
               ),
               8.height,
-              // Size slider & styling buttons
+
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Icon(Icons.format_size),
-                  Expanded(
-                    child: Slider(
-                      value: state.textSize,
-                      min: 0.1,
-                      max: 1.0,
-                      onChanged: (v) => _cubit.changeTextSize(v),
-                    ),
-                  ),
                   4.width,
                   _buildStyleButton(
                     icon: Icons.format_bold,
@@ -174,7 +190,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                     onPressed: _cubit.toggleTextUnderline,
                     primaryColor: _theme.colorScheme.primary,
                   ),
-                  4.width,
+                  const Spacer(),
                   InkWell(
                     borderRadius: 20.borderRadius,
                     onTap: () async {
@@ -201,6 +217,42 @@ class _ShareTextTabState extends State<ShareTextTab> {
                         size: 20,
                         color: Colors.black54,
                       ),
+                    ),
+                  ),
+                  if (state.textColor != null) ...[
+                    4.width,
+                    Tooltip(
+                      message: _l10n.clearColor,
+                      child: InkWell(
+                        onTap: () => _cubit.changeTextColor(null),
+                        borderRadius: 20.borderRadius,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _theme.colorScheme.primary.withValues(
+                              alpha: 0.2,
+                            ),
+                          ),
+                          child: const Icon(Icons.format_color_reset, size: 24),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+
+              // Size slider & styling buttons
+              Row(
+                children: [
+                  const Icon(Icons.format_size),
+                  Expanded(
+                    child: Slider(
+                      value: state.textSize,
+                      min: 0.1,
+                      max: 1.0,
+                      onChanged: (v) => _cubit.changeTextSize(v),
                     ),
                   ),
                 ],

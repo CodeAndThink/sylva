@@ -90,7 +90,7 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
 
               40.height,
               AppFilledButton(
-                text: S.of(context).supportOnKofi,
+                text: _l10n.supportOnKofi,
                 icon: Icons.coffee_rounded,
                 backgroundColor: const Color(0xFFFF5E5B),
                 foregroundColor: Colors.white,

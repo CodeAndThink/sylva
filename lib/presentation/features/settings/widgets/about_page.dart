@@ -12,8 +12,9 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = S.of(context);
     return AppScaffold(
-      title: S.of(context).about,
+      title: l10n.about,
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
           24.0,
@@ -59,14 +60,14 @@ class AboutPage extends StatelessWidget {
             ),
             8.height,
             Text(
-              S.of(context).version(AppConfigs.version),
+              l10n.version(AppConfigs.version),
               style: theme.textTheme.titleMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
             32.height,
             Text(
-              S.of(context).aboutSylvaDescription,
+              l10n.aboutSylvaDescription,
               style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
               textAlign: TextAlign.center,
             ),

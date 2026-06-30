@@ -77,6 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "colorCopiedSuccess": m0,
     "colorPickMode": MessageLookupByLibrary.simpleMessage("Chế độ chọn màu"),
+    "colorPickerSelectColor": MessageLookupByLibrary.simpleMessage("Chọn màu"),
+    "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage(
+      "Chọn độ đậm nhạt",
+    ),
+    "colorPickerShades": MessageLookupByLibrary.simpleMessage(
+      "Màu đã chọn và các độ đậm nhạt",
+    ),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng màu sắc"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
@@ -234,6 +241,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Thiết bị không có camera",
     ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage(
+      "Không có ảnh để chia sẻ",
+    ),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Chưa chọn màu để sao chép",
     ),
@@ -342,6 +352,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "text": MessageLookupByLibrary.simpleMessage("Văn bản"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Căn lề chữ"),
+    "textOptionNone": MessageLookupByLibrary.simpleMessage("Không"),
+    "textPositionBottom": MessageLookupByLibrary.simpleMessage("Dưới"),
+    "textPositionInside": MessageLookupByLibrary.simpleMessage("Bên trong"),
+    "textPositionLeft": MessageLookupByLibrary.simpleMessage("Trái"),
+    "textPositionRight": MessageLookupByLibrary.simpleMessage("Phải"),
+    "textPositionTop": MessageLookupByLibrary.simpleMessage("Trên"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage(
       "Cảm ơn & Tài liệu tham khảo",
     ),
@@ -447,6 +463,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tùy chỉnh các thiết lập của ứng dụng.",
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
+      "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
+    ),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "Sắp xếp lịch sử tăng dần hoặc giảm dần theo thời gian.",

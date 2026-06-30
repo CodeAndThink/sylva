@@ -71,6 +71,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
     "colorPickMode": MessageLookupByLibrary.simpleMessage("カラーピックモード"),
+    "colorPickerSelectColor": MessageLookupByLibrary.simpleMessage("色を選択"),
+    "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage("色の濃淡を選択"),
+    "colorPickerShades": MessageLookupByLibrary.simpleMessage("選択した色とその濃淡"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("カラーアイコン"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
@@ -200,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("次へ"),
     "noCamerasFound": MessageLookupByLibrary.simpleMessage("デバイスにカメラが見つかりません"),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("履歴はまだありません"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage("共有する画像がありません"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "コピーする色が選択されていません",
     ),
@@ -291,6 +295,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "text": MessageLookupByLibrary.simpleMessage("テキスト"),
     "textAlign": MessageLookupByLibrary.simpleMessage("文字揃え"),
+    "textOptionNone": MessageLookupByLibrary.simpleMessage("なし"),
+    "textPositionBottom": MessageLookupByLibrary.simpleMessage("下"),
+    "textPositionInside": MessageLookupByLibrary.simpleMessage("内側"),
+    "textPositionLeft": MessageLookupByLibrary.simpleMessage("左"),
+    "textPositionRight": MessageLookupByLibrary.simpleMessage("右"),
+    "textPositionTop": MessageLookupByLibrary.simpleMessage("上"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage("感謝と参考文献"),
     "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
     "themeDark": MessageLookupByLibrary.simpleMessage("ダーク"),
@@ -380,6 +390,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "アプリの設定をカスタマイズします。",
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("設定"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
+      "画像とカラー情報を友達と共有する",
+    ),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("共有"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("スキップ"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "時間で履歴を昇順または降順に並べ替えます。",

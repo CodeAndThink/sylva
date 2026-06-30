@@ -47,6 +47,7 @@ class _HistoryChildPage extends StatefulWidget {
 class __HistoryChildPageState extends State<_HistoryChildPage> {
   late final HistoryCubit _cubit;
   late ThemeData _theme;
+  late S _l10n;
   final ScrollController _scrollController = ScrollController();
   final ValueNotifier<bool> _showScrollToTop = ValueNotifier(false);
   final GlobalKey _keyDeleteAll = GlobalKey();
@@ -80,10 +81,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
 
   void _handleCleanHistory() {
     _cubit.navigator.dialog.showConfirm(
-      title: S.of(context).clearAllHistory,
-      message: S.of(context).clearAllHistoryConfirm,
-      leftText: S.of(context).cancel,
-      rightText: S.of(context).delete,
+      title: _l10n.clearAllHistory,
+      message: _l10n.clearAllHistoryConfirm,
+      leftText: _l10n.cancel,
+      rightText: _l10n.delete,
       rightColor: _theme.colorScheme.error,
       onRight: () {
         _cubit.clearHistory();
@@ -104,29 +105,29 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
         AppTutorialHelper.buildTarget(
           context: context,
           key: _keyDeleteAll,
-          title: S.of(context).tutorialDeleteAllTitle,
-          desc: S.of(context).tutorialDeleteAllDesc,
+          title: _l10n.tutorialDeleteAllTitle,
+          desc: _l10n.tutorialDeleteAllDesc,
           contentAlign: ContentAlign.bottom,
         ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyChangeView,
-        title: S.of(context).tutorialHistoryViewTitle,
-        desc: S.of(context).tutorialHistoryViewDesc,
+        title: _l10n.tutorialHistoryViewTitle,
+        desc: _l10n.tutorialHistoryViewDesc,
         contentAlign: ContentAlign.top,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyFavoriteOnly,
-        title: S.of(context).tutorialFavoritesTitle,
-        desc: S.of(context).tutorialFavoritesDesc,
+        title: _l10n.tutorialFavoritesTitle,
+        desc: _l10n.tutorialFavoritesDesc,
         contentAlign: ContentAlign.top,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keySort,
-        title: S.of(context).tutorialSortTitle,
-        desc: S.of(context).tutorialSortDesc,
+        title: _l10n.tutorialSortTitle,
+        desc: _l10n.tutorialSortDesc,
         contentAlign: ContentAlign.top,
       ),
     ];
@@ -142,9 +143,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
+    _l10n = S.of(context);
 
     return AppScaffold(
-      title: S.of(context).history,
+      title: _l10n.history,
       actions: [_buildCleanHistoryAction()],
       body: _buildBody(),
     );
@@ -159,7 +161,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           return const SizedBox.shrink();
         }
         return Tooltip(
-          message: S.of(context).clearAllHistory,
+          message: _l10n.clearAllHistory,
           child: IconButton(
             key: _keyDeleteAll,
             icon: Icon(Icons.auto_delete, color: _theme.colorScheme.error),
@@ -193,7 +195,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 ),
                 12.height,
                 Text(
-                  S.of(context).noHistoryYet,
+                  _l10n.noHistoryYet,
                   style: _theme.textTheme.titleMedium?.copyWith(
                     color: _theme.colorScheme.onSurfaceVariant,
                   ),
@@ -345,7 +347,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: 16.paddingBottom,
+        padding: 12.paddingBottom,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -374,7 +376,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
 
   Widget _buildHelperButton() {
     return Tooltip(
-      message: S.of(context).help,
+      message: _l10n.help,
       child: IconButton(
         icon: Icon(
           Icons.help_outline_outlined,
@@ -392,7 +394,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           previous.isGridView != current.isGridView,
       builder: (context, state) {
         return Tooltip(
-          message: S.of(context).historyView,
+          message: _l10n.historyView,
           child: IconButton(
             key: _keyChangeView,
             icon: Icon(
@@ -414,7 +416,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
 
   Widget _buildFavoriteOnlyButton() {
     return Tooltip(
-      message: S.of(context).onlyFavorites,
+      message: _l10n.onlyFavorites,
       child: InkWell(
         key: _keyFavoriteOnly,
         onTap: () {
@@ -451,7 +453,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
 
   Widget _buildSortButton() {
     return Tooltip(
-      message: S.of(context).historySort,
+      message: _l10n.historySort,
       child: InkWell(
         key: _keySort,
         onTap: () {
@@ -476,7 +478,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
               return Row(
                 children: [
                   Text(
-                    S.of(context).createTime,
+                    _l10n.createTime,
                     style: _theme.textTheme.titleSmall?.copyWith(
                       color: _theme.colorScheme.onPrimaryContainer,
                     ),

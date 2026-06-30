@@ -29,13 +29,14 @@ class SaveOptionsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context);
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
             leading: const Icon(Icons.add_to_photos_outlined),
-            title: Text(S.of(context).saveAsNew),
+            title: Text(l10n.saveAsNew),
             onTap: () {
               Navigator.pop(context);
               onSaveAsNew();
@@ -43,7 +44,7 @@ class SaveOptionsBottomSheet extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.update_outlined),
-            title: Text(S.of(context).replaceExistingRecord),
+            title: Text(l10n.replaceExistingRecord),
             onTap: () {
               Navigator.pop(context);
               onReplaceExisting();

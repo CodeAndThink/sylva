@@ -1938,6 +1938,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Share`
+  String get tutorialShareTitle {
+    return Intl.message(
+      'Share',
+      name: 'tutorialShareTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share photos with color information with your friends`
+  String get tutorialShareDesc {
+    return Intl.message(
+      'Share photos with color information with your friends',
+      name: 'tutorialShareDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No image to share`
+  String get noImageToShare {
+    return Intl.message(
+      'No image to share',
+      name: 'noImageToShare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `None`
+  String get textOptionNone {
+    return Intl.message('None', name: 'textOptionNone', desc: '', args: []);
+  }
+
+  /// `Top`
+  String get textPositionTop {
+    return Intl.message('Top', name: 'textPositionTop', desc: '', args: []);
+  }
+
+  /// `Bottom`
+  String get textPositionBottom {
+    return Intl.message(
+      'Bottom',
+      name: 'textPositionBottom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Left`
+  String get textPositionLeft {
+    return Intl.message('Left', name: 'textPositionLeft', desc: '', args: []);
+  }
+
+  /// `Right`
+  String get textPositionRight {
+    return Intl.message('Right', name: 'textPositionRight', desc: '', args: []);
+  }
+
+  /// `Inside`
+  String get textPositionInside {
+    return Intl.message(
+      'Inside',
+      name: 'textPositionInside',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select color`
+  String get colorPickerSelectColor {
+    return Intl.message(
+      'Select color',
+      name: 'colorPickerSelectColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select color shade`
+  String get colorPickerSelectShade {
+    return Intl.message(
+      'Select color shade',
+      name: 'colorPickerSelectShade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected color and its shades`
+  String get colorPickerShades {
+    return Intl.message(
+      'Selected color and its shades',
+      name: 'colorPickerShades',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

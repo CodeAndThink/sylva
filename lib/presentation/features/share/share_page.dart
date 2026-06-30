@@ -132,7 +132,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
     _cubit.navigator.safePop();
 
     if (file != null) {
-      await Share.shareXFiles([XFile(file.path)]);
+      await SharePlus.instance.share(ShareParams(files: [XFile(file.path)]));
     }
   }
 

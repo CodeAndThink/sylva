@@ -44,6 +44,7 @@ class AppTutorialHelper {
     double? radius,
   }) {
     final theme = Theme.of(context);
+    final l10n = S.of(context);
     return TargetFocus(
       identify: key,
       keyTarget: key,
@@ -82,7 +83,7 @@ class AppTutorialHelper {
                     TextButton(
                       onPressed: controller.skip,
                       child: Text(
-                        S.of(context).tutorialSkip,
+                        l10n.tutorialSkip,
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: Colors.white70,
                         ),
@@ -95,7 +96,7 @@ class AppTutorialHelper {
                       ),
                       onPressed: controller.next,
                       child: Text(
-                        S.of(context).tutorialNext,
+                        l10n.tutorialNext,
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: theme.colorScheme.surface,
                         ),

@@ -3,7 +3,7 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 
 class PaletteColorListItem extends StatelessWidget {
   final Color color;
-  final String hex;
+  final String? hex;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final bool isSelected;
@@ -11,7 +11,7 @@ class PaletteColorListItem extends StatelessWidget {
   const PaletteColorListItem({
     super.key,
     required this.color,
-    required this.hex,
+    this.hex,
     this.onTap,
     this.onLongPress,
     this.isSelected = false,
@@ -60,13 +60,15 @@ class PaletteColorListItem extends StatelessWidget {
                       )
                     : null,
               ),
-              5.height,
-              Text(
-                hex,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
+              if (hex != null && hex?.isNotEmpty == true) ...[
+                5.height,
+                Text(
+                  hex!,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
         ),

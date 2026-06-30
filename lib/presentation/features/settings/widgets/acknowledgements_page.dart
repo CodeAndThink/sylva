@@ -9,8 +9,9 @@ class AcknowledgementsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = S.of(context);
     return AppScaffold(
-      title: S.of(context).acknowledgements,
+      title: l10n.acknowledgements,
       body: ListView(
         padding: EdgeInsets.fromLTRB(
           12.0,
@@ -19,14 +20,11 @@ class AcknowledgementsPage extends StatelessWidget {
           MediaQuery.of(context).padding.bottom + 12.0,
         ),
         children: [
-          Text(
-            S.of(context).acknowledgementsIntro,
-            style: theme.textTheme.bodyLarge,
-          ),
+          Text(l10n.acknowledgementsIntro, style: theme.textTheme.bodyLarge),
           24.height,
           _buildCreditItem(
             context: context,
-            title: S.of(context).roadBlockIcon,
+            title: l10n.roadBlockIcon,
             attribution: S
                 .of(context)
                 .designedByAuthorFromFlaticon('Aranagraphics'),
@@ -34,20 +32,20 @@ class AcknowledgementsPage extends StatelessWidget {
           12.height,
           _buildCreditItem(
             context: context,
-            title: S.of(context).colorsIcon,
-            attribution: S.of(context).designedByAuthorFromFlaticon('Freepik'),
+            title: l10n.colorsIcon,
+            attribution: l10n.designedByAuthorFromFlaticon('Freepik'),
           ),
           12.height,
           _buildCreditItem(
             context: context,
-            title: S.of(context).cameraIcon,
-            attribution: S.of(context).designedByAuthorFromFlaticon('Freepik'),
+            title: l10n.cameraIcon,
+            attribution: l10n.designedByAuthorFromFlaticon('Freepik'),
           ),
           12.height,
           _buildCreditItem(
             context: context,
-            title: S.of(context).rainbowHalftoneDotsBackground,
-            attribution: S.of(context).designedByAuthorMagnific('kjpargeter'),
+            title: l10n.rainbowHalftoneDotsBackground,
+            attribution: l10n.designedByAuthorMagnific('kjpargeter'),
           ),
         ],
       ),

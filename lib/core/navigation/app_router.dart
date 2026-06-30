@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sylva/data/models/process_image_model.dart';
 import 'package:sylva/presentation/features/history/history_page.dart';
 import 'package:sylva/presentation/features/home/home_page.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
+import 'package:sylva/presentation/features/share/share_page.dart';
 import 'package:sylva/presentation/features/sponsors/sponsors_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
@@ -12,7 +14,6 @@ import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page
 import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/acknowledgements_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
-import 'package:sylva/data/entities/history_record.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -53,6 +54,9 @@ class AppRouter {
 
   static const String photoPreview = 'photoPreview';
   static const String photoPreviewPath = '/photoPreview';
+
+  static const String share = 'share';
+  static const String sharePath = '/share';
 
   static final GoRouter router = GoRouter(
     navigatorKey: rootNavigatorKey,
@@ -117,19 +121,14 @@ class AppRouter {
         path: photoPreviewPath,
         name: photoPreview,
         builder: (context, state) {
-          if (state.extra is HistoryRecord) {
-            final record = state.extra as HistoryRecord;
-            return PhotoPreviewPage(
-              imagePath: record.imagePath,
-              initialColors: record.userColors.map((c) => Color(c)).toList(),
-              initialSelectedColor: record.selectedColor != null
-                  ? Color(record.selectedColor!)
-                  : null,
-              historyRecordId: record.id,
-            );
-          }
-          final imagePath = state.extra as String;
-          return PhotoPreviewPage(imagePath: imagePath);
+          return PhotoPreviewPage(args: state.extra as PhotoPreviewArguments);
+        },
+      ),
+      GoRoute(
+        path: sharePath,
+        name: share,
+        builder: (context, state) {
+          return SharePage(args: state.extra as ProcessImageModel);
         },
       ),
     ],

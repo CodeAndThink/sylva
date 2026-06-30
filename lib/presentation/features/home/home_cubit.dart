@@ -14,7 +14,7 @@ class HomeCubit extends BaseCubit<HomeState> {
       final picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        navigator.goToPhotoPreview(image.path);
+        navigator.goToPhotoPreview(imagePath: image.path);
       }
     } catch (e) {
       debugPrint('Error picking image: $e');

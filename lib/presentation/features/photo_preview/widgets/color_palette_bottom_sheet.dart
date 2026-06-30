@@ -43,6 +43,7 @@ class ColorPaletteBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = S.of(context);
 
     return SafeArea(
       child: Padding(
@@ -56,7 +57,7 @@ class ColorPaletteBottomSheet extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppTitleText(title: S.of(context).autoDetectColors),
+                    AppTitleText(title: l10n.autoDetectColors),
                     12.height,
                     Wrap(
                       spacing: 10,
@@ -79,12 +80,12 @@ class ColorPaletteBottomSheet extends StatelessWidget {
                       }).toList(),
                     ),
                     24.height,
-                    AppTitleText(title: S.of(context).myColors),
+                    AppTitleText(title: l10n.myColors),
                     12.height,
                     userColors.isEmpty
                         ? Center(
                             child: Text(
-                              S.of(context).useMagnifierToPickColors,
+                              l10n.useMagnifierToPickColors,
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.colorScheme.onSurface.withValues(
                                   alpha: 0.5,

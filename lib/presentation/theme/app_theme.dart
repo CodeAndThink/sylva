@@ -103,6 +103,10 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       textTheme: _buildTextTheme(isDarkMode: false),
+      scrollbarTheme: ScrollbarThemeData(
+        thumbVisibility: const WidgetStatePropertyAll(true),
+        thumbColor: WidgetStatePropertyAll(colorScheme.primary),
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -128,7 +132,11 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       textTheme: _buildTextTheme(isDarkMode: true),
-      appBarTheme: AppBarTheme(
+      scrollbarTheme: ScrollbarThemeData(
+        thumbVisibility: const WidgetStatePropertyAll(true),
+        thumbColor: WidgetStatePropertyAll(colorScheme.primary),
+      ),
+      appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,

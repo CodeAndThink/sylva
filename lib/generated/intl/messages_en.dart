@@ -74,12 +74,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to clear all history? This action cannot be undone.",
     ),
+    "clearColor": MessageLookupByLibrary.simpleMessage("Clear color"),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Failed to copy color",
     ),
     "colorCopiedSuccess": m0,
     "colorPickMode": MessageLookupByLibrary.simpleMessage("Color Pick Mode"),
+    "colorPickerSelectColor": MessageLookupByLibrary.simpleMessage(
+      "Select color",
+    ),
+    "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage(
+      "Select color shade",
+    ),
+    "colorPickerShades": MessageLookupByLibrary.simpleMessage(
+      "Selected color and its shades",
+    ),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Colors icon"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
@@ -231,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No cameras found on device",
     ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("No history yet"),
+    "noImageToShare": MessageLookupByLibrary.simpleMessage("No image to share"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
       "Nothing selected to copy",
     ),
@@ -337,6 +348,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "text": MessageLookupByLibrary.simpleMessage("Text"),
     "textAlign": MessageLookupByLibrary.simpleMessage("Align text"),
+    "textOptionNone": MessageLookupByLibrary.simpleMessage("None"),
+    "textPositionBottom": MessageLookupByLibrary.simpleMessage("Bottom"),
+    "textPositionInside": MessageLookupByLibrary.simpleMessage("Inside"),
+    "textPositionLeft": MessageLookupByLibrary.simpleMessage("Left"),
+    "textPositionRight": MessageLookupByLibrary.simpleMessage("Right"),
+    "textPositionTop": MessageLookupByLibrary.simpleMessage("Top"),
     "thanksAndReference": MessageLookupByLibrary.simpleMessage(
       "Thanks & Reference",
     ),
@@ -446,6 +463,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Customize your app preferences here.",
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
+      "Select colors and create beautiful images",
+    ),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Create Images"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Skip"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "Sort your history ascending or descending by time.",

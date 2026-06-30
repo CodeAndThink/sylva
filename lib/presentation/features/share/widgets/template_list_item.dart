@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sylva/core/enums/template_enums.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/presentation/widgets/shapes/capsule_shape.dart';
-import 'package:sylva/presentation/widgets/shapes/card_shape.dart';
 import 'package:sylva/presentation/widgets/shapes/circle_shape.dart';
 import 'package:sylva/presentation/widgets/shapes/diamond_shape.dart';
 import 'package:sylva/presentation/widgets/shapes/rounded_square_shape.dart';
@@ -89,8 +88,6 @@ class TemplateListItem extends StatelessWidget {
         return DiamondShape(color: color, size: size);
       case PaletteShape.capsule:
         return CapsuleShape(color: color, size: size);
-      case PaletteShape.card:
-        return CardShape(color: color, size: size);
       case PaletteShape.roundedSquare:
         return RoundedSquareShape(color: color, size: size);
     }

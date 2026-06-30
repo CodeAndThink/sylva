@@ -88,9 +88,10 @@ class _ShareTextTabState extends State<ShareTextTab> {
                 ),
               ],
             ),
-            8.height,
+
             if (state.textOption != ShareTextOption.none &&
                 state.selectedShape != PaletteShape.none) ...[
+              8.height,
               // Position Segmented Control
               AppSlidingSegmentedControl<ShareTextPosition>(
                 isFlexible: true,

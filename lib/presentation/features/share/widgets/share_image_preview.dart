@@ -5,7 +5,6 @@ import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/shapes/capsule_shape.dart';
-import 'package:sylva/presentation/widgets/shapes/card_shape.dart';
 import 'package:sylva/presentation/widgets/shapes/circle_shape.dart';
 import 'package:sylva/presentation/widgets/shapes/diamond_shape.dart';
 import 'package:sylva/presentation/widgets/shapes/rounded_square_shape.dart';
@@ -129,7 +128,7 @@ class ShareImagePreview extends StatelessWidget {
     }
 
     final List<Widget> children = [];
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < colors.length; i++) {
       final color = colors.isNotEmpty
           ? colors[i % colors.length]
           : Colors.white;
@@ -144,7 +143,11 @@ class ShareImagePreview extends StatelessWidget {
     double size,
     ShareState state,
   ) {
-    Widget shapeWidget = _buildShapeWidget(shape, color, size);
+    Widget shapeWidget = _buildShapeWidget(
+      shape: shape,
+      color: color,
+      size: size,
+    );
 
     if (state.textOption == ShareTextOption.none) {
       return shapeWidget;
@@ -221,7 +224,11 @@ class ShareImagePreview extends StatelessWidget {
     }
   }
 
-  Widget _buildShapeWidget(PaletteShape shape, Color color, double size) {
+  Widget _buildShapeWidget({
+    required PaletteShape shape,
+    required Color color,
+    required double size,
+  }) {
     switch (shape) {
       case PaletteShape.none:
         return Container();
@@ -233,8 +240,6 @@ class ShareImagePreview extends StatelessWidget {
         return DiamondShape(color: color, size: size);
       case PaletteShape.capsule:
         return CapsuleShape(color: color, size: size);
-      case PaletteShape.card:
-        return CardShape(color: color, size: size);
       case PaletteShape.roundedSquare:
         return RoundedSquareShape(color: color, size: size);
     }

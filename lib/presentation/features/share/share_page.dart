@@ -61,7 +61,12 @@ class __ShareChildPageState extends State<_ShareChildPage> {
         child: Column(
           children: [
             Expanded(
-              child: ShareImagePreview(imagePath: widget.args.imagePath),
+              child: AppTransparentContainer(
+                padding: 8.paddingAll,
+                child: Center(
+                  child: ShareImagePreview(imagePath: widget.args.imagePath),
+                ),
+              ),
             ),
             12.height,
             _buildBottomActions(),

@@ -70,16 +70,14 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
                 ),
               ],
             ),
-            16.height,
             SizedBox(
-              height: 67,
+              height: 55,
               child: Scrollbar(
                 controller: _scrollController,
                 thumbVisibility: true,
                 child: ListView.separated(
                   controller: _scrollController,
                   scrollDirection: Axis.horizontal,
-                  padding: 12.paddingBottom,
                   itemCount: shapes.length,
                   separatorBuilder: (context, index) => 10.width,
                   itemBuilder: (context, index) {

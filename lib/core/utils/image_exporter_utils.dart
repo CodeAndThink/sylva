@@ -105,11 +105,7 @@ class ImageExporterUtils {
     if (colors.isEmpty) {
       colors = [Colors.white, Colors.white, Colors.white];
     }
-    final colorsToDraw = [
-      colors[0 % colors.length],
-      colors.length > 1 ? colors[1 % colors.length] : colors[0],
-      colors.length > 2 ? colors[2 % colors.length] : colors[0],
-    ];
+    final int colorCount = colors.length;
 
     // Determine scale based on image size and selected size.
     final boxSize = imageWidth * shapeSizeState;
@@ -119,6 +115,17 @@ class ImageExporterUtils {
     final padding = boxSize * 0.2;
     final spacing = boxSize * shapeSpacingState;
     final shapeSize = boxSize - padding * 2;
+
+    // Calculate shape actual dimensions
+    double shapeWidth = shapeSize;
+    double shapeHeight = shapeSize;
+    if (shape == PaletteShape.capsule) {
+      shapeWidth = shapeSize * 1.5;
+      shapeHeight = shapeSize * 0.8;
+    } else if (shape == PaletteShape.diamond) {
+      shapeWidth = shapeSize * 0.7 + 4;
+      shapeHeight = shapeSize * 0.7 + 4;
+    }
 
     // Calculate text dimensions if text is enabled
     double textHeight = 0;
@@ -145,25 +152,25 @@ class ImageExporterUtils {
       textWidth = sampleParagraph.maxIntrinsicWidth;
     }
 
-    double blockWidth = shapeSize;
-    double blockHeight = shapeSize;
+    double blockWidth = shapeWidth;
+    double blockHeight = shapeHeight;
     if (textOption != ShareTextOption.none) {
       if (textPosition == ShareTextPosition.top ||
           textPosition == ShareTextPosition.bottom) {
-        blockHeight = shapeSize + textHeight + 4;
-        blockWidth = shapeSize > textWidth ? shapeSize : textWidth;
+        blockHeight = shapeHeight + textHeight + 4;
+        blockWidth = shapeWidth > textWidth ? shapeWidth : textWidth;
       } else if (textPosition == ShareTextPosition.left ||
           textPosition == ShareTextPosition.right) {
-        blockWidth = shapeSize + textWidth + 4;
-        blockHeight = shapeSize > textHeight ? shapeSize : textHeight;
+        blockWidth = shapeWidth + textWidth + 4;
+        blockHeight = shapeHeight > textHeight ? shapeHeight : textHeight;
       }
     }
 
     final containerWidth = isVertical
         ? (blockWidth + padding * 2)
-        : (blockWidth * 3 + spacing * 2 + padding * 2);
+        : (blockWidth * colorCount + spacing * (colorCount - 1) + padding * 2);
     final containerHeight = isVertical
-        ? (blockHeight * 3 + spacing * 2 + padding * 2)
+        ? (blockHeight * colorCount + spacing * (colorCount - 1) + padding * 2)
         : (blockHeight + padding * 2);
 
     // Position
@@ -213,26 +220,28 @@ class ImageExporterUtils {
     // Background removed as per user request
 
     // Draw shapes
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < colorCount; i++) {
       final sDx =
           dx +
           padding +
           (isVertical
-              ? (blockWidth - shapeSize) / 2
-              : i * (blockWidth + spacing) + (blockWidth - shapeSize) / 2);
+              ? (blockWidth - shapeWidth) / 2
+              : i * (blockWidth + spacing) + (blockWidth - shapeWidth) / 2);
       final sDy =
           dy +
           padding +
           (isVertical
-              ? i * (blockHeight + spacing) + (blockHeight - shapeSize) / 2
-              : (blockHeight - shapeSize) / 2);
+              ? i * (blockHeight + spacing) + (blockHeight - shapeHeight) / 2
+              : (blockHeight - shapeHeight) / 2);
       _drawShapeWithText(
         canvas,
         sDx,
         sDy,
         shapeSize,
+        shapeWidth,
+        shapeHeight,
         shape,
-        colorsToDraw[i],
+        colors[i],
         textOption,
         textPosition,
         textSizeState,
@@ -249,6 +258,8 @@ class ImageExporterUtils {
     double x,
     double y,
     double size,
+    double shapeWidth,
+    double shapeHeight,
     PaletteShape shape,
     Color color,
     ShareTextOption textOption,
@@ -260,7 +271,7 @@ class ImageExporterUtils {
     Color? textColorState,
   ) {
     if (textOption == ShareTextOption.none) {
-      _drawShape(canvas, x, y, size, shape, color);
+      _drawShape(canvas, x, y, size, shapeWidth, shapeHeight, shape, color);
       return;
     }
 
@@ -300,27 +311,27 @@ class ImageExporterUtils {
     double textDy = y;
 
     if (textPosition == ShareTextPosition.top) {
-      textDx = x + (size - paragraph.maxIntrinsicWidth) / 2;
+      textDx = x + (shapeWidth - paragraph.maxIntrinsicWidth) / 2;
       textDy = y - paragraph.height - 4;
       canvas.drawParagraph(paragraph, Offset(textDx, textDy));
-      _drawShape(canvas, x, y, size, shape, color);
+      _drawShape(canvas, x, y, size, shapeWidth, shapeHeight, shape, color);
     } else if (textPosition == ShareTextPosition.bottom) {
-      textDx = x + (size - paragraph.maxIntrinsicWidth) / 2;
-      textDy = y + size + 4;
-      _drawShape(canvas, x, y, size, shape, color);
+      textDx = x + (shapeWidth - paragraph.maxIntrinsicWidth) / 2;
+      textDy = y + shapeHeight + 4;
+      _drawShape(canvas, x, y, size, shapeWidth, shapeHeight, shape, color);
       canvas.drawParagraph(paragraph, Offset(textDx, textDy));
     } else if (textPosition == ShareTextPosition.left) {
       textDx = x - paragraph.maxIntrinsicWidth - 4;
-      textDy = y + (size - paragraph.height) / 2;
+      textDy = y + (shapeHeight - paragraph.height) / 2;
       canvas.drawParagraph(paragraph, Offset(textDx, textDy));
-      _drawShape(canvas, x, y, size, shape, color);
+      _drawShape(canvas, x, y, size, shapeWidth, shapeHeight, shape, color);
     } else if (textPosition == ShareTextPosition.right) {
-      textDx = x + size + 4;
-      textDy = y + (size - paragraph.height) / 2;
-      _drawShape(canvas, x, y, size, shape, color);
+      textDx = x + shapeWidth + 4;
+      textDy = y + (shapeHeight - paragraph.height) / 2;
+      _drawShape(canvas, x, y, size, shapeWidth, shapeHeight, shape, color);
       canvas.drawParagraph(paragraph, Offset(textDx, textDy));
     } else if (textPosition == ShareTextPosition.inside) {
-      _drawShape(canvas, x, y, size, shape, color);
+      _drawShape(canvas, x, y, size, shapeWidth, shapeHeight, shape, color);
       final brightness = ThemeData.estimateBrightnessForColor(color);
       final insideTextColor =
           textColorState ??
@@ -350,8 +361,8 @@ class ImageExporterUtils {
       final maxWidth = size * 0.9;
       final p = pb.build()..layout(ui.ParagraphConstraints(width: maxWidth));
 
-      textDx = x + (size - p.width) / 2;
-      textDy = y + (size - p.height) / 2;
+      textDx = x + (shapeWidth - p.width) / 2;
+      textDy = y + (shapeHeight - p.height) / 2;
       canvas.drawParagraph(p, Offset(textDx, textDy));
     }
   }
@@ -361,6 +372,8 @@ class ImageExporterUtils {
     double x,
     double y,
     double size,
+    double shapeWidth,
+    double shapeHeight,
     PaletteShape shape,
     Color color,
   ) {
@@ -376,32 +389,25 @@ class ImageExporterUtils {
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromLTWH(x, y, size, size),
-            Radius.circular(size * 0.25),
+            Radius.circular(size * 0.15),
           ),
           paint,
         );
         break;
       case PaletteShape.capsule:
+        final w = size * 1.5;
+        final h = size * 0.8;
         canvas.drawRRect(
           RRect.fromRectAndRadius(
-            Rect.fromLTWH(x + size * 0.25, y, size * 0.5, size),
+            Rect.fromLTWH(x, y, w, h),
             Radius.circular(size),
-          ),
-          paint,
-        );
-        break;
-      case PaletteShape.card:
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(
-            Rect.fromLTWH(x + size * 0.15, y, size * 0.7, size),
-            Radius.circular(size * 0.1),
           ),
           paint,
         );
         break;
       case PaletteShape.diamond:
         canvas.save();
-        canvas.translate(x + size / 2, y + size / 2);
+        canvas.translate(x + shapeWidth / 2, y + shapeHeight / 2);
         canvas.rotate(45 * 3.14159 / 180);
         final dSize = size * 0.7;
         canvas.drawRect(

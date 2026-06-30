@@ -34,14 +34,12 @@ enum PaletteShape {
   square,
   diamond,
   capsule,
-  card,
   roundedSquare;
 
   bool get isCircle => this == PaletteShape.circle;
   bool get isSquare => this == PaletteShape.square;
   bool get isDiamond => this == PaletteShape.diamond;
   bool get isCapsule => this == PaletteShape.capsule;
-  bool get isCard => this == PaletteShape.card;
   bool get isRoundedSquare => this == PaletteShape.roundedSquare;
 }
 

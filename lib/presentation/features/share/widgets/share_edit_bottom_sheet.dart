@@ -26,52 +26,56 @@ class ShareEditBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildFeatureActions(context),
-            12.height,
-            AnimatedSize(
-              duration: 300.milliseconds,
-              curve: Curves.easeInOutCubic,
-              alignment: Alignment.topCenter,
-              child: BlocBuilder<ShareCubit, ShareState>(
-                buildWhen: (previous, current) {
-                  return previous.currentTab != current.currentTab ||
-                      previous.selectedColors != current.selectedColors;
-                },
-                builder: (context, state) {
-                  Widget child;
-                  switch (state.currentTab) {
-                    case ShareFeatureTab.focus:
-                      child = const SizedBox(
-                        height: 67,
-                        child: ShareFocusTab(),
-                      );
-                      break;
-                    case ShareFeatureTab.shapes:
-                      child = const ShareShapesTab();
-                      break;
-                    case ShareFeatureTab.text:
-                      child = ShareTextTab(colors: colors);
-                      break;
-                    case ShareFeatureTab.direction:
-                      child = const SizedBox(
-                        height: 55,
-                        child: ShareDirectionTab(),
-                      );
-                      break;
-                    case ShareFeatureTab.colors:
-                      child = SizedBox(
-                        height: 67,
-                        child: ShareColorsTab(colors: colors),
-                      );
-                      break;
-                  }
+            8.height,
+            AppTransparentContainer(
+              padding: 8.paddingAll,
+              borderRadius: 12,
+              child: AnimatedSize(
+                duration: 300.milliseconds,
+                curve: Curves.easeInOutCubic,
+                alignment: Alignment.topCenter,
+                child: BlocBuilder<ShareCubit, ShareState>(
+                  buildWhen: (previous, current) {
+                    return previous.currentTab != current.currentTab ||
+                        previous.selectedColors != current.selectedColors;
+                  },
+                  builder: (context, state) {
+                    Widget child;
+                    switch (state.currentTab) {
+                      case ShareFeatureTab.focus:
+                        child = const SizedBox(
+                          height: 67,
+                          child: ShareFocusTab(),
+                        );
+                        break;
+                      case ShareFeatureTab.shapes:
+                        child = const ShareShapesTab();
+                        break;
+                      case ShareFeatureTab.text:
+                        child = ShareTextTab(colors: colors);
+                        break;
+                      case ShareFeatureTab.direction:
+                        child = const SizedBox(
+                          height: 55,
+                          child: ShareDirectionTab(),
+                        );
+                        break;
+                      case ShareFeatureTab.colors:
+                        child = SizedBox(
+                          height: 67,
+                          child: ShareColorsTab(colors: colors),
+                        );
+                        break;
+                    }
 
-                  // Key is required for AnimatedSwitcher if we want crossfade, but for AnimatedSize, changing child size is enough.
-                  // However, giving it a key ensures the tree knows it's a new child if needed.
-                  return KeyedSubtree(
-                    key: ValueKey(state.currentTab),
-                    child: child,
-                  );
-                },
+                    // Key is required for AnimatedSwitcher if we want crossfade, but for AnimatedSize, changing child size is enough.
+                    // However, giving it a key ensures the tree knows it's a new child if needed.
+                    return KeyedSubtree(
+                      key: ValueKey(state.currentTab),
+                      child: child,
+                    );
+                  },
+                ),
               ),
             ),
           ],

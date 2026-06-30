@@ -490,9 +490,9 @@
   "@errorInvalidImage": {},
   "errorSomethingWentWrong": "予期せぬエラーが発生しました。後でもう一度お試しください。",
   "@errorSomethingWentWrong": {},
-  "tutorialShareTitle": "共有",
+  "tutorialShareTitle": "画像を作成する",
   "@tutorialShareTitle": {},
-  "tutorialShareDesc": "画像とカラー情報を友達と共有する",
+  "tutorialShareDesc": "色を選択して画像を共有する",
   "@tutorialShareDesc": {},
   "noImageToShare": "共有する画像がありません",
   "@noImageToShare": {},
@@ -513,5 +513,7 @@
   "colorPickerSelectShade": "色の濃淡を選択",
   "@colorPickerSelectShade": {},
   "colorPickerShades": "選択した色とその濃淡",
-  "@colorPickerShades": {}
+  "@colorPickerShades": {},
+  "clearColor": "色をクリア",
+  "@clearColor": {}
 }

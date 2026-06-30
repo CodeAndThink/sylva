@@ -13,6 +13,7 @@ class ImageExporterUtils {
     required List<Color> colors,
     required double shapeSize,
     required double shapeSpacing,
+    required double shapeMargin,
     required ShareTextOption textOption,
     required ShareTextPosition textPosition,
     required double textSize,
@@ -51,6 +52,7 @@ class ImageExporterUtils {
           colors,
           shapeSize,
           shapeSpacing,
+          shapeMargin,
           textOption,
           textPosition,
           textSize,
@@ -94,6 +96,7 @@ class ImageExporterUtils {
     List<Color> colors,
     double shapeSizeState,
     double shapeSpacingState,
+    double shapeMarginState,
     ShareTextOption textOption,
     ShareTextPosition textPosition,
     double textSizeState,
@@ -167,16 +170,16 @@ class ImageExporterUtils {
     }
 
     final containerWidth = isVertical
-        ? (blockWidth + padding * 2)
-        : (blockWidth * colorCount + spacing * (colorCount - 1) + padding * 2);
+        ? blockWidth
+        : (blockWidth * colorCount + spacing * (colorCount - 1));
     final containerHeight = isVertical
-        ? (blockHeight * colorCount + spacing * (colorCount - 1) + padding * 2)
-        : (blockHeight + padding * 2);
+        ? (blockHeight * colorCount + spacing * (colorCount - 1))
+        : blockHeight;
 
     // Position
     double dx = 0;
     double dy = 0;
-    final margin = imageWidth * 0.05;
+    final margin = imageWidth * (0.01 + shapeMarginState * 0.2);
 
     switch (position) {
       case PalettePosition.topLeft:
@@ -223,13 +226,11 @@ class ImageExporterUtils {
     for (int i = 0; i < colorCount; i++) {
       final sDx =
           dx +
-          padding +
           (isVertical
               ? (blockWidth - shapeWidth) / 2
               : i * (blockWidth + spacing) + (blockWidth - shapeWidth) / 2);
       final sDy =
           dy +
-          padding +
           (isVertical
               ? i * (blockHeight + spacing) + (blockHeight - shapeHeight) / 2
               : (blockHeight - shapeHeight) / 2);

@@ -1001,16 +1001,37 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               icon: Icon(Icons.download_rounded, size: 30),
             ),
           ),
-          Tooltip(
-            message: _l10n.tutorialShareTitle,
-            child: IconButton(
-              key: _keyShare,
-              onPressed: () {
-                AppFeedback.playInteract(context);
-                _cubit.navigateToShare();
-              },
-              icon: Icon(Icons.share_rounded, size: 25),
-            ),
+          BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+            buildWhen: (previous, current) =>
+                previous.paletteColors.isNotEmpty !=
+                    current.paletteColors.isNotEmpty ||
+                previous.userColors.isNotEmpty != current.userColors.isNotEmpty,
+            builder: (context, state) {
+              final showShare =
+                  state.paletteColors.isNotEmpty || state.userColors.isNotEmpty;
+              return AnimatedSize(
+                duration: 300.milliseconds,
+                curve: Curves.easeInOutCubic,
+                child: AnimatedSwitcher(
+                  duration: 300.milliseconds,
+                  switchInCurve: Curves.easeInOutCubic,
+                  switchOutCurve: Curves.easeInOutCubic,
+                  child: showShare
+                      ? Tooltip(
+                          message: _l10n.tutorialShareTitle,
+                          child: IconButton(
+                            key: _keyShare,
+                            onPressed: () {
+                              AppFeedback.playInteract(context);
+                              _cubit.navigateToShare();
+                            },
+                            icon: const Icon(Icons.draw_rounded, size: 30),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              );
+            },
           ),
           Tooltip(
             message: _l10n.help,

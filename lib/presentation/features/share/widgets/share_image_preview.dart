@@ -77,43 +77,46 @@ class ShareImagePreview extends StatelessWidget {
     // Determine direction layout
     final isVertical = state.selectedDirection == PaletteDirection.vertical;
 
-    return Align(
-      alignment: alignment,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          // Estimate size based on available area and selected size.
-          final boxSize = constraints.maxWidth * state.shapeSize;
-          final padding = boxSize * 0.2;
-          final spacing = boxSize * state.shapeSpacing;
-          final size = boxSize - padding * 2;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final marginValue =
+            constraints.maxWidth * (0.01 + state.shapeMargin * 0.2);
 
-          Widget list = Container(
-            child: isVertical
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: spacing,
-                    children: _buildShapes(
-                      state.selectedShape,
-                      state.selectedColors.toList(),
-                      size,
-                      state,
-                    ),
-                  )
-                : Row(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: spacing,
-                    children: _buildShapes(
-                      state.selectedShape,
-                      state.selectedColors.toList(),
-                      size,
-                      state,
-                    ),
+        // Estimate size based on available area and selected size.
+        final boxSize = constraints.maxWidth * state.shapeSize;
+        final padding = boxSize * 0.2;
+        final spacing = boxSize * state.shapeSpacing;
+        final size = boxSize - padding * 2;
+
+        Widget list = Container(
+          child: isVertical
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: spacing,
+                  children: _buildShapes(
+                    state.selectedShape,
+                    state.selectedColors.toList(),
+                    size,
+                    state,
                   ),
-          );
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: spacing,
+                  children: _buildShapes(
+                    state.selectedShape,
+                    state.selectedColors.toList(),
+                    size,
+                    state,
+                  ),
+                ),
+        );
 
-          return list;
-        },
-      ),
+        return Align(
+          alignment: alignment,
+          child: Padding(padding: EdgeInsets.all(marginValue), child: list),
+        );
+      },
     );
   }
 
@@ -163,9 +166,10 @@ class ShareImagePreview extends StatelessWidget {
     }
 
     final textColor = state.textColor ?? Colors.white;
+    final actualFontSize = size * (0.08 + state.textSize * 0.16);
     final textStyle = TextStyle(
       color: textColor,
-      fontSize: 8 + state.textSize * 16,
+      fontSize: actualFontSize,
       fontWeight: state.isTextBold ? FontWeight.bold : FontWeight.normal,
       fontStyle: state.isTextItalic ? FontStyle.italic : FontStyle.normal,
       decoration: state.isTextUnderline

@@ -1939,20 +1939,20 @@ class S {
     );
   }
 
-  /// `Share`
+  /// `Create Images`
   String get tutorialShareTitle {
     return Intl.message(
-      'Share',
+      'Create Images',
       name: 'tutorialShareTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Share photos with color information with your friends`
+  /// `Select colors and create beautiful images`
   String get tutorialShareDesc {
     return Intl.message(
-      'Share photos with color information with your friends',
+      'Select colors and create beautiful images',
       name: 'tutorialShareDesc',
       desc: '',
       args: [],
@@ -2037,6 +2037,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Clear color`
+  String get clearColor {
+    return Intl.message('Clear color', name: 'clearColor', desc: '', args: []);
   }
 }
 

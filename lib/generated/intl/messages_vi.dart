@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "Bạn có chắc chắn muốn xoá tất cả lịch sử? Hành động này không thể hoàn tác.",
     ),
+    "clearColor": MessageLookupByLibrary.simpleMessage("Bỏ chọn màu"),
     "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Sao chép màu thất bại",
@@ -464,9 +465,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
-      "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
+      "Chọn màu sắc và tạo hình ảnh",
     ),
-    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Tạo ảnh"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "Sắp xếp lịch sử tăng dần hoặc giảm dần theo thời gian.",

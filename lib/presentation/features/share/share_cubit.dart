@@ -50,6 +50,10 @@ class ShareCubit extends BaseCubit<ShareState> {
     emit(state.copyWith(shapeSpacing: spacing));
   }
 
+  void changeShapeMargin(double margin) {
+    emit(state.copyWith(shapeMargin: margin));
+  }
+
   void changeTextOption(ShareTextOption option) {
     emit(state.copyWith(textOption: option));
   }

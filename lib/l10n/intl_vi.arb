@@ -496,9 +496,9 @@
   "@errorInvalidImage": {},
   "errorSomethingWentWrong": "Đã xảy ra sự cố ngoài ý muốn. Vui lòng thử lại sau.",
   "@errorSomethingWentWrong": {},
-  "tutorialShareTitle": "Chia sẻ",
+  "tutorialShareTitle": "Tạo ảnh",
   "@tutorialShareTitle": {},
-  "tutorialShareDesc": "Chia sẻ hình ảnh cùng thông tin màu sắc với bạn bè",
+  "tutorialShareDesc": "Chọn màu sắc và tạo hình ảnh",
   "@tutorialShareDesc": {},
   "noImageToShare": "Không có ảnh để chia sẻ",
   "@noImageToShare": {},
@@ -519,5 +519,7 @@
   "colorPickerSelectShade": "Chọn độ đậm nhạt",
   "@colorPickerSelectShade": {},
   "colorPickerShades": "Màu đã chọn và các độ đậm nhạt",
-  "@colorPickerShades": {}
+  "@colorPickerShades": {},
+  "clearColor": "Bỏ chọn màu",
+  "@clearColor": {}
 }

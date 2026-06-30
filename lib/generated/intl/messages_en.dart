@@ -80,6 +80,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "colorCopiedSuccess": m0,
     "colorPickMode": MessageLookupByLibrary.simpleMessage("Color Pick Mode"),
+    "colorPickerSelectColor": MessageLookupByLibrary.simpleMessage(
+      "Select color",
+    ),
+    "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage(
+      "Select color shade",
+    ),
+    "colorPickerShades": MessageLookupByLibrary.simpleMessage(
+      "Selected color and its shades",
+    ),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Colors icon"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(

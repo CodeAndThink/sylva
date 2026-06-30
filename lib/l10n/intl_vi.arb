@@ -513,5 +513,11 @@
   "textPositionRight": "Phải",
   "@textPositionRight": {},
   "textPositionInside": "Bên trong",
-  "@textPositionInside": {}
+  "@textPositionInside": {},
+  "colorPickerSelectColor": "Chọn màu",
+  "@colorPickerSelectColor": {},
+  "colorPickerSelectShade": "Chọn độ đậm nhạt",
+  "@colorPickerSelectShade": {},
+  "colorPickerShades": "Màu đã chọn và các độ đậm nhạt",
+  "@colorPickerShades": {}
 }

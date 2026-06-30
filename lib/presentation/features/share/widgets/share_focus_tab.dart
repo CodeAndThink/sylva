@@ -4,9 +4,29 @@ import 'package:sylva/core/enums/template_enums.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
+import 'package:sylva/presentation/features/share/widgets/dot.dart';
 
-class ShareFocusTab extends StatelessWidget {
+class ShareFocusTab extends StatefulWidget {
   const ShareFocusTab({super.key});
+
+  @override
+  State<ShareFocusTab> createState() => _ShareFocusTabState();
+}
+
+class _ShareFocusTabState extends State<ShareFocusTab> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   Alignment _getAlignment(PalettePosition position) {
     switch (position) {
@@ -41,65 +61,51 @@ class ShareFocusTab extends StatelessWidget {
         final theme = Theme.of(context);
         final positions = PalettePosition.values;
 
-        return ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: positions.length,
-          separatorBuilder: (context, index) => 10.width,
-          itemBuilder: (context, index) {
-            final position = positions[index];
-            final isSelected = state.selectedPosition == position;
+        return Scrollbar(
+          controller: _scrollController,
 
-            return InkWell(
-              onTap: () {
-                cubit.selectPosition(position);
-              },
-              borderRadius: 10.borderRadius,
-              child: Container(
-                width: 55,
-                height: 55,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: 10.borderRadius,
-                  border: Border.all(
-                    color: theme.colorScheme.onSurface,
-                    width: 1,
+          thumbVisibility: true,
+          child: ListView.separated(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            itemCount: positions.length,
+            padding: 12.paddingBottom,
+            separatorBuilder: (context, index) => 10.width,
+            itemBuilder: (context, index) {
+              final position = positions[index];
+              final isSelected = state.selectedPosition == position;
+
+              return InkWell(
+                onTap: () {
+                  cubit.selectPosition(position);
+                },
+                borderRadius: 10.borderRadius,
+                child: Container(
+                  width: 55,
+                  height: 55,
+                  padding: 8.paddingAll,
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? theme.colorScheme.primary
+                        : Colors.transparent,
+                    borderRadius: 10.borderRadius,
+                    border: Border.all(
+                      color:
+                          (isSelected
+                                  ? theme.colorScheme.onPrimary
+                                  : theme.colorScheme.onSurface)
+                              .withValues(alpha: 0.5),
+                      width: 1,
+                    ),
+                  ),
+                  child: Align(
+                    alignment: _getAlignment(position),
+                    child: Dot(isSelected: isSelected),
                   ),
                 ),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: _getAlignment(position),
-                      child: Container(
-                        width: 12,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.onSurfaceVariant,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
-                    if (isSelected)
-                      Center(
-                        child: Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.onSurface,
-                            borderRadius: 10.borderRadius,
-                          ),
-                          child: Icon(
-                            Icons.check_rounded,
-                            color: theme.colorScheme.surface,
-                            size: 18,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         );
       },
     );

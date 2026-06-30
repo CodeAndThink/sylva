@@ -78,45 +78,42 @@ class ShareImagePreview extends StatelessWidget {
     // Determine direction layout
     final isVertical = state.selectedDirection == PaletteDirection.vertical;
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Align(
-        alignment: alignment,
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            // Estimate size based on available area and selected size.
-            final boxSize = constraints.maxWidth * state.shapeSize;
-            final padding = boxSize * 0.2;
-            final spacing = boxSize * state.shapeSpacing;
-            final size = boxSize - padding * 2;
+    return Align(
+      alignment: alignment,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Estimate size based on available area and selected size.
+          final boxSize = constraints.maxWidth * state.shapeSize;
+          final padding = boxSize * 0.2;
+          final spacing = boxSize * state.shapeSpacing;
+          final size = boxSize - padding * 2;
 
-            Widget list = Container(
-              child: isVertical
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: spacing,
-                      children: _buildShapes(
-                        state.selectedShape,
-                        state.selectedColors.toList(),
-                        size,
-                        state,
-                      ),
-                    )
-                  : Row(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: spacing,
-                      children: _buildShapes(
-                        state.selectedShape,
-                        state.selectedColors.toList(),
-                        size,
-                        state,
-                      ),
+          Widget list = Container(
+            child: isVertical
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: spacing,
+                    children: _buildShapes(
+                      state.selectedShape,
+                      state.selectedColors.toList(),
+                      size,
+                      state,
                     ),
-            );
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: spacing,
+                    children: _buildShapes(
+                      state.selectedShape,
+                      state.selectedColors.toList(),
+                      size,
+                      state,
+                    ),
+                  ),
+          );
 
-            return list;
-          },
-        ),
+          return list;
+        },
       ),
     );
   }

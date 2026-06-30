@@ -513,5 +513,11 @@
   "textPositionRight": "Right",
   "@textPositionRight": {},
   "textPositionInside": "Inside",
-  "@textPositionInside": {}
+  "@textPositionInside": {},
+  "colorPickerSelectColor": "Select color",
+  "@colorPickerSelectColor": {},
+  "colorPickerSelectShade": "Select color shade",
+  "@colorPickerSelectShade": {},
+  "colorPickerShades": "Selected color and its shades",
+  "@colorPickerShades": {}
 }

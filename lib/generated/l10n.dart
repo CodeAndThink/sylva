@@ -2008,6 +2008,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Select color`
+  String get colorPickerSelectColor {
+    return Intl.message(
+      'Select color',
+      name: 'colorPickerSelectColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select color shade`
+  String get colorPickerSelectShade {
+    return Intl.message(
+      'Select color shade',
+      name: 'colorPickerSelectShade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected color and its shades`
+  String get colorPickerShades {
+    return Intl.message(
+      'Selected color and its shades',
+      name: 'colorPickerShades',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -71,6 +71,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
     "colorPickMode": MessageLookupByLibrary.simpleMessage("カラーピックモード"),
+    "colorPickerSelectColor": MessageLookupByLibrary.simpleMessage("色を選択"),
+    "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage("色の濃淡を選択"),
+    "colorPickerShades": MessageLookupByLibrary.simpleMessage("選択した色とその濃淡"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("カラーアイコン"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(

@@ -22,6 +22,7 @@ class TemplateListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return InkWell(
       onTap: onTap,
       borderRadius: 12.borderRadius,
@@ -36,20 +37,28 @@ class TemplateListItem extends StatelessWidget {
               height: 55,
               decoration: BoxDecoration(
                 color: isSelected
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 0.8),
+                    ? theme.colorScheme.primary
+                    : Colors.transparent,
                 borderRadius: 10.borderRadius,
-                // border: Border.all(
-                //   color: theme.colorScheme.onSurface,
-                //   width: 1,
-                // ),
+                border: Border.all(
+                  color:
+                      (isSelected
+                              ? theme.colorScheme.onPrimary
+                              : theme.colorScheme.onSurface)
+                          .withValues(alpha: 0.5),
+                  width: 1,
+                ),
               ),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final size = constraints.maxWidth / 2;
-                  return Center(child: _buildShape(size: size));
+                  return Center(
+                    child: _buildShape(
+                      context: context,
+                      size: size,
+                      isSelected: isSelected,
+                    ),
+                  );
                 },
               ),
             ),
@@ -59,8 +68,15 @@ class TemplateListItem extends StatelessWidget {
     );
   }
 
-  Widget _buildShape({required double size}) {
-    const color = Colors.white;
+  Widget _buildShape({
+    required BuildContext context,
+    required double size,
+    required bool isSelected,
+  }) {
+    final theme = Theme.of(context);
+    final color = isSelected
+        ? theme.colorScheme.onPrimary
+        : theme.colorScheme.onSurface.withValues(alpha: 0.5);
 
     switch (shape) {
       case PaletteShape.none:

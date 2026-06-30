@@ -507,5 +507,11 @@
   "textPositionRight": "右",
   "@textPositionRight": {},
   "textPositionInside": "内部",
-  "@textPositionInside": {}
+  "@textPositionInside": {},
+  "colorPickerSelectColor": "选择颜色",
+  "@colorPickerSelectColor": {},
+  "colorPickerSelectShade": "选择颜色深浅",
+  "@colorPickerSelectShade": {},
+  "colorPickerShades": "所选颜色及其深浅",
+  "@colorPickerShades": {}
 }

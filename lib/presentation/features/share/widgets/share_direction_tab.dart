@@ -4,6 +4,7 @@ import 'package:sylva/core/enums/template_enums.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
+import 'package:sylva/presentation/features/share/widgets/dot.dart';
 
 class ShareDirectionTab extends StatelessWidget {
   const ShareDirectionTab({super.key});
@@ -36,22 +37,39 @@ class ShareDirectionTab extends StatelessWidget {
                 height: 55,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? theme.colorScheme.primaryContainer
+                      ? theme.colorScheme.primary
                       : Colors.transparent,
                   borderRadius: 10.borderRadius,
                   border: Border.all(
-                    color: theme.colorScheme.onSurface,
+                    color:
+                        (isSelected
+                                ? theme.colorScheme.onPrimary
+                                : theme.colorScheme.onSurface)
+                            .withValues(alpha: 0.5),
                     width: 1,
                   ),
                 ),
-                child: Icon(
-                  direction == PaletteDirection.horizontal
-                      ? Icons.swap_horiz_rounded
-                      : Icons.swap_vert_rounded,
-                  color: isSelected
-                      ? theme.colorScheme.onPrimaryContainer
-                      : theme.colorScheme.onSurface,
-                ),
+                child: direction == PaletteDirection.vertical
+                    ? Column(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 4,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Dot(isSelected: state.selectedDirection.isVertical),
+                          Dot(isSelected: state.selectedDirection.isVertical),
+                          Dot(isSelected: state.selectedDirection.isVertical),
+                        ],
+                      )
+                    : Row(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 4,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Dot(isSelected: state.selectedDirection.isHorizontal),
+                          Dot(isSelected: state.selectedDirection.isHorizontal),
+                          Dot(isSelected: state.selectedDirection.isHorizontal),
+                        ],
+                      ),
               ),
             );
           },

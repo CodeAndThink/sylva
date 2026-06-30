@@ -1,4 +1,10 @@
-enum PaletteDirection { horizontal, vertical }
+enum PaletteDirection {
+  horizontal,
+  vertical;
+
+  bool get isVertical => this == PaletteDirection.vertical;
+  bool get isHorizontal => this == PaletteDirection.horizontal;
+}
 
 enum PalettePosition {
   topLeft,
@@ -9,7 +15,17 @@ enum PalettePosition {
   bottomCenter,
   centerLeft,
   centerRight,
-  center,
+  center;
+
+  bool get isTopLeft => this == PalettePosition.topLeft;
+  bool get isTopRight => this == PalettePosition.topRight;
+  bool get isTopCenter => this == PalettePosition.topCenter;
+  bool get isBottomLeft => this == PalettePosition.bottomLeft;
+  bool get isBottomRight => this == PalettePosition.bottomRight;
+  bool get isBottomCenter => this == PalettePosition.bottomCenter;
+  bool get isCenterLeft => this == PalettePosition.centerLeft;
+  bool get isCenterRight => this == PalettePosition.centerRight;
+  bool get isCenter => this == PalettePosition.center;
 }
 
 enum PaletteShape {
@@ -19,9 +35,36 @@ enum PaletteShape {
   diamond,
   capsule,
   card,
-  roundedSquare,
+  roundedSquare;
+
+  bool get isCircle => this == PaletteShape.circle;
+  bool get isSquare => this == PaletteShape.square;
+  bool get isDiamond => this == PaletteShape.diamond;
+  bool get isCapsule => this == PaletteShape.capsule;
+  bool get isCard => this == PaletteShape.card;
+  bool get isRoundedSquare => this == PaletteShape.roundedSquare;
 }
 
-enum ShareTextOption { none, hex, rgba }
+enum ShareTextOption {
+  none,
+  hex,
+  rgba;
 
-enum ShareTextPosition { top, bottom, left, right, inside }
+  bool get isNone => this == ShareTextOption.none;
+  bool get isHex => this == ShareTextOption.hex;
+  bool get isRgba => this == ShareTextOption.rgba;
+}
+
+enum ShareTextPosition {
+  top,
+  bottom,
+  left,
+  right,
+  inside;
+
+  bool get isTop => this == ShareTextPosition.top;
+  bool get isBottom => this == ShareTextPosition.bottom;
+  bool get isLeft => this == ShareTextPosition.left;
+  bool get isRight => this == ShareTextPosition.right;
+  bool get isInside => this == ShareTextPosition.inside;
+}

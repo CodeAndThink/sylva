@@ -77,6 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "colorCopiedSuccess": m0,
     "colorPickMode": MessageLookupByLibrary.simpleMessage("Chế độ chọn màu"),
+    "colorPickerSelectColor": MessageLookupByLibrary.simpleMessage("Chọn màu"),
+    "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage(
+      "Chọn độ đậm nhạt",
+    ),
+    "colorPickerShades": MessageLookupByLibrary.simpleMessage(
+      "Màu đã chọn và các độ đậm nhạt",
+    ),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng màu sắc"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",

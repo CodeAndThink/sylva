@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/utils/color_utils.dart';
 import 'package:sylva/core/enums/template_enums.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
-import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_list_item.dart';
+import 'package:sylva/presentation/widgets/buttons/app_sliding_segmented_control.dart';
 
-class ShareTextTab extends StatelessWidget {
+class ShareTextTab extends StatefulWidget {
   final List<Color> colors;
 
   const ShareTextTab({super.key, required this.colors});
 
   @override
+  State<ShareTextTab> createState() => _ShareTextTabState();
+}
+
+class _ShareTextTabState extends State<ShareTextTab> {
+  late ThemeData _theme;
+  late S _l10n;
+  late final ShareCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _cubit = context.read<ShareCubit>();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _theme = Theme.of(context);
+    _l10n = S.of(context);
+
     return BlocBuilder<ShareCubit, ShareState>(
       buildWhen: (previous, current) =>
           previous.textOption != current.textOption ||
@@ -22,80 +42,104 @@ class ShareTextTab extends StatelessWidget {
           previous.isTextBold != current.isTextBold ||
           previous.isTextItalic != current.isTextItalic ||
           previous.isTextUnderline != current.isTextUnderline ||
-          previous.selectedShape != current.selectedShape,
+          previous.selectedShape != current.selectedShape ||
+          previous.textColor != current.textColor,
       builder: (context, state) {
-        final cubit = context.read<ShareCubit>();
-        final primaryColor = Theme.of(context).colorScheme.primary;
-        final l10n = S.of(context);
-
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Option Segmented Control
-            SegmentedButton<ShareTextOption>(
+            AppSlidingSegmentedControl<ShareTextOption>(
+              selectedValue: state.textOption,
+              onValueChanged: _cubit.changeTextOption,
               segments: [
-                ButtonSegment(
-                  value: ShareTextOption.none,
-                  label: Text(l10n.textOptionNone),
-                  icon: const Icon(Icons.do_not_disturb),
+                (
+                  ShareTextOption.none,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.do_not_disturb),
+                      4.width,
+                      Text(_l10n.textOptionNone),
+                    ],
+                  ),
                 ),
-                const ButtonSegment(
-                  value: ShareTextOption.hex,
-                  label: Text('HEX'),
-                  icon: Icon(Icons.tag),
+                (
+                  ShareTextOption.hex,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.tag),
+                      4.width,
+                      const Text('HEX'),
+                    ],
+                  ),
                 ),
-                const ButtonSegment(
-                  value: ShareTextOption.rgba,
-                  label: Text('RGBA'),
-                  icon: Icon(Icons.color_lens),
+                (
+                  ShareTextOption.rgba,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.color_lens),
+                      4.width,
+                      const Text('RGBA'),
+                    ],
+                  ),
                 ),
               ],
-              selected: {state.textOption},
-              onSelectionChanged: (Set<ShareTextOption> newSelection) {
-                cubit.changeTextOption(newSelection.first);
-              },
             ),
-            12.height,
+            8.height,
             if (state.textOption != ShareTextOption.none &&
                 state.selectedShape != PaletteShape.none) ...[
               // Position Segmented Control
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: SegmentedButton<ShareTextPosition>(
-                  segments: [
-                    ButtonSegment(
-                      value: ShareTextPosition.top,
-                      label: Text(l10n.textPositionTop),
-                      icon: const Icon(Icons.vertical_align_top),
+              AppSlidingSegmentedControl<ShareTextPosition>(
+                isFlexible: true,
+                selectedValue: state.textPosition,
+                onValueChanged: _cubit.changeTextPosition,
+                segments: [
+                  (
+                    ShareTextPosition.top,
+                    _buildPositionSegment(
+                      icon: Icons.vertical_align_top,
+                      label: _l10n.textPositionTop,
+                      isSelected: state.textPosition.isTop,
                     ),
-                    ButtonSegment(
-                      value: ShareTextPosition.bottom,
-                      label: Text(l10n.textPositionBottom),
-                      icon: const Icon(Icons.vertical_align_bottom),
+                  ),
+                  (
+                    ShareTextPosition.bottom,
+                    _buildPositionSegment(
+                      icon: Icons.vertical_align_bottom,
+                      label: _l10n.textPositionBottom,
+                      isSelected: state.textPosition.isBottom,
                     ),
-                    ButtonSegment(
-                      value: ShareTextPosition.left,
-                      label: Text(l10n.textPositionLeft),
-                      icon: const Icon(Icons.align_horizontal_left),
+                  ),
+                  (
+                    ShareTextPosition.left,
+                    _buildPositionSegment(
+                      icon: Icons.align_horizontal_left,
+                      label: _l10n.textPositionLeft,
+                      isSelected: state.textPosition.isLeft,
                     ),
-                    ButtonSegment(
-                      value: ShareTextPosition.right,
-                      label: Text(l10n.textPositionRight),
-                      icon: const Icon(Icons.align_horizontal_right),
+                  ),
+                  (
+                    ShareTextPosition.right,
+                    _buildPositionSegment(
+                      icon: Icons.align_horizontal_right,
+                      label: _l10n.textPositionRight,
+                      isSelected: state.textPosition.isRight,
                     ),
-                    ButtonSegment(
-                      value: ShareTextPosition.inside,
-                      label: Text(l10n.textPositionInside),
-                      icon: const Icon(Icons.center_focus_strong),
+                  ),
+                  (
+                    ShareTextPosition.inside,
+                    _buildPositionSegment(
+                      icon: Icons.center_focus_strong,
+                      label: _l10n.textPositionInside,
+                      isSelected: state.textPosition.isInside,
                     ),
-                  ],
-                  selected: {state.textPosition},
-                  onSelectionChanged: (Set<ShareTextPosition> newSelection) {
-                    cubit.changeTextPosition(newSelection.first);
-                  },
-                ),
+                  ),
+                ],
               ),
-              12.height,
+              8.height,
               // Size slider & styling buttons
               Row(
                 children: [
@@ -105,91 +149,92 @@ class ShareTextTab extends StatelessWidget {
                       value: state.textSize,
                       min: 0.1,
                       max: 1.0,
-                      onChanged: (v) => cubit.changeTextSize(v),
+                      onChanged: (v) => _cubit.changeTextSize(v),
                     ),
                   ),
+                  4.width,
                   _buildStyleButton(
                     icon: Icons.format_bold,
                     isSelected: state.isTextBold,
-                    onPressed: cubit.toggleTextBold,
-                    primaryColor: primaryColor,
+                    onPressed: _cubit.toggleTextBold,
+                    primaryColor: _theme.colorScheme.primary,
                   ),
+                  4.width,
                   _buildStyleButton(
                     icon: Icons.format_italic,
                     isSelected: state.isTextItalic,
-                    onPressed: cubit.toggleTextItalic,
-                    primaryColor: primaryColor,
+                    onPressed: _cubit.toggleTextItalic,
+                    primaryColor: _theme.colorScheme.primary,
                   ),
+                  4.width,
                   _buildStyleButton(
                     icon: Icons.format_underlined,
                     isSelected: state.isTextUnderline,
-                    onPressed: cubit.toggleTextUnderline,
-                    primaryColor: primaryColor,
+                    onPressed: _cubit.toggleTextUnderline,
+                    primaryColor: _theme.colorScheme.primary,
+                  ),
+                  4.width,
+                  InkWell(
+                    borderRadius: 20.borderRadius,
+                    onTap: () async {
+                      final Color initialColor =
+                          state.textColor ?? _theme.colorScheme.surface;
+                      final Color? pickedColor =
+                          await ColorUtils.showColorPicker(
+                            context,
+                            initialColor: initialColor,
+                          );
+                      if (pickedColor != null) {
+                        _cubit.changeTextColor(pickedColor);
+                      }
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: state.textColor ?? _theme.colorScheme.surface,
+                      ),
+                      child: const Icon(
+                        Icons.colorize,
+                        size: 20,
+                        color: Colors.black54,
+                      ),
+                    ),
                   ),
                 ],
-              ),
-              12.height,
-              // Text Color Picker
-              SizedBox(
-                height: 55,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    // Auto Color Option
-                    Center(
-                      child: GestureDetector(
-                        onTap: () => cubit.changeTextColor(null),
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey.shade800,
-                            border: state.textColor == null
-                                ? Border.all(color: primaryColor, width: 2)
-                                : null,
-                          ),
-                          child: const Icon(
-                            Icons.auto_awesome,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    10.width,
-                    // White
-                    PaletteColorListItem(
-                      color: Colors.white,
-                      isSelected: state.textColor == Colors.white,
-                      onTap: () => cubit.changeTextColor(Colors.white),
-                    ),
-                    10.width,
-                    // Black
-                    PaletteColorListItem(
-                      color: Colors.black,
-                      isSelected: state.textColor == Colors.black,
-                      onTap: () => cubit.changeTextColor(Colors.black),
-                    ),
-                    10.width,
-                    // Image Colors
-                    ...colors.map(
-                      (c) => Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: PaletteColorListItem(
-                          color: c,
-                          isSelected: state.textColor == c,
-                          onTap: () => cubit.changeTextColor(c),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ],
         );
       },
+    );
+  }
+
+  Widget _buildPositionSegment({
+    required IconData icon,
+    required String label,
+    required bool isSelected,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon),
+        if (isSelected) ...[
+          4.width,
+          Flexible(
+            child: Text(
+              label,
+              style: _theme.textTheme.bodySmall?.copyWith(
+                color: _theme.colorScheme.onPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ],
     );
   }
 
@@ -199,14 +244,20 @@ class ShareTextTab extends StatelessWidget {
     required VoidCallback onPressed,
     required Color primaryColor,
   }) {
-    return IconButton(
-      onPressed: onPressed,
-      icon: Icon(icon),
-      color: isSelected ? primaryColor : Colors.grey,
-      style: IconButton.styleFrom(
-        backgroundColor: isSelected
-            ? primaryColor.withValues(alpha: 0.2)
-            : null,
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: 20.borderRadius,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isSelected ? primaryColor.withValues(alpha: 0.2) : null,
+        ),
+        child: Icon(
+          icon,
+          color: isSelected ? primaryColor : _theme.colorScheme.onSurface,
+        ),
       ),
     );
   }

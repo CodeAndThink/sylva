@@ -96,7 +96,8 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                 AppFeedback.playInteract(context);
                 showModalBottomSheet(
                   context: context,
-                  showDragHandle: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
                   isScrollControlled: true,
                   builder: (context) => BlocProvider.value(
                     value: _cubit,

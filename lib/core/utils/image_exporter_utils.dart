@@ -210,18 +210,7 @@ class ImageExporterUtils {
         break;
     }
 
-    // Draw background
-    final bgPaint = Paint()
-      ..color = Colors.black.withValues(
-        alpha: 0.5,
-      ); // equivalent to primaryContainer with opacity roughly
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(dx, dy, containerWidth, containerHeight),
-        Radius.circular(boxSize * 0.1),
-      ),
-      bgPaint,
-    );
+    // Background removed as per user request
 
     // Draw shapes
     for (int i = 0; i < 3; i++) {

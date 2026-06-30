@@ -507,5 +507,11 @@
   "textPositionRight": "右",
   "@textPositionRight": {},
   "textPositionInside": "内側",
-  "@textPositionInside": {}
+  "@textPositionInside": {},
+  "colorPickerSelectColor": "色を選択",
+  "@colorPickerSelectColor": {},
+  "colorPickerSelectShade": "色の濃淡を選択",
+  "@colorPickerSelectShade": {},
+  "colorPickerShades": "選択した色とその濃淡",
+  "@colorPickerShades": {}
 }

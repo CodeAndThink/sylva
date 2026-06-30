@@ -37,9 +37,7 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
           previous.shapeSpacing != current.shapeSpacing,
       builder: (context, state) {
         final cubit = context.read<ShareCubit>();
-        final shapes = PaletteShape.values
-            .where((s) => s != PaletteShape.none)
-            .toList();
+        final shapes = PaletteShape.values;
 
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -71,12 +69,13 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
               ],
             ),
             SizedBox(
-              height: 55,
+              height: 67,
               child: Scrollbar(
                 controller: _scrollController,
                 thumbVisibility: true,
                 child: ListView.separated(
                   controller: _scrollController,
+                  padding: 12.paddingBottom,
                   scrollDirection: Axis.horizontal,
                   itemCount: shapes.length,
                   separatorBuilder: (context, index) => 10.width,

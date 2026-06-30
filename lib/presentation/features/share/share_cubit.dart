@@ -17,7 +17,11 @@ class ShareCubit extends BaseCubit<ShareState> {
     } else {
       set.add(color);
     }
-    emit(state.copyWith(selectedColors: set));
+    final selectedShape =
+        state.selectedColors.isNotEmpty && state.selectedShape.isNone
+        ? PaletteShape.circle
+        : state.selectedShape;
+    emit(state.copyWith(selectedColors: set, selectedShape: selectedShape));
   }
 
   void changeTab(ShareFeatureTab tab) {

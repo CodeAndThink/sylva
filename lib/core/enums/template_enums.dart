@@ -36,6 +36,7 @@ enum PaletteShape {
   capsule,
   roundedSquare;
 
+  bool get isNone => this == PaletteShape.none;
   bool get isCircle => this == PaletteShape.circle;
   bool get isSquare => this == PaletteShape.square;
   bool get isDiamond => this == PaletteShape.diamond;

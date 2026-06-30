@@ -79,7 +79,7 @@ class TemplateListItem extends StatelessWidget {
 
     switch (shape) {
       case PaletteShape.none:
-        return Container();
+        return Icon(Icons.do_not_disturb, size: size, color: color);
       case PaletteShape.circle:
         return CircleShape(color: color, size: size);
       case PaletteShape.square:

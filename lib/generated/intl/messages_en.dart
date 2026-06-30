@@ -463,9 +463,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
     "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
-      "Share photos with color information with your friends",
+      "Select colors and create beautiful images",
     ),
-    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Share"),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("Create Images"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("Skip"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "Sort your history ascending or descending by time.",

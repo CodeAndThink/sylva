@@ -34,7 +34,8 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
       buildWhen: (previous, current) =>
           previous.selectedShape != current.selectedShape ||
           previous.shapeSize != current.shapeSize ||
-          previous.shapeSpacing != current.shapeSpacing,
+          previous.shapeSpacing != current.shapeSpacing ||
+          previous.shapeMargin != current.shapeMargin,
       builder: (context, state) {
         final cubit = context.read<ShareCubit>();
         final shapes = PaletteShape.values;
@@ -64,6 +65,19 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
                     min: 0.0,
                     max: 1.0,
                     onChanged: (v) => cubit.changeShapeSpacing(v),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(Icons.margin),
+                Expanded(
+                  child: Slider(
+                    value: state.shapeMargin,
+                    min: 0.0,
+                    max: 1.0,
+                    onChanged: (v) => cubit.changeShapeMargin(v),
                   ),
                 ),
               ],

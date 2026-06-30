@@ -25,6 +25,7 @@ class ShareState extends Equatable {
   final PaletteDirection selectedDirection;
   final double shapeSize;
   final double shapeSpacing;
+  final double shapeMargin;
 
   final ShareTextOption textOption;
   final ShareTextPosition textPosition;
@@ -42,6 +43,7 @@ class ShareState extends Equatable {
     this.selectedDirection = PaletteDirection.vertical,
     this.shapeSize = 0.2,
     this.shapeSpacing = 0.2,
+    this.shapeMargin = 0.0,
     this.textOption = ShareTextOption.none,
     this.textPosition = ShareTextPosition.bottom,
     this.textSize = 0.5,
@@ -59,6 +61,7 @@ class ShareState extends Equatable {
     PaletteDirection? selectedDirection,
     double? shapeSize,
     double? shapeSpacing,
+    double? shapeMargin,
     ShareTextOption? textOption,
     ShareTextPosition? textPosition,
     double? textSize,
@@ -76,6 +79,7 @@ class ShareState extends Equatable {
       selectedDirection: selectedDirection ?? this.selectedDirection,
       shapeSize: shapeSize ?? this.shapeSize,
       shapeSpacing: shapeSpacing ?? this.shapeSpacing,
+      shapeMargin: shapeMargin ?? this.shapeMargin,
       textOption: textOption ?? this.textOption,
       textPosition: textPosition ?? this.textPosition,
       textSize: textSize ?? this.textSize,
@@ -95,6 +99,7 @@ class ShareState extends Equatable {
     selectedDirection,
     shapeSize,
     shapeSpacing,
+    shapeMargin,
     textOption,
     textPosition,
     textSize,

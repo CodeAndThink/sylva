@@ -1009,7 +1009,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 AppFeedback.playInteract(context);
                 _cubit.navigateToShare();
               },
-              icon: Icon(Icons.share_rounded, size: 25),
+              icon: Icon(Icons.draw_rounded, size: 30),
             ),
           ),
           Tooltip(

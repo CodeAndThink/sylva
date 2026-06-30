@@ -390,10 +390,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "アプリの設定をカスタマイズします。",
     ),
     "tutorialSettingsTitle": MessageLookupByLibrary.simpleMessage("設定"),
-    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage(
-      "画像とカラー情報を友達と共有する",
-    ),
-    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("共有"),
+    "tutorialShareDesc": MessageLookupByLibrary.simpleMessage("色を選択して画像を共有する"),
+    "tutorialShareTitle": MessageLookupByLibrary.simpleMessage("画像を作成する"),
     "tutorialSkip": MessageLookupByLibrary.simpleMessage("スキップ"),
     "tutorialSortDesc": MessageLookupByLibrary.simpleMessage(
       "時間で履歴を昇順または降順に並べ替えます。",

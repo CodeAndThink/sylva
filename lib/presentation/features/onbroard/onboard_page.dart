@@ -63,26 +63,6 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
       body: Stack(
         children: [
           Positioned.fill(
-            child: AppAssetImage(path: AppAssets.bgOnboard, fit: BoxFit.cover),
-          ),
-
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.transparent,
-                    _theme.colorScheme.surface,
-                  ],
-                  stops: const [0.0, 0.8, 1.0],
-                ),
-              ),
-            ),
-          ),
-          Positioned.fill(
             child: Center(
               child: Padding(
                 padding: 20.paddingAll,
@@ -90,15 +70,16 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        AppAssetImage(
+                    Align(
+                      alignment: Alignment.center,
+                      child: ClipRRect(
+                        borderRadius: 75.borderRadius,
+                        child: AppAssetImage(
                           path: AppAssets.icAppIcon,
                           width: 150,
                           height: 150,
                         ),
-                      ],
+                      ),
                     ),
                     30.height,
                     ShaderMask(
@@ -127,10 +108,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                     16.height,
                     Text(
                       _l10n.onboardDesc,
-                      style: _theme.textTheme.bodyLarge?.copyWith(
-                        color: Colors.black,
-                        height: 1.4,
-                      ),
+                      style: _theme.textTheme.bodyLarge?.copyWith(height: 1.4),
                     ),
                   ],
                 ),
@@ -140,7 +118,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: 16.paddingBottom,
+              padding: 12.paddingBottom,
               child: SafeArea(
                 child: ScaleTransition(
                   scale: _scaleAnimation,
@@ -154,14 +132,14 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                       },
                       borderRadius: 50.borderRadius,
                       child: Container(
-                        padding: 20.paddingAll,
+                        padding: 16.paddingAll,
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.1),
+                          color: _theme.colorScheme.primary,
                           borderRadius: 50.borderRadius,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.navigate_next_outlined,
-                          color: Colors.white,
+                          color: _theme.colorScheme.onPrimary,
                           size: 36,
                         ),
                       ),

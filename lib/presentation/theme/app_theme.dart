@@ -97,6 +97,7 @@ class AppTheme {
       seedColor: seedColor,
       brightness: Brightness.light,
       error: Colors.red,
+      surface: Colors.white,
     );
 
     return ThemeData(
@@ -126,6 +127,7 @@ class AppTheme {
       seedColor: seedColor,
       brightness: Brightness.dark,
       error: Colors.red,
+      surface: Color(0xFF121212),
     );
 
     return ThemeData(

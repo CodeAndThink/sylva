@@ -65,7 +65,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                     child: Container(
                       margin: 12.paddingLeft,
                       decoration: BoxDecoration(
-                        color: Colors.red.withValues(alpha: 0.9),
+                        color: theme.colorScheme.error.withValues(alpha: 0.9),
                         borderRadius: 20.borderRadius,
                       ),
                       alignment: Alignment.center,

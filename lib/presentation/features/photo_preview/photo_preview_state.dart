@@ -9,6 +9,7 @@ class PhotoPreviewState extends Equatable {
   final List<Color> paletteColors;
   final List<Color> userColors;
   final Color? selectedColor;
+  final Color? filteredColor;
   final Uint8List? filteredImageBytes;
   final String? imagePath;
   final int? historyRecordId;
@@ -19,6 +20,7 @@ class PhotoPreviewState extends Equatable {
     this.getColorStatus = LoadStatus.initial,
     this.filterColorStatus = LoadStatus.initial,
     this.selectedColor,
+    this.filteredColor,
     this.filteredImageBytes,
     this.imagePath,
     this.historyRecordId,
@@ -30,6 +32,8 @@ class PhotoPreviewState extends Equatable {
     LoadStatus? getColorStatus,
     LoadStatus? filterColorStatus,
     Color? selectedColor,
+    bool clearSelectedColor = false,
+    Color? filteredColor,
     Uint8List? filteredImageBytes,
     String? imagePath,
     int? historyRecordId,
@@ -39,13 +43,12 @@ class PhotoPreviewState extends Equatable {
       userColors: userColors ?? this.userColors,
       getColorStatus: getColorStatus ?? this.getColorStatus,
       filterColorStatus: filterColorStatus ?? this.filterColorStatus,
-      // If selectedColor is explicitly passed as null, it will be ignored by ??
-      // To allow nulling it out, we'd normally use a wrapped value, but since
-      // we only null it out when filterColorStatus == initial, we can infer it
-      // or just use a workaround. Wait, let's keep it simple:
-      selectedColor: filterColorStatus == LoadStatus.initial
+      selectedColor: clearSelectedColor
           ? null
           : (selectedColor ?? this.selectedColor),
+      filteredColor: filterColorStatus == LoadStatus.initial
+          ? null
+          : (filteredColor ?? this.filteredColor),
       filteredImageBytes: filterColorStatus == LoadStatus.initial
           ? null
           : (filteredImageBytes ?? this.filteredImageBytes),
@@ -61,6 +64,7 @@ class PhotoPreviewState extends Equatable {
     getColorStatus,
     filterColorStatus,
     selectedColor,
+    filteredColor,
     filteredImageBytes,
     imagePath,
     historyRecordId,

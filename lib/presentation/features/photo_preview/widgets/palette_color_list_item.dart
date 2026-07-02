@@ -37,28 +37,35 @@ class PaletteColorListItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: 10.borderRadius,
-                  border: Border.all(
-                    color: theme.colorScheme.onSurface,
-                    width: 1,
+                ),
+                child: Center(
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: 8.borderRadius,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    child: isSelected
+                        ? Center(
+                            child: Container(
+                              width: 20,
+                              height: 20,
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.onSurface,
+                                borderRadius: 10.borderRadius,
+                              ),
+                              child: Icon(
+                                Icons.check_rounded,
+                                color: theme.colorScheme.surface,
+                                size: 18,
+                              ),
+                            ),
+                          )
+                        : null,
                   ),
                 ),
-                child: isSelected
-                    ? Center(
-                        child: Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.onSurface,
-                            borderRadius: 10.borderRadius,
-                          ),
-                          child: Icon(
-                            Icons.check_rounded,
-                            color: theme.colorScheme.surface,
-                            size: 18,
-                          ),
-                        ),
-                      )
-                    : null,
               ),
               if (hex != null && hex?.isNotEmpty == true) ...[
                 5.height,

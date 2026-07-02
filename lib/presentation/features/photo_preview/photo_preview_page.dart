@@ -16,6 +16,7 @@ import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_shimmer_list.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/save_options_bottom_sheet.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/full_screen_photo_viewer.dart';
+import 'package:sylva/presentation/widgets/buttons/app_circle_icon_button.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -65,6 +66,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   late final PhotoPreviewCubit _cubit;
   final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isZoomMode = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> _isDeleteMode = ValueNotifier<bool>(false);
   final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
     Offset.zero,
   );
@@ -73,6 +75,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   final GlobalKey _imageKey = GlobalKey();
   final GlobalKey _keyPalette = GlobalKey();
   final GlobalKey _keyExpandPalette = GlobalKey();
+  final GlobalKey _keyDeleteColor = GlobalKey();
   final GlobalKey _keyBack = GlobalKey();
   final GlobalKey _keySave = GlobalKey();
   final GlobalKey _keyLibrary = GlobalKey();
@@ -116,6 +119,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     _zoomAnimationController.dispose();
     _pageController.dispose();
     _transformationController.dispose();
+    _isDeleteMode.dispose();
     super.dispose();
   }
 
@@ -414,22 +418,20 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
 
         if (isFiltering) {
           return Positioned(
-            bottom: 88,
-            right: 4,
-            child: Tooltip(
-              message: _l10n.cancel,
-              child: IconButton(
-                color: Colors.red,
-                onPressed: () {
-                  if (state.selectedColor != null) {
-                    _cubit.filterColor(
-                      widget.args.imagePath,
-                      state.selectedColor!,
-                    );
-                  }
-                },
-                icon: const Icon(Icons.close_rounded, size: 32),
-              ),
+            bottom: 100,
+            right: 8,
+            child: AppCircleIconButton(
+              tooltipMessage: _l10n.cancel,
+              backgroundColor: _theme.colorScheme.error.withValues(alpha: 0.8),
+              onTap: () {
+                if (state.filteredColor != null) {
+                  _cubit.filterColor(
+                    widget.args.imagePath,
+                    state.filteredColor!,
+                  );
+                }
+              },
+              icon: Icons.close_rounded,
             ),
           );
         }
@@ -439,43 +441,43 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           builder: (context, showMagnifier, child) {
             if (!showMagnifier) return const SizedBox.shrink();
             return Positioned(
-              bottom: 88,
-              right: 4,
+              bottom: 100,
+              right: 8,
               child: Column(
+                spacing: 8,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Tooltip(
-                    message: _l10n.saveColor,
-                    child: IconButton(
-                      color: Colors.green,
-                      onPressed: () {
-                        AppFeedback.playInteract(context);
-                        if (_cubit.state.selectedColor != null) {
-                          _cubit.saveUserColor(
-                            color: _cubit.state.selectedColor!,
-                          );
-                        }
-                        _showMagnifier.value = false;
-                        _pageController.animateToPage(
-                          1,
-                          duration: 200.milliseconds,
-                          curve: Curves.easeInOut,
+                  AppCircleIconButton(
+                    tooltipMessage: _l10n.saveColor,
+                    backgroundColor: Colors.green.withValues(alpha: 0.8),
+                    onTap: () {
+                      AppFeedback.playInteract(context);
+                      if (_cubit.state.selectedColor != null) {
+                        _cubit.saveUserColor(
+                          color: _cubit.state.selectedColor!,
                         );
-                      },
-                      icon: const Icon(Icons.check_circle_outline, size: 32),
-                    ),
-                  ),
-                  Tooltip(
-                    message: _l10n.cancel,
-                    child: IconButton(
-                      color: Colors.red,
-                      onPressed: () {
-                        AppFeedback.playInteract(context);
-                        _showMagnifier.value = false;
                         _cubit.clearSelectedColor();
-                      },
-                      icon: const Icon(Icons.block_outlined, size: 32),
+                      }
+                      _showMagnifier.value = false;
+                      _pageController.animateToPage(
+                        1,
+                        duration: 200.milliseconds,
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    icon: Icons.check_circle_outline,
+                  ),
+                  AppCircleIconButton(
+                    tooltipMessage: _l10n.cancel,
+                    backgroundColor: _theme.colorScheme.error.withValues(
+                      alpha: 0.8,
                     ),
+                    onTap: () {
+                      AppFeedback.playInteract(context);
+                      _showMagnifier.value = false;
+                      _cubit.clearSelectedColor();
+                    },
+                    icon: Icons.block_outlined,
                   ),
                 ],
               ),
@@ -519,10 +521,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildColorSet() {
     return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
       buildWhen: (previous, current) =>
+          current.paletteColors != previous.paletteColors ||
+          current.userColors != previous.userColors ||
           current.getColorStatus != previous.getColorStatus ||
-          current.filterColorStatus != previous.filterColorStatus ||
-          current.selectedColor != previous.selectedColor ||
-          previous.userColors != current.userColors,
+          current.filteredColor != previous.filteredColor,
       builder: (context, state) {
         if (state.getColorStatus.isLoading) {
           return SizedBox(
@@ -536,7 +538,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             padding: 8.paddingAll,
             child: Text(
               _l10n.failedToLoadColors,
-              style: _theme.textTheme.bodyMedium?.copyWith(color: Colors.red),
+              style: _theme.textTheme.bodyMedium?.copyWith(
+                color: _theme.colorScheme.error,
+              ),
             ),
           );
         } else {
@@ -566,7 +570,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                 return PaletteColorListItem(
                                   color: color,
                                   hex: hex,
-                                  isSelected: state.selectedColor == color,
+                                  isSelected: state.filteredColor == color,
                                   onTap: () {
                                     _cubit.filterColor(
                                       widget.args.imagePath,
@@ -587,7 +591,49 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          AppTitleText(title: _l10n.myColors),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: AppTitleText(title: _l10n.myColors),
+                              ),
+                              SizedBox(
+                                height: 24,
+                                child: state.userColors.isNotEmpty
+                                    ? ValueListenableBuilder<bool>(
+                                        valueListenable: _isDeleteMode,
+                                        builder: (context, isDeleteMode, child) {
+                                          return InkWell(
+                                            borderRadius: 12.borderRadius,
+                                            key: _keyDeleteColor,
+                                            onTap: () {
+                                              _isDeleteMode.value =
+                                                  !_isDeleteMode.value;
+                                              if (state.filteredColor != null) {
+                                                _cubit.clearSelectedColor();
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 48,
+                                              decoration: BoxDecoration(
+                                                color: isDeleteMode
+                                                    ? _theme.colorScheme.error
+                                                    : Colors.transparent,
+                                                borderRadius: 12.borderRadius,
+                                              ),
+                                              child: Icon(
+                                                Icons.cleaning_services_rounded,
+                                                color: isDeleteMode
+                                                    ? _theme.colorScheme.onError
+                                                    : _theme.colorScheme.error,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : null,
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 80,
                             child: state.userColors.isEmpty
@@ -611,21 +657,75 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                       final hex = ColorUtils.colorToHex(
                                         color: color,
                                       );
-                                      return PaletteColorListItem(
-                                        color: color,
-                                        hex: hex,
-                                        isSelected:
-                                            state.selectedColor == color,
-                                        onTap: () {
-                                          _cubit.filterColor(
-                                            widget.args.imagePath,
-                                            color,
+                                      return ValueListenableBuilder<bool>(
+                                        valueListenable: _isDeleteMode,
+                                        builder: (context, isDeleteMode, child) {
+                                          return Stack(
+                                            alignment: Alignment.topCenter,
+                                            children: [
+                                              PaletteColorListItem(
+                                                color: color,
+                                                hex: hex,
+                                                isSelected:
+                                                    state.filteredColor ==
+                                                    color,
+                                                onTap: () {
+                                                  if (isDeleteMode) {
+                                                    _cubit.deleteUserColor(
+                                                      color: color,
+                                                    );
+                                                    if (state
+                                                            .userColors
+                                                            .length ==
+                                                        1) {
+                                                      _isDeleteMode.value =
+                                                          false;
+                                                    }
+                                                  } else {
+                                                    _cubit.filterColor(
+                                                      widget.args.imagePath,
+                                                      color,
+                                                    );
+                                                    _showMagnifier.value =
+                                                        false;
+                                                  }
+                                                },
+                                                onLongPress: () {
+                                                  if (!isDeleteMode) {
+                                                    AppFeedback.playLongInteract(
+                                                      context,
+                                                    );
+                                                    _cubit.copyColor(color);
+                                                  }
+                                                },
+                                              ),
+                                              if (isDeleteMode)
+                                                Positioned(
+                                                  top: 15.5,
+                                                  child: IgnorePointer(
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: _theme
+                                                            .colorScheme
+                                                            .error
+                                                            .withValues(
+                                                              alpha: 0.8,
+                                                            ),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      padding: 4.paddingAll,
+                                                      child: Icon(
+                                                        Icons.close_rounded,
+                                                        color: _theme
+                                                            .colorScheme
+                                                            .onError,
+                                                        size: 16,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
                                           );
-                                          _showMagnifier.value = false;
-                                        },
-                                        onLongPress: () {
-                                          AppFeedback.playLongInteract(context);
-                                          _cubit.copyColor(color);
                                         },
                                       );
                                     },
@@ -638,7 +738,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 ),
                 8.width,
                 Padding(
-                  padding: 8.paddingVertical,
+                  padding: 6.paddingVertical,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -886,9 +986,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildColorDetails() {
     return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
       buildWhen: (previous, current) =>
-          current.selectedColor != previous.selectedColor,
+          current.selectedColor != previous.selectedColor ||
+          current.filteredColor != previous.filteredColor,
       builder: (context, state) {
-        final color = state.selectedColor;
+        final color = state.selectedColor ?? state.filteredColor;
 
         return AppTransparentContainer(
           height: 38,
@@ -1025,7 +1126,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                               AppFeedback.playInteract(context);
                               _cubit.navigateToShare();
                             },
-                            icon: const Icon(Icons.draw_rounded, size: 30),
+                            icon: const Icon(
+                              Icons.design_services_rounded,
+                              size: 30,
+                            ),
                           ),
                         )
                       : const SizedBox.shrink(),

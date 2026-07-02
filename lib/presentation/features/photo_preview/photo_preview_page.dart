@@ -422,7 +422,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             child: Tooltip(
               message: _l10n.cancel,
               child: IconButton(
-                color: Colors.red,
+                color: _theme.colorScheme.error,
                 onPressed: () {
                   if (state.selectedColor != null) {
                     _cubit.filterColor(
@@ -442,42 +442,71 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           builder: (context, showMagnifier, child) {
             if (!showMagnifier) return const SizedBox.shrink();
             return Positioned(
-              bottom: 88,
-              right: 4,
+              bottom: 100,
+              right: 8,
               child: Column(
+                spacing: 8,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Tooltip(
                     message: _l10n.saveColor,
-                    child: IconButton(
-                      color: Colors.green,
-                      onPressed: () {
-                        AppFeedback.playInteract(context);
-                        if (_cubit.state.selectedColor != null) {
-                          _cubit.saveUserColor(
-                            color: _cubit.state.selectedColor!,
+                    child: Material(
+                      color: Colors.green.withValues(alpha: 0.8),
+                      borderRadius: 20.borderRadius,
+                      clipBehavior: Clip.hardEdge,
+                      child: InkWell(
+                        onTap: () {
+                          AppFeedback.playInteract(context);
+                          if (_cubit.state.selectedColor != null) {
+                            _cubit.saveUserColor(
+                              color: _cubit.state.selectedColor!,
+                            );
+                          }
+                          _showMagnifier.value = false;
+                          _pageController.animateToPage(
+                            1,
+                            duration: 200.milliseconds,
+                            curve: Curves.easeInOut,
                           );
-                        }
-                        _showMagnifier.value = false;
-                        _pageController.animateToPage(
-                          1,
-                          duration: 200.milliseconds,
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      icon: const Icon(Icons.check_circle_outline, size: 32),
+                        },
+                        child: SizedBox(
+                          height: 38,
+                          width: 38,
+                          child: Center(
+                            child: const Icon(
+                              Icons.check_circle_outline,
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Tooltip(
                     message: _l10n.cancel,
-                    child: IconButton(
-                      color: Colors.red,
-                      onPressed: () {
-                        AppFeedback.playInteract(context);
-                        _showMagnifier.value = false;
-                        _cubit.clearSelectedColor();
-                      },
-                      icon: const Icon(Icons.block_outlined, size: 32),
+                    child: Material(
+                      color: _theme.colorScheme.error.withValues(alpha: 0.7),
+                      borderRadius: 20.borderRadius,
+                      clipBehavior: Clip.hardEdge,
+                      child: InkWell(
+                        onTap: () {
+                          AppFeedback.playInteract(context);
+                          _showMagnifier.value = false;
+                          _cubit.clearSelectedColor();
+                        },
+                        child: SizedBox(
+                          height: 38,
+                          width: 38,
+                          child: Center(
+                            child: const Icon(
+                              Icons.block_outlined,
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -539,7 +568,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             padding: 8.paddingAll,
             child: Text(
               _l10n.failedToLoadColors,
-              style: _theme.textTheme.bodyMedium?.copyWith(color: Colors.red),
+              style: _theme.textTheme.bodyMedium?.copyWith(
+                color: _theme.colorScheme.error,
+              ),
             ),
           );
         } else {
@@ -590,7 +621,49 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          AppTitleText(title: _l10n.myColors),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: AppTitleText(title: _l10n.myColors),
+                              ),
+                              SizedBox(
+                                height: 24,
+                                child: state.userColors.isNotEmpty
+                                    ? ValueListenableBuilder<bool>(
+                                        valueListenable: _isDeleteMode,
+                                        builder: (context, isDeleteMode, child) {
+                                          return InkWell(
+                                            borderRadius: 12.borderRadius,
+                                            key: _keyDeleteColor,
+                                            onTap: () {
+                                              _isDeleteMode.value =
+                                                  !_isDeleteMode.value;
+                                              if (state.selectedColor != null) {
+                                                _cubit.clearSelectedColor();
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 48,
+                                              decoration: BoxDecoration(
+                                                color: isDeleteMode
+                                                    ? _theme.colorScheme.error
+                                                    : Colors.transparent,
+                                                borderRadius: 12.borderRadius,
+                                              ),
+                                              child: Icon(
+                                                Icons.cleaning_services_rounded,
+                                                color: isDeleteMode
+                                                    ? _theme.colorScheme.onError
+                                                    : _theme.colorScheme.error,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : null,
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 80,
                             child: state.userColors.isEmpty
@@ -695,7 +768,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 ),
                 8.width,
                 Padding(
-                  padding: 8.paddingVertical,
+                  padding: 6.paddingVertical,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -755,41 +828,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                           },
                         ),
                       ),
-                      SizedBox(
-                        height: 24,
-                        child: state.userColors.isNotEmpty
-                            ? ValueListenableBuilder<bool>(
-                                valueListenable: _isDeleteMode,
-                                builder: (context, isDeleteMode, child) {
-                                  return InkWell(
-                                    borderRadius: 12.borderRadius,
-                                    key: _keyDeleteColor,
-                                    onTap: () {
-                                      _isDeleteMode.value =
-                                          !_isDeleteMode.value;
-                                      if (state.selectedColor != null) {
-                                        _cubit.clearSelectedColor();
-                                      }
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: isDeleteMode
-                                            ? _theme.colorScheme.error
-                                            : Colors.transparent,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.close_rounded,
-                                        color: isDeleteMode
-                                            ? _theme.colorScheme.onError
-                                            : _theme.colorScheme.error,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                            : null,
-                      ),
+                      16.height,
                     ],
                   ),
                 ),

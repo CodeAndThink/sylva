@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sylva/core/configs/app_configs.dart';
 import 'package:sylva/core/constants/app_assets.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
@@ -36,16 +37,8 @@ class AboutPage extends StatelessWidget {
             ),
             24.height,
             ShaderMask(
-              shaderCallback: (bounds) => const LinearGradient(
-                colors: [
-                  Colors.red,
-                  Colors.orange,
-                  Colors.yellow,
-                  Colors.green,
-                  Colors.blue,
-                  Colors.indigo,
-                  Colors.purple,
-                ],
+              shaderCallback: (bounds) => LinearGradient(
+                colors: AppColors.presetColors,
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ).createShader(bounds),

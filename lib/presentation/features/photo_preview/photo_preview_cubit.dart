@@ -55,13 +55,13 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   }
 
   void clearSelectedColor() {
-    safeEmit(
-      state.copyWith(
-        selectedColor: null,
-        filteredImageBytes: null,
-        filterColorStatus: LoadStatus.initial,
-      ),
-    );
+    safeEmit(state.copyWith(clearSelectedColor: true));
+  }
+
+  void deleteUserColor({required Color color}) {
+    final updatedUserColors = List<Color>.from(state.userColors);
+    updatedUserColors.remove(color);
+    safeEmit(state.copyWith(userColors: updatedUserColors));
   }
 
   void saveUserColor({required Color color}) {
@@ -73,9 +73,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       updatedUserColors.insert(0, color);
     }
 
-    safeEmit(
-      state.copyWith(selectedColor: color, userColors: updatedUserColors),
-    );
+    safeEmit(state.copyWith(userColors: updatedUserColors));
   }
 
   Future<void> extractPalette({required String imagePath}) async {
@@ -140,10 +138,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     _filterIsolate = null;
 
     // Toggle off if the same color is tapped
-    if (state.selectedColor == targetColor) {
+    if (state.filteredColor == targetColor) {
       safeEmit(
         state.copyWith(
-          selectedColor: null,
+          filteredColor: null,
           filteredImageBytes: null,
           filterColorStatus: LoadStatus.initial,
         ),
@@ -154,7 +152,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     safeEmit(
       state.copyWith(
         filterColorStatus: LoadStatus.loading,
-        selectedColor: targetColor,
+        filteredColor: targetColor,
       ),
     );
 
@@ -227,7 +225,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final record = HistoryRecord(
         imagePath: imagePath,
         userColors: userColors,
-        selectedColor: state.selectedColor?.toARGB32(),
+        selectedColor: state.filteredColor?.toARGB32(),
         createdAt: DateTime.now(),
       );
 
@@ -254,7 +252,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final record = HistoryRecord(
         imagePath: imagePath,
         userColors: userColors,
-        selectedColor: state.selectedColor?.toARGB32(),
+        selectedColor: state.filteredColor?.toARGB32(),
         createdAt: DateTime.now(),
       )..id = id;
 

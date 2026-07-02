@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/constants/app_assets.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_cubit.dart';
@@ -83,16 +84,8 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                     ),
                     30.height,
                     ShaderMask(
-                      shaderCallback: (bounds) => const LinearGradient(
-                        colors: [
-                          Colors.red,
-                          Colors.orange,
-                          Colors.yellow,
-                          Colors.green,
-                          Colors.blue,
-                          Colors.indigo,
-                          Colors.purple,
-                        ],
+                      shaderCallback: (bounds) => LinearGradient(
+                        colors: AppColors.presetColors,
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ).createShader(bounds),
@@ -136,6 +129,18 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                         decoration: BoxDecoration(
                           color: _theme.colorScheme.primary,
                           borderRadius: 50.borderRadius,
+                          border: Border.all(
+                            color: _theme.colorScheme.primaryContainer,
+                            width: 3,
+                          ),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: _theme.colorScheme.onSurface,
+                              blurRadius: 12,
+                              spreadRadius: 12,
+                              offset: const Offset(0, 0),
+                            ),
+                          ],
                         ),
                         child: Icon(
                           Icons.navigate_next_outlined,

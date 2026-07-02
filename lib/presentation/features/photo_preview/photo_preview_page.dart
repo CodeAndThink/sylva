@@ -65,6 +65,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   late final PhotoPreviewCubit _cubit;
   final ValueNotifier<bool> _showMagnifier = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _isZoomMode = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> _isDeleteMode = ValueNotifier<bool>(false);
   final ValueNotifier<Offset> _touchPosition = ValueNotifier<Offset>(
     Offset.zero,
   );
@@ -73,6 +74,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   final GlobalKey _imageKey = GlobalKey();
   final GlobalKey _keyPalette = GlobalKey();
   final GlobalKey _keyExpandPalette = GlobalKey();
+  final GlobalKey _keyDeleteColor = GlobalKey();
   final GlobalKey _keyBack = GlobalKey();
   final GlobalKey _keySave = GlobalKey();
   final GlobalKey _keyLibrary = GlobalKey();
@@ -116,6 +118,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     _zoomAnimationController.dispose();
     _pageController.dispose();
     _transformationController.dispose();
+    _isDeleteMode.dispose();
     super.dispose();
   }
 
@@ -611,21 +614,75 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                       final hex = ColorUtils.colorToHex(
                                         color: color,
                                       );
-                                      return PaletteColorListItem(
-                                        color: color,
-                                        hex: hex,
-                                        isSelected:
-                                            state.selectedColor == color,
-                                        onTap: () {
-                                          _cubit.filterColor(
-                                            widget.args.imagePath,
-                                            color,
+                                      return ValueListenableBuilder<bool>(
+                                        valueListenable: _isDeleteMode,
+                                        builder: (context, isDeleteMode, child) {
+                                          return Stack(
+                                            alignment: Alignment.topCenter,
+                                            children: [
+                                              PaletteColorListItem(
+                                                color: color,
+                                                hex: hex,
+                                                isSelected:
+                                                    state.selectedColor ==
+                                                    color,
+                                                onTap: () {
+                                                  if (isDeleteMode) {
+                                                    _cubit.deleteUserColor(
+                                                      color: color,
+                                                    );
+                                                    if (state
+                                                            .userColors
+                                                            .length ==
+                                                        1) {
+                                                      _isDeleteMode.value =
+                                                          false;
+                                                    }
+                                                  } else {
+                                                    _cubit.filterColor(
+                                                      widget.args.imagePath,
+                                                      color,
+                                                    );
+                                                    _showMagnifier.value =
+                                                        false;
+                                                  }
+                                                },
+                                                onLongPress: () {
+                                                  if (!isDeleteMode) {
+                                                    AppFeedback.playLongInteract(
+                                                      context,
+                                                    );
+                                                    _cubit.copyColor(color);
+                                                  }
+                                                },
+                                              ),
+                                              if (isDeleteMode)
+                                                Positioned(
+                                                  top: 15.5,
+                                                  child: IgnorePointer(
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: _theme
+                                                            .colorScheme
+                                                            .error
+                                                            .withValues(
+                                                              alpha: 0.8,
+                                                            ),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      padding: 4.paddingAll,
+                                                      child: Icon(
+                                                        Icons.close_rounded,
+                                                        color: _theme
+                                                            .colorScheme
+                                                            .onError,
+                                                        size: 16,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
                                           );
-                                          _showMagnifier.value = false;
-                                        },
-                                        onLongPress: () {
-                                          AppFeedback.playLongInteract(context);
-                                          _cubit.copyColor(color);
                                         },
                                       );
                                     },
@@ -698,7 +755,41 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                           },
                         ),
                       ),
-                      16.height,
+                      SizedBox(
+                        height: 24,
+                        child: state.userColors.isNotEmpty
+                            ? ValueListenableBuilder<bool>(
+                                valueListenable: _isDeleteMode,
+                                builder: (context, isDeleteMode, child) {
+                                  return InkWell(
+                                    borderRadius: 12.borderRadius,
+                                    key: _keyDeleteColor,
+                                    onTap: () {
+                                      _isDeleteMode.value =
+                                          !_isDeleteMode.value;
+                                      if (state.selectedColor != null) {
+                                        _cubit.clearSelectedColor();
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: isDeleteMode
+                                            ? _theme.colorScheme.error
+                                            : Colors.transparent,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Icons.close_rounded,
+                                        color: isDeleteMode
+                                            ? _theme.colorScheme.onError
+                                            : _theme.colorScheme.error,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
+                            : null,
+                      ),
                     ],
                   ),
                 ),

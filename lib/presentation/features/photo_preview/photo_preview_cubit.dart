@@ -64,6 +64,12 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     );
   }
 
+  void deleteUserColor({required Color color}) {
+    final updatedUserColors = List<Color>.from(state.userColors);
+    updatedUserColors.remove(color);
+    safeEmit(state.copyWith(userColors: updatedUserColors));
+  }
+
   void saveUserColor({required Color color}) {
     final updatedUserColors = List<Color>.from(state.userColors);
     if (!updatedUserColors.contains(color)) {

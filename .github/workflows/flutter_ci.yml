@@ -36,3 +36,36 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
+      - name: Configure Keystore
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        run: |
+          echo $KEYSTORE_BASE64 | base64 --decode > android/app/keystore.jks
+          cat <<EOF > android/key.properties
+          storePassword=$STORE_PASSWORD
+          keyPassword=$KEY_PASSWORD
+          keyAlias=$KEY_ALIAS
+          storeFile=keystore.jks
+          EOF
+
+      - name: Build Android APK
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: flutter build apk --release
+
+      - name: Extract version from pubspec.yaml
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        id: extract_version
+        run: |
+          VERSION=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2)
+          echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Upload Android APK
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sylva-v${{ env.APP_VERSION }}-apk
+          path: build/app/outputs/flutter-apk/app-release.apk

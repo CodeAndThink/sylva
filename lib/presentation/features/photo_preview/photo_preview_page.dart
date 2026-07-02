@@ -424,10 +424,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               tooltipMessage: _l10n.cancel,
               backgroundColor: _theme.colorScheme.error.withValues(alpha: 0.8),
               onTap: () {
-                if (state.selectedColor != null) {
+                if (state.filteredColor != null) {
                   _cubit.filterColor(
                     widget.args.imagePath,
-                    state.selectedColor!,
+                    state.filteredColor!,
                   );
                 }
               },
@@ -456,6 +456,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                         _cubit.saveUserColor(
                           color: _cubit.state.selectedColor!,
                         );
+                        _cubit.clearSelectedColor();
                       }
                       _showMagnifier.value = false;
                       _pageController.animateToPage(
@@ -520,10 +521,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildColorSet() {
     return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
       buildWhen: (previous, current) =>
+          current.paletteColors != previous.paletteColors ||
+          current.userColors != previous.userColors ||
           current.getColorStatus != previous.getColorStatus ||
-          current.filterColorStatus != previous.filterColorStatus ||
-          current.selectedColor != previous.selectedColor ||
-          previous.userColors != current.userColors,
+          current.filteredColor != previous.filteredColor,
       builder: (context, state) {
         if (state.getColorStatus.isLoading) {
           return SizedBox(
@@ -569,7 +570,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                 return PaletteColorListItem(
                                   color: color,
                                   hex: hex,
-                                  isSelected: state.selectedColor == color,
+                                  isSelected: state.filteredColor == color,
                                   onTap: () {
                                     _cubit.filterColor(
                                       widget.args.imagePath,
@@ -607,7 +608,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                             onTap: () {
                                               _isDeleteMode.value =
                                                   !_isDeleteMode.value;
-                                              if (state.selectedColor != null) {
+                                              if (state.filteredColor != null) {
                                                 _cubit.clearSelectedColor();
                                               }
                                             },
@@ -666,7 +667,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                                 color: color,
                                                 hex: hex,
                                                 isSelected:
-                                                    state.selectedColor ==
+                                                    state.filteredColor ==
                                                     color,
                                                 onTap: () {
                                                   if (isDeleteMode) {
@@ -985,9 +986,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
   Widget _buildColorDetails() {
     return BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
       buildWhen: (previous, current) =>
-          current.selectedColor != previous.selectedColor,
+          current.selectedColor != previous.selectedColor ||
+          current.filteredColor != previous.filteredColor,
       builder: (context, state) {
-        final color = state.selectedColor;
+        final color = state.selectedColor ?? state.filteredColor;
 
         return AppTransparentContainer(
           height: 38,

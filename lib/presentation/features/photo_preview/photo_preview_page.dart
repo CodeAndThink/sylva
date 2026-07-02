@@ -16,6 +16,7 @@ import 'package:sylva/presentation/features/photo_preview/widgets/palette_color_
 import 'package:sylva/presentation/features/photo_preview/widgets/palette_shimmer_list.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/save_options_bottom_sheet.dart';
 import 'package:sylva/presentation/features/photo_preview/widgets/full_screen_photo_viewer.dart';
+import 'package:sylva/presentation/widgets/buttons/app_circle_icon_button.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -417,22 +418,20 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
 
         if (isFiltering) {
           return Positioned(
-            bottom: 88,
-            right: 4,
-            child: Tooltip(
-              message: _l10n.cancel,
-              child: IconButton(
-                color: _theme.colorScheme.error,
-                onPressed: () {
-                  if (state.selectedColor != null) {
-                    _cubit.filterColor(
-                      widget.args.imagePath,
-                      state.selectedColor!,
-                    );
-                  }
-                },
-                icon: const Icon(Icons.close_rounded, size: 32),
-              ),
+            bottom: 100,
+            right: 8,
+            child: AppCircleIconButton(
+              tooltipMessage: _l10n.cancel,
+              backgroundColor: _theme.colorScheme.error.withValues(alpha: 0.8),
+              onTap: () {
+                if (state.selectedColor != null) {
+                  _cubit.filterColor(
+                    widget.args.imagePath,
+                    state.selectedColor!,
+                  );
+                }
+              },
+              icon: Icons.close_rounded,
             ),
           );
         }
@@ -448,66 +447,36 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 spacing: 8,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Tooltip(
-                    message: _l10n.saveColor,
-                    child: Material(
-                      color: Colors.green.withValues(alpha: 0.8),
-                      borderRadius: 20.borderRadius,
-                      clipBehavior: Clip.hardEdge,
-                      child: InkWell(
-                        onTap: () {
-                          AppFeedback.playInteract(context);
-                          if (_cubit.state.selectedColor != null) {
-                            _cubit.saveUserColor(
-                              color: _cubit.state.selectedColor!,
-                            );
-                          }
-                          _showMagnifier.value = false;
-                          _pageController.animateToPage(
-                            1,
-                            duration: 200.milliseconds,
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                        child: SizedBox(
-                          height: 38,
-                          width: 38,
-                          child: Center(
-                            child: const Icon(
-                              Icons.check_circle_outline,
-                              size: 24,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  AppCircleIconButton(
+                    tooltipMessage: _l10n.saveColor,
+                    backgroundColor: Colors.green.withValues(alpha: 0.8),
+                    onTap: () {
+                      AppFeedback.playInteract(context);
+                      if (_cubit.state.selectedColor != null) {
+                        _cubit.saveUserColor(
+                          color: _cubit.state.selectedColor!,
+                        );
+                      }
+                      _showMagnifier.value = false;
+                      _pageController.animateToPage(
+                        1,
+                        duration: 200.milliseconds,
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    icon: Icons.check_circle_outline,
                   ),
-                  Tooltip(
-                    message: _l10n.cancel,
-                    child: Material(
-                      color: _theme.colorScheme.error.withValues(alpha: 0.7),
-                      borderRadius: 20.borderRadius,
-                      clipBehavior: Clip.hardEdge,
-                      child: InkWell(
-                        onTap: () {
-                          AppFeedback.playInteract(context);
-                          _showMagnifier.value = false;
-                          _cubit.clearSelectedColor();
-                        },
-                        child: SizedBox(
-                          height: 38,
-                          width: 38,
-                          child: Center(
-                            child: const Icon(
-                              Icons.block_outlined,
-                              size: 24,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                  AppCircleIconButton(
+                    tooltipMessage: _l10n.cancel,
+                    backgroundColor: _theme.colorScheme.error.withValues(
+                      alpha: 0.8,
                     ),
+                    onTap: () {
+                      AppFeedback.playInteract(context);
+                      _showMagnifier.value = false;
+                      _cubit.clearSelectedColor();
+                    },
+                    icon: Icons.block_outlined,
                   ),
                 ],
               ),
@@ -1155,7 +1124,10 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                               AppFeedback.playInteract(context);
                               _cubit.navigateToShare();
                             },
-                            icon: const Icon(Icons.draw_rounded, size: 30),
+                            icon: const Icon(
+                              Icons.design_services_rounded,
+                              size: 30,
+                            ),
                           ),
                         )
                       : const SizedBox.shrink(),

@@ -45,7 +45,7 @@ class PaletteColorListItem extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: color,
                       borderRadius: 8.borderRadius,
-                      border: Border.all(color: Colors.white, width: 1),
+                      border: Border.all(color: Colors.white, width: 2),
                     ),
                     child: isSelected
                         ? Center(

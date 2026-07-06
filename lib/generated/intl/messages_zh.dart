@@ -164,12 +164,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS 位置数据已移除并另存为副本。",
     ),
+    "hapticFeedback": MessageLookupByLibrary.simpleMessage("触觉反馈"),
     "help": MessageLookupByLibrary.simpleMessage("帮助"),
     "history": MessageLookupByLibrary.simpleMessage("历史记录"),
     "historySort": MessageLookupByLibrary.simpleMessage("排序"),
     "historyView": MessageLookupByLibrary.simpleMessage("更改视图"),
     "imageSaved": MessageLookupByLibrary.simpleMessage("图像保存成功！"),
     "informationAndSupport": MessageLookupByLibrary.simpleMessage("信息与支持"),
+    "interactionEffects": MessageLookupByLibrary.simpleMessage("交互效果"),
     "language": MessageLookupByLibrary.simpleMessage("语言"),
     "last30Days": MessageLookupByLibrary.simpleMessage("过去 30 天"),
     "last7Days": MessageLookupByLibrary.simpleMessage("过去 7 天"),
@@ -256,6 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedColor": MessageLookupByLibrary.simpleMessage("应用颜色"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),
+    "soundEffects": MessageLookupByLibrary.simpleMessage("音效"),
     "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
       "如果您喜欢这个应用，请考虑支持开发。请我喝杯咖啡吧！",
     ),

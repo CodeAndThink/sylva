@@ -515,5 +515,11 @@
   "colorPickerShades": "所选颜色及其深浅",
   "@colorPickerShades": {},
   "clearColor": "清除颜色",
-  "@clearColor": {}
+  "@clearColor": {},
+  "interactionEffects": "交互效果",
+  "@interactionEffects": {},
+  "hapticFeedback": "触觉反馈",
+  "@hapticFeedback": {},
+  "soundEffects": "音效",
+  "@soundEffects": {}
 }

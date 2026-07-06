@@ -515,5 +515,11 @@
   "colorPickerShades": "選択した色とその濃淡",
   "@colorPickerShades": {},
   "clearColor": "色をクリア",
-  "@clearColor": {}
+  "@clearColor": {},
+  "interactionEffects": "インタラクション効果",
+  "@interactionEffects": {},
+  "hapticFeedback": "触覚フィードバック",
+  "@hapticFeedback": {},
+  "soundEffects": "サウンド効果",
+  "@soundEffects": {}
 }

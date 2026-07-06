@@ -16,6 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -56,6 +64,8 @@ jobs:
 
       - name: Build Android APK
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false -Xmx4096m"
         run: flutter build apk --release
 
       - name: Extract version from pubspec.yaml

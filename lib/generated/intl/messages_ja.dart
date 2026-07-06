@@ -182,12 +182,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS位置データが削除され、コピーとして保存されました。",
     ),
+    "hapticFeedback": MessageLookupByLibrary.simpleMessage("触覚フィードバック"),
     "help": MessageLookupByLibrary.simpleMessage("ヘルプ"),
     "history": MessageLookupByLibrary.simpleMessage("履歴"),
     "historySort": MessageLookupByLibrary.simpleMessage("並べ替え"),
     "historyView": MessageLookupByLibrary.simpleMessage("表示の変更"),
     "imageSaved": MessageLookupByLibrary.simpleMessage("画像が正常に保存されました！"),
     "informationAndSupport": MessageLookupByLibrary.simpleMessage("情報とサポート"),
+    "interactionEffects": MessageLookupByLibrary.simpleMessage("インタラクション効果"),
     "language": MessageLookupByLibrary.simpleMessage("言語"),
     "last30Days": MessageLookupByLibrary.simpleMessage("過去30日間"),
     "last7Days": MessageLookupByLibrary.simpleMessage("過去7日間"),
@@ -282,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedColor": MessageLookupByLibrary.simpleMessage("アプリカラー"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
+    "soundEffects": MessageLookupByLibrary.simpleMessage("サウンド効果"),
     "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
       "このアプリを気に入っていただけたら、開発をサポートしてください。コーヒーを奢ってください！",
     ),

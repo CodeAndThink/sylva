@@ -300,41 +300,23 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       child: ValueListenableBuilder<bool>(
         valueListenable: _isZoomMode,
         builder: (context, isZoomMode, child) {
-          return GestureDetector(
-            onTapDown: isZoomMode
+          return Listener(
+            onPointerDown: isZoomMode
                 ? null
-                : (details) {
+                : (event) {
                     if (_cubit.state.filteredImageBytes != null) return;
                     _showMagnifier.value = true;
-                    _touchPosition.value = details.localPosition;
+                    _touchPosition.value = event.localPosition;
                   },
-            onTapUp: isZoomMode
+            onPointerMove: isZoomMode
                 ? null
-                : (_) async {
+                : (event) {
                     if (_cubit.state.filteredImageBytes != null) return;
-                    final color = await _getColorAtPosition(
-                      _touchPosition.value,
-                    );
-                    if (color != null) {
-                      _cubit.setSelectedColor(color: color);
-                    }
+                    _touchPosition.value = event.localPosition;
                   },
-            onPanStart: isZoomMode
+            onPointerUp: isZoomMode
                 ? null
-                : (details) {
-                    if (_cubit.state.filteredImageBytes != null) return;
-                    _showMagnifier.value = true;
-                    _touchPosition.value = details.localPosition;
-                  },
-            onPanUpdate: isZoomMode
-                ? null
-                : (details) {
-                    if (_cubit.state.filteredImageBytes != null) return;
-                    _touchPosition.value = details.localPosition;
-                  },
-            onPanEnd: isZoomMode
-                ? null
-                : (_) async {
+                : (event) async {
                     if (_cubit.state.filteredImageBytes != null) return;
                     final color = await _getColorAtPosition(
                       _touchPosition.value,
@@ -350,7 +332,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 panEnabled: isZoomMode,
                 scaleEnabled: isZoomMode,
                 minScale: 1.0,
-                maxScale: 20.0,
+                maxScale: 40.0,
                 child: BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
                   buildWhen: (previous, current) =>
                       current.filteredImageBytes != previous.filteredImageBytes,
@@ -359,11 +341,13 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       return Image.memory(
                         state.filteredImageBytes!,
                         fit: BoxFit.cover,
+                        filterQuality: FilterQuality.none,
                       );
                     }
                     return AppFileImage(
                       path: widget.args.imagePath,
                       fit: BoxFit.cover,
+                      filterQuality: FilterQuality.none,
                     );
                   },
                 ),
@@ -933,17 +917,36 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             return Positioned(
               left: magnifierLeft,
               top: magnifierTop,
-              child: RawMagnifier(
-                size: const Size(120, 120),
-                magnificationScale: 10.0,
-                focalPointOffset: focalPointOffset,
-                decoration: MagnifierDecoration(
-                  shape: CircleBorder(
-                    side: BorderSide(
-                      color: _theme.colorScheme.surface,
-                      width: 2,
+              child: SizedBox(
+                width: 120,
+                height: 120,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    RawMagnifier(
+                      size: const Size(120, 120),
+                      magnificationScale: 10.0,
+                      focalPointOffset: focalPointOffset,
+                      decoration: MagnifierDecoration(
+                        shape: CircleBorder(
+                          side: BorderSide(
+                            color: _theme.colorScheme.surface,
+                            width: 2,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned.fill(
+                      child: ClipOval(
+                        child: CustomPaint(
+                          painter: _MagnifierGridPainter(
+                            touchPosition: touchPos,
+                            magnification: 10.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
@@ -1217,5 +1220,54 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
         desc: _l10n.tutorialShareDesc,
       ),
     ];
+  }
+}
+
+class _MagnifierGridPainter extends CustomPainter {
+  final Offset touchPosition;
+  final double magnification;
+
+  _MagnifierGridPainter({
+    required this.touchPosition,
+    required this.magnification,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.black26
+      ..strokeWidth = 0.5;
+
+    final offsetX = (touchPosition.dx * magnification) % magnification;
+    final offsetY = (touchPosition.dy * magnification) % magnification;
+
+    for (double x = -offsetX; x < size.width; x += magnification) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+    for (double y = -offsetY; y < size.height; y += magnification) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+    }
+
+    final centerPaint = Paint()
+      ..color = Colors.redAccent
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0;
+
+    final centerX = size.width / 2;
+    final centerY = size.height / 2;
+
+    final cellLeft = centerX - offsetX;
+    final cellTop = centerY - offsetY;
+
+    canvas.drawRect(
+      Rect.fromLTWH(cellLeft, cellTop, magnification, magnification),
+      centerPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _MagnifierGridPainter oldDelegate) {
+    return oldDelegate.touchPosition != touchPosition ||
+        oldDelegate.magnification != magnification;
   }
 }

@@ -10,6 +10,7 @@ class AppFileImage extends StatelessWidget {
   final int? cacheWidth;
   final int? cacheHeight;
   final BoxFit fit;
+  final FilterQuality filterQuality;
 
   const AppFileImage({
     super.key,
@@ -19,6 +20,7 @@ class AppFileImage extends StatelessWidget {
     this.cacheWidth,
     this.cacheHeight,
     this.fit = BoxFit.cover,
+    this.filterQuality = FilterQuality.low,
   });
 
   @override
@@ -28,6 +30,7 @@ class AppFileImage extends StatelessWidget {
       width: width,
       height: height,
       cacheWidth: cacheWidth,
+      filterQuality: filterQuality,
       cacheHeight: cacheHeight,
       fit: fit,
       errorBuilder: (_, _, _) => const Center(

@@ -14,6 +14,8 @@ import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:sylva/core/enums/device_type.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -306,17 +308,34 @@ class __HomeChildPageState extends State<_HomeChildPage>
     _theme = Theme.of(context);
     _l10n = S.of(context);
 
+    final isTabletLandscape =
+        ResponsiveBreakpoints.of(context).largerThan(DeviceType.mobile.name) &&
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return AppScaffold(
       showAppBar: false,
       body: SafeArea(
         child: Padding(
           padding: 12.paddingAll,
-          child: Column(
-            children: [
-              Expanded(child: _buildCameraPreview()),
-              SizedBox(height: 120, child: _buildBottomActions()),
-            ],
-          ),
+          child: isTabletLandscape
+              ? Row(
+                  children: [
+                    Expanded(child: _buildCameraPreview()),
+                    SizedBox(
+                      width: 120,
+                      child: _buildBottomActions(isLandscape: true),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    Expanded(child: _buildCameraPreview()),
+                    SizedBox(
+                      height: 120,
+                      child: _buildBottomActions(isLandscape: false),
+                    ),
+                  ],
+                ),
         ),
       ),
     );
@@ -326,30 +345,38 @@ class __HomeChildPageState extends State<_HomeChildPage>
     if (_isCameraInitialized && _controller != null) {
       return Stack(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: AppTransparentContainer(
-                padding: EdgeInsets.zero,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onScaleStart: (details) {
-                    _baseScale = _currentScale;
-                  },
-                  onScaleUpdate: (details) {
-                    if (_controller == null || !_isCameraInitialized) {
-                      return;
-                    }
-                    setState(() {
-                      _currentScale = (_baseScale * details.scale).clamp(
-                        _minAvailableZoom,
-                        _maxAvailableZoom,
-                      );
-                    });
-                    _controller!.setZoomLevel(_currentScale);
-                  },
-                  child: CameraPreview(_controller!),
+          Positioned.fill(
+            child: AppTransparentContainer(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onScaleStart: (details) {
+                  _baseScale = _currentScale;
+                },
+                onScaleUpdate: (details) {
+                  if (_controller == null || !_isCameraInitialized) {
+                    return;
+                  }
+                  setState(() {
+                    _currentScale = (_baseScale * details.scale).clamp(
+                      _minAvailableZoom,
+                      _maxAvailableZoom,
+                    );
+                  });
+                  _controller!.setZoomLevel(_currentScale);
+                },
+                child: ClipRRect(
+                  borderRadius: 24.borderRadius,
+                  child: Center(
+                    child: AspectRatio(
+                      aspectRatio:
+                          MediaQuery.of(context).orientation ==
+                              Orientation.portrait
+                          ? 1 / _controller!.value.aspectRatio
+                          : _controller!.value.aspectRatio,
+                      child: CameraPreview(_controller!),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -436,199 +463,211 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
-  Widget _buildBottomActions() {
-    return AbsorbPointer(
-      absorbing: _isCapturing || _isCountingDown,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Tooltip(
-                message: _l10n.help,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.help_outline_outlined,
-                    color: _theme.colorScheme.onSurface,
-                    size: 24,
-                  ),
-                  onPressed: _showTutorial,
-                ),
-              ),
-              Tooltip(
-                message: _l10n.settings,
-                child: IconButton(
-                  key: _keySettings,
-                  icon: Icon(
-                    Icons.settings_outlined,
-                    color: _theme.colorScheme.onSurface,
-                    size: 24,
-                  ),
-                  onPressed: () {
-                    _cubit.navigator.goToSettings();
-                  },
-                ),
-              ),
-              Tooltip(
-                message: _l10n.flashMode,
-                child: IconButton(
-                  key: _keyFlash,
-                  icon: AnimatedSwitcher(
-                    duration: 150.milliseconds,
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                          return ScaleTransition(
-                            scale: animation,
-                            child: child,
-                          );
-                        },
-                    child: Icon(
-                      _flashMode == FlashMode.always
-                          ? Icons.flash_on_outlined
-                          : _flashMode == FlashMode.auto
-                          ? Icons.flash_auto_outlined
-                          : Icons.flash_off_outlined,
-                      key: ValueKey<FlashMode>(_flashMode),
-                      color: _theme.colorScheme.onSurface,
-                      size: 24,
-                    ),
-                  ),
-                  onPressed: _toggleFlash,
-                ),
-              ),
-              PopupMenuButton<int>(
-                key: _keyTimer,
-                tooltip: _l10n.timer,
-                menuPadding: EdgeInsets.zero,
-                color: Colors.black54,
-                constraints: const BoxConstraints(minWidth: 48, maxWidth: 48),
-                borderRadius: 16.borderRadius,
-                shape: RoundedRectangleBorder(borderRadius: 16.borderRadius),
-                onSelected: (value) {
-                  setState(() {
-                    _timerSeconds = value;
-                  });
-                },
-                offset: const Offset(0, -160),
-                icon: AnimatedSwitcher(
-                  duration: 150.milliseconds,
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                        return ScaleTransition(scale: animation, child: child);
-                      },
-                  child: Icon(
-                    _timerSeconds == 0
-                        ? Icons.timer_off_outlined
-                        : _timerSeconds == 3
-                        ? Icons.timer_3_outlined
-                        : _timerSeconds == 3
-                        ? Icons.timer_10_outlined
-                        : Icons.timer_10,
-                    color: _timerSeconds == 0
-                        ? _theme.colorScheme.onSurface
-                        : Colors.amber,
-                    size: 24,
-                  ),
-                ),
-                itemBuilder: (context) => [
-                  _buildTimerMenuItem(value: 0, icon: Icons.timer_off_outlined),
-                  _buildTimerMenuItem(value: 3, icon: Icons.timer_3),
-                  _buildTimerMenuItem(value: 10, icon: Icons.timer_10),
-                ],
-              ),
-
-              Tooltip(
-                message: _l10n.switchCamera,
-                child: IconButton(
-                  key: _keySwitchCamera,
-                  icon: Icon(
-                    Icons.cached,
-                    color: _theme.colorScheme.onSurface,
-                    size: 24,
-                  ),
-                  onPressed: _switchCamera,
-                ),
-              ),
-            ],
+  List<Widget> _buildTopActionButtons() {
+    return [
+      Tooltip(
+        message: _l10n.help,
+        child: IconButton(
+          icon: Icon(
+            Icons.help_outline_outlined,
+            color: _theme.colorScheme.onSurface,
+            size: 24,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Tooltip(
-                message: _l10n.history,
-                child: IconButton(
-                  key: _keyHistory,
-                  icon: Icon(
-                    Icons.history_outlined,
-                    color: _theme.colorScheme.onSurface,
-                    size: 40,
-                  ),
-                  onPressed: () {
-                    _cubit.navigator.goToHistory();
-                  },
-                ),
-              ),
-              Material(
-                color: _isCapturing ? Colors.transparent : Colors.white,
-                shape: const CircleBorder(),
-                elevation: 6,
-                shadowColor: _theme.colorScheme.onSurface.withValues(
-                  alpha: 0.5,
-                ),
-                clipBehavior: Clip.hardEdge,
-                child: InkWell(
-                  key: _keyCapture,
-                  onTap: _isCapturing ? null : _takePicture,
-                  child: SizedBox(
-                    width: 70,
-                    height: 70,
-                    child: _isCapturing
-                        ? Center(
-                            child: SpinKitRipple(
-                              color: _theme.colorScheme.primary,
-                            ),
-                          )
-                        : Center(
-                            child: AppAssetImage(
-                              path: AppAssets.icCamera,
-                              height: 65,
-                              width: 65,
-                            ),
-                          ),
-                  ),
-                ),
-              ),
-              Tooltip(
-                message: S.current.pickImageFromGallery,
-                child: IconButton(
-                  key: _keyUpload,
-                  icon: Icon(
-                    Icons.upload_rounded,
-                    color: _theme.colorScheme.onSurface,
-                    size: 40,
-                  ),
-                  onPressed: () async {
-                    try {
-                      await _controller?.pausePreview();
-                    } catch (e) {
-                      debugPrint('Error pausing preview: $e');
-                    }
-                    await _cubit.pickImageFromGallery();
-                    if (mounted && _controller != null) {
-                      try {
-                        await _controller?.resumePreview();
-                      } catch (e) {
-                        debugPrint('Error resuming preview: $e');
-                      }
-                    }
-                  },
-                ),
-              ),
-            ],
+          onPressed: _showTutorial,
+        ),
+      ),
+      Tooltip(
+        message: _l10n.settings,
+        child: IconButton(
+          key: _keySettings,
+          icon: Icon(
+            Icons.settings_outlined,
+            color: _theme.colorScheme.onSurface,
+            size: 24,
           ),
+          onPressed: () {
+            _cubit.navigator.goToSettings();
+          },
+        ),
+      ),
+      Tooltip(
+        message: _l10n.flashMode,
+        child: IconButton(
+          key: _keyFlash,
+          icon: AnimatedSwitcher(
+            duration: 150.milliseconds,
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(scale: animation, child: child);
+            },
+            child: Icon(
+              _flashMode == FlashMode.always
+                  ? Icons.flash_on_outlined
+                  : _flashMode == FlashMode.auto
+                  ? Icons.flash_auto_outlined
+                  : Icons.flash_off_outlined,
+              key: ValueKey<FlashMode>(_flashMode),
+              color: _theme.colorScheme.onSurface,
+              size: 24,
+            ),
+          ),
+          onPressed: _toggleFlash,
+        ),
+      ),
+      PopupMenuButton<int>(
+        key: _keyTimer,
+        tooltip: _l10n.timer,
+        menuPadding: EdgeInsets.zero,
+        color: Colors.black54,
+        constraints: const BoxConstraints(minWidth: 48, maxWidth: 48),
+        borderRadius: 16.borderRadius,
+        shape: RoundedRectangleBorder(borderRadius: 16.borderRadius),
+        onSelected: (value) {
+          setState(() {
+            _timerSeconds = value;
+          });
+        },
+        offset: const Offset(0, -160),
+        icon: AnimatedSwitcher(
+          duration: 150.milliseconds,
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(scale: animation, child: child);
+          },
+          child: Icon(
+            _timerSeconds == 0
+                ? Icons.timer_off_outlined
+                : _timerSeconds == 3
+                ? Icons.timer_3_outlined
+                : _timerSeconds == 3
+                ? Icons.timer_10_outlined
+                : Icons.timer_10,
+            color: _timerSeconds == 0
+                ? _theme.colorScheme.onSurface
+                : Colors.amber,
+            size: 24,
+          ),
+        ),
+        itemBuilder: (context) => [
+          _buildTimerMenuItem(value: 0, icon: Icons.timer_off_outlined),
+          _buildTimerMenuItem(value: 3, icon: Icons.timer_3),
+          _buildTimerMenuItem(value: 10, icon: Icons.timer_10),
         ],
       ),
+      Tooltip(
+        message: _l10n.switchCamera,
+        child: IconButton(
+          key: _keySwitchCamera,
+          icon: Icon(
+            Icons.cached,
+            color: _theme.colorScheme.onSurface,
+            size: 24,
+          ),
+          onPressed: _switchCamera,
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _buildMainActionButtons() {
+    return [
+      Tooltip(
+        message: _l10n.history,
+        child: IconButton(
+          key: _keyHistory,
+          icon: Icon(
+            Icons.history_outlined,
+            color: _theme.colorScheme.onSurface,
+            size: 40,
+          ),
+          onPressed: () {
+            _cubit.navigator.goToHistory();
+          },
+        ),
+      ),
+      Material(
+        color: _isCapturing ? Colors.transparent : Colors.white,
+        shape: const CircleBorder(),
+        elevation: 6,
+        shadowColor: _theme.colorScheme.onSurface.withValues(alpha: 0.5),
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          key: _keyCapture,
+          onTap: _isCapturing ? null : _takePicture,
+          child: SizedBox(
+            width: 70,
+            height: 70,
+            child: _isCapturing
+                ? Center(
+                    child: SpinKitRipple(color: _theme.colorScheme.primary),
+                  )
+                : Center(
+                    child: AppAssetImage(
+                      path: AppAssets.icCamera,
+                      height: 65,
+                      width: 65,
+                    ),
+                  ),
+          ),
+        ),
+      ),
+      Tooltip(
+        message: S.current.pickImageFromGallery,
+        child: IconButton(
+          key: _keyUpload,
+          icon: Icon(
+            Icons.upload_rounded,
+            color: _theme.colorScheme.onSurface,
+            size: 40,
+          ),
+          onPressed: () async {
+            try {
+              await _controller?.pausePreview();
+            } catch (e) {
+              debugPrint('Error pausing preview: \$e');
+            }
+            await _cubit.pickImageFromGallery();
+            if (mounted && _controller != null) {
+              try {
+                await _controller?.resumePreview();
+              } catch (e) {
+                debugPrint('Error resuming preview: \$e');
+              }
+            }
+          },
+        ),
+      ),
+    ];
+  }
+
+  Widget _buildBottomActions({required bool isLandscape}) {
+    return AbsorbPointer(
+      absorbing: _isCapturing || _isCountingDown,
+      child: isLandscape
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _buildTopActionButtons(),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _buildMainActionButtons(),
+                ),
+              ],
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _buildTopActionButtons(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: _buildMainActionButtons(),
+                ),
+              ],
+            ),
     );
   }
 

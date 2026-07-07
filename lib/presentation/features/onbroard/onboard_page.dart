@@ -69,7 +69,6 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                 padding: 20.paddingAll,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
                       alignment: Alignment.center,

@@ -236,6 +236,15 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 // Image
                 Positioned.fill(child: _buildImage()),
 
+                // Filter Loading Overlay
+                _buildColorOverlay(),
+
+                // Magnifier
+                _buildBigZoom(constraints: constraints),
+
+                // Magnifier UI
+                _buildSmallZoom(),
+
                 // color Picker Controller
                 _buildPickerColorController(),
 
@@ -277,15 +286,6 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     ],
                   ),
                 ),
-
-                // Filter Loading Overlay
-                _buildColorOverlay(),
-
-                // Magnifier
-                _buildBigZoom(constraints: constraints),
-
-                // Magnifier UI
-                _buildSmallZoom(),
               ],
             ),
           );

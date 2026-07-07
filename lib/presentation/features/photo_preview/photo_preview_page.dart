@@ -340,13 +340,13 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     if (state.filteredImageBytes != null) {
                       return Image.memory(
                         state.filteredImageBytes!,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                         filterQuality: FilterQuality.none,
                       );
                     }
                     return AppFileImage(
                       path: widget.args.imagePath,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       filterQuality: FilterQuality.none,
                     );
                   },

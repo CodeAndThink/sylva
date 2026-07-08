@@ -184,103 +184,107 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
         if (state.status.isInitial) {
           return const HistoryShimmerList();
         }
-        if (state.records.isEmpty) {
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                AppAssetImage(
-                  path: AppAssets.icColors,
-                  width: MediaQuery.sizeOf(context).width * 0.3,
-                ),
-                12.height,
-                Text(
-                  _l10n.noHistoryYet,
-                  style: _theme.textTheme.titleMedium?.copyWith(
-                    color: _theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
 
         return Stack(
           children: [
-            Positioned.fill(
-              child: state.isGridView
-                  ? CustomScrollView(
-                      controller: _scrollController,
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: SizedBox(
-                            height: MediaQuery.of(context).padding.top + 12,
-                          ),
-                        ),
-                        SliverPadding(
-                          padding: 12.paddingHorizontal,
-                          sliver: SliverMainAxisGroup(
-                            slivers: _buildGridSlivers(state.groupedItems),
-                          ),
-                        ),
-                        if (state.isLoadingMore)
+            if (state.records.isNotEmpty) ...[
+              Positioned.fill(
+                child: state.isGridView
+                    ? CustomScrollView(
+                        controller: _scrollController,
+                        slivers: [
                           SliverToBoxAdapter(
-                            child: Padding(
+                            child: SizedBox(
+                              height: MediaQuery.of(context).padding.top + 12,
+                            ),
+                          ),
+                          SliverPadding(
+                            padding: 12.paddingHorizontal,
+                            sliver: SliverMainAxisGroup(
+                              slivers: _buildGridSlivers(state.groupedItems),
+                            ),
+                          ),
+                          if (state.isLoadingMore)
+                            SliverToBoxAdapter(
+                              child: Padding(
+                                padding: 16.paddingAll,
+                                child: Center(
+                                  child: SpinKitRipple(
+                                    color: _theme.colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          SliverToBoxAdapter(child: 100.height),
+                        ],
+                      )
+                    : ListView.builder(
+                        controller: _scrollController,
+                        padding: EdgeInsets.fromLTRB(
+                          12,
+                          MediaQuery.of(context).padding.top + 12,
+                          12,
+                          100,
+                        ),
+                        itemCount:
+                            state.groupedItems.length +
+                            (state.isLoadingMore ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index == state.groupedItems.length) {
+                            return Padding(
                               padding: 16.paddingAll,
                               child: Center(
                                 child: SpinKitRipple(
                                   color: _theme.colorScheme.primary,
                                 ),
                               ),
-                            ),
-                          ),
-                        SliverToBoxAdapter(child: 100.height),
-                      ],
-                    )
-                  : ListView.builder(
-                      controller: _scrollController,
-                      padding: EdgeInsets.fromLTRB(
-                        12,
-                        MediaQuery.of(context).padding.top + 12,
-                        12,
-                        100,
-                      ),
-                      itemCount:
-                          state.groupedItems.length +
-                          (state.isLoadingMore ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index == state.groupedItems.length) {
-                          return Padding(
-                            padding: 16.paddingAll,
-                            child: Center(
-                              child: SpinKitRipple(
-                                color: _theme.colorScheme.primary,
-                              ),
-                            ),
-                          );
-                        }
+                            );
+                          }
 
-                        final item = state.groupedItems[index];
-                        if (item is TimeGroup) {
-                          return Padding(
-                            padding: 4.paddingTop.copyWith(bottom: 8),
-                            child: AppTitleText(title: item.title),
-                          );
-                        } else if (item is HistoryRecord) {
-                          return HistoryListItem(
-                            key: ValueKey('list_${item.id}'),
-                            record: item,
-                            onDelete: () => _cubit.deleteRecord(id: item.id),
-                            onTap: () => _cubit.goToPhotoPreview(record: item),
-                            isFavorite: item.isFavorite,
-                            onFavoritePressed: () =>
-                                _cubit.toggleFavorite(item.id),
-                          );
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ),
-            ),
+                          final item = state.groupedItems[index];
+                          if (item is TimeGroup) {
+                            return Padding(
+                              padding: 4.paddingTop.copyWith(bottom: 8),
+                              child: AppTitleText(title: item.title),
+                            );
+                          } else if (item is HistoryRecord) {
+                            return HistoryListItem(
+                              key: ValueKey('list_${item.id}'),
+                              record: item,
+                              onDelete: () => _cubit.deleteRecord(id: item.id),
+                              onTap: () =>
+                                  _cubit.goToPhotoPreview(record: item),
+                              isFavorite: item.isFavorite,
+                              onFavoritePressed: () =>
+                                  _cubit.toggleFavorite(item.id),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+              ),
+            ] else ...[
+              Positioned.fill(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppAssetImage(
+                        path: AppAssets.icColors,
+                        width: MediaQuery.sizeOf(context).width * 0.3,
+                      ),
+                      12.height,
+                      Text(
+                        _l10n.noHistoryYet,
+                        style: _theme.textTheme.titleMedium?.copyWith(
+                          color: _theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
             Align(
               alignment: Alignment.bottomCenter,
               child: _buildBottomActions(),

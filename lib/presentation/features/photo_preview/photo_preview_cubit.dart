@@ -258,11 +258,14 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     try {
       final isar = locator<Isar>();
       final userColors = state.userColors.map((c) => c.toARGB32()).toList();
+      final originalRecord = await isar.historyRecords.get(id);
+
       final record = HistoryRecord(
         imagePath: imagePath,
         userColors: userColors,
         selectedColor: state.filteredColor?.toARGB32(),
-        createdAt: DateTime.now(),
+        createdAt: originalRecord?.createdAt ?? DateTime.now(),
+        isFavorite: originalRecord?.isFavorite ?? false,
       )..id = id;
 
       await isar.writeTxn(() async {

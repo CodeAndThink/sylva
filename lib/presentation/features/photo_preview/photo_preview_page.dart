@@ -1077,14 +1077,25 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               onPressed: () async {
                 AppFeedback.playInteract(context);
                 if (widget.args.historyRecordId != null) {
-                  SaveOptionsBottomSheet.show(
+                  await SaveOptionsBottomSheet.show(
                     context: context,
-                    onSaveAsNew: () =>
-                        _cubit.saveHistory(imagePath: widget.args.imagePath),
-                    onReplaceExisting: () => _cubit.updateHistory(
-                      imagePath: widget.args.imagePath,
-                      id: widget.args.historyRecordId!,
-                    ),
+                    onSaveAsNew: () {
+                      _cubit.saveHistory(imagePath: widget.args.imagePath).then(
+                        (_) {
+                          _cubit.navigator.safePop();
+                        },
+                      );
+                    },
+                    onReplaceExisting: () {
+                      _cubit
+                          .updateHistory(
+                            imagePath: widget.args.imagePath,
+                            id: widget.args.historyRecordId!,
+                          )
+                          .then((_) {
+                            _cubit.navigator.safePop();
+                          });
+                    },
                   );
                 } else {
                   await _cubit.saveHistory(imagePath: widget.args.imagePath);

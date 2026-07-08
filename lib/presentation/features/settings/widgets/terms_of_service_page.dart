@@ -15,31 +15,31 @@ class TermsOfServicePage extends StatelessWidget {
       title: l10n.termsOfService,
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
-          16.0,
-          MediaQuery.of(context).padding.top + 60 + 16,
-          16.0,
-          MediaQuery.of(context).padding.bottom + 16.0,
+          12.0,
+          MediaQuery.of(context).padding.top + 60 + 12,
+          12.0,
+          MediaQuery.of(context).padding.bottom + 12.0,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(l10n.termsOfServiceContent, style: theme.textTheme.bodyLarge),
-            24.height,
+            Text(l10n.termsOfServiceContent, style: theme.textTheme.bodyMedium),
+            20.height,
             AppTitleText(title: l10n.tosTitle1),
 
-            Text(l10n.tosContent1, style: theme.textTheme.bodyLarge),
-            24.height,
+            Text(l10n.tosContent1, style: theme.textTheme.bodyMedium),
+            20.height,
             AppTitleText(title: l10n.tosTitle2),
 
-            Text(l10n.tosContent2, style: theme.textTheme.bodyLarge),
-            24.height,
+            Text(l10n.tosContent2, style: theme.textTheme.bodyMedium),
+            20.height,
             AppTitleText(title: l10n.tosTitle3),
 
-            Text(l10n.tosContent3, style: theme.textTheme.bodyLarge),
-            24.height,
+            Text(l10n.tosContent3, style: theme.textTheme.bodyMedium),
+            20.height,
             AppTitleText(title: l10n.tosTitle4),
 
-            Text(l10n.tosContent4, style: theme.textTheme.bodyLarge),
+            Text(l10n.tosContent4, style: theme.textTheme.bodyMedium),
           ],
         ),
       ),

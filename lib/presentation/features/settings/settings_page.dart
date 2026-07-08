@@ -11,6 +11,8 @@ import 'package:sylva/presentation/app/theme_cubit.dart';
 import 'package:sylva/presentation/app/theme_state.dart';
 import 'package:sylva/presentation/features/settings/settings_cubit.dart';
 import 'package:sylva/presentation/features/settings/settings_navigator.dart';
+import 'package:sylva/presentation/widgets/buttons/app_radio_tile.dart';
+import 'package:sylva/presentation/widgets/buttons/app_switch_tile.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 
@@ -64,11 +66,16 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           12,
           MediaQuery.of(context).padding.bottom + 12,
         ),
+
         children: [
           _buildInteractionSection(),
+          12.height,
           _buildThemeSection(),
+          12.height,
           _buildSeedColorSection(),
+          12.height,
           _buildLanguageSection(),
+          12.height,
           _buildOtherSection(),
         ],
       ),
@@ -84,26 +91,40 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppTitleText(title: _l10n.theme),
-            RadioGroup<ThemeMode>(
-              groupValue: themeMode,
-              onChanged: (mode) {
-                if (mode != null) {
-                  _themeCubit.updateTheme(mode: mode);
-                }
-              },
+            Padding(
+              padding: 12.paddingHorizontal,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  RadioListTile<ThemeMode>(
-                    title: Text(_l10n.themeSystem),
+                  AppRadioTile<ThemeMode>(
+                    title: _l10n.themeSystem,
                     value: ThemeMode.system,
+                    groupValue: themeMode,
+                    onChanged: (mode) {
+                      if (mode != null) {
+                        _themeCubit.updateTheme(mode: mode);
+                      }
+                    },
                   ),
-                  RadioListTile<ThemeMode>(
-                    title: Text(_l10n.themeLight),
+                  AppRadioTile<ThemeMode>(
+                    title: _l10n.themeLight,
                     value: ThemeMode.light,
+                    groupValue: themeMode,
+                    onChanged: (mode) {
+                      if (mode != null) {
+                        _themeCubit.updateTheme(mode: mode);
+                      }
+                    },
                   ),
-                  RadioListTile<ThemeMode>(
-                    title: Text(_l10n.themeDark),
+                  AppRadioTile<ThemeMode>(
+                    title: _l10n.themeDark,
                     value: ThemeMode.dark,
+                    groupValue: themeMode,
+                    onChanged: (mode) {
+                      if (mode != null) {
+                        _themeCubit.updateTheme(mode: mode);
+                      }
+                    },
                   ),
                 ],
               ),
@@ -123,51 +144,53 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           children: [
             AppTitleText(title: _l10n.seedColor),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 8.0,
-              ),
+              padding: 12.paddingHorizontal,
               child: Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: AppColors.presetColors.map((color) {
                   final isSelected =
                       state.seedColor.toARGB32() == color.toARGB32();
-                  return GestureDetector(
-                    onTap: () {
-                      _themeCubit.updateSeedColor(color: color);
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeInOut,
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        color: color,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: isSelected
-                              ? _theme.colorScheme.onSurface
-                              : Colors.transparent,
-                          width: 2.5,
+                  return Material(
+                    color: color,
+                    shape: CircleBorder(
+                      side: BorderSide(
+                        color: isSelected
+                            ? _theme.colorScheme.onSurface
+                            : Colors.transparent,
+                        width: 2.5,
+                      ),
+                    ),
+                    child: InkWell(
+                      customBorder: const CircleBorder(),
+                      onTap: () {
+                        _themeCubit.updateSeedColor(color: color);
+                      },
+                      child: AnimatedContainer(
+                        duration: 250.milliseconds,
+                        curve: Curves.easeInOut,
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: isSelected
+                              ? [
+                                  BoxShadow(
+                                    color: color.withValues(alpha: 0.45),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ]
+                              : null,
                         ),
-                        boxShadow: isSelected
-                            ? [
-                                BoxShadow(
-                                  color: color.withValues(alpha: 0.45),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ]
+                        child: isSelected
+                            ? const Icon(
+                                Icons.check_rounded,
+                                color: Colors.white,
+                                size: 22,
+                              )
                             : null,
                       ),
-                      child: isSelected
-                          ? const Icon(
-                              Icons.check_rounded,
-                              color: Colors.white,
-                              size: 22,
-                            )
-                          : null,
                     ),
                   );
                 }).toList(),
@@ -189,30 +212,50 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppTitleText(title: _l10n.language),
-            RadioGroup<String>(
-              groupValue: locale,
-              onChanged: (code) {
-                if (code != null) {
-                  _localeCubit.changeLanguage(languageCode: code);
-                }
-              },
+            Padding(
+              padding: 12.paddingHorizontal,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  RadioListTile<String>(
-                    title: Text(LanguageType.en.name),
+                  AppRadioTile<String>(
+                    title: LanguageType.en.name,
                     value: LanguageType.en.value,
+                    groupValue: locale,
+                    onChanged: (code) {
+                      if (code != null) {
+                        _localeCubit.changeLanguage(languageCode: code);
+                      }
+                    },
                   ),
-                  RadioListTile<String>(
-                    title: Text(LanguageType.vi.name),
+                  AppRadioTile<String>(
+                    title: LanguageType.vi.name,
                     value: LanguageType.vi.value,
+                    groupValue: locale,
+                    onChanged: (code) {
+                      if (code != null) {
+                        _localeCubit.changeLanguage(languageCode: code);
+                      }
+                    },
                   ),
-                  RadioListTile<String>(
-                    title: Text(LanguageType.ja.name),
+                  AppRadioTile<String>(
+                    title: LanguageType.ja.name,
                     value: LanguageType.ja.value,
+                    groupValue: locale,
+                    onChanged: (code) {
+                      if (code != null) {
+                        _localeCubit.changeLanguage(languageCode: code);
+                      }
+                    },
                   ),
-                  RadioListTile<String>(
-                    title: Text(LanguageType.zh.name),
+                  AppRadioTile<String>(
+                    title: LanguageType.zh.name,
                     value: LanguageType.zh.value,
+                    groupValue: locale,
+                    onChanged: (code) {
+                      if (code != null) {
+                        _localeCubit.changeLanguage(languageCode: code);
+                      }
+                    },
                   ),
                 ],
               ),
@@ -225,24 +268,35 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
 
   Widget _buildInteractionSection() {
     return BlocBuilder<InteractionCubit, InteractionState>(
+      buildWhen: (previous, current) =>
+          previous.hapticEnabled != current.hapticEnabled ||
+          previous.soundEnabled != current.soundEnabled,
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppTitleText(title: _l10n.interactionEffects),
-            SwitchListTile(
-              title: Text(_l10n.hapticFeedback),
-              value: state.hapticEnabled,
-              onChanged: (value) {
-                _interactionCubit.toggleHaptic();
-              },
-            ),
-            SwitchListTile(
-              title: Text(_l10n.soundEffects),
-              value: state.soundEnabled,
-              onChanged: (value) {
-                _interactionCubit.toggleSound();
-              },
+            Padding(
+              padding: 12.paddingHorizontal,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AppSwitchTile(
+                    title: _l10n.hapticFeedback,
+                    value: state.hapticEnabled,
+                    onChanged: (value) {
+                      _interactionCubit.toggleHaptic();
+                    },
+                  ),
+                  AppSwitchTile(
+                    title: _l10n.soundEffects,
+                    value: state.soundEnabled,
+                    onChanged: (value) {
+                      _interactionCubit.toggleSound();
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         );
@@ -253,7 +307,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   Widget _buildOtherSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 12,
+      spacing: 10,
       children: [
         AppTitleText(title: _l10n.informationAndSupport),
         Container(
@@ -281,8 +335,8 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 16.0,
+                  horizontal: 12.0,
+                  vertical: 12.0,
                 ),
                 child: Row(
                   children: [
@@ -291,7 +345,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                     Expanded(
                       child: Text(
                         _l10n.donation,
-                        style: _theme.textTheme.titleMedium?.copyWith(
+                        style: _theme.textTheme.titleSmall?.copyWith(
                           color: Colors.white,
                         ),
                       ),
@@ -303,7 +357,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           ),
         ),
         _buildSettingFilledButton(
-          color: Theme.of(context).colorScheme.primary,
           title: _l10n.about,
           onTap: () {
             _settingsCubit.navigator.goToAbout();
@@ -311,7 +364,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           icon: Icons.info_outline_rounded,
         ),
         _buildSettingFilledButton(
-          color: Theme.of(context).colorScheme.primary,
           title: _l10n.termsOfService,
           onTap: () {
             _settingsCubit.navigator.goToTermsOfService();
@@ -319,7 +371,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           icon: Icons.description_outlined,
         ),
         _buildSettingFilledButton(
-          color: Theme.of(context).colorScheme.primary,
           title: _l10n.privacyPolicy,
           onTap: () {
             _settingsCubit.navigator.goToPrivacyPolicy();
@@ -327,7 +378,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           icon: Icons.privacy_tip_outlined,
         ),
         _buildSettingFilledButton(
-          color: Theme.of(context).colorScheme.primary,
           title: _l10n.contact,
           onTap: () {
             _settingsCubit.navigator.goToContact();
@@ -335,7 +385,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           icon: Icons.contact_support_outlined,
         ),
         _buildSettingFilledButton(
-          color: Theme.of(context).colorScheme.primary,
           title: _l10n.acknowledgements,
           onTap: () {
             _settingsCubit.navigator.goToThanksAndReference();
@@ -347,14 +396,13 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   }
 
   Widget _buildSettingFilledButton({
-    required Color color,
     required String title,
     required VoidCallback onTap,
     required IconData icon,
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondaryContainer,
+        color: _theme.colorScheme.secondaryContainer.withValues(alpha: 0.5),
         borderRadius: 16.borderRadius,
       ),
       child: Material(
@@ -363,16 +411,16 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           borderRadius: 16.borderRadius,
           onTap: onTap,
           child: Padding(
-            padding: 16.paddingAll,
+            padding: 12.paddingAll,
             child: Row(
               children: [
-                Icon(icon, color: color),
-                16.width,
+                Icon(icon, color: _theme.colorScheme.primary),
+                12.width,
                 Expanded(
                   child: Text(
                     title,
-                    style: _theme.textTheme.titleMedium?.copyWith(
-                      color: _theme.colorScheme.onPrimaryContainer,
+                    style: _theme.textTheme.titleSmall?.copyWith(
+                      color: _theme.colorScheme.primary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

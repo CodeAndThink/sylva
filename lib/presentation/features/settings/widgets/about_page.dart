@@ -54,14 +54,14 @@ class AboutPage extends StatelessWidget {
             8.height,
             Text(
               l10n.version(AppConfigs.version),
-              style: theme.textTheme.titleMedium?.copyWith(
+              style: theme.textTheme.titleSmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
             32.height,
             Text(
               l10n.aboutSylvaDescription,
-              style: theme.textTheme.bodyLarge?.copyWith(height: 1.5),
+              style: theme.textTheme.bodyMedium?.copyWith(height: 1.5),
               textAlign: TextAlign.center,
             ),
           ],

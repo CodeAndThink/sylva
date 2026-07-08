@@ -211,10 +211,15 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
       showAppBar: false,
       body: SafeArea(
         child: Padding(
-          padding: 12.paddingAll,
+          padding: 12.paddingVertical,
           child: Column(
             children: [
-              Expanded(child: _buildPhotoWidget()),
+              Expanded(
+                child: Padding(
+                  padding: 12.paddingHorizontal,
+                  child: _buildPhotoWidget(),
+                ),
+              ),
               _buildColorSet(),
               _buildBottomActions(),
             ],
@@ -511,7 +516,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           current.filteredColor != previous.filteredColor,
       builder: (context, state) {
         if (state.getColorStatus.isLoading) {
-          return SizedBox(
+          return Container(
+            padding: 12.paddingHorizontal,
             key: const ValueKey('loading'),
             height: 120,
             child: PaletteShimmerList(),
@@ -519,11 +525,14 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
         } else if (state.getColorStatus.isFailure) {
           return Container(
             key: const ValueKey('failure'),
+            height: 120,
             padding: 8.paddingAll,
-            child: Text(
-              _l10n.failedToLoadColors,
-              style: _theme.textTheme.bodyMedium?.copyWith(
-                color: _theme.colorScheme.error,
+            child: Center(
+              child: Text(
+                _l10n.failedToLoadColors,
+                style: _theme.textTheme.bodyMedium?.copyWith(
+                  color: _theme.colorScheme.error,
+                ),
               ),
             ),
           );

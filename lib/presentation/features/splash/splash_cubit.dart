@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sylva/core/di/injection.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/services/permission_service.dart';
 import 'package:sylva/presentation/app/app_cubit.dart';
 import 'package:sylva/presentation/features/splash/splash_navigator.dart';
@@ -15,7 +16,7 @@ class SplashCubit extends BaseCubit<SplashState> {
     : super(const SplashState());
 
   Future<void> init(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(1.seconds);
     if (!context.mounted) return;
 
     final permissionService = locator<PermissionService>();

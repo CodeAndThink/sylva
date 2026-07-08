@@ -232,7 +232,10 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                   isScrollControlled: true,
                   builder: (context) => BlocProvider.value(
                     value: _cubit,
-                    child: ShareEditBottomSheet(colors: widget.args.colors),
+                    child: ShareEditBottomSheet(
+                      genColors: widget.args.genColors,
+                      userColors: widget.args.userColors,
+                    ),
                   ),
                 );
               },

@@ -13,9 +13,14 @@ import 'package:sylva/presentation/widgets/buttons/app_sliding_segmented_control
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 
 class ShareEditBottomSheet extends StatelessWidget {
-  final List<Color> colors;
+  final List<Color> genColors;
+  final List<Color> userColors;
 
-  const ShareEditBottomSheet({super.key, required this.colors});
+  const ShareEditBottomSheet({
+    super.key,
+    required this.genColors,
+    required this.userColors,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +58,7 @@ class ShareEditBottomSheet extends StatelessWidget {
                         child = const ShareShapesTab();
                         break;
                       case ShareFeatureTab.text:
-                        child = ShareTextTab(colors: colors);
+                        child = ShareTextTab();
                         break;
                       case ShareFeatureTab.direction:
                         child = const SizedBox(
@@ -63,8 +68,10 @@ class ShareEditBottomSheet extends StatelessWidget {
                         break;
                       case ShareFeatureTab.colors:
                         child = SizedBox(
-                          height: 67,
-                          child: ShareColorsTab(colors: colors),
+                          child: ShareColorsTab(
+                            genColors: genColors,
+                            userColors: userColors,
+                          ),
                         );
                         break;
                     }

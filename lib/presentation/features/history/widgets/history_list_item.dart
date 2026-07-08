@@ -197,9 +197,6 @@ class _HistoryListItemState extends State<HistoryListItem> {
                                         decoration: BoxDecoration(
                                           color: Color(c),
                                           shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: theme.colorScheme.onSurface,
-                                          ),
                                         ),
                                       ),
                                     ),

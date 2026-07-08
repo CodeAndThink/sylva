@@ -62,7 +62,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     _cubit = context.read<HistoryCubit>();
     _cubit.loadHistory();
     _scrollController.addListener(() {
-      if (!_scrollController.hasClients) return;
+      if (!_scrollController.hasClients) {
+        _showScrollToTop.value = false;
+        return;
+      }
 
       final bool shouldShow =
           _scrollController.offset > 200 &&
@@ -88,6 +91,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       rightColor: _theme.colorScheme.error,
       onRight: () {
         _cubit.clearHistory();
+        _showScrollToTop.value = false;
       },
     );
   }
@@ -516,11 +520,14 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                   padding: 12.paddingLeft,
                   child: AppTransparentContainer(
                     onTap: () {
-                      _scrollController.animateTo(
-                        0,
-                        duration: 300.milliseconds,
-                        curve: Curves.easeOut,
-                      );
+                      AppFeedback.playInteract(context);
+                      if (_scrollController.hasClients) {
+                        _scrollController.animateTo(
+                          0,
+                          duration: 300.milliseconds,
+                          curve: Curves.easeOut,
+                        );
+                      }
                     },
                     backgroundColor: _theme.colorScheme.primaryContainer,
                     child: const Icon(Icons.expand_less_rounded),

@@ -114,6 +114,32 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     );
   }
 
+  Future<void> handleSavePress() async {
+    if (widget.args.historyRecordId != null) {
+      await SaveOptionsBottomSheet.show(
+        context: context,
+        onSaveAsNew: () {
+          _cubit.saveHistory(imagePath: widget.args.imagePath).then((_) {
+            _cubit.navigator.safePop();
+          });
+        },
+        onReplaceExisting: () {
+          _cubit
+              .updateHistory(
+                imagePath: widget.args.imagePath,
+                id: widget.args.historyRecordId!,
+              )
+              .then((_) {
+                _cubit.navigator.safePop();
+              });
+        },
+      );
+    } else {
+      await _cubit.saveHistory(imagePath: widget.args.imagePath);
+      _cubit.navigator.safePop();
+    }
+  }
+
   @override
   void dispose() {
     _zoomAnimationController.dispose();
@@ -550,12 +576,16 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       // Page 1: Auto-detected colors
                       Column(
                         children: [
-                          AppTitleText(title: _l10n.autoDetectColors),
+                          Padding(
+                            padding: 12.paddingHorizontal,
+                            child: AppTitleText(title: _l10n.autoDetectColors),
+                          ),
                           SizedBox(
                             height: 80,
                             child: ListView.separated(
                               itemCount: state.paletteColors.length,
                               scrollDirection: Axis.horizontal,
+                              padding: 12.paddingLeft,
                               separatorBuilder: (context, index) => 10.width,
                               itemBuilder: (context, index) {
                                 final color = state.paletteColors[index];
@@ -584,48 +614,57 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                       // Page 2: User-picked colors
                       Column(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: AppTitleText(title: _l10n.myColors),
-                              ),
-                              SizedBox(
-                                height: 24,
-                                child: state.userColors.isNotEmpty
-                                    ? ValueListenableBuilder<bool>(
-                                        valueListenable: _isDeleteMode,
-                                        builder: (context, isDeleteMode, child) {
-                                          return InkWell(
-                                            borderRadius: 12.borderRadius,
-                                            key: _keyDeleteColor,
-                                            onTap: () {
-                                              _isDeleteMode.value =
-                                                  !_isDeleteMode.value;
-                                              if (state.filteredColor != null) {
-                                                _cubit.clearSelectedColor();
-                                              }
-                                            },
-                                            child: Container(
-                                              width: 48,
-                                              decoration: BoxDecoration(
-                                                color: isDeleteMode
-                                                    ? _theme.colorScheme.error
-                                                    : Colors.transparent,
-                                                borderRadius: 12.borderRadius,
+                          Padding(
+                            padding: 12.paddingHorizontal,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: AppTitleText(title: _l10n.myColors),
+                                ),
+                                SizedBox(
+                                  height: 24,
+                                  child: state.userColors.isNotEmpty
+                                      ? ValueListenableBuilder<bool>(
+                                          valueListenable: _isDeleteMode,
+                                          builder: (context, isDeleteMode, child) {
+                                            return InkWell(
+                                              borderRadius: 12.borderRadius,
+                                              key: _keyDeleteColor,
+                                              onTap: () {
+                                                _isDeleteMode.value =
+                                                    !_isDeleteMode.value;
+                                                if (state.filteredColor !=
+                                                    null) {
+                                                  _cubit.clearSelectedColor();
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 48,
+                                                decoration: BoxDecoration(
+                                                  color: isDeleteMode
+                                                      ? _theme.colorScheme.error
+                                                      : Colors.transparent,
+                                                  borderRadius: 12.borderRadius,
+                                                ),
+                                                child: Icon(
+                                                  Icons
+                                                      .cleaning_services_rounded,
+                                                  color: isDeleteMode
+                                                      ? _theme
+                                                            .colorScheme
+                                                            .onError
+                                                      : _theme
+                                                            .colorScheme
+                                                            .error,
+                                                ),
                                               ),
-                                              child: Icon(
-                                                Icons.cleaning_services_rounded,
-                                                color: isDeleteMode
-                                                    ? _theme.colorScheme.onError
-                                                    : _theme.colorScheme.error,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      )
-                                    : null,
-                              ),
-                            ],
+                                            );
+                                          },
+                                        )
+                                      : null,
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: 80,
@@ -645,6 +684,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                     scrollDirection: Axis.horizontal,
                                     separatorBuilder: (context, index) =>
                                         10.width,
+                                    padding: 12.paddingLeft,
                                     itemBuilder: (context, index) {
                                       final color = state.userColors[index];
                                       final hex = ColorUtils.colorToHex(
@@ -729,9 +769,8 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     ],
                   ),
                 ),
-                8.width,
                 Padding(
-                  padding: 6.paddingVertical,
+                  padding: 6.paddingAll,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1085,31 +1124,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               key: _keySave,
               onPressed: () async {
                 AppFeedback.playInteract(context);
-                if (widget.args.historyRecordId != null) {
-                  await SaveOptionsBottomSheet.show(
-                    context: context,
-                    onSaveAsNew: () {
-                      _cubit.saveHistory(imagePath: widget.args.imagePath).then(
-                        (_) {
-                          _cubit.navigator.safePop();
-                        },
-                      );
-                    },
-                    onReplaceExisting: () {
-                      _cubit
-                          .updateHistory(
-                            imagePath: widget.args.imagePath,
-                            id: widget.args.historyRecordId!,
-                          )
-                          .then((_) {
-                            _cubit.navigator.safePop();
-                          });
-                    },
-                  );
-                } else {
-                  await _cubit.saveHistory(imagePath: widget.args.imagePath);
-                  _cubit.navigator.safePop();
-                }
+                handleSavePress();
               },
               icon: const Icon(Icons.data_saver_on_outlined, size: 30),
             ),

@@ -88,6 +88,49 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                         Spacer(),
                         Row(
                           children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (widget.record.userColors.isNotEmpty) ...[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      spacing: 4,
+                                      children: [
+                                        ...widget.record.userColors
+                                            .take(5)
+                                            .map(
+                                              (c) => Container(
+                                                width: 16,
+                                                height: 16,
+                                                decoration: BoxDecoration(
+                                                  color: Color(c),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                            ),
+                                      ],
+                                    ),
+                                  ] else ...[
+                                    16.height,
+                                  ],
+                                  8.height,
+                                  Text(
+                                    widget.record.createdAt.isToday
+                                        ? widget.record.createdAt
+                                              .toFormattedTime()
+                                        : widget.record.createdAt
+                                              .toFormattedDate(),
+                                    style: theme.textTheme.titleSmall?.copyWith(
+                                      color:
+                                          theme.colorScheme.onPrimaryContainer,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 AppFeedback.playInteract(context);
@@ -115,51 +158,6 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                                       ? Colors.amber
                                       : theme.colorScheme.onSurfaceVariant,
                                 ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  if (widget.record.userColors.isNotEmpty) ...[
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      spacing: 4,
-                                      children: [
-                                        ...widget.record.userColors
-                                            .take(5)
-                                            .map(
-                                              (c) => Container(
-                                                width: 16,
-                                                height: 16,
-                                                decoration: BoxDecoration(
-                                                  color: Color(c),
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                      ],
-                                    ),
-                                  ] else ...[
-                                    16.height,
-                                  ],
-                                  8.height,
-                                  Text(
-                                    widget.record.createdAt.isToday
-                                        ? widget.record.createdAt
-                                              .toFormattedTime()
-                                        : widget.record.createdAt
-                                              .toFormattedDate(),
-                                    style: theme.textTheme.titleSmall?.copyWith(
-                                      color:
-                                          theme.colorScheme.onPrimaryContainer,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ],

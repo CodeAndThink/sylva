@@ -264,8 +264,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
         imagePath: imagePath,
         userColors: userColors,
         selectedColor: state.filteredColor?.toARGB32(),
-        createdAt: originalRecord?.createdAt ?? DateTime.now(),
-        isFavorite: originalRecord?.isFavorite ?? false,
+        createdAt: DateTime.now(), // Cập nhật lại thời gian tạo
+        isFavorite:
+            originalRecord?.isFavorite ??
+            false, // Giữ nguyên trạng thái yêu thích
       )..id = id;
 
       await isar.writeTxn(() async {

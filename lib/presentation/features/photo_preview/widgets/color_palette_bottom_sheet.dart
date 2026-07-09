@@ -58,60 +58,67 @@ class ColorPaletteBottomSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppTitleText(title: l10n.autoDetectColors),
-                    12.height,
-                    Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: paletteColors.map((color) {
-                        final hex = ColorUtils.colorToHex(color: color);
-                        return PaletteColorListItem(
-                          color: color,
-                          hex: hex,
-                          isSelected: false,
-                          onTap: () {
-                            AppFeedback.playInteract(context);
-                            onColorLongPress(color);
-                          },
-                          onLongPress: () {
-                            AppFeedback.playLongInteract(context);
-                            onColorLongPress(color);
-                          },
-                        );
-                      }).toList(),
+                    Padding(
+                      padding: 12.paddingLeft,
+                      child: Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: paletteColors.map((color) {
+                          final hex = ColorUtils.colorToHex(color: color);
+                          return PaletteColorListItem(
+                            color: color,
+                            hex: hex,
+                            isSelected: false,
+                            onTap: () {
+                              AppFeedback.playInteract(context);
+                              onColorLongPress(color);
+                            },
+                            onLongPress: () {
+                              AppFeedback.playLongInteract(context);
+                              onColorLongPress(color);
+                            },
+                          );
+                        }).toList(),
+                      ),
                     ),
-                    24.height,
-                    AppTitleText(title: l10n.myColors),
                     12.height,
+                    AppTitleText(title: l10n.myColors),
                     userColors.isEmpty
-                        ? Center(
-                            child: Text(
-                              l10n.useMagnifierToPickColors,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.colorScheme.onSurface.withValues(
-                                  alpha: 0.5,
+                        ? SizedBox(
+                            height: 55,
+                            child: Center(
+                              child: Text(
+                                l10n.useMagnifierToPickColors,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: 0.5,
+                                  ),
                                 ),
                               ),
                             ),
                           )
-                        : Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            children: userColors.map((color) {
-                              final hex = ColorUtils.colorToHex(color: color);
-                              return PaletteColorListItem(
-                                color: color,
-                                hex: hex,
-                                isSelected: false,
-                                onTap: () {
-                                  AppFeedback.playInteract(context);
-                                  onColorLongPress(color);
-                                },
-                                onLongPress: () {
-                                  AppFeedback.playLongInteract(context);
-                                  onColorLongPress(color);
-                                },
-                              );
-                            }).toList(),
+                        : Padding(
+                            padding: 12.paddingLeft,
+                            child: Wrap(
+                              spacing: 10,
+                              runSpacing: 10,
+                              children: userColors.map((color) {
+                                final hex = ColorUtils.colorToHex(color: color);
+                                return PaletteColorListItem(
+                                  color: color,
+                                  hex: hex,
+                                  isSelected: false,
+                                  onTap: () {
+                                    AppFeedback.playInteract(context);
+                                    onColorLongPress(color);
+                                  },
+                                  onLongPress: () {
+                                    AppFeedback.playLongInteract(context);
+                                    onColorLongPress(color);
+                                  },
+                                );
+                              }).toList(),
+                            ),
                           ),
                   ],
                 ),

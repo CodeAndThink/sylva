@@ -26,42 +26,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        bottomLeft: Radius.circular(36),
-        bottomRight: Radius.circular(36),
+      borderRadius: BorderRadius.only(
+        bottomLeft: 36.radius,
+        bottomRight: 36.radius,
       ),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Container(
           height: preferredSize.height + MediaQuery.of(context).padding.top,
           decoration: BoxDecoration(
-            // gradient: LinearGradient(
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            //   colors: isDark
-            //       ? [
-            //           theme.colorScheme.primary.withValues(alpha: 0.4),
-            //           theme.colorScheme.primary.withValues(alpha: 0.5),
-            //         ]
-            //       : [
-            //           theme.colorScheme.primary.withValues(alpha: 0.2),
-            //           theme.colorScheme.primary.withValues(alpha: 0.3),
-            //         ],
-            // ),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(36),
-              bottomRight: Radius.circular(36),
+            borderRadius: BorderRadius.only(
+              bottomLeft: 36.radius,
+              bottomRight: 36.radius,
             ),
-            // border: Border.all(
-            //   color: isDark
-            //       ? AppColors.glassStroke
-            //       : theme.colorScheme.secondary.withValues(alpha: 0.28),
-            //   width: 1.5,
-            // ),
+            border: Border.all(
+              color: theme.colorScheme.secondary.withValues(alpha: 0.28),
+              width: 1.5,
+            ),
             boxShadow: [
               BoxShadow(
                 color: theme.colorScheme.primary.withValues(
-                  alpha: isDark ? 0.28 : 0.18,
+                  alpha: isDark ? 0.4 : 0.3,
                 ),
                 blurRadius: 32,
                 spreadRadius: -8,

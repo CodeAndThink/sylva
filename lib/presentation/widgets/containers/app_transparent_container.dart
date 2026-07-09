@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 
 class AppTransparentContainer extends StatelessWidget {
@@ -36,10 +35,9 @@ class AppTransparentContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: border ?? (borderRadius ?? 28).borderRadius,
         border: Border.all(
-          color: isDark
-              ? borderColor ?? AppColors.glassStroke
-              : borderColor ??
-                    theme.colorScheme.secondary.withValues(alpha: 0.24),
+          color:
+              borderColor ??
+              theme.colorScheme.secondary.withValues(alpha: 0.24),
           width: 1.5,
         ),
         boxShadow: [

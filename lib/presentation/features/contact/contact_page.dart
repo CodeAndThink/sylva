@@ -133,7 +133,7 @@ class __ContactChildPageState extends State<_ContactChildPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Contact Type Selection
-            AppTitleText(title: _l10n.contactType), 8.height,
+            AppTitleText(title: _l10n.contactType),
             BlocBuilder<ContactCubit, ContactState>(
               buildWhen: (previous, current) =>
                   previous.selectedType != current.selectedType,
@@ -150,10 +150,10 @@ class __ContactChildPageState extends State<_ContactChildPage> {
               },
             ),
 
-            16.height,
+            12.height,
 
             // Title Field
-            AppTitleText(title: _l10n.contactFormTitle), 8.height,
+            AppTitleText(title: _l10n.contactFormTitle),
             AppTextField(
               focusNode: _titleFocus,
               controller: _titleController,
@@ -168,11 +168,11 @@ class __ContactChildPageState extends State<_ContactChildPage> {
                 _cubit.changeTitle(value: value);
               },
             ),
-            16.height,
+            12.height,
 
             // Description Field
             AppTitleText(title: _l10n.contactFormDescription),
-            8.height,
+
             AppTextField(
               focusNode: _descFocus,
               controller: _descController,
@@ -188,7 +188,7 @@ class __ContactChildPageState extends State<_ContactChildPage> {
                 _cubit.changeDescription(value: value);
               },
             ),
-            16.height,
+            12.height,
 
             // Device Info
             Row(

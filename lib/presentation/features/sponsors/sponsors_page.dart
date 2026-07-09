@@ -45,7 +45,7 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
         child: AppTransparentContainer(
-          padding: 32.paddingAll,
+          padding: 30.paddingAll,
           borderColor: const Color(0xFFFF5E5B).withValues(alpha: 0.3),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -82,7 +82,7 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
               Text(
                 _l10n.sponsorsDescription,
                 textAlign: TextAlign.center,
-                style: _theme.textTheme.bodyLarge?.copyWith(
+                style: _theme.textTheme.bodyMedium?.copyWith(
                   height: 1.5,
                   color: _theme.colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
@@ -95,10 +95,10 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
                 backgroundColor: const Color(0xFFFF5E5B),
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
+                  horizontal: 28,
                   vertical: 16,
                 ),
-                textStyle: _theme.textTheme.titleLarge?.copyWith(
+                textStyle: _theme.textTheme.titleMedium?.copyWith(
                   color: Colors.white,
                 ),
                 onPressed: () {

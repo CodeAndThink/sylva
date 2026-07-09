@@ -62,7 +62,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     _cubit = context.read<HistoryCubit>();
     _cubit.loadHistory();
     _scrollController.addListener(() {
-      if (!_scrollController.hasClients) return;
+      if (!_scrollController.hasClients) {
+        _showScrollToTop.value = false;
+        return;
+      }
 
       final bool shouldShow =
           _scrollController.offset > 200 &&
@@ -88,6 +91,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
       rightColor: _theme.colorScheme.error,
       onRight: () {
         _cubit.clearHistory();
+        _showScrollToTop.value = false;
       },
     );
   }
@@ -164,7 +168,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           message: _l10n.clearAllHistory,
           child: IconButton(
             key: _keyDeleteAll,
-            icon: Icon(Icons.auto_delete, color: _theme.colorScheme.error),
+            icon: Icon(
+              Icons.auto_delete_rounded,
+              color: _theme.colorScheme.error,
+            ),
             onPressed: () {
               _handleCleanHistory();
             },
@@ -355,7 +362,6 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            60.width,
             AppTransparentContainer(
               padding: 4.paddingAll,
               child: Row(
@@ -370,7 +376,6 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 ],
               ),
             ),
-            12.width,
             _buildScrollToTopButton(),
           ],
         ),
@@ -446,7 +451,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                 color: state.isFavoriteOnly
                     ? Colors.amber
                     : _theme.colorScheme.onSurfaceVariant,
-                size: 30,
+                size: 24,
               );
             },
           ),
@@ -510,25 +515,28 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
     return ValueListenableBuilder<bool>(
       valueListenable: _showScrollToTop,
       builder: (context, show, child) {
-        return AnimatedOpacity(
-          opacity: show ? 1.0 : 0.0,
+        return AnimatedSize(
           duration: 200.milliseconds,
-          child: IgnorePointer(
-            ignoring: !show,
-            child: FloatingActionButton(
-              shape: const CircleBorder(),
-              onPressed: () {
-                _scrollController.animateTo(
-                  0,
-                  duration: 300.milliseconds,
-                  curve: Curves.easeOut,
-                );
-              },
-              backgroundColor: _theme.colorScheme.primaryContainer,
-              foregroundColor: _theme.colorScheme.onPrimaryContainer,
-              child: const Icon(Icons.arrow_upward),
-            ),
-          ),
+          curve: Curves.easeInOut,
+          child: show
+              ? Padding(
+                  padding: 12.paddingLeft,
+                  child: AppTransparentContainer(
+                    onTap: () {
+                      AppFeedback.playInteract(context);
+                      if (_scrollController.hasClients) {
+                        _scrollController.animateTo(
+                          0,
+                          duration: 300.milliseconds,
+                          curve: Curves.easeOut,
+                        );
+                      }
+                    },
+                    backgroundColor: _theme.colorScheme.primaryContainer,
+                    child: const Icon(Icons.expand_less_rounded),
+                  ),
+                )
+              : const SizedBox.shrink(),
         );
       },
     );

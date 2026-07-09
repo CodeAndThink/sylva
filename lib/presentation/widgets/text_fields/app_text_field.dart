@@ -47,7 +47,7 @@ class AppTextField extends StatelessWidget {
       validator: validator,
       onChanged: onChanged,
       obscureText: obscureText,
-      style: theme.textTheme.bodyLarge,
+      style: theme.textTheme.bodyMedium,
       focusNode: focusNode,
       maxLines: maxLines,
       enabled: isEnable,

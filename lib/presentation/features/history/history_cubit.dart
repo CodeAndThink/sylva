@@ -10,6 +10,9 @@ import 'package:sylva/presentation/features/history/history_navigator.dart';
 import 'package:sylva/presentation/features/history/history_state.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
+import 'package:sylva/core/utils/file_utils.dart';
+import 'package:path/path.dart' as p;
+import 'dart:io' as dart_io;
 
 class HistoryCubit extends BaseCubit<HistoryState> {
   final HistoryNavigator navigator;
@@ -125,9 +128,27 @@ class HistoryCubit extends BaseCubit<HistoryState> {
 
   void deleteRecord({required int id}) async {
     try {
+      final recordToDelete = await isarService.historyRecords.get(id);
+      if (recordToDelete == null) return;
+      final imagePath = recordToDelete.imagePath;
+
       await isarService.writeTxn(() async {
         await isarService.historyRecords.delete(id);
       });
+
+      // Check if any other records are still using this image file
+      final usageCount = await isarService.historyRecords
+          .filter()
+          .imagePathEqualTo(imagePath)
+          .count();
+
+      if (usageCount == 0) {
+        final fullPath = FileUtils.getFullImagePath(imagePath);
+        final file = dart_io.File(fullPath);
+        if (file.existsSync()) {
+          file.deleteSync();
+        }
+      }
 
       final updatedRecords = List<HistoryRecord>.from(state.records)
         ..removeWhere((record) => record.id == id);
@@ -150,6 +171,14 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         await isarService.historyRecords.clear();
       });
 
+      // Delete the entire sylva_images directory to clean up all files
+      final dir = dart_io.Directory(
+        p.join(FileUtils.appDocDirPath, 'sylva_images'),
+      );
+      if (dir.existsSync()) {
+        dir.deleteSync(recursive: true);
+      }
+
       emit(state.copyWith(records: [], groupedItems: []));
     } catch (e) {
       debugPrint('Error clearing history: $e');
@@ -160,7 +189,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     final timeBeforeNavigation = DateTime.now();
     await navigator.goToPhotoPreview(
       args: PhotoPreviewArguments(
-        imagePath: record.imagePath,
+        imagePath: FileUtils.getFullImagePath(record.imagePath),
         initialColors: record.userColors.map((c) => Color(c)).toList(),
         initialSelectedColor: record.selectedColor != null
             ? Color(record.selectedColor!)

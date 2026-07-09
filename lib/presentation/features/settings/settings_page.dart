@@ -201,18 +201,17 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                               duration: 300.milliseconds,
                               child: InkWell(
                                 customBorder: const CircleBorder(),
-                                onTap: () async {
-                                  final Color? pickedColor =
-                                      await ColorUtils.showColorPicker(
-                                        context,
-                                        initialColor: state.customSeedColor!,
+                                onTap: () {
+                                  ColorUtils.showColorPicker(
+                                    context,
+                                    initialColor: state.customSeedColor!,
+                                    onColorPicked: (color) {
+                                      _themeCubit.updateSeedColor(
+                                        color: color,
+                                        isCustom: true,
                                       );
-                                  if (pickedColor != null) {
-                                    _themeCubit.updateSeedColor(
-                                      color: pickedColor,
-                                      isCustom: true,
-                                    );
-                                  }
+                                    },
+                                  );
                                 },
                                 child: Icon(
                                   Icons.sync_rounded,
@@ -224,18 +223,17 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                         )
                       : InkWell(
                           customBorder: const CircleBorder(),
-                          onTap: () async {
-                            final Color? pickedColor =
-                                await ColorUtils.showColorPicker(
-                                  context,
-                                  initialColor: state.seedColor,
+                          onTap: () {
+                            ColorUtils.showColorPicker(
+                              context,
+                              initialColor: state.seedColor,
+                              onColorPicked: (color) {
+                                _themeCubit.updateSeedColor(
+                                  color: color,
+                                  isCustom: true,
                                 );
-                            if (pickedColor != null) {
-                              _themeCubit.updateSeedColor(
-                                color: pickedColor,
-                                isCustom: true,
-                              );
-                            }
+                              },
+                            );
                           },
                           child: Container(
                             width: 30,

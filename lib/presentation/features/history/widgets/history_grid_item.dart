@@ -5,6 +5,7 @@ import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
+import 'package:sylva/core/utils/file_utils.dart';
 
 class HistoryGridItem extends StatefulWidget {
   final HistoryRecord record;
@@ -61,7 +62,7 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
               fit: StackFit.expand,
               children: [
                 AppFileImage(
-                  path: widget.record.imagePath,
+                  path: FileUtils.getFullImagePath(widget.record.imagePath),
                   fit: BoxFit.cover,
                   cacheHeight: 400,
                 ),

@@ -10,6 +10,7 @@ import 'package:sylva/core/utils/throttle_utils.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 import 'package:sylva/generated/l10n.dart';
+import 'package:sylva/core/utils/file_utils.dart';
 
 class HistoryListItem extends StatefulWidget {
   final HistoryRecord record;
@@ -115,7 +116,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                   child: ClipRRect(
                     borderRadius: 18.borderRadiusLeft,
                     child: AppFileImage(
-                      path: widget.record.imagePath,
+                      path: FileUtils.getFullImagePath(widget.record.imagePath),
                       fit: BoxFit.cover,
                       cacheHeight: 250,
                     ),
@@ -139,7 +140,13 @@ class _HistoryListItemState extends State<HistoryListItem> {
                         color: theme.colorScheme.primaryContainer,
                         image: DecorationImage(
                           image: ResizeImage(
-                            FileImage(File(widget.record.imagePath)),
+                            FileImage(
+                              File(
+                                FileUtils.getFullImagePath(
+                                  widget.record.imagePath,
+                                ),
+                              ),
+                            ),
                             height: 250,
                           ),
                           fit: BoxFit.cover,

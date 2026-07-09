@@ -20,8 +20,8 @@ class AcknowledgementsPage extends StatelessWidget {
           MediaQuery.of(context).padding.bottom + 12.0,
         ),
         children: [
-          Text(l10n.acknowledgementsIntro, style: theme.textTheme.bodyLarge),
-          24.height,
+          Text(l10n.acknowledgementsIntro, style: theme.textTheme.bodyMedium),
+          20.height,
           _buildCreditItem(
             context: context,
             title: l10n.roadBlockIcon,
@@ -69,7 +69,7 @@ class AcknowledgementsPage extends StatelessWidget {
         children: [
           Text(
             title,
-            style: theme.textTheme.titleMedium?.copyWith(
+            style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondaryContainer,
             ),
           ),

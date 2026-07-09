@@ -84,33 +84,43 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final PaletteGeneratorMaster generator =
           await PaletteGeneratorMaster.fromImageProvider(
             FileImage(File(imagePath)),
+            maximumColorCount: 16,
           );
 
-      final List<Color> colors = [];
+      final List<Color> targetColors = [];
       if (generator.dominantColor != null) {
-        colors.add(generator.dominantColor!.color);
+        targetColors.add(generator.dominantColor!.color);
       }
       if (generator.vibrantColor != null) {
-        colors.add(generator.vibrantColor!.color);
+        targetColors.add(generator.vibrantColor!.color);
       }
       if (generator.mutedColor != null) {
-        colors.add(generator.mutedColor!.color);
+        targetColors.add(generator.mutedColor!.color);
       }
       if (generator.darkVibrantColor != null) {
-        colors.add(generator.darkVibrantColor!.color);
+        targetColors.add(generator.darkVibrantColor!.color);
       }
       if (generator.lightVibrantColor != null) {
-        colors.add(generator.lightVibrantColor!.color);
+        targetColors.add(generator.lightVibrantColor!.color);
       }
       if (generator.darkMutedColor != null) {
-        colors.add(generator.darkMutedColor!.color);
+        targetColors.add(generator.darkMutedColor!.color);
       }
       if (generator.lightMutedColor != null) {
-        colors.add(generator.lightMutedColor!.color);
+        targetColors.add(generator.lightMutedColor!.color);
       }
 
+      final List<Color> allExtractedColors = generator.colors.toList();
+      final combinedColors = [...targetColors, ...allExtractedColors];
+
       // Remove duplicates
-      final uniqueColors = colors.toSet().toList();
+      final uniqueColors = combinedColors.toSet().toList();
+
+      uniqueColors.sort((a, b) {
+        final hsvA = HSVColor.fromColor(a);
+        final hsvB = HSVColor.fromColor(b);
+        return hsvA.hue.compareTo(hsvB.hue);
+      });
 
       if (uniqueColors.isEmpty) {
         throw Exception('No colors extracted');
@@ -133,7 +143,6 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     Color targetColor, {
     Color? replacementColor,
   }) async {
-    // Hủy isolate cũ nếu đang chạy để ưu tiên thao tác mới
     _filterIsolate?.kill(priority: Isolate.immediate);
     _filterIsolate = null;
 
@@ -161,7 +170,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final Map<String, dynamic> params = {
         'imagePath': imagePath,
         'targetColorValue': targetColor.toARGB32(),
-        'threshold': 10.0, // RGB distance threshold
+        'threshold': 30.0, // RGB distance threshold
         'replacementColorValue': replacementColor?.toARGB32(),
         'sendPort': receivePort.sendPort,
       };
@@ -249,11 +258,14 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     try {
       final isar = locator<Isar>();
       final userColors = state.userColors.map((c) => c.toARGB32()).toList();
+      final originalRecord = await isar.historyRecords.get(id);
+
       final record = HistoryRecord(
         imagePath: imagePath,
         userColors: userColors,
         selectedColor: state.filteredColor?.toARGB32(),
         createdAt: DateTime.now(),
+        isFavorite: originalRecord?.isFavorite ?? false,
       )..id = id;
 
       await isar.writeTxn(() async {
@@ -320,9 +332,12 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       navigator.flushBar.showError(message: S.current.noImageToShare);
       return;
     }
-    final List<Color> colors = [...state.userColors, ...state.paletteColors];
     navigator.navigateToShare(
-      args: ProcessImageModel(imagePath: state.imagePath!, colors: colors),
+      args: ProcessImageModel(
+        imagePath: state.imagePath!,
+        genColors: state.paletteColors,
+        userColors: state.userColors,
+      ),
     );
   }
 }

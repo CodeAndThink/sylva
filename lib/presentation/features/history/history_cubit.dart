@@ -195,8 +195,12 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       }
     }
 
-    if (newRecords.isNotEmpty) {
-      currentRecords.addAll(newRecords);
+    final actuallyNewRecords = newRecords
+        .where((r) => r.id != record.id)
+        .toList();
+
+    if (actuallyNewRecords.isNotEmpty) {
+      currentRecords.addAll(actuallyNewRecords);
       // Re-sort the list since new items were added
       if (state.isSortAscending) {
         currentRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
@@ -204,6 +208,13 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         currentRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       }
       hasChanges = true;
+    } else if (hasChanges) {
+      // Re-sort anyway if the updatedRecord changed its createdAt
+      if (state.isSortAscending) {
+        currentRecords.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      } else {
+        currentRecords.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      }
     }
 
     if (hasChanges) {

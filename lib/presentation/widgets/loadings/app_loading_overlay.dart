@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:sylva/core/extensions/num_extensions.dart';
 import 'app_loading.dart';
 
 class AppLoadingOverlay extends StatelessWidget {
@@ -46,7 +47,7 @@ class AppLoadingOverlay extends StatelessWidget {
 
     if (_currentOverlay == null) return;
 
-    final minShowDuration = const Duration(milliseconds: 500);
+    final minShowDuration = 500.milliseconds;
     final elapsed = DateTime.now().difference(_showTime ?? DateTime.now());
 
     if (elapsed < minShowDuration) {

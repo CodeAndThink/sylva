@@ -9,9 +9,7 @@ import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/widgets/buttons/app_sliding_segmented_control.dart';
 
 class ShareTextTab extends StatefulWidget {
-  final List<Color> colors;
-
-  const ShareTextTab({super.key, required this.colors});
+  const ShareTextTab({super.key});
 
   @override
   State<ShareTextTab> createState() => _ShareTextTabState();

@@ -6,6 +6,7 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_cubit.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_navigator.dart';
+import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
@@ -63,47 +64,124 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
     return AppScaffold(
       body: Stack(
         children: [
+          // --- Background Blobs ---
+          Positioned(
+            top: -150,
+            left: -150,
+            child: ScaleTransition(
+              scale: _scaleAnimation,
+              child: Container(
+                width: 400,
+                height: 400,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      AppColors.presetColors.first.withValues(alpha: 0.4),
+                      AppColors.presetColors.first.withValues(alpha: 0.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -100,
+            right: -150,
+            child: ScaleTransition(
+              scale: _scaleAnimation,
+              child: Container(
+                width: 500,
+                height: 500,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      AppColors.presetColors.last.withValues(alpha: 0.3),
+                      AppColors.presetColors.last.withValues(alpha: 0.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.25,
+            right: -150,
+            child: ScaleTransition(
+              scale: _scaleAnimation,
+              child: Container(
+                width: 350,
+                height: 350,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      (AppColors.presetColors.length > 1
+                              ? AppColors.presetColors[1]
+                              : Colors.orange)
+                          .withValues(alpha: 0.3),
+                      (AppColors.presetColors.length > 1
+                              ? AppColors.presetColors[1]
+                              : Colors.orange)
+                          .withValues(alpha: 0.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // --- End Background Blobs ---
           Positioned.fill(
-            child: Center(
-              child: Padding(
-                padding: 20.paddingAll,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: ClipRRect(
-                        borderRadius: 75.borderRadius,
-                        child: AppAssetImage(
-                          path: AppAssets.icAppIcon,
-                          width: 150,
-                          height: 150,
+            child: Padding(
+              padding: 12.paddingAll,
+              child: AppTransparentContainer(
+                backgroundColor: Colors.transparent,
+                padding: 24.paddingAll,
+                borderRadius: 40,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: ClipRRect(
+                          borderRadius: 75.borderRadius,
+                          child: AppAssetImage(
+                            path: AppAssets.icAppIcon,
+                            width: 150,
+                            height: 150,
+                          ),
                         ),
                       ),
-                    ),
-                    30.height,
-                    ShaderMask(
-                      shaderCallback: (bounds) => LinearGradient(
-                        colors: AppColors.presetColors,
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ).createShader(bounds),
-                      child: Text(
-                        _l10n.onboardTitle,
-                        style: _theme.textTheme.displaySmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          height: 1.1,
-                          color: Colors.white,
+                      30.height,
+                      ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: AppColors.presetColors,
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ).createShader(bounds),
+                        child: Text(
+                          _l10n.onboardTitle,
+                          style: _theme.textTheme.displaySmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            height: 1.1,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    16.height,
-                    Text(
-                      _l10n.onboardDesc,
-                      style: _theme.textTheme.bodyLarge?.copyWith(height: 1.4),
-                    ),
-                  ],
+                      16.height,
+                      Text(
+                        _l10n.onboardDesc,
+                        style: _theme.textTheme.bodyMedium?.copyWith(
+                          fontSize: 15,
+                          height: 1.4,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -124,28 +202,18 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                         _cubit.navigateToHome();
                       },
                       borderRadius: 50.borderRadius,
-                      child: Container(
-                        padding: 16.paddingAll,
-                        decoration: BoxDecoration(
-                          color: _theme.colorScheme.primary,
-                          borderRadius: 50.borderRadius,
-                          border: Border.all(
-                            color: _theme.colorScheme.primaryContainer,
-                            width: 3,
+                      child: Padding(
+                        padding: 2.paddingAll,
+                        child: AppTransparentContainer(
+                          padding: 16.paddingAll,
+                          borderRadius: 50,
+                          backgroundColor: _theme.colorScheme.surface
+                              .withValues(alpha: 0.3),
+                          child: Icon(
+                            Icons.navigate_next_outlined,
+                            color: _theme.colorScheme.onPrimary,
+                            size: 36,
                           ),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: _theme.colorScheme.onSurface,
-                              blurRadius: 12,
-                              spreadRadius: 12,
-                              offset: const Offset(0, 0),
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.navigate_next_outlined,
-                          color: _theme.colorScheme.onPrimary,
-                          size: 36,
                         ),
                       ),
                     ),

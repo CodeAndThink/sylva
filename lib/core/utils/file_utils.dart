@@ -21,7 +21,12 @@ class FileUtils {
       await targetDir.create(recursive: true);
     }
     final targetPath = p.join(targetDir.path, filename);
-    await file.copy(targetPath);
+
+    if (sourcePath != targetPath) {
+      if (await file.exists()) {
+        await file.copy(targetPath);
+      }
+    }
     return p.join('sylva_images', filename);
   }
 

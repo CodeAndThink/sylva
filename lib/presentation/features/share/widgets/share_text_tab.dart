@@ -191,17 +191,16 @@ class _ShareTextTabState extends State<ShareTextTab> {
                   const Spacer(),
                   InkWell(
                     borderRadius: 20.borderRadius,
-                    onTap: () async {
+                    onTap: () {
                       final Color initialColor =
                           state.textColor ?? _theme.colorScheme.surface;
-                      final Color? pickedColor =
-                          await ColorUtils.showColorPicker(
-                            context,
-                            initialColor: initialColor,
-                          );
-                      if (pickedColor != null) {
-                        _cubit.changeTextColor(pickedColor);
-                      }
+                      ColorUtils.showColorPicker(
+                        context,
+                        initialColor: initialColor,
+                        onColorPicked: (color) {
+                          _cubit.changeTextColor(color);
+                        },
+                      );
                     },
                     child: Container(
                       width: 40,

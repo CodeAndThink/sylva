@@ -21,6 +21,7 @@ class ColorUtils {
   static Future<Color?> showColorPicker(
     BuildContext context, {
     required Color initialColor,
+    ValueChanged<Color>? onColorPicked,
   }) async {
     Color newColor = initialColor;
     final bool confirmed =

@@ -11,6 +11,7 @@ import 'package:sylva/presentation/app/theme_cubit.dart';
 import 'package:sylva/presentation/app/theme_state.dart';
 import 'package:sylva/presentation/features/settings/settings_cubit.dart';
 import 'package:sylva/presentation/features/settings/settings_navigator.dart';
+import 'package:sylva/presentation/features/settings/widgets/theme_color_button.dart';
 import 'package:sylva/presentation/widgets/buttons/app_radio_tile.dart';
 import 'package:sylva/presentation/widgets/buttons/app_switch_tile.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -146,51 +147,20 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             Padding(
               padding: 12.paddingHorizontal,
               child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
                 spacing: 12,
                 runSpacing: 12,
                 children: AppColors.presetColors.map((color) {
                   final isSelected =
                       state.seedColor.toARGB32() == color.toARGB32();
-                  return Material(
-                    color: color,
-                    shape: CircleBorder(
-                      side: BorderSide(
-                        color: isSelected
-                            ? _theme.colorScheme.onSurface
-                            : Colors.transparent,
-                        width: 2.5,
-                      ),
-                    ),
-                    child: InkWell(
-                      customBorder: const CircleBorder(),
+                  return SizedBox(
+                    height: 38,
+                    child: ThemeColorButton(
+                      color: color,
+                      isSelected: isSelected,
                       onTap: () {
                         _themeCubit.updateSeedColor(color: color);
                       },
-                      child: AnimatedContainer(
-                        duration: 250.milliseconds,
-                        curve: Curves.easeInOut,
-                        width: 38,
-                        height: 38,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: isSelected
-                              ? [
-                                  BoxShadow(
-                                    color: color.withValues(alpha: 0.45),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ]
-                              : null,
-                        ),
-                        child: isSelected
-                            ? const Icon(
-                                Icons.check_rounded,
-                                color: Colors.white,
-                                size: 22,
-                              )
-                            : null,
-                      ),
                     ),
                   );
                 }).toList(),

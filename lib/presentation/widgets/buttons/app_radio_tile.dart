@@ -9,6 +9,7 @@ class AppRadioTile<T> extends StatelessWidget {
   final ValueChanged<T?>? onChanged;
   final double height;
   final EdgeInsetsGeometry? padding;
+  final Widget? trailingWidget;
 
   const AppRadioTile({
     super.key,
@@ -19,6 +20,7 @@ class AppRadioTile<T> extends StatelessWidget {
     this.titleStyle,
     this.height = 40,
     this.padding,
+    this.trailingWidget,
   });
 
   @override
@@ -50,14 +52,32 @@ class AppRadioTile<T> extends StatelessWidget {
               ),
             ),
             12.width,
-            Expanded(
-              child: Text(
-                title,
-                style: titleStyle ?? theme.textTheme.bodyMedium,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            if (trailingWidget != null) ...{
+              Flexible(
+                child: Text(
+                  title,
+                  style: titleStyle ?? theme.textTheme.bodyMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
+              12.width,
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: trailingWidget,
+                ),
+              ),
+            } else ...{
+              Expanded(
+                child: Text(
+                  title,
+                  style: titleStyle ?? theme.textTheme.bodyMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            },
           ],
         ),
       ),

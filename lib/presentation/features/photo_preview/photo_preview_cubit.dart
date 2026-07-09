@@ -230,9 +230,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   Future<void> saveHistory({required String imagePath}) async {
     try {
       final isar = locator<Isar>();
+      final localImagePath = await FileUtils.saveImageToAppDirectory(imagePath);
       final userColors = state.userColors.map((c) => c.toARGB32()).toList();
       final record = HistoryRecord(
-        imagePath: imagePath,
+        imagePath: localImagePath,
         userColors: userColors,
         selectedColor: state.filteredColor?.toARGB32(),
         createdAt: DateTime.now(),
@@ -260,8 +261,13 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       final userColors = state.userColors.map((c) => c.toARGB32()).toList();
       final originalRecord = await isar.historyRecords.get(id);
 
+      // We don't save to App Directory again if it's already there, but since we are updating history
+      // wait, we only want to update the colors and selectedColor.
+      // But if imagePath is a new image, we'd save it. The imagePath passed to updateHistory is the same one loaded from DB.
+      // However, if the old one was absolute, it might need saving. But since it's just an update of an existing record, we shouldn't copy it again unless the path changed.
+      // We will just use the passed imagePath (which might be the relative one now, or absolute one).
       final record = HistoryRecord(
-        imagePath: imagePath,
+        imagePath: originalRecord?.imagePath ?? imagePath,
         userColors: userColors,
         selectedColor: state.filteredColor?.toARGB32(),
         createdAt: DateTime.now(),

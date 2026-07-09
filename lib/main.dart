@@ -14,6 +14,7 @@ import 'package:sylva/presentation/app/theme_state.dart';
 import 'package:sylva/presentation/theme/app_theme.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/core/enums/device_type.dart';
+import 'package:sylva/core/utils/file_utils.dart';
 
 import 'dart:ui';
 
@@ -51,6 +52,7 @@ void main() async {
   ]);
 
   await configureDependencies();
+  await FileUtils.init();
 
   runApp(const MainApp());
 }

@@ -10,6 +10,7 @@ import 'package:sylva/presentation/features/history/history_navigator.dart';
 import 'package:sylva/presentation/features/history/history_state.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
+import 'package:sylva/core/utils/file_utils.dart';
 
 class HistoryCubit extends BaseCubit<HistoryState> {
   final HistoryNavigator navigator;
@@ -160,7 +161,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
     final timeBeforeNavigation = DateTime.now();
     await navigator.goToPhotoPreview(
       args: PhotoPreviewArguments(
-        imagePath: record.imagePath,
+        imagePath: FileUtils.getFullImagePath(record.imagePath),
         initialColors: record.userColors.map((c) => Color(c)).toList(),
         initialSelectedColor: record.selectedColor != null
             ? Color(record.selectedColor!)

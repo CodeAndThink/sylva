@@ -77,7 +77,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      AppColors.presetColors.first.withValues(alpha: 0.4),
+                      AppColors.presetColors.first.withValues(alpha: 0.5),
                       AppColors.presetColors.first.withValues(alpha: 0.0),
                     ],
                   ),
@@ -97,7 +97,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      AppColors.presetColors.last.withValues(alpha: 0.3),
+                      AppColors.presetColors.last.withValues(alpha: 0.5),
                       AppColors.presetColors.last.withValues(alpha: 0.0),
                     ],
                   ),
@@ -120,7 +120,7 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
                       (AppColors.presetColors.length > 1
                               ? AppColors.presetColors[1]
                               : Colors.orange)
-                          .withValues(alpha: 0.3),
+                          .withValues(alpha: 0.5),
                       (AppColors.presetColors.length > 1
                               ? AppColors.presetColors[1]
                               : Colors.orange)

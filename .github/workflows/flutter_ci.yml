@@ -64,8 +64,15 @@ jobs:
 
       - name: Build Android APK
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        timeout-minutes: 30
         env:
-          GRADLE_OPTS: "-Dorg.gradle.daemon=false -Xmx4096m"
+          GRADLE_OPTS: >-
+            -Dorg.gradle.daemon=false
+            -Dorg.gradle.workers.max=2
+            -Dorg.gradle.parallel=false
+            -Dorg.gradle.jvmargs=-Xmx3g
+            -Dorg.gradle.vfs.watch=false
+            -Xmx1536m
         run: flutter build apk --release
 
       - name: Extract version from pubspec.yaml

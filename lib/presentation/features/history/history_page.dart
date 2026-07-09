@@ -168,7 +168,10 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
           message: _l10n.clearAllHistory,
           child: IconButton(
             key: _keyDeleteAll,
-            icon: Icon(Icons.auto_delete, color: _theme.colorScheme.error),
+            icon: Icon(
+              Icons.auto_delete_rounded,
+              color: _theme.colorScheme.error,
+            ),
             onPressed: () {
               _handleCleanHistory();
             },

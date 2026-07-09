@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
+import 'package:sylva/core/utils/color_utils.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/app/interaction_cubit.dart';
 import 'package:sylva/presentation/app/interaction_state.dart';
@@ -99,6 +100,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                 children: [
                   AppRadioTile<ThemeMode>(
                     title: _l10n.themeSystem,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: ThemeMode.system,
                     groupValue: themeMode,
                     onChanged: (mode) {
@@ -109,6 +111,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                   AppRadioTile<ThemeMode>(
                     title: _l10n.themeLight,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: ThemeMode.light,
                     groupValue: themeMode,
                     onChanged: (mode) {
@@ -119,6 +122,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                   AppRadioTile<ThemeMode>(
                     title: _l10n.themeDark,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: ThemeMode.dark,
                     groupValue: themeMode,
                     onChanged: (mode) {
@@ -138,8 +142,14 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
 
   Widget _buildSeedColorSection() {
     return BlocBuilder<ThemeCubit, ThemeState>(
-      buildWhen: (previous, current) => previous.seedColor != current.seedColor,
+      buildWhen: (previous, current) =>
+          previous.seedColor != current.seedColor ||
+          previous.customSeedColor != current.customSeedColor,
       builder: (context, state) {
+        final isCustomColorSelected = !AppColors.presetColors.any(
+          (c) => c.toARGB32() == state.seedColor.toARGB32(),
+        );
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -150,20 +160,98 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 spacing: 12,
                 runSpacing: 12,
-                children: AppColors.presetColors.map((color) {
-                  final isSelected =
-                      state.seedColor.toARGB32() == color.toARGB32();
-                  return SizedBox(
-                    height: 38,
-                    child: ThemeColorButton(
-                      color: color,
-                      isSelected: isSelected,
-                      onTap: () {
-                        _themeCubit.updateSeedColor(color: color);
-                      },
-                    ),
-                  );
-                }).toList(),
+                children: [
+                  ...AppColors.presetColors.map((color) {
+                    final isSelected =
+                        state.seedColor.toARGB32() == color.toARGB32();
+                    return SizedBox(
+                      height: 38,
+                      child: ThemeColorButton(
+                        color: color,
+                        isSelected: isSelected,
+                        onTap: () {
+                          _themeCubit.updateSeedColor(color: color);
+                        },
+                      ),
+                    );
+                  }),
+                  state.customSeedColor != null
+                      ? Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ThemeColorButton(
+                              color: state.customSeedColor!,
+                              isSelected: isCustomColorSelected,
+                              onTap: () {
+                                if (!isCustomColorSelected) {
+                                  _themeCubit.updateSeedColor(
+                                    color: state.customSeedColor!,
+                                    isCustom: true,
+                                  );
+                                }
+                              },
+                            ),
+                            4.width,
+                            AnimatedOpacity(
+                              opacity:
+                                  isCustomColorSelected &&
+                                      state.customSeedColor != null
+                                  ? 1
+                                  : 0,
+                              duration: 300.milliseconds,
+                              child: InkWell(
+                                customBorder: const CircleBorder(),
+                                onTap: () async {
+                                  final Color? pickedColor =
+                                      await ColorUtils.showColorPicker(
+                                        context,
+                                        initialColor: state.customSeedColor!,
+                                      );
+                                  if (pickedColor != null) {
+                                    _themeCubit.updateSeedColor(
+                                      color: pickedColor,
+                                      isCustom: true,
+                                    );
+                                  }
+                                },
+                                child: Icon(
+                                  Icons.sync_rounded,
+                                  color: _theme.colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : InkWell(
+                          customBorder: const CircleBorder(),
+                          onTap: () async {
+                            final Color? pickedColor =
+                                await ColorUtils.showColorPicker(
+                                  context,
+                                  initialColor: state.seedColor,
+                                );
+                            if (pickedColor != null) {
+                              _themeCubit.updateSeedColor(
+                                color: pickedColor,
+                                isCustom: true,
+                              );
+                            }
+                          },
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _theme.colorScheme.surface,
+                              border: Border.all(
+                                color: _theme.colorScheme.onSurface,
+                                width: 1,
+                              ),
+                            ),
+                            child: Icon(Icons.colorize_rounded, size: 16),
+                          ),
+                        ),
+                ],
               ),
             ),
           ],
@@ -189,6 +277,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                 children: [
                   AppRadioTile<String>(
                     title: LanguageType.en.name,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: LanguageType.en.value,
                     groupValue: locale,
                     onChanged: (code) {
@@ -199,6 +288,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                   AppRadioTile<String>(
                     title: LanguageType.vi.name,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: LanguageType.vi.value,
                     groupValue: locale,
                     onChanged: (code) {
@@ -209,6 +299,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                   AppRadioTile<String>(
                     title: LanguageType.ja.name,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: LanguageType.ja.value,
                     groupValue: locale,
                     onChanged: (code) {
@@ -219,6 +310,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                   AppRadioTile<String>(
                     title: LanguageType.zh.name,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: LanguageType.zh.value,
                     groupValue: locale,
                     onChanged: (code) {
@@ -253,6 +345,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                 children: [
                   AppSwitchTile(
                     title: _l10n.hapticFeedback,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: state.hapticEnabled,
                     onChanged: (value) {
                       _interactionCubit.toggleHaptic();
@@ -260,6 +353,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                   ),
                   AppSwitchTile(
                     title: _l10n.soundEffects,
+                    titleStyle: _theme.textTheme.titleSmall,
                     value: state.soundEnabled,
                     onChanged: (value) {
                       _interactionCubit.toggleSound();

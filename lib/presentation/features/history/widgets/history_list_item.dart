@@ -104,7 +104,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
           padding: 1.paddingAll,
           height: 110,
           width: double.maxFinite,
-          borderRadius: 20,
+          borderRadius: 18,
           child: Stack(
             children: [
               Align(
@@ -146,7 +146,7 @@ class _HistoryListItemState extends State<HistoryListItem> {
                           opacity: 0.2,
                         ),
                       ),
-                      padding: 4.paddingVertical.copyWith(left: 8, right: 8),
+                      padding: 4.paddingAll,
                       child: Column(
                         children: [
                           Row(
@@ -184,34 +184,39 @@ class _HistoryListItemState extends State<HistoryListItem> {
                             ],
                           ),
                           const Spacer(),
-                          Row(
-                            spacing: 4,
-                            children: [
-                              if (widget.record.userColors.isNotEmpty)
-                                ...widget.record.userColors
-                                    .take(5)
-                                    .map(
-                                      (c) => Container(
-                                        width: 20,
-                                        height: 20,
-                                        decoration: BoxDecoration(
-                                          color: Color(c),
-                                          shape: BoxShape.circle,
+                          Padding(
+                            padding: 4.paddingAll,
+                            child: Row(
+                              spacing: 4,
+                              children: [
+                                if (widget.record.userColors.isNotEmpty)
+                                  ...widget.record.userColors
+                                      .take(5)
+                                      .map(
+                                        (c) => Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            color: Color(c),
+                                            shape: BoxShape.circle,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                              const Spacer(),
-                              Text(
-                                widget.record.createdAt.isToday
-                                    ? widget.record.createdAt.toFormattedTime()
-                                    : widget.record.createdAt.toFormattedDate(),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: theme.textTheme.titleSmall?.copyWith(
-                                  color: theme.colorScheme.onPrimaryContainer,
+                                const Spacer(),
+                                Text(
+                                  widget.record.createdAt.isToday
+                                      ? widget.record.createdAt
+                                            .toFormattedTime()
+                                      : widget.record.createdAt
+                                            .toFormattedDate(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    color: theme.colorScheme.onPrimaryContainer,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),

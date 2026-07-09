@@ -398,14 +398,11 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                 _settingsCubit.navigator.goToSponsors();
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 12.0,
-                ),
+                padding: 12.paddingAll,
                 child: Row(
                   children: [
                     const Icon(Icons.favorite, color: Colors.white, size: 28),
-                    const SizedBox(width: 16),
+                    16.width,
                     Expanded(
                       child: Text(
                         _l10n.donation,

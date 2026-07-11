@@ -384,7 +384,10 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
+              colors: [
+                Colors.pinkAccent,
+                Colors.deepPurpleAccent.withValues(alpha: 0.7),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

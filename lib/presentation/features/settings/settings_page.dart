@@ -221,32 +221,38 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                             ),
                           ],
                         )
-                      : InkWell(
-                          customBorder: const CircleBorder(),
-                          onTap: () {
-                            ColorUtils.showColorPicker(
-                              context,
-                              initialColor: state.seedColor,
-                              onColorPicked: (color) {
-                                _themeCubit.updateSeedColor(
-                                  color: color,
-                                  isCustom: true,
+                      : SizedBox(
+                          width: 38,
+                          height: 38,
+                          child: Center(
+                            child: InkWell(
+                              customBorder: const CircleBorder(),
+                              onTap: () {
+                                ColorUtils.showColorPicker(
+                                  context,
+                                  initialColor: state.seedColor,
+                                  onColorPicked: (color) {
+                                    _themeCubit.updateSeedColor(
+                                      color: color,
+                                      isCustom: true,
+                                    );
+                                  },
                                 );
                               },
-                            );
-                          },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _theme.colorScheme.surface,
-                              border: Border.all(
-                                color: _theme.colorScheme.onSurface,
-                                width: 1,
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _theme.colorScheme.surface,
+                                  border: Border.all(
+                                    color: _theme.colorScheme.onSurface,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Icon(Icons.colorize_rounded, size: 16),
                               ),
                             ),
-                            child: Icon(Icons.colorize_rounded, size: 16),
                           ),
                         ),
                 ],

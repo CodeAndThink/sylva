@@ -184,22 +184,26 @@ class ShareImagePreview extends StatelessWidget {
       case ShareTextPosition.top:
         return Column(
           mainAxisSize: MainAxisSize.min,
-          children: [textWidget, const SizedBox(height: 4), shapeWidget],
+          spacing: 4,
+          children: [textWidget, shapeWidget],
         );
       case ShareTextPosition.bottom:
         return Column(
           mainAxisSize: MainAxisSize.min,
-          children: [shapeWidget, const SizedBox(height: 4), textWidget],
+          spacing: 4,
+          children: [shapeWidget, textWidget],
         );
       case ShareTextPosition.left:
         return Row(
           mainAxisSize: MainAxisSize.min,
-          children: [textWidget, const SizedBox(width: 4), shapeWidget],
+          spacing: 4,
+          children: [textWidget, shapeWidget],
         );
       case ShareTextPosition.right:
         return Row(
           mainAxisSize: MainAxisSize.min,
-          children: [shapeWidget, const SizedBox(width: 4), textWidget],
+          spacing: 4,
+          children: [shapeWidget, textWidget],
         );
       case ShareTextPosition.inside:
         final brightness = ThemeData.estimateBrightnessForColor(color);

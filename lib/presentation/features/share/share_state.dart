@@ -20,6 +20,9 @@ class ShareState extends Equatable {
   final bool isTextItalic;
   final bool isTextUnderline;
   final Color? textColor;
+  final String textFontFamily;
+  final List<String> downloadedFonts;
+  final Set<String> downloadingFonts;
 
   const ShareState({
     this.selectedColors = const {},
@@ -37,6 +40,9 @@ class ShareState extends Equatable {
     this.isTextItalic = false,
     this.isTextUnderline = false,
     this.textColor,
+    this.textFontFamily = 'Nunito',
+    this.downloadedFonts = const ['Nunito'],
+    this.downloadingFonts = const {},
   });
 
   ShareState copyWith({
@@ -56,6 +62,9 @@ class ShareState extends Equatable {
     bool? isTextUnderline,
     Color? textColor,
     bool clearTextColor = false,
+    String? textFontFamily,
+    List<String>? downloadedFonts,
+    Set<String>? downloadingFonts,
   }) {
     return ShareState(
       selectedColors: selectedColors ?? this.selectedColors,
@@ -73,6 +82,9 @@ class ShareState extends Equatable {
       isTextItalic: isTextItalic ?? this.isTextItalic,
       isTextUnderline: isTextUnderline ?? this.isTextUnderline,
       textColor: clearTextColor ? null : (textColor ?? this.textColor),
+      textFontFamily: textFontFamily ?? this.textFontFamily,
+      downloadedFonts: downloadedFonts ?? this.downloadedFonts,
+      downloadingFonts: downloadingFonts ?? this.downloadingFonts,
     );
   }
 
@@ -93,5 +105,8 @@ class ShareState extends Equatable {
     isTextItalic,
     isTextUnderline,
     textColor,
+    textFontFamily,
+    downloadedFonts,
+    downloadingFonts,
   ];
 }

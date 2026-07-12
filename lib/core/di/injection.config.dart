@@ -14,7 +14,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:isar_community/isar.dart' as _i214;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../data/repositories/app_preferences_repository_impl.dart' as _i877;
 import '../../data/repositories/contact_repository_impl.dart' as _i133;
+import '../../domain/repositories/app_preferences_repository.dart' as _i606;
 import '../../domain/repositories/contact_repository.dart' as _i482;
 import '../../domain/usecases/submit_contact_usecase.dart' as _i460;
 import '../../presentation/app/app_cubit.dart' as _i503;
@@ -49,23 +51,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i151.SubscriptionCubit>(
       () => _i151.SubscriptionCubit(gh<_i1.IapService>()),
     );
-    gh.lazySingleton<_i503.AppCubit>(
-      () => _i503.AppCubit(gh<_i727.ConnectionService>()),
-    );
     gh.lazySingleton<_i482.ContactRepository>(
       () => _i133.ContactRepositoryImpl(),
     );
     gh.lazySingleton<_i460.SubmitContactUseCase>(
       () => _i460.SubmitContactUseCase(gh<_i482.ContactRepository>()),
     );
+    gh.lazySingleton<_i606.AppPreferencesRepository>(
+      () => _i877.AppPreferencesRepositoryImpl(gh<_i460.SharedPreferences>()),
+    );
     gh.lazySingleton<_i89.InteractionCubit>(
-      () => _i89.InteractionCubit(gh<_i460.SharedPreferences>()),
+      () => _i89.InteractionCubit(gh<_i606.AppPreferencesRepository>()),
     );
     gh.lazySingleton<_i687.LocaleCubit>(
-      () => _i687.LocaleCubit(gh<_i460.SharedPreferences>()),
+      () => _i687.LocaleCubit(gh<_i606.AppPreferencesRepository>()),
     );
     gh.lazySingleton<_i980.ThemeCubit>(
-      () => _i980.ThemeCubit(gh<_i460.SharedPreferences>()),
+      () => _i980.ThemeCubit(gh<_i606.AppPreferencesRepository>()),
+    );
+    gh.lazySingleton<_i503.AppCubit>(
+      () => _i503.AppCubit(
+        gh<_i727.ConnectionService>(),
+        gh<_i606.AppPreferencesRepository>(),
+      ),
     );
     return this;
   }

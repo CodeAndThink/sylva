@@ -202,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "filter": MessageLookupByLibrary.simpleMessage("Bộ lọc"),
     "finish": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
     "flashMode": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
+    "fontSelection": MessageLookupByLibrary.simpleMessage("Chọn Font chữ"),
     "fullScreen": MessageLookupByLibrary.simpleMessage("Toàn màn hình"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "Đã xóa dữ liệu vị trí và lưu thành bản sao mới.",

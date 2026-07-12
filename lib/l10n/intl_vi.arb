@@ -194,6 +194,8 @@
   "@finish": {},
   "flashMode": "Chế độ Flash",
   "@flashMode": {},
+  "fontSelection": "Chọn Font chữ",
+  "@fontSelection": {},
   "fullScreen": "Toàn màn hình",
   "@fullScreen": {},
   "gpsRemovedSuccess": "Đã xóa dữ liệu vị trí và lưu thành bản sao mới.",

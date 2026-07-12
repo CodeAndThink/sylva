@@ -1,34 +1,30 @@
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sylva/core/constants/key_constants.dart';
+import 'package:sylva/domain/repositories/app_preferences_repository.dart';
 import 'package:sylva/presentation/app/interaction_state.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 
 @lazySingleton
 class InteractionCubit extends BaseCubit<InteractionState> {
-  final SharedPreferences _prefs;
+  final AppPreferencesRepository _appPrefs;
 
-  InteractionCubit(this._prefs) : super(_loadInitialState(_prefs));
+  InteractionCubit(this._appPrefs) : super(_loadInitialState(_appPrefs));
 
-  static InteractionState _loadInitialState(SharedPreferences prefs) {
-    final hapticEnabled = prefs.getBool(KeyConstants.hapticEnabled) ?? true;
-    final soundEnabled = prefs.getBool(KeyConstants.soundEnabled) ?? true;
-
+  static InteractionState _loadInitialState(AppPreferencesRepository prefs) {
     return InteractionState(
-      hapticEnabled: hapticEnabled,
-      soundEnabled: soundEnabled,
+      hapticEnabled: prefs.isHapticEnabled,
+      soundEnabled: prefs.isSoundEnabled,
     );
   }
 
   void toggleHaptic() {
     final newValue = !state.hapticEnabled;
-    _prefs.setBool(KeyConstants.hapticEnabled, newValue);
+    _appPrefs.setHapticEnabled(newValue);
     safeEmit(state.copyWith(hapticEnabled: newValue));
   }
 
   void toggleSound() {
     final newValue = !state.soundEnabled;
-    _prefs.setBool(KeyConstants.soundEnabled, newValue);
+    _appPrefs.setSoundEnabled(newValue);
     safeEmit(state.copyWith(soundEnabled: newValue));
   }
 }

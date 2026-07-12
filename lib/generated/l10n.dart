@@ -739,6 +739,16 @@ class S {
     return Intl.message('Flash Mode', name: 'flashMode', desc: '', args: []);
   }
 
+  /// `Select Font`
+  String get fontSelection {
+    return Intl.message(
+      'Select Font',
+      name: 'fontSelection',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Full Screen`
   String get fullScreen {
     return Intl.message('Full Screen', name: 'fullScreen', desc: '', args: []);

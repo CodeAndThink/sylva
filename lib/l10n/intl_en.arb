@@ -194,6 +194,8 @@
   "@finish": {},
   "flashMode": "Flash Mode",
   "@flashMode": {},
+  "fontSelection": "Select Font",
+  "@fontSelection": {},
   "fullScreen": "Full Screen",
   "@fullScreen": {},
   "gpsRemovedSuccess": "GPS location data removed and saved as a new copy.",

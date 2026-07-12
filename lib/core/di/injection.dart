@@ -5,6 +5,7 @@ import 'package:sylva/presentation/app/app_cubit.dart';
 import 'package:sylva/presentation/app/locale_cubit.dart';
 import 'package:sylva/presentation/app/subscription_cubit.dart';
 import 'package:sylva/presentation/app/theme_cubit.dart';
+import 'package:sylva/domain/repositories/app_preferences_repository.dart';
 import 'injection.config.dart';
 import 'package:sylva/core/services/iap_service.dart';
 import 'package:sylva/core/services/connection_service.dart';
@@ -28,16 +29,21 @@ Future<void> configureDependencies() async {
   }
 
   if (!locator.isRegistered<AppCubit>()) {
-    locator.registerLazySingleton(() => AppCubit(locator<ConnectionService>()));
+    locator.registerLazySingleton(
+      () => AppCubit(
+        locator<ConnectionService>(),
+        locator<AppPreferencesRepository>(),
+      ),
+    );
   }
   if (!locator.isRegistered<ThemeCubit>()) {
     locator.registerLazySingleton(
-      () => ThemeCubit(locator<SharedPreferences>()),
+      () => ThemeCubit(locator<AppPreferencesRepository>()),
     );
   }
   if (!locator.isRegistered<LocaleCubit>()) {
     locator.registerLazySingleton(
-      () => LocaleCubit(locator<SharedPreferences>()),
+      () => LocaleCubit(locator<AppPreferencesRepository>()),
     );
   }
 

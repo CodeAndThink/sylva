@@ -203,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "filter": MessageLookupByLibrary.simpleMessage("Filter"),
     "finish": MessageLookupByLibrary.simpleMessage("Finish"),
     "flashMode": MessageLookupByLibrary.simpleMessage("Flash Mode"),
+    "fontSelection": MessageLookupByLibrary.simpleMessage("Select Font"),
     "fullScreen": MessageLookupByLibrary.simpleMessage("Full Screen"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS location data removed and saved as a new copy.",

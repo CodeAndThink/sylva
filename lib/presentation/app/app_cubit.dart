@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sylva/domain/repositories/app_preferences_repository.dart';
 import 'package:sylva/core/services/connection_service.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 
@@ -10,9 +10,9 @@ part 'app_state.dart';
 @lazySingleton
 class AppCubit extends BaseCubit<AppState> {
   final ConnectionService _connectionService;
-  static const _firstTimeKey = 'is_first_time';
+  final AppPreferencesRepository _appPrefs;
 
-  AppCubit(this._connectionService) : super(const AppState()) {
+  AppCubit(this._connectionService, this._appPrefs) : super(const AppState()) {
     _init();
   }
 
@@ -20,14 +20,12 @@ class AppCubit extends BaseCubit<AppState> {
     // Start connection monitoring service
     _connectionService.init();
 
-    final prefs = await SharedPreferences.getInstance();
-    final isFirstTime = prefs.getBool(_firstTimeKey) ?? true;
+    final isFirstTime = _appPrefs.isFirstTime;
     emit(state.copyWith(isFirstTime: isFirstTime));
   }
 
   Future<void> completeOnboarding() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_firstTimeKey, false);
+    await _appPrefs.setFirstTime(false);
     emit(state.copyWith(isFirstTime: false));
   }
 

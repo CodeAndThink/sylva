@@ -41,75 +41,143 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
   }
 
   Widget _buildBody() {
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
-        child: AppTransparentContainer(
-          padding: 30.paddingAll,
-          borderColor: const Color(0xFFFF5E5B).withValues(alpha: 0.3),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: 24.paddingAll,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color(0xFFFF5E5B).withValues(alpha: 0.1),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFFFF5E5B).withValues(alpha: 0.25),
-                      blurRadius: 40,
-                      spreadRadius: 8,
+    return Stack(
+      children: [
+        // --- Background Blobs ---
+        Positioned(
+          top: -150,
+          left: -150,
+          child: Container(
+            width: 400,
+            height: 400,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  Color(0xFFFF5E5B).withValues(alpha: 0.5),
+                  Color(0xFFFF5E5B).withValues(alpha: 0.0),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: -100,
+          right: -150,
+          child: Container(
+            width: 500,
+            height: 500,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  Color(0xFFFF5E5B).withValues(alpha: 0.5),
+                  Color(0xFFFF5E5B).withValues(alpha: 0.0),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: MediaQuery.of(context).size.height * 0.25,
+          right: -150,
+          child: Container(
+            width: 350,
+            height: 350,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  Color(0xFFFF5E5B).withValues(alpha: 0.5),
+                  Color(0xFFFF5E5B).withValues(alpha: 0.0),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned.fill(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 40.0,
+            ),
+            child: Center(
+              child: AppTransparentContainer(
+                backgroundColor: _theme.colorScheme.surface.withValues(
+                  alpha: 0.5,
+                ),
+                padding: 30.paddingAll,
+                borderColor: const Color(0xFFFF5E5B).withValues(alpha: 0.3),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: 24.paddingAll,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: const Color(0xFFFF5E5B).withValues(alpha: 0.1),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(
+                              0xFFFF5E5B,
+                            ).withValues(alpha: 0.25),
+                            blurRadius: 40,
+                            spreadRadius: 8,
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.favorite_rounded,
+                        size: 72,
+                        color: Color(0xFFFF5E5B),
+                      ),
+                    ),
+                    32.height,
+                    Text(
+                      _l10n.sponsorsTitle,
+                      textAlign: TextAlign.center,
+                      style: _theme.textTheme.headlineSmall?.copyWith(
+                        color: Color(0xFFFF5E5B),
+                      ),
+                    ),
+                    16.height,
+                    Text(
+                      _l10n.sponsorsDescription,
+                      textAlign: TextAlign.center,
+                      style: _theme.textTheme.bodyMedium?.copyWith(
+                        height: 1.5,
+                        color: _theme.colorScheme.onSurface.withValues(
+                          alpha: 0.8,
+                        ),
+                      ),
+                    ),
+
+                    40.height,
+                    AppFilledButton(
+                      text: _l10n.supportOnKofi,
+                      icon: Icons.coffee_rounded,
+                      backgroundColor: const Color(0xFFFF5E5B),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 28,
+                        vertical: 16,
+                      ),
+                      textStyle: _theme.textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        AppFeedback.playInteract(context);
+                        context.read<SponsorsCubit>().openKofiPage();
+                      },
                     ),
                   ],
                 ),
-                child: const Icon(
-                  Icons.favorite_rounded,
-                  size: 72,
-                  color: Color(0xFFFF5E5B),
-                ),
               ),
-              32.height,
-              Text(
-                _l10n.sponsorsTitle,
-                textAlign: TextAlign.center,
-                style: _theme.textTheme.headlineSmall?.copyWith(
-                  color: Color(0xFFFF5E5B),
-                ),
-              ),
-              16.height,
-              Text(
-                _l10n.sponsorsDescription,
-                textAlign: TextAlign.center,
-                style: _theme.textTheme.bodyMedium?.copyWith(
-                  height: 1.5,
-                  color: _theme.colorScheme.onSurface.withValues(alpha: 0.8),
-                ),
-              ),
-
-              40.height,
-              AppFilledButton(
-                text: _l10n.supportOnKofi,
-                icon: Icons.coffee_rounded,
-                backgroundColor: const Color(0xFFFF5E5B),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 28,
-                  vertical: 16,
-                ),
-                textStyle: _theme.textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  AppFeedback.playInteract(context);
-                  context.read<SponsorsCubit>().openKofiPage();
-                },
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

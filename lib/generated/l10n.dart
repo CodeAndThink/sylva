@@ -739,6 +739,31 @@ class S {
     return Intl.message('Flash Mode', name: 'flashMode', desc: '', args: []);
   }
 
+  /// `Select Font`
+  String get fontSelection {
+    return Intl.message(
+      'Select Font',
+      name: 'fontSelection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search font`
+  String get searchFont {
+    return Intl.message('Search font', name: 'searchFont', desc: '', args: []);
+  }
+
+  /// `No fonts found`
+  String get noFontsFound {
+    return Intl.message(
+      'No fonts found',
+      name: 'noFontsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Full Screen`
   String get fullScreen {
     return Intl.message('Full Screen', name: 'fullScreen', desc: '', args: []);

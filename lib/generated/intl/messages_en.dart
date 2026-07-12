@@ -203,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "filter": MessageLookupByLibrary.simpleMessage("Filter"),
     "finish": MessageLookupByLibrary.simpleMessage("Finish"),
     "flashMode": MessageLookupByLibrary.simpleMessage("Flash Mode"),
+    "fontSelection": MessageLookupByLibrary.simpleMessage("Select Font"),
     "fullScreen": MessageLookupByLibrary.simpleMessage("Full Screen"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "GPS location data removed and saved as a new copy.",
@@ -240,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCamerasFound": MessageLookupByLibrary.simpleMessage(
       "No cameras found on device",
     ),
+    "noFontsFound": MessageLookupByLibrary.simpleMessage("No fonts found"),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("No history yet"),
     "noImageToShare": MessageLookupByLibrary.simpleMessage("No image to share"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
@@ -330,6 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Save to library"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
+    "searchFont": MessageLookupByLibrary.simpleMessage("Search font"),
     "seedColor": MessageLookupByLibrary.simpleMessage("App Color"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),

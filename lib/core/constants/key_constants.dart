@@ -8,6 +8,9 @@ class KeyConstants {
   static const String backgroundType = 'background_type';
   static const String customBackgroundPath = 'custom_background_path';
   static const String scanLimit = 'scan_limit';
+  static const String isFirstTime = 'is_first_time';
+  static const String languageCode = 'language_code';
+  static const String downloadedFonts = 'downloaded_fonts';
 
   ///Env Keys
   static const String supabaseUrl = 'SUPABASE_URL';

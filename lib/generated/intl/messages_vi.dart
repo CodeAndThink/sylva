@@ -202,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "filter": MessageLookupByLibrary.simpleMessage("Bộ lọc"),
     "finish": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
     "flashMode": MessageLookupByLibrary.simpleMessage("Chế độ Flash"),
+    "fontSelection": MessageLookupByLibrary.simpleMessage("Chọn Font chữ"),
     "fullScreen": MessageLookupByLibrary.simpleMessage("Toàn màn hình"),
     "gpsRemovedSuccess": MessageLookupByLibrary.simpleMessage(
       "Đã xóa dữ liệu vị trí và lưu thành bản sao mới.",
@@ -240,6 +241,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
     "noCamerasFound": MessageLookupByLibrary.simpleMessage(
       "Thiết bị không có camera",
+    ),
+    "noFontsFound": MessageLookupByLibrary.simpleMessage(
+      "Không tìm thấy font chữ",
     ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
     "noImageToShare": MessageLookupByLibrary.simpleMessage(
@@ -333,6 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Lưu vào thư viện"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
+    "searchFont": MessageLookupByLibrary.simpleMessage("Tìm kiếm font chữ"),
     "seedColor": MessageLookupByLibrary.simpleMessage("Màu ứng dụng"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),

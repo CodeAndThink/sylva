@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sylva/core/constants/app_colors.dart';
-import 'package:sylva/core/constants/key_constants.dart';
+import 'package:sylva/domain/repositories/app_preferences_repository.dart';
 import 'package:sylva/presentation/app/theme_state.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 
 @lazySingleton
 class ThemeCubit extends BaseCubit<ThemeState> {
-  final SharedPreferences _prefs;
+  final AppPreferencesRepository _appPrefs;
 
-  ThemeCubit(this._prefs) : super(_loadInitialState(_prefs));
+  ThemeCubit(this._appPrefs) : super(_loadInitialState(_appPrefs));
 
-  static ThemeState _loadInitialState(SharedPreferences prefs) {
-    final themeIndex =
-        prefs.getInt(KeyConstants.themeMode) ?? ThemeMode.system.index;
-    final seedColorValue = prefs.getInt(KeyConstants.seedColor);
+  static ThemeState _loadInitialState(AppPreferencesRepository prefs) {
+    final themeIndex = prefs.themeModeIndex;
+    final seedColorValue = prefs.seedColorValue;
     final seedColor = seedColorValue != null
         ? Color(seedColorValue)
         : AppColors.seed;
 
-    final customSeedColorValue = prefs.getInt(KeyConstants.customSeedColor);
+    final customSeedColorValue = prefs.customSeedColorValue;
     final customSeedColor = customSeedColorValue != null
         ? Color(customSeedColorValue)
         : null;
@@ -33,14 +31,14 @@ class ThemeCubit extends BaseCubit<ThemeState> {
   }
 
   void updateTheme({required ThemeMode mode}) {
-    _prefs.setInt(KeyConstants.themeMode, mode.index);
+    _appPrefs.setThemeModeIndex(mode.index);
     safeEmit(state.copyWith(themeMode: mode));
   }
 
   void updateSeedColor({required Color color, bool isCustom = false}) {
-    _prefs.setInt(KeyConstants.seedColor, color.toARGB32());
+    _appPrefs.setSeedColorValue(color.toARGB32());
     if (isCustom) {
-      _prefs.setInt(KeyConstants.customSeedColor, color.toARGB32());
+      _appPrefs.setCustomSeedColorValue(color.toARGB32());
       safeEmit(state.copyWith(seedColor: color, customSeedColor: color));
     } else {
       safeEmit(state.copyWith(seedColor: color));

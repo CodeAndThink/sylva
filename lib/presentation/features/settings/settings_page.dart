@@ -166,12 +166,15 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                         state.seedColor.toARGB32() == color.toARGB32();
                     return SizedBox(
                       height: 38,
-                      child: ThemeColorButton(
-                        color: color,
-                        isSelected: isSelected,
-                        onTap: () {
-                          _themeCubit.updateSeedColor(color: color);
-                        },
+                      width: 38,
+                      child: Center(
+                        child: ThemeColorButton(
+                          color: color,
+                          isSelected: isSelected,
+                          onTap: () {
+                            _themeCubit.updateSeedColor(color: color);
+                          },
+                        ),
                       ),
                     );
                   }),
@@ -381,7 +384,10 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.pinkAccent, Colors.deepPurpleAccent],
+              colors: [
+                Colors.pinkAccent,
+                Colors.deepPurpleAccent.withValues(alpha: 0.7),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

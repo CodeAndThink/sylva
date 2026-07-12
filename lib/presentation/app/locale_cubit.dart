@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sylva/domain/repositories/app_preferences_repository.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 part 'locale_state.dart';
 
 @lazySingleton
 class LocaleCubit extends BaseCubit<LocaleState> {
-  final SharedPreferences _prefs;
+  final AppPreferencesRepository _appPrefs;
 
-  LocaleCubit(this._prefs) : super(_loadInitialState(_prefs));
+  LocaleCubit(this._appPrefs) : super(_loadInitialState(_appPrefs));
 
-  static LocaleState _loadInitialState(SharedPreferences prefs) {
-    final languageCode = prefs.getString('language_code') ?? 'en';
-    return LocaleState(Locale(languageCode));
+  static LocaleState _loadInitialState(AppPreferencesRepository prefs) {
+    return LocaleState(Locale(prefs.languageCode));
   }
 
   void changeLanguage({required String languageCode}) {
-    _prefs.setString('language_code', languageCode);
+    _appPrefs.setLanguageCode(languageCode);
     safeEmit(LocaleState(Locale(languageCode)));
   }
 }

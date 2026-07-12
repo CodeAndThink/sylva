@@ -7,6 +7,7 @@ import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/widgets/buttons/app_sliding_segmented_control.dart';
+import 'package:sylva/presentation/features/share/widgets/share_font_bottom_sheet.dart';
 
 class ShareTextTab extends StatefulWidget {
   const ShareTextTab({super.key});
@@ -38,10 +39,10 @@ class _ShareTextTabState extends State<ShareTextTab> {
           previous.textPosition != current.textPosition ||
           previous.textSize != current.textSize ||
           previous.isTextBold != current.isTextBold ||
-          previous.isTextItalic != current.isTextItalic ||
           previous.isTextUnderline != current.isTextUnderline ||
           previous.selectedShape != current.selectedShape ||
-          previous.textColor != current.textColor,
+          previous.textColor != current.textColor ||
+          previous.textFontFamily != current.textFontFamily,
       builder: (context, state) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -250,6 +251,56 @@ class _ShareTextTabState extends State<ShareTextTab> {
                       min: 0.1,
                       max: 1.0,
                       onChanged: (v) => _cubit.changeTextSize(v),
+                    ),
+                  ),
+                  4.width,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.4,
+                    ),
+                    child: InkWell(
+                      borderRadius: 20.borderRadius,
+                      onTap: () {
+                        _cubit.navigator.showAppBottomSheet(
+                          isScrollControlled: true,
+                          child: BlocProvider.value(
+                            value: _cubit,
+                            child: const ShareFontBottomSheet(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 40,
+                        padding: 12.paddingHorizontal,
+                        decoration: BoxDecoration(
+                          color: _theme.colorScheme.primary.withValues(
+                            alpha: 0.1,
+                          ),
+                          borderRadius: 20.borderRadius,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.font_download,
+                              color: _theme.colorScheme.primary,
+                              size: 20,
+                            ),
+                            8.width,
+                            Flexible(
+                              child: Text(
+                                state.textFontFamily,
+                                style: TextStyle(
+                                  color: _theme.colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],

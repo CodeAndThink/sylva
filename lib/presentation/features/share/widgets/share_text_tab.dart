@@ -39,10 +39,10 @@ class _ShareTextTabState extends State<ShareTextTab> {
           previous.textPosition != current.textPosition ||
           previous.textSize != current.textSize ||
           previous.isTextBold != current.isTextBold ||
-          previous.isTextItalic != current.isTextItalic ||
           previous.isTextUnderline != current.isTextUnderline ||
           previous.selectedShape != current.selectedShape ||
-          previous.textColor != current.textColor,
+          previous.textColor != current.textColor ||
+          previous.textFontFamily != current.textFontFamily,
       builder: (context, state) {
         return Column(
           mainAxisSize: MainAxisSize.min,

@@ -241,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCamerasFound": MessageLookupByLibrary.simpleMessage(
       "No cameras found on device",
     ),
+    "noFontsFound": MessageLookupByLibrary.simpleMessage("No fonts found"),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("No history yet"),
     "noImageToShare": MessageLookupByLibrary.simpleMessage("No image to share"),
     "nothingSelectedToCopy": MessageLookupByLibrary.simpleMessage(
@@ -331,6 +332,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Save to library"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
+    "searchFont": MessageLookupByLibrary.simpleMessage("Search font"),
     "seedColor": MessageLookupByLibrary.simpleMessage("App Color"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),

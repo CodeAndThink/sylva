@@ -242,6 +242,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noCamerasFound": MessageLookupByLibrary.simpleMessage(
       "Thiết bị không có camera",
     ),
+    "noFontsFound": MessageLookupByLibrary.simpleMessage(
+      "Không tìm thấy font chữ",
+    ),
     "noHistoryYet": MessageLookupByLibrary.simpleMessage("Chưa có lịch sử"),
     "noImageToShare": MessageLookupByLibrary.simpleMessage(
       "Không có ảnh để chia sẻ",
@@ -334,6 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Lưu vào thư viện"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
+    "searchFont": MessageLookupByLibrary.simpleMessage("Tìm kiếm font chữ"),
     "seedColor": MessageLookupByLibrary.simpleMessage("Màu ứng dụng"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),

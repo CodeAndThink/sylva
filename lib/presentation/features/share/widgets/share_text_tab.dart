@@ -254,46 +254,52 @@ class _ShareTextTabState extends State<ShareTextTab> {
                     ),
                   ),
                   4.width,
-                  InkWell(
-                    borderRadius: 20.borderRadius,
-                    onTap: () {
-                      _cubit.navigator.showAppBottomSheet(
-                        child: BlocProvider.value(
-                          value: _cubit,
-                          child: const ShareFontBottomSheet(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 40,
-                      padding: 12.paddingHorizontal,
-                      decoration: BoxDecoration(
-                        color: _theme.colorScheme.primary.withValues(
-                          alpha: 0.1,
-                        ),
-                        borderRadius: 20.borderRadius,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.font_download,
-                            color: _theme.colorScheme.primary,
-                            size: 20,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.4,
+                    ),
+                    child: InkWell(
+                      borderRadius: 20.borderRadius,
+                      onTap: () {
+                        _cubit.navigator.showAppBottomSheet(
+                          isScrollControlled: true,
+                          child: BlocProvider.value(
+                            value: _cubit,
+                            child: const ShareFontBottomSheet(),
                           ),
-                          8.width,
-                          Flexible(
-                            child: Text(
-                              state.textFontFamily,
-                              style: TextStyle(
-                                color: _theme.colorScheme.primary,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                        );
+                      },
+                      child: Container(
+                        height: 40,
+                        padding: 12.paddingHorizontal,
+                        decoration: BoxDecoration(
+                          color: _theme.colorScheme.primary.withValues(
+                            alpha: 0.1,
+                          ),
+                          borderRadius: 20.borderRadius,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.font_download,
+                              color: _theme.colorScheme.primary,
+                              size: 20,
                             ),
-                          ),
-                        ],
+                            8.width,
+                            Flexible(
+                              child: Text(
+                                state.textFontFamily,
+                                style: TextStyle(
+                                  color: _theme.colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

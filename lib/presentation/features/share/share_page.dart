@@ -79,6 +79,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
       textOption: state.textOption,
       textPosition: state.textPosition,
       textSize: state.textSize,
+      textFontFamily: state.textFontFamily,
       isTextBold: state.isTextBold,
       isTextItalic: state.isTextItalic,
       isTextUnderline: state.isTextUnderline,
@@ -123,6 +124,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
       textOption: state.textOption,
       textPosition: state.textPosition,
       textSize: state.textSize,
+      textFontFamily: state.textFontFamily,
       isTextBold: state.isTextBold,
       isTextItalic: state.isTextItalic,
       isTextUnderline: state.isTextUnderline,
@@ -239,7 +241,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                   ),
                 );
               },
-              icon: const Icon(Icons.tune_rounded, size: 30),
+              icon: const Icon(Icons.tune_rounded, size: 25),
             ),
           ),
           Tooltip(
@@ -250,7 +252,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                 AppFeedback.playInteract(context);
                 await _exportAndSave();
               },
-              icon: const Icon(Icons.download_rounded, size: 30),
+              icon: const Icon(Icons.download_rounded, size: 28),
             ),
           ),
           Tooltip(
@@ -261,7 +263,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                 AppFeedback.playInteract(context);
                 await _exportAndShare();
               },
-              icon: const Icon(Icons.share_rounded, size: 25),
+              icon: const Icon(Icons.share_rounded, size: 22),
             ),
           ),
           Tooltip(
@@ -271,7 +273,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
                 AppFeedback.playInteract(context);
                 _showTutorial();
               },
-              icon: Icon(Icons.help_outline_outlined, size: 30),
+              icon: Icon(Icons.help_outline_outlined, size: 28),
             ),
           ),
         ],

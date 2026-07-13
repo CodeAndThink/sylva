@@ -5,6 +5,7 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_state.dart';
+import 'package:sylva/presentation/widgets/text_fields/app_text_field.dart';
 
 class ShareFontBottomSheet extends StatefulWidget {
   const ShareFontBottomSheet({super.key});
@@ -84,33 +85,23 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
     return Container(
       padding: EdgeInsets.only(top: 16, bottom: 24 + bottomInset),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.vertical(top: 20.radius),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(l10n.fontSelection, style: theme.textTheme.titleMedium),
-          16.height,
+          12.height,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
+            padding: 16.paddingHorizontal,
+            child: AppTextField(
+              hintText: l10n.searchFont,
               controller: _searchController,
               onChanged: _onSearchChanged,
-              decoration: InputDecoration(
-                hintText: l10n.searchFont,
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 0,
-                  horizontal: 16,
-                ),
-              ),
+              prefixIcon: Icons.search,
             ),
           ),
-          16.height,
+          12.height,
           Flexible(
             child: BlocBuilder<ShareCubit, ShareState>(
               buildWhen: (previous, current) =>
@@ -120,7 +111,7 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
               builder: (context, state) {
                 if (_displayFonts.isEmpty) {
                   return Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: 16.paddingAll,
                     child: Center(child: Text(l10n.noFontsFound)),
                   );
                 }

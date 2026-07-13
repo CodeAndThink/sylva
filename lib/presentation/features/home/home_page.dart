@@ -381,7 +381,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
                       '${_currentScale.toStringAsFixed(1)}x',
                       textAlign: TextAlign.center,
                       style: _theme.textTheme.titleSmall?.copyWith(
-                        color: Colors.white,
+                        color: _currentScale > 1.0
+                            ? Colors.amber
+                            : Colors.white,
                       ),
                     ),
                   ),
@@ -490,7 +492,11 @@ class __HomeChildPageState extends State<_HomeChildPage>
                           ? Icons.flash_auto_outlined
                           : Icons.flash_off_outlined,
                       key: ValueKey<FlashMode>(_flashMode),
-                      color: _theme.colorScheme.onSurface,
+                      color:
+                          _flashMode == FlashMode.always ||
+                              _flashMode == FlashMode.auto
+                          ? Colors.amber
+                          : _theme.colorScheme.onSurface,
                       size: 24,
                     ),
                   ),

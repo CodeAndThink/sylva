@@ -155,7 +155,9 @@ class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer>
                               '${currentScale.toStringAsFixed(1)}x',
                               textAlign: TextAlign.center,
                               style: theme.textTheme.titleSmall?.copyWith(
-                                color: Colors.white,
+                                color: currentScale > 1.0
+                                    ? Colors.amber
+                                    : Colors.white,
                               ),
                             ),
                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/enums/template_enums.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
@@ -152,30 +153,33 @@ class ShareImagePreview extends StatelessWidget {
       size: size,
     );
 
-    if (state.textOption == ShareTextOption.none) {
+    if (state.textOption.isNone) {
       return shapeWidget;
     }
 
     String textStr = '';
-    if (state.textOption == ShareTextOption.hex) {
+    if (state.textOption.isHex) {
       textStr =
           '#${(color.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
-    } else if (state.textOption == ShareTextOption.rgba) {
+    } else if (state.textOption.isRgba) {
       textStr =
           'rgba(${(color.r * 255).round()}, ${(color.g * 255).round()}, ${(color.b * 255).round()}, ${color.a.toStringAsFixed(1)})';
     }
 
     final textColor = state.textColor ?? Colors.white;
     final actualFontSize = size * (0.08 + state.textSize * 0.16);
-    final textStyle = TextStyle(
-      color: textColor,
-      fontSize: actualFontSize,
-      fontWeight: state.isTextBold ? FontWeight.bold : FontWeight.normal,
-      fontStyle: state.isTextItalic ? FontStyle.italic : FontStyle.normal,
-      decoration: state.isTextUnderline
-          ? TextDecoration.underline
-          : TextDecoration.none,
-      decorationColor: textColor,
+    final textStyle = GoogleFonts.getFont(
+      state.textFontFamily,
+      textStyle: TextStyle(
+        color: textColor,
+        fontSize: actualFontSize,
+        fontWeight: state.isTextBold ? FontWeight.bold : FontWeight.normal,
+        fontStyle: state.isTextItalic ? FontStyle.italic : FontStyle.normal,
+        decoration: state.isTextUnderline
+            ? TextDecoration.underline
+            : TextDecoration.none,
+        decorationColor: textColor,
+      ),
     );
 
     final textWidget = Text(textStr, style: textStyle);

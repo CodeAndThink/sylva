@@ -4,14 +4,30 @@
   <img src="assets/icons/ic_app_icon.png" width="128" style="border-radius: 24px;" alt="Sylva App Icon"/>
 </p>
 
-Sylva is a camera application designed to help you capture and discover the world's colors effortlessly. It processes camera data locally on your device to analyze and extract color palettes in real time.
+Sylva is a beautiful, offline-first camera application designed to help you capture, extract, and discover the world's colors effortlessly. Using an advanced color quantization algorithm locally on your device, it analyzes live camera data or photos to generate harmonious color palettes in real-time.
 
 ## Features
 
-- **Color Palette Extraction**: Take a photo using the built-in camera, and Sylva will instantly analyze the image to extract a beautiful color palette.
-- **Local Processing**: All camera analysis is done securely and locally on your device. No photos or data are uploaded to any server.
-- **Multi-language Support**: Full localization for English, Vietnamese, Japanese, and Chinese.
-- **Premium Design**: Built with a modern, clean, and responsive UI.
+- **Instant Color Extraction**: Take a photo or select an image to instantly analyze and extract a beautiful, dynamic color palette.
+- **Offline & Private**: All processing happens locally on your device. No data or images are ever uploaded to the cloud.
+- **Image Import**: Extract palettes from photos saved in your gallery.
+- **Customizable Export**: Choose between various shapes, layouts, fonts (via Google Fonts), and text styles (HEX, RGBA) to export your palette overlay onto your images.
+- **Save & Share**: Quickly save the result to your photo library or share it on social media.
+- **Multi-language Support**: Fully localized in English, Vietnamese, Japanese, and Chinese.
+
+## Supported Platforms
+
+- **Android**: Supported on Android 5.0 (Lollipop, API Level 21) and newer.
+- **iOS**: Supported on iOS 12.0 and newer (depending on camera plugin requirements).
+
+## Comparison with other methods
+
+| Feature | Sylva | Online Color Pickers | Standard Camera App + Eyeballing |
+| :--- | :--- | :--- | :--- |
+| **Speed** | Instant | Slower, requires uploading | Fast, but inaccurate |
+| **Privacy** | 100% Local, secure | Cloud-dependent, privacy risks | Local, secure |
+| **Palette Generation** | Automatic, harmonious | Manual or basic | Manual, tedious |
+| **Export Options** | Customizable overlays | Basic export (usually just text) | None |
 
 ## Architecture & Tech Stack
 

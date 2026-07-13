@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sylva/core/enums/template_enums.dart';
 
 class ImageExporterUtils {
@@ -17,6 +18,7 @@ class ImageExporterUtils {
     required ShareTextOption textOption,
     required ShareTextPosition textPosition,
     required double textSize,
+    required String textFontFamily,
     required bool isTextBold,
     required bool isTextItalic,
     required bool isTextUnderline,
@@ -56,6 +58,7 @@ class ImageExporterUtils {
           textOption,
           textPosition,
           textSize,
+          textFontFamily,
           isTextBold,
           isTextItalic,
           isTextUnderline,
@@ -100,6 +103,7 @@ class ImageExporterUtils {
     ShareTextOption textOption,
     ShareTextPosition textPosition,
     double textSizeState,
+    String textFontFamily,
     bool isTextBold,
     bool isTextItalic,
     bool isTextUnderline,
@@ -136,9 +140,11 @@ class ImageExporterUtils {
     ui.Paragraph? sampleParagraph;
     if (textOption != ShareTextOption.none) {
       final actualFontSize = shapeSize * (0.08 + textSizeState * 0.16);
+      final fontFamily = GoogleFonts.getFont(textFontFamily).fontFamily;
       ui.TextStyle textStyle = ui.TextStyle(
         color: Colors.white,
         fontSize: actualFontSize,
+        fontFamily: fontFamily,
         fontWeight: isTextBold ? FontWeight.bold : FontWeight.normal,
         fontStyle: isTextItalic ? FontStyle.italic : FontStyle.normal,
         decoration: isTextUnderline
@@ -246,6 +252,7 @@ class ImageExporterUtils {
         textOption,
         textPosition,
         textSizeState,
+        textFontFamily,
         isTextBold,
         isTextItalic,
         isTextUnderline,
@@ -266,6 +273,7 @@ class ImageExporterUtils {
     ShareTextOption textOption,
     ShareTextPosition textPosition,
     double textSizeState,
+    String textFontFamily,
     bool isTextBold,
     bool isTextItalic,
     bool isTextUnderline,
@@ -289,10 +297,12 @@ class ImageExporterUtils {
     final actualFontSize = size * (0.08 + textSizeState * 0.16);
 
     final textColor = textColorState ?? Colors.white;
+    final fontFamily = GoogleFonts.getFont(textFontFamily).fontFamily;
 
     ui.TextStyle textStyle = ui.TextStyle(
       color: textColor,
       fontSize: actualFontSize,
+      fontFamily: fontFamily,
       fontWeight: isTextBold ? FontWeight.bold : FontWeight.normal,
       fontStyle: isTextItalic ? FontStyle.italic : FontStyle.normal,
       decoration: isTextUnderline
@@ -341,6 +351,7 @@ class ImageExporterUtils {
       final insideTextStyle = ui.TextStyle(
         color: insideTextColor,
         fontSize: actualFontSize,
+        fontFamily: fontFamily,
         fontWeight: isTextBold ? FontWeight.bold : FontWeight.normal,
         fontStyle: isTextItalic ? FontStyle.italic : FontStyle.normal,
         decoration: isTextUnderline

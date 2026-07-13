@@ -1126,7 +1126,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 AppFeedback.playInteract(context);
                 handleSavePress();
               },
-              icon: const Icon(Icons.data_saver_on_outlined, size: 30),
+              icon: const Icon(Icons.data_saver_on_outlined, size: 25),
             ),
           ),
           Tooltip(
@@ -1166,7 +1166,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                             },
                             icon: const Icon(
                               Icons.design_services_rounded,
-                              size: 30,
+                              size: 25,
                             ),
                           ),
                         )
@@ -1182,7 +1182,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 AppFeedback.playInteract(context);
                 _showTutorial();
               },
-              icon: Icon(Icons.help_outline_outlined, size: 30),
+              icon: Icon(Icons.help_outline_outlined, size: 28),
             ),
           ),
         ],

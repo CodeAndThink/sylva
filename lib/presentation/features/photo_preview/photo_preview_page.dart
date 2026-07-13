@@ -906,7 +906,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     '${currentScale.toStringAsFixed(1)}x',
                     textAlign: TextAlign.center,
                     style: _theme.textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
+                      color: currentScale > 1.0 ? Colors.amber : Colors.white,
                     ),
                   ),
                 ),

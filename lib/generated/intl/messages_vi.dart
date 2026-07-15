@@ -68,14 +68,24 @@ class MessageLookup extends MessageLookupByLibrary {
       "Yêu cầu quyền Máy ảnh",
     ),
     "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
+    "cancelBtn": MessageLookupByLibrary.simpleMessage("Hủy"),
     "circle": MessageLookupByLibrary.simpleMessage("Hình tròn"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage(
-      "Xoá tất cả lịch sử",
+      "Xóa toàn bộ lịch sử",
     ),
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "Bạn có chắc chắn muốn xoá tất cả lịch sử? Hành động này không thể hoàn tác.",
     ),
+    "clearAllHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "Xóa sạch tất cả hình ảnh và dữ liệu đã lưu",
+    ),
     "clearColor": MessageLookupByLibrary.simpleMessage("Bỏ chọn màu"),
+    "clearUnfavoritedHistory": MessageLookupByLibrary.simpleMessage(
+      "Xóa bản lưu không yêu thích",
+    ),
+    "clearUnfavoritedHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "Giải phóng bộ nhớ, giữ lại những mục đã thả tim",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("Màu sắc"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Sao chép màu thất bại",
@@ -90,6 +100,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Màu đã chọn và các độ đậm nhạt",
     ),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Biểu tượng màu sắc"),
+    "confirmClearAll": MessageLookupByLibrary.simpleMessage(
+      "Xác nhận xóa toàn bộ",
+    ),
+    "confirmClearAllDesc": MessageLookupByLibrary.simpleMessage(
+      "Toàn bộ dữ liệu sẽ bị xóa và không thể khôi phục. Bạn có chắc chắn?",
+    ),
+    "confirmDeleteUnfavoritedDesc": MessageLookupByLibrary.simpleMessage(
+      "Bạn có chắc chắn muốn xóa các bản lưu không yêu thích? Hành động này không thể hoàn tác.",
+    ),
+    "confirmDeletion": MessageLookupByLibrary.simpleMessage("Xác nhận xóa"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Xác nhận mật khẩu",
     ),
@@ -140,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createTime": MessageLookupByLibrary.simpleMessage("Thời gian"),
     "days": MessageLookupByLibrary.simpleMessage("Ngày"),
     "delete": MessageLookupByLibrary.simpleMessage("Xóa"),
+    "deleteBtn": MessageLookupByLibrary.simpleMessage("Xóa"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("Xóa ảnh"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Hãy kiểm tra kỹ lần cuối!\nBạn không thể hoàn tác đâu nhé!",
@@ -340,12 +361,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Lưu mới"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Lưu Màu"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Lưu vào thư viện"),
+    "savedImagesStorage": MessageLookupByLibrary.simpleMessage(
+      "Dung lượng ảnh đã lưu",
+    ),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Giới hạn quét"),
     "searchFont": MessageLookupByLibrary.simpleMessage("Tìm kiếm font chữ"),
     "seedColor": MessageLookupByLibrary.simpleMessage("Màu ứng dụng"),
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Hiệu ứng âm thanh"),
+    "storageManagement": MessageLookupByLibrary.simpleMessage(
+      "Quản lý dung lượng",
+    ),
     "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),

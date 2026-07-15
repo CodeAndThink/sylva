@@ -431,6 +431,13 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           ),
         ),
         _buildSettingFilledButton(
+          title: _l10n.storageManagement,
+          onTap: () {
+            _settingsCubit.navigator.goToStorageManagement();
+          },
+          icon: Icons.storage_rounded,
+        ),
+        _buildSettingFilledButton(
           title: _l10n.termsOfService,
           onTap: () {
             _settingsCubit.navigator.goToTermsOfService();

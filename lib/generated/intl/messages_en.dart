@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Camera Permission Required",
     ),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
     "circle": MessageLookupByLibrary.simpleMessage("Circle"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage(
       "Clear all history",
@@ -78,7 +79,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to clear all history? This action cannot be undone.",
     ),
+    "clearAllHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "Delete all saved images and data",
+    ),
     "clearColor": MessageLookupByLibrary.simpleMessage("Clear color"),
+    "clearUnfavoritedHistory": MessageLookupByLibrary.simpleMessage(
+      "Clear unfavorited history",
+    ),
+    "clearUnfavoritedHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "Free up space, keep your favorite items",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("Color"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage(
       "Failed to copy color",
@@ -95,6 +105,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Selected color and its shades",
     ),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("Colors icon"),
+    "confirmClearAll": MessageLookupByLibrary.simpleMessage(
+      "Confirm clear all",
+    ),
+    "confirmClearAllDesc": MessageLookupByLibrary.simpleMessage(
+      "All data will be deleted and cannot be recovered. Are you sure?",
+    ),
+    "confirmDeleteUnfavoritedDesc": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete unfavorited history? This action cannot be undone.",
+    ),
+    "confirmDeletion": MessageLookupByLibrary.simpleMessage("Confirm deletion"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Confirm password is required",
@@ -143,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createTime": MessageLookupByLibrary.simpleMessage("Time"),
     "days": MessageLookupByLibrary.simpleMessage("Days"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteBtn": MessageLookupByLibrary.simpleMessage("Delete"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("Delete photo"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "Please double-check one last time!\nThis action cannot be undone.",
@@ -335,12 +356,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveAsNew": MessageLookupByLibrary.simpleMessage("Save as new"),
     "saveColor": MessageLookupByLibrary.simpleMessage("Save Color"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("Save to library"),
+    "savedImagesStorage": MessageLookupByLibrary.simpleMessage(
+      "Saved images storage",
+    ),
     "scanLimit": MessageLookupByLibrary.simpleMessage("Scan Limit"),
     "searchFont": MessageLookupByLibrary.simpleMessage("Search font"),
     "seedColor": MessageLookupByLibrary.simpleMessage("App Color"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Sound Effects"),
+    "storageManagement": MessageLookupByLibrary.simpleMessage(
+      "Storage Management",
+    ),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),

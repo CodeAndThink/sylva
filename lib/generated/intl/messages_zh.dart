@@ -64,12 +64,22 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cameraPermissionRequired": MessageLookupByLibrary.simpleMessage("需要相机权限"),
     "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+    "cancelBtn": MessageLookupByLibrary.simpleMessage("取消"),
     "circle": MessageLookupByLibrary.simpleMessage("圆形"),
     "clearAllHistory": MessageLookupByLibrary.simpleMessage("清除所有历史记录"),
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "您确定要清除所有历史记录吗？此操作无法撤销。",
     ),
+    "clearAllHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "删除所有已保存的图片和数据",
+    ),
     "clearColor": MessageLookupByLibrary.simpleMessage("清除颜色"),
+    "clearUnfavoritedHistory": MessageLookupByLibrary.simpleMessage(
+      "清除未收藏的历史记录",
+    ),
+    "clearUnfavoritedHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "释放空间，保留您喜欢的项目",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("颜色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("复制颜色失败"),
     "colorCopiedSuccess": m0,
@@ -78,6 +88,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage("选择颜色深浅"),
     "colorPickerShades": MessageLookupByLibrary.simpleMessage("所选颜色及其深浅"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("颜色图标"),
+    "confirmClearAll": MessageLookupByLibrary.simpleMessage("确认全部清除"),
+    "confirmClearAllDesc": MessageLookupByLibrary.simpleMessage(
+      "所有数据将被删除且无法恢复。您确定吗？",
+    ),
+    "confirmDeleteUnfavoritedDesc": MessageLookupByLibrary.simpleMessage(
+      "您确定要删除未收藏的历史记录吗？此操作无法撤销。",
+    ),
+    "confirmDeletion": MessageLookupByLibrary.simpleMessage("确认删除"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("确认密码"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage("必须确认密码"),
     "contact": MessageLookupByLibrary.simpleMessage("联系"),
@@ -114,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createTime": MessageLookupByLibrary.simpleMessage("时间"),
     "days": MessageLookupByLibrary.simpleMessage("天"),
     "delete": MessageLookupByLibrary.simpleMessage("删除"),
+    "deleteBtn": MessageLookupByLibrary.simpleMessage("删除"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("删除照片"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "请最后仔细检查一次！\n此操作无法撤销。",
@@ -258,11 +277,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveAsNew": MessageLookupByLibrary.simpleMessage("保存为新记录"),
     "saveColor": MessageLookupByLibrary.simpleMessage("保存颜色"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("保存到图库"),
+    "savedImagesStorage": MessageLookupByLibrary.simpleMessage("已存图片存储空间"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("扫描限制"),
     "seedColor": MessageLookupByLibrary.simpleMessage("应用颜色"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("音效"),
+    "storageManagement": MessageLookupByLibrary.simpleMessage("存储管理"),
     "submit": MessageLookupByLibrary.simpleMessage("提交"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("切换相机"),
@@ -378,6 +399,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),
-    "zoomMode": MessageLookupByLibrary.simpleMessage("缩放模式"),
+    "zoomMode": MessageLookupByLibrary.simpleMessage("变焦模式"),
   };
 }

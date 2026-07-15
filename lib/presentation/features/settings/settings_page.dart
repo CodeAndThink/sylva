@@ -1,5 +1,8 @@
+import 'dart:io';
+import 'package:disk_space_2/disk_space_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart' as p;
 import 'package:sylva/core/configs/app_configs.dart';
 import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/enums/language_type.dart';
@@ -18,6 +21,7 @@ import 'package:sylva/presentation/widgets/buttons/app_radio_tile.dart';
 import 'package:sylva/presentation/widgets/buttons/app_switch_tile.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
+import 'package:sylva/core/utils/file_utils.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -46,6 +50,9 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   late S _l10n;
   late ThemeData _theme;
 
+  int _totalSize = 0;
+  int _deviceSize = 0;
+
   @override
   void initState() {
     super.initState();
@@ -53,6 +60,33 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     _localeCubit = context.read<LocaleCubit>();
     _settingsCubit = context.read<SettingsCubit>();
     _interactionCubit = context.read<InteractionCubit>();
+    _fetchStorage();
+  }
+
+  Future<void> _fetchStorage() async {
+    final targetDir = Directory(
+      p.join(FileUtils.appDocDirPath, 'sylva_images'),
+    );
+    int dirSize = 0;
+    if (await targetDir.exists()) {
+      final files = targetDir.listSync(recursive: true);
+      for (var entity in files) {
+        if (entity is File) {
+          dirSize += await entity.length();
+        }
+      }
+    }
+    final double? totalDiskSpaceMB = await DiskSpace.getTotalDiskSpace;
+    final int totalDiskSpaceBytes = totalDiskSpaceMB != null
+        ? (totalDiskSpaceMB * 1024 * 1024).toInt()
+        : 0;
+
+    if (mounted) {
+      setState(() {
+        _totalSize = dirSize;
+        _deviceSize = totalDiskSpaceBytes;
+      });
+    }
   }
 
   @override
@@ -78,6 +112,8 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           _buildSeedColorSection(),
           12.height,
           _buildLanguageSection(),
+          12.height,
+          _buildStorageSection(),
           12.height,
           _buildOtherSection(),
           8.height,
@@ -378,6 +414,99 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     );
   }
 
+  Widget _buildStorageSection() {
+    final percent = _deviceSize > 0
+        ? (_totalSize / _deviceSize).clamp(0.0, 1.0)
+        : 0.0;
+    final percentStr = (percent * 100).toStringAsFixed(1);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppTitleText(title: _l10n.storageManagement),
+        10.height,
+        Material(
+          color: _theme.colorScheme.surfaceContainerHighest.withValues(
+            alpha: 0.3,
+          ),
+          borderRadius: 24.borderRadius,
+          child: InkWell(
+            borderRadius: 24.borderRadius,
+            onTap: () async {
+              await _settingsCubit.navigator.goToStorageManagement();
+              _fetchStorage();
+            },
+            child: Padding(
+              padding: 16.paddingAll,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.storage_rounded,
+                        color: _theme.colorScheme.onSurface,
+                      ),
+                      16.width,
+                      Expanded(
+                        child: Text(
+                          _l10n.storageManagement,
+                          style: _theme.textTheme.titleMedium?.copyWith(),
+                        ),
+                      ),
+                      Text(
+                        '$percentStr%',
+                        style: _theme.textTheme.titleMedium?.copyWith(
+                          color: _theme.colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  16.height,
+                  ClipRRect(
+                    borderRadius: 8.borderRadius,
+                    child: LinearProgressIndicator(
+                      value: percent,
+                      minHeight: 8,
+                      backgroundColor: _theme.colorScheme.onSurface.withValues(
+                        alpha: 0.1,
+                      ),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        _theme.colorScheme.primary,
+                      ),
+                    ),
+                  ),
+                  8.height,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        FileUtils.formatBytes(_totalSize),
+                        style: _theme.textTheme.bodySmall?.copyWith(
+                          color: _theme.colorScheme.onSurface.withValues(
+                            alpha: 0.6,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        FileUtils.formatBytes(_deviceSize),
+                        style: _theme.textTheme.bodySmall?.copyWith(
+                          color: _theme.colorScheme.onSurface.withValues(
+                            alpha: 0.6,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildOtherSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -430,13 +559,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             ),
           ),
         ),
-        _buildSettingFilledButton(
-          title: _l10n.storageManagement,
-          onTap: () {
-            _settingsCubit.navigator.goToStorageManagement();
-          },
-          icon: Icons.storage_rounded,
-        ),
+
         _buildSettingFilledButton(
           title: _l10n.termsOfService,
           onTap: () {

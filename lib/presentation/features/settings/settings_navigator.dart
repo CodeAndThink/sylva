@@ -20,7 +20,7 @@ class SettingsNavigator extends BaseNavigator {
     pushNamed(AppRouter.acknowledgements);
   }
 
-  void goToStorageManagement() {
-    pushNamed(AppRouter.storageManagement);
+  Future<void> goToStorageManagement() {
+    return pushNamed(AppRouter.storageManagement);
   }
 }

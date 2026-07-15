@@ -59,6 +59,21 @@ class S {
     return Intl.message('About', name: 'about', desc: '', args: []);
   }
 
+  /// `About Us`
+  String get aboutUs {
+    return Intl.message('About Us', name: 'aboutUs', desc: '', args: []);
+  }
+
+  /// `Want to learn more about Sylva? Visit our website for the latest updates, features, and more!`
+  String get aboutDescription {
+    return Intl.message(
+      'Want to learn more about Sylva? Visit our website for the latest updates, features, and more!',
+      name: 'aboutDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sylva is a camera application designed to help you capture and discover the world's colors effortlessly.`
   String get aboutSylvaDescription {
     return Intl.message(
@@ -1339,21 +1354,6 @@ class S {
     );
   }
 
-  /// `If you like this app, consider supporting the development. Buy me a coffee!`
-  String get sponsorsDescription {
-    return Intl.message(
-      'If you like this app, consider supporting the development. Buy me a coffee!',
-      name: 'sponsorsDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sponsors`
-  String get sponsorsTitle {
-    return Intl.message('Sponsors', name: 'sponsorsTitle', desc: '', args: []);
-  }
-
   /// `Submit`
   String get submit {
     return Intl.message('Submit', name: 'submit', desc: '', args: []);
@@ -1362,16 +1362,6 @@ class S {
   /// `Success`
   String get success {
     return Intl.message('Success', name: 'success', desc: '', args: []);
-  }
-
-  /// `Support on Ko-fi`
-  String get supportOnKofi {
-    return Intl.message(
-      'Support on Ko-fi',
-      name: 'supportOnKofi',
-      desc: '',
-      args: [],
-    );
   }
 
   /// `Switch Camera`
@@ -2041,6 +2031,16 @@ class S {
       name: 'version',
       desc: '',
       args: [version],
+    );
+  }
+
+  /// `Visit our website`
+  String get visitOurWebsite {
+    return Intl.message(
+      'Visit our website',
+      name: 'visitOurWebsite',
+      desc: '',
+      args: [],
     );
   }
 

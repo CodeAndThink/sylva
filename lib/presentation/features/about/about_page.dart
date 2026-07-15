@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/presentation/features/about/about_cubit.dart';
 import 'package:sylva/presentation/features/about/about_navigator.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -31,19 +32,29 @@ class _AboutChildPage extends StatefulWidget {
 class __AboutChildPageState extends State<_AboutChildPage> {
   late ThemeData _theme;
   late S _l10n;
+  late final AboutCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = context.read<AboutCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
     _l10n = S.of(context);
 
-    return AppScaffold(title: _l10n.sponsorsTitle, body: _buildBody());
+    return AppScaffold(
+      appBarColor: AppColors.aboutPrimary,
+      title: _l10n.about,
+      body: _buildBody(),
+    );
   }
 
   Widget _buildBody() {
     return Stack(
       children: [
-        // --- Background Blobs ---
         Positioned(
           top: -150,
           left: -150,
@@ -107,7 +118,7 @@ class __AboutChildPageState extends State<_AboutChildPage> {
                   alpha: 0.5,
                 ),
                 padding: 30.paddingAll,
-                borderColor: const Color(0xFFFF5E5B).withValues(alpha: 0.3),
+                borderColor: AppColors.aboutPrimary.withValues(alpha: 0.3),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -116,34 +127,34 @@ class __AboutChildPageState extends State<_AboutChildPage> {
                       padding: 24.paddingAll,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: const Color(0xFFFF5E5B).withValues(alpha: 0.1),
+                        color: AppColors.aboutPrimary.withValues(alpha: 0.1),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(
-                              0xFFFF5E5B,
-                            ).withValues(alpha: 0.25),
+                            color: AppColors.aboutPrimary.withValues(
+                              alpha: 0.25,
+                            ),
                             blurRadius: 40,
                             spreadRadius: 8,
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.favorite_rounded,
+                        Icons.blur_on_rounded,
                         size: 72,
-                        color: Color(0xFFFF5E5B),
+                        color: AppColors.aboutPrimary,
                       ),
                     ),
                     32.height,
                     Text(
-                      _l10n.sponsorsTitle,
+                      _l10n.aboutUs,
                       textAlign: TextAlign.center,
                       style: _theme.textTheme.headlineSmall?.copyWith(
-                        color: Color(0xFFFF5E5B),
+                        color: AppColors.aboutPrimary,
                       ),
                     ),
                     16.height,
                     Text(
-                      _l10n.sponsorsDescription,
+                      _l10n.aboutDescription,
                       textAlign: TextAlign.center,
                       style: _theme.textTheme.bodyMedium?.copyWith(
                         height: 1.5,
@@ -152,12 +163,11 @@ class __AboutChildPageState extends State<_AboutChildPage> {
                         ),
                       ),
                     ),
-
-                    40.height,
+                    30.height,
                     AppFilledButton(
-                      text: _l10n.supportOnKofi,
-                      icon: Icons.coffee_rounded,
-                      backgroundColor: const Color(0xFFFF5E5B),
+                      text: _l10n.visitOurWebsite,
+                      icon: Icons.language_rounded,
+                      backgroundColor: AppColors.aboutPrimary,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 28,
@@ -168,7 +178,7 @@ class __AboutChildPageState extends State<_AboutChildPage> {
                       ),
                       onPressed: () {
                         AppFeedback.playInteract(context);
-                        context.read<AboutCubit>().openKofiPage();
+                        _cubit.openAppWebsite();
                       },
                     ),
                   ],

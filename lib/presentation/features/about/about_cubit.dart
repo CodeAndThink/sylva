@@ -9,8 +9,8 @@ class AboutCubit extends BaseCubit<AboutAppState> {
 
   AboutCubit({required this.navigator}) : super(const AboutAppState());
 
-  Future<void> openKofiPage() async {
-    final uri = Uri.parse(AppEnvConfigs.koFiLink);
+  Future<void> openAppWebsite() async {
+    final uri = Uri.parse(AppEnvConfigs.appWeb);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     }

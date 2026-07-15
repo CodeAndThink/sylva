@@ -1,3 +1,3 @@
 class AppEnvConfigs {
-  static final String koFiLink = 'https://ko-fi.com/solvelabs';
+  static final String appWeb = 'https://sylva.solve-labs.com/';
 }

@@ -37,9 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("約"),
+    "aboutDescription": MessageLookupByLibrary.simpleMessage(
+      "Sylva についてもっと知りたいですか？最新情報や機能紹介など、ウェブサイトでチェックしてみてください！",
+    ),
     "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
       "Sylvaは、世界の色彩を簡単にキャプチャして発見できるように設計されたカメラアプリケーションです。",
     ),
+    "aboutUs": MessageLookupByLibrary.simpleMessage("私たちについて"),
     "acknowledgements": MessageLookupByLibrary.simpleMessage("謝辞"),
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
@@ -285,13 +289,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("サウンド効果"),
-    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
-      "このアプリを気に入っていただけたら、開発をサポートしてください。コーヒーを奢ってください！",
-    ),
-    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("スポンサー"),
     "submit": MessageLookupByLibrary.simpleMessage("送信"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
-    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Ko-fiでサポート"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("利用規約"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
@@ -419,6 +418,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userBanned": MessageLookupByLibrary.simpleMessage("ユーザーは利用停止されています。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("ユーザーが見つかりません。"),
     "version": m6,
+    "visitOurWebsite": MessageLookupByLibrary.simpleMessage("ウェブサイトを見る"),
     "weakPassword": MessageLookupByLibrary.simpleMessage("パスワードが弱すぎます。"),
     "wed": MessageLookupByLibrary.simpleMessage("水"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨日"),

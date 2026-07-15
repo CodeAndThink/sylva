@@ -38,9 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "aboutDescription": MessageLookupByLibrary.simpleMessage(
+      "Want to learn more about Sylva? Visit our website for the latest updates, features, and more!",
+    ),
     "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
       "Sylva is a camera application designed to help you capture and discover the world\'s colors effortlessly.",
     ),
+    "aboutUs": MessageLookupByLibrary.simpleMessage("About Us"),
     "acknowledgements": MessageLookupByLibrary.simpleMessage(
       "Acknowledgements",
     ),
@@ -337,13 +341,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Sound Effects"),
-    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
-      "If you like this app, consider supporting the development. Buy me a coffee!",
-    ),
-    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("Sponsors"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
-    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Support on Ko-fi"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Switch Camera"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
@@ -495,6 +494,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "userBanned": MessageLookupByLibrary.simpleMessage("User is banned."),
     "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
     "version": m6,
+    "visitOurWebsite": MessageLookupByLibrary.simpleMessage(
+      "Visit our website",
+    ),
     "weakPassword": MessageLookupByLibrary.simpleMessage(
       "Password is too weak.",
     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sylva/presentation/features/sponsors/sponsors_cubit.dart';
-import 'package:sylva/presentation/features/sponsors/sponsors_navigator.dart';
+import 'package:sylva/presentation/features/about/about_cubit.dart';
+import 'package:sylva/presentation/features/about/about_navigator.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/buttons/app_filled_button.dart';
@@ -9,26 +9,26 @@ import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 
-class SponsorsPage extends StatelessWidget {
-  const SponsorsPage({super.key});
+class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SponsorsCubit(navigator: SponsorsNavigator(context)),
-      child: const _SponsorsChildPage(),
+      create: (_) => AboutCubit(navigator: AboutNavigator(context)),
+      child: const _AboutChildPage(),
     );
   }
 }
 
-class _SponsorsChildPage extends StatefulWidget {
-  const _SponsorsChildPage();
+class _AboutChildPage extends StatefulWidget {
+  const _AboutChildPage();
 
   @override
-  State<_SponsorsChildPage> createState() => __SponsorsChildPageState();
+  State<_AboutChildPage> createState() => __AboutChildPageState();
 }
 
-class __SponsorsChildPageState extends State<_SponsorsChildPage> {
+class __AboutChildPageState extends State<_AboutChildPage> {
   late ThemeData _theme;
   late S _l10n;
 
@@ -168,7 +168,7 @@ class __SponsorsChildPageState extends State<_SponsorsChildPage> {
                       ),
                       onPressed: () {
                         AppFeedback.playInteract(context);
-                        context.read<SponsorsCubit>().openKofiPage();
+                        context.read<AboutCubit>().openKofiPage();
                       },
                     ),
                   ],

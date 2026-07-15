@@ -405,17 +405,17 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             child: InkWell(
               borderRadius: 16.borderRadius,
               onTap: () {
-                _settingsCubit.navigator.goToSponsors();
+                _settingsCubit.navigator.goToAbout();
               },
               child: Padding(
                 padding: 12.paddingAll,
                 child: Row(
                   children: [
-                    const Icon(Icons.favorite, color: Colors.white, size: 28),
-                    16.width,
+                    const Icon(Icons.favorite, color: Colors.white),
+                    12.width,
                     Expanded(
                       child: Text(
-                        _l10n.donation,
+                        _l10n.about,
                         style: _theme.textTheme.titleSmall?.copyWith(
                           color: Colors.white,
                         ),
@@ -426,13 +426,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
               ),
             ),
           ),
-        ),
-        _buildSettingFilledButton(
-          title: _l10n.about,
-          onTap: () {
-            _settingsCubit.navigator.goToAbout();
-          },
-          icon: Icons.info_outline_rounded,
         ),
         _buildSettingFilledButton(
           title: _l10n.termsOfService,

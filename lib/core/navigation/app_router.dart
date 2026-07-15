@@ -5,10 +5,9 @@ import 'package:sylva/presentation/features/history/history_page.dart';
 import 'package:sylva/presentation/features/home/home_page.dart';
 import 'package:sylva/presentation/features/onbroard/onboard_page.dart';
 import 'package:sylva/presentation/features/share/share_page.dart';
-import 'package:sylva/presentation/features/sponsors/sponsors_page.dart';
+import 'package:sylva/presentation/features/about/about_page.dart';
 import 'package:sylva/presentation/features/photo_preview/photo_preview_page.dart';
 import 'package:sylva/presentation/features/settings/settings_page.dart';
-import 'package:sylva/presentation/features/settings/widgets/about_page.dart';
 import 'package:sylva/presentation/features/contact/contact_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
@@ -49,9 +48,6 @@ class AppRouter {
   static const String acknowledgements = 'acknowledgements';
   static const String acknowledgementsPath = '/acknowledgements';
 
-  static const String sponsors = 'sponsors';
-  static const String sponsorsPath = '/sponsors';
-
   static const String photoPreview = 'photoPreview';
   static const String photoPreviewPath = '/photoPreview';
 
@@ -73,9 +69,9 @@ class AppRouter {
         builder: (context, state) => const OnboardingPage(),
       ),
       GoRoute(
-        path: sponsorsPath,
-        name: sponsors,
-        builder: (context, state) => const SponsorsPage(),
+        path: aboutPath,
+        name: about,
+        builder: (context, state) => const AboutPage(),
       ),
       GoRoute(
         path: homePath,
@@ -91,11 +87,6 @@ class AppRouter {
         path: settingsPath,
         name: settings,
         builder: (context, state) => const SettingsPage(),
-      ),
-      GoRoute(
-        path: aboutPath,
-        name: about,
-        builder: (context, state) => const AboutPage(),
       ),
       GoRoute(
         path: termsOfServicePath,

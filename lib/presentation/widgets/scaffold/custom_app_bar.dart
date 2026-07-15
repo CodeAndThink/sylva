@@ -49,9 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               bottomRight: 36.radius,
             ),
             border: Border.all(
-              color: colorScheme.secondary.withValues(
-                alpha: 0.28,
-              ),
+              color: colorScheme.secondary.withValues(alpha: 0.28),
               width: 1.5,
             ),
             boxShadow: [

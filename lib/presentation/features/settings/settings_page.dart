@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/configs/app_configs.dart';
 import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
@@ -79,6 +80,8 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           _buildLanguageSection(),
           12.height,
           _buildOtherSection(),
+          8.height,
+          _buildAppVersion(),
         ],
       ),
     );
@@ -456,6 +459,19 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           icon: Icons.format_quote,
         ),
       ],
+    );
+  }
+
+  Widget _buildAppVersion() {
+    return Padding(
+      padding: 8.paddingAll,
+      child: Text(
+        "-- ${_l10n.version(AppConfigs.version)} --",
+        style: _theme.textTheme.bodySmall?.copyWith(
+          color: _theme.colorScheme.primary,
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 

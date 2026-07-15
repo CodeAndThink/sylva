@@ -169,14 +169,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.5+4"
-  change_case:
-    dependency: transitive
-    description:
-      name: change_case
-      sha256: e41ef3df58521194ef8d7649928954805aeb08061917cf658322305e61568003
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   characters:
     dependency: transitive
     description:
@@ -305,14 +297,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.7"
-  dartcv4:
-    dependency: transitive
-    description:
-      name: dartcv4
-      sha256: "5764d13550055da3bb35ca28e6866b837579dfb4b594582b7a7753785ca5dfef"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.1+4"
   dartx:
     dependency: transitive
     description:
@@ -353,14 +337,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.8"
-  exif:
-    dependency: "direct main"
-    description:
-      name: exif
-      sha256: a7980fdb3b7ffcd0b035e5b8a5e1eef7cadfe90ea6a4e85ebb62f87b96c7a172
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.0"
   fake_async:
     dependency: transitive
     description:
@@ -481,14 +457,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  fl_chart:
-    dependency: "direct main"
-    description:
-      name: fl_chart
-      sha256: b938f77d042cbcd822936a7a359a7235bad8bd72070de1f827efc2cc297ac888
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   flex_color_picker:
     dependency: "direct main"
     description:
@@ -693,14 +661,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.4+3"
-  home_widget:
-    dependency: "direct main"
-    description:
-      name: home_widget
-      sha256: fece84c7464099873c3ace38394ad7053509a4b0e36e57a1105a6aa31f47f23c
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.3"
   hooks:
     dependency: transitive
     description:
@@ -813,14 +773,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
-  image_pixels:
-    dependency: "direct main"
-    description:
-      name: image_pixels
-      sha256: c88bb386a9067f489c9e9a9701ddb48e456e3f92c8c4ce575fac062809a1daae
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.2"
   injectable:
     dependency: "direct main"
     description:
@@ -846,7 +798,7 @@ packages:
     source: hosted
     version: "0.20.2"
   intl_utils:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: intl_utils
       sha256: "07469a81dcb011ab3708ed4a324403f0f556f2e3663b769006f92c9e62a0066a"
@@ -965,14 +917,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
-  lottie:
-    dependency: "direct main"
-    description:
-      name: lottie
-      sha256: "8b6359a7422167014aa73ce763fa133fb832065dcc0ac4d1dec1f603a5cef7d0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.3.3"
   matcher:
     dependency: transitive
     description:
@@ -1005,14 +949,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  native_exif:
-    dependency: "direct main"
-    description:
-      name: native_exif
-      sha256: "044276caf22c14695f97833b3e9cec941a7bf2403f422749436797381fceb857"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.0"
   native_toolchain_c:
     dependency: transitive
     description:
@@ -1021,14 +957,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.6"
-  native_toolchain_cmake:
-    dependency: transitive
-    description:
-      name: native_toolchain_cmake
-      sha256: cd4865568c57f03c7ab1f138cc5032c5f77825d27083d6f5a3e9bbb3e8014a87
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.5"
   nested:
     dependency: transitive
     description:
@@ -1053,14 +981,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.3.0"
-  opencv_dart:
-    dependency: "direct main"
-    description:
-      name: opencv_dart
-      sha256: b50ea4788e6d61df6369874e0244445d98ef9210dbb90b8d3c1df198b4ee2333
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.1+4"
   package_config:
     dependency: transitive
     description:
@@ -1273,10 +1193,10 @@ packages:
     dependency: "direct main"
     description:
       name: purchases_flutter
-      sha256: "7e849e3a94011109c4b91e1be65871bdb0f6aa3d577aee0764fbdb69b3eb6181"
+      sha256: "15c354a07aeabe1cda32fff84ce3e1d7e6645725cb7f9fca7c0738982d1b499d"
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.0"
+    version: "10.4.1"
   recase:
     dependency: transitive
     description:
@@ -1418,14 +1338,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.2"
-  sprintf:
-    dependency: transitive
-    description:
-      name: sprintf
-      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -1434,14 +1346,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.1"
-  storage_space:
-    dependency: "direct main"
-    description:
-      name: storage_space
-      sha256: "8a3fbc61c20ce3b926b663b4ae77064e2bc5351a49756a41fa415e302f4063cd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   stream_channel:
     dependency: transitive
     description:

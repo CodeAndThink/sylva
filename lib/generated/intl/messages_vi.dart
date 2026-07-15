@@ -37,9 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
+    "aboutDescription": MessageLookupByLibrary.simpleMessage(
+      "Muốn tìm hiểu thêm về Sylva? Ghé trang web của chúng tôi để cập nhật tính năng mới và nhiều hơn nữa!",
+    ),
     "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
       "Sylva là ứng dụng camera được thiết kế để giúp bạn chụp và khám phá màu sắc của thế giới một cách dễ dàng.",
     ),
+    "aboutUs": MessageLookupByLibrary.simpleMessage("Về chúng tôi"),
     "acknowledgements": MessageLookupByLibrary.simpleMessage("Lời cảm ơn"),
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "Chúng tôi xin chân thành cảm ơn những nhà sáng tạo sau đây vì các tài nguyên được sử dụng trong ứng dụng này:",
@@ -342,13 +346,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "size": MessageLookupByLibrary.simpleMessage("Kích thước"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("Hiệu ứng âm thanh"),
-    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
-      "Nếu bạn yêu thích ứng dụng này, hãy ủng hộ để giúp dự án phát triển hơn nhé. Mời tôi một ly cà phê nha!",
-    ),
-    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("Ủng hộ"),
     "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
     "success": MessageLookupByLibrary.simpleMessage("Thành công"),
-    "supportOnKofi": MessageLookupByLibrary.simpleMessage("Ủng hộ qua Ko-fi"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("Đổi máy ảnh"),
     "termsOfService": MessageLookupByLibrary.simpleMessage(
       "Điều khoản dịch vụ",
@@ -500,6 +499,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Không tìm thấy người dùng.",
     ),
     "version": m6,
+    "visitOurWebsite": MessageLookupByLibrary.simpleMessage(
+      "Ghé trang web của chúng tôi",
+    ),
     "weakPassword": MessageLookupByLibrary.simpleMessage("Mật khẩu quá yếu."),
     "wed": MessageLookupByLibrary.simpleMessage("Th 4"),
     "yesterday": MessageLookupByLibrary.simpleMessage("Hôm qua"),

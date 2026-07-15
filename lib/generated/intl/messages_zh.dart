@@ -37,9 +37,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("关于"),
+    "aboutDescription": MessageLookupByLibrary.simpleMessage(
+      "想了解更多关于 Sylva 的信息？访问我们的网站，获取最新动态、功能介绍等精彩内容！",
+    ),
     "aboutSylvaDescription": MessageLookupByLibrary.simpleMessage(
       "Sylva是一款相机应用程序，旨在帮助您轻松捕捉和发现世界的色彩。",
     ),
+    "aboutUs": MessageLookupByLibrary.simpleMessage("关于我们"),
     "acknowledgements": MessageLookupByLibrary.simpleMessage("鸣谢"),
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "我们在此感谢以下创作者提供本应用中使用的资源：",
@@ -259,13 +263,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "size": MessageLookupByLibrary.simpleMessage("大小"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("音效"),
-    "sponsorsDescription": MessageLookupByLibrary.simpleMessage(
-      "如果您喜欢这个应用，请考虑支持开发。请我喝杯咖啡吧！",
-    ),
-    "sponsorsTitle": MessageLookupByLibrary.simpleMessage("赞助"),
     "submit": MessageLookupByLibrary.simpleMessage("提交"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
-    "supportOnKofi": MessageLookupByLibrary.simpleMessage("在 Ko-fi 上支持"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("切换相机"),
     "termsOfService": MessageLookupByLibrary.simpleMessage("服务条款"),
     "termsOfServiceContent": MessageLookupByLibrary.simpleMessage(
@@ -375,6 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userBanned": MessageLookupByLibrary.simpleMessage("用户被封禁。"),
     "userNotFound": MessageLookupByLibrary.simpleMessage("未找到用户。"),
     "version": m6,
+    "visitOurWebsite": MessageLookupByLibrary.simpleMessage("访问我们的网站"),
     "weakPassword": MessageLookupByLibrary.simpleMessage("密码太弱。"),
     "wed": MessageLookupByLibrary.simpleMessage("三"),
     "yesterday": MessageLookupByLibrary.simpleMessage("昨天"),

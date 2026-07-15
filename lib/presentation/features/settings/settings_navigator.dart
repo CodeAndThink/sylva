@@ -4,10 +4,6 @@ import 'package:sylva/core/navigation/base_navigator.dart';
 class SettingsNavigator extends BaseNavigator {
   SettingsNavigator(super.context);
 
-  void goToAbout() {
-    pushNamed(AppRouter.about);
-  }
-
   void goToTermsOfService() {
     pushNamed(AppRouter.termsOfService);
   }

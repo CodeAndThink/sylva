@@ -79,8 +79,8 @@ abstract class BaseNavigator {
     );
   }
 
-  Future<void> goToSponsors() async {
-    await pushNamed(AppRouter.sponsors);
+  Future<void> goToAbout() async {
+    await pushNamed(AppRouter.about);
   }
 }
 

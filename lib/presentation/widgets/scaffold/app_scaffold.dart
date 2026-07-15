@@ -20,6 +20,7 @@ class AppScaffold extends StatelessWidget {
   final bool extendBody;
   final Color? backgroundColor;
   final VoidCallback? onLeadingPressed;
+  final Color? appBarColor;
 
   const AppScaffold({
     super.key,
@@ -38,6 +39,7 @@ class AppScaffold extends StatelessWidget {
     this.extendBody = false,
     this.backgroundColor,
     this.onLeadingPressed,
+    this.appBarColor,
   });
 
   @override
@@ -65,6 +67,7 @@ class AppScaffold extends StatelessWidget {
                                 () {
                                   Navigator.pop(context);
                                 },
+                            primaryColor: appBarColor,
                           )
                         : null)
               : null,

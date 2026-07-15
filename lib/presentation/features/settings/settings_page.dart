@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/configs/app_configs.dart';
 import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/enums/language_type.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
@@ -79,6 +80,8 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           _buildLanguageSection(),
           12.height,
           _buildOtherSection(),
+          8.height,
+          _buildAppVersion(),
         ],
       ),
     );
@@ -405,17 +408,17 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             child: InkWell(
               borderRadius: 16.borderRadius,
               onTap: () {
-                _settingsCubit.navigator.goToSponsors();
+                _settingsCubit.navigator.goToAbout();
               },
               child: Padding(
                 padding: 12.paddingAll,
                 child: Row(
                   children: [
-                    const Icon(Icons.favorite, color: Colors.white, size: 28),
-                    16.width,
+                    const Icon(Icons.favorite, color: Colors.white),
+                    12.width,
                     Expanded(
                       child: Text(
-                        _l10n.donation,
+                        _l10n.about,
                         style: _theme.textTheme.titleSmall?.copyWith(
                           color: Colors.white,
                         ),
@@ -426,13 +429,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
               ),
             ),
           ),
-        ),
-        _buildSettingFilledButton(
-          title: _l10n.about,
-          onTap: () {
-            _settingsCubit.navigator.goToAbout();
-          },
-          icon: Icons.info_outline_rounded,
         ),
         _buildSettingFilledButton(
           title: _l10n.termsOfService,
@@ -463,6 +459,19 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
           icon: Icons.format_quote,
         ),
       ],
+    );
+  }
+
+  Widget _buildAppVersion() {
+    return Padding(
+      padding: 8.paddingAll,
+      child: Text(
+        "-- ${_l10n.version(AppConfigs.version)} --",
+        style: _theme.textTheme.bodySmall?.copyWith(
+          color: _theme.colorScheme.primary,
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 

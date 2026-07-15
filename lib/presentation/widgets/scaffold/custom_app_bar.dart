@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final bool automaticallyImplyLeading;
   final PreferredSizeWidget? bottom;
+  final Color? primaryColor;
 
   const CustomAppBar({
     super.key,
@@ -18,12 +19,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.automaticallyImplyLeading = true,
     this.bottom,
+    this.primaryColor,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+
+    final colorScheme = primaryColor != null
+        ? ColorScheme.fromSeed(
+            seedColor: primaryColor!,
+            brightness: theme.brightness,
+          )
+        : theme.colorScheme;
 
     return ClipRRect(
       borderRadius: BorderRadius.only(
@@ -40,12 +49,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               bottomRight: 36.radius,
             ),
             border: Border.all(
-              color: theme.colorScheme.secondary.withValues(alpha: 0.28),
+              color: colorScheme.secondary.withValues(alpha: 0.28),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: theme.colorScheme.primary.withValues(
+                color: colorScheme.primary.withValues(
                   alpha: isDark ? 0.4 : 0.3,
                 ),
                 blurRadius: 32,
@@ -69,7 +78,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                   child: IconButton(
                                     icon: Icon(
                                       Icons.arrow_back_ios_new,
-                                      color: theme.colorScheme.primary,
+                                      color: colorScheme.primary,
                                     ),
                                     onPressed:
                                         onLeadingPressed ??
@@ -81,7 +90,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     middle: Text(
                       title,
                       style: theme.textTheme.titleLarge?.copyWith(
-                        color: theme.colorScheme.primary,
+                        color: colorScheme.primary,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

@@ -311,11 +311,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       } else {
         final compressedBytes = await FileUtils.compressImageToBytes(imagePath);
         final bytes = compressedBytes ?? await File(imagePath).readAsBytes();
-        final finalExt = compressedBytes != null ? '.jpg' : ext;
         success = await FileUtils.saveImageToLibrary(
           bytes: bytes,
           titlePrefix: 'sylva',
-          extension: finalExt,
+          extension: ext,
         );
       }
 

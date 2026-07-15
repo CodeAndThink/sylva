@@ -35,9 +35,20 @@ class FileUtils {
     String sourcePath, {
     int quality = 80,
   }) async {
+    final ext = p.extension(sourcePath).toLowerCase();
+    CompressFormat format = CompressFormat.jpeg;
+    if (ext == '.png') {
+      format = CompressFormat.png;
+    } else if (ext == '.webp') {
+      format = CompressFormat.webp;
+    } else if (ext == '.heic') {
+      format = CompressFormat.heic;
+    }
+
     return await FlutterImageCompress.compressWithFile(
       sourcePath,
       quality: quality,
+      format: format,
       // Keep original resolution, only reduce quality
     );
   }
@@ -52,13 +63,7 @@ class FileUtils {
       await targetDir.create(recursive: true);
     }
 
-    // Compression defaults to JPG format, change extension if needed
-    final ext = p.extension(filename).toLowerCase();
-    String newFilename = filename;
-    if (ext != '.jpg' && ext != '.jpeg') {
-      newFilename = '${p.basenameWithoutExtension(filename)}.jpg';
-    }
-    final targetPath = p.join(targetDir.path, newFilename);
+    final targetPath = p.join(targetDir.path, filename);
 
     if (sourcePath != targetPath) {
       final compressedBytes = await compressImageToBytes(
@@ -74,10 +79,9 @@ class FileUtils {
         if (await file.exists()) {
           await file.copy(targetPath);
         }
-        newFilename = filename; // Keep old filename since compression failed
       }
     }
-    return p.join('sylva_images', newFilename);
+    return p.join('sylva_images', filename);
   }
 
   static String getFullImagePath(String path) {

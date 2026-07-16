@@ -354,7 +354,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
         }
         final now = DateTime.now();
         if (_lastColorExtractionTime != null &&
-            now.difference(_lastColorExtractionTime!).inMilliseconds < 200) {
+            now.difference(_lastColorExtractionTime!).inMilliseconds < 500) {
           return;
         }
         final Color color = _extractCenterColor(image);

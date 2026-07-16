@@ -263,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "彩虹半色调圆点背景",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("比例"),
+    "realTimeColorPicker": MessageLookupByLibrary.simpleMessage("实时取色器"),
     "rectangle": MessageLookupByLibrary.simpleMessage("矩形"),
     "register": MessageLookupByLibrary.simpleMessage("注册"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage("替换现有记录"),
@@ -369,6 +370,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "点击颜色进行过滤，长按复制其十六进制代码。",
     ),
     "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage("调色板"),
+    "tutorialRealTimeColorPickerDesc": MessageLookupByLibrary.simpleMessage(
+      "实时从相机中提取颜色。",
+    ),
+    "tutorialRealTimeColorPickerTitle": MessageLookupByLibrary.simpleMessage(
+      "实时取色器",
+    ),
     "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
       "将这张照片和颜色保存到应用的历史记录中。",
     ),

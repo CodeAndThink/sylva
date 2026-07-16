@@ -2173,6 +2173,36 @@ class S {
   String get allRecords {
     return Intl.message('All Records', name: 'allRecords', desc: '', args: []);
   }
+
+  /// `Real-time color picker`
+  String get realTimeColorPicker {
+    return Intl.message(
+      'Real-time color picker',
+      name: 'realTimeColorPicker',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Real-time Color Picker`
+  String get tutorialRealTimeColorPickerTitle {
+    return Intl.message(
+      'Real-time Color Picker',
+      name: 'tutorialRealTimeColorPickerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extract colors directly from your camera in real-time.`
+  String get tutorialRealTimeColorPickerDesc {
+    return Intl.message(
+      'Extract colors directly from your camera in real-time.',
+      name: 'tutorialRealTimeColorPickerDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

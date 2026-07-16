@@ -189,7 +189,8 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: 12.paddingBottom,
+              padding:
+                  (MediaQuery.of(context).padding.bottom + 12).paddingBottom,
               child: SafeArea(
                 child: ScaleTransition(
                   scale: _scaleAnimation,

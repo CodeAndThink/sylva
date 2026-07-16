@@ -547,5 +547,11 @@
   "deleteBtn": "削除",
   "@deleteBtn": {},
   "allRecords": "すべての記録",
-  "@allRecords": {}
+  "@allRecords": {},
+  "realTimeColorPicker": "リアルタイムカラーピッカー",
+  "@realTimeColorPicker": {},
+  "tutorialRealTimeColorPickerTitle": "リアルタイムカラーピッカー",
+  "@tutorialRealTimeColorPickerTitle": {},
+  "tutorialRealTimeColorPickerDesc": "カメラからリアルタイムで色を抽出します。",
+  "@tutorialRealTimeColorPickerDesc": {}
 }

@@ -338,6 +338,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Rainbow halftone dots background",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("Ratio"),
+    "realTimeColorPicker": MessageLookupByLibrary.simpleMessage(
+      "Real-time color picker",
+    ),
     "rectangle": MessageLookupByLibrary.simpleMessage("Rectangle"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
@@ -484,6 +487,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage(
       "Color Palette",
+    ),
+    "tutorialRealTimeColorPickerDesc": MessageLookupByLibrary.simpleMessage(
+      "Extract colors directly from your camera in real-time.",
+    ),
+    "tutorialRealTimeColorPickerTitle": MessageLookupByLibrary.simpleMessage(
+      "Real-time Color Picker",
     ),
     "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
       "Save this photo and colors to the app\'s history.",

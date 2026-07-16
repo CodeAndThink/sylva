@@ -77,15 +77,15 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
         }
       }
     }
-    final double? totalDiskSpaceMB = await DiskSpace.getTotalDiskSpace;
-    final int totalDiskSpaceBytes = totalDiskSpaceMB != null
-        ? (totalDiskSpaceMB * 1024 * 1024).toInt()
+    final double? freeDiskSpaceMB = await DiskSpace.getFreeDiskSpace;
+    final int freeDiskSpaceBytes = freeDiskSpaceMB != null
+        ? (freeDiskSpaceMB * 1024 * 1024).toInt()
         : 0;
 
     if (mounted) {
       setState(() {
         _totalSize = dirSize;
-        _deviceSize = totalDiskSpaceBytes;
+        _deviceSize = freeDiskSpaceBytes;
       });
     }
   }

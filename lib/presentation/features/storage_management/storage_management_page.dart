@@ -4,6 +4,7 @@ import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/file_utils.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/storage_management/storage_management_navigator.dart';
+import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/dialogs/app_dialog.dart';
 import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
@@ -153,51 +154,45 @@ class __StorageManagementChildPageState
   }) {
     return Tooltip(
       message: title,
-      child: Material(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: 16.borderRadius,
-        child: InkWell(
-          borderRadius: 16.borderRadius,
-          onTap: onTap,
-          child: Padding(
-            padding: 16.paddingAll,
-            child: Row(
-              children: [
-                Container(
-                  padding: 12.paddingAll,
-                  decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icon, color: color),
-                ),
-                16.width,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: _theme.colorScheme.onSurface,
-                        ),
-                      ),
-                      4.height,
-                      Text(
-                        subtitle,
-                        style: _theme.textTheme.bodySmall?.copyWith(
-                          color: _theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+      child: AppTransparentContainer(
+        backgroundColor: color.withValues(alpha: 0.1),
+        borderRadius: 16,
+        padding: 16.paddingAll,
+        onTap: onTap,
+        child: Row(
+          children: [
+            Container(
+              padding: 12.paddingAll,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: color),
             ),
-          ),
+            16.width,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: _theme.textTheme.titleMedium?.copyWith(
+                      color: _theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  4.height,
+                  Text(
+                    subtitle,
+                    style: _theme.textTheme.bodySmall?.copyWith(
+                      color: _theme.colorScheme.onSurface.withValues(
+                        alpha: 0.6,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

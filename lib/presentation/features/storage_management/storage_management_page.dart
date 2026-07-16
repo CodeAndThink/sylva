@@ -6,7 +6,6 @@ import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/storage_management/storage_management_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/dialogs/app_dialog.dart';
-import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'storage_management_cubit.dart';
 import 'storage_management_state.dart';
@@ -74,46 +73,63 @@ class __StorageManagementChildPageState
           previous.status != current.status ||
           previous.totalSizeInBytes != current.totalSizeInBytes,
       builder: (context, state) {
-        if (state.status.isLoading && state.totalSizeInBytes == 0) {
-          return AppLoading(size: size.width * 0.5);
-        }
-
         final formattedSize = FileUtils.formatBytes(state.totalSizeInBytes);
 
-        return Container(
-          height: size.width * 0.5,
-          width: size.width * 0.5,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: _theme.colorScheme.primary.withValues(alpha: 0.2),
-              width: 8,
-            ),
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+        return Center(
+          child: SizedBox(
+            height: size.width * 0.5,
+            width: size.width * 0.5,
+            child: Stack(
+              fit: StackFit.expand,
               children: [
-                Icon(
-                  Icons.storage_rounded,
-                  size: 48,
-                  color: _theme.colorScheme.primary,
-                ),
-                4.height,
-                Text(
-                  formattedSize,
-                  style: _theme.textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: _theme.colorScheme.primary,
+                if (state.status.isLoading)
+                  CircularProgressIndicator(
+                    strokeWidth: 8,
+                    backgroundColor: _theme.colorScheme.primary.withValues(
+                      alpha: 0.1,
+                    ),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      _theme.colorScheme.primary.withValues(alpha: 0.6),
+                    ),
+                  )
+                else
+                  CircularProgressIndicator(
+                    value: 1.0,
+                    strokeWidth: 8,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      _theme.colorScheme.primary.withValues(alpha: 0.2),
+                    ),
                   ),
-                ),
-                4.height,
-                Text(
-                  _l10n.savedImagesStorage,
-                  style: _theme.textTheme.bodyMedium?.copyWith(
-                    color: _theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                if (!state.status.isLoading)
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.storage_rounded,
+                          size: 48,
+                          color: _theme.colorScheme.primary,
+                        ),
+                        4.height,
+                        Text(
+                          formattedSize,
+                          style: _theme.textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: _theme.colorScheme.primary,
+                          ),
+                        ),
+                        4.height,
+                        Text(
+                          _l10n.savedImagesStorage,
+                          style: _theme.textTheme.bodyMedium?.copyWith(
+                            color: _theme.colorScheme.onSurface.withValues(
+                              alpha: 0.6,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
           ),

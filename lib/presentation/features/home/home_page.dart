@@ -66,6 +66,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   bool _isRealTimeColorPickerEnabled = false;
   Color? _realTimeColor;
   bool _isStreamingImage = false;
+  DateTime? _lastColorExtractionTime;
   late final HomeCubit _cubit;
   late ThemeData _theme;
   late S _l10n;
@@ -334,6 +335,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
       _stopImageStream();
       setState(() {
         _realTimeColor = null;
+        _lastColorExtractionTime = null;
       });
     }
   }
@@ -350,8 +352,14 @@ class __HomeChildPageState extends State<_HomeChildPage>
         if (!mounted || !_isRealTimeColorPickerEnabled) {
           return;
         }
+        final now = DateTime.now();
+        if (_lastColorExtractionTime != null &&
+            now.difference(_lastColorExtractionTime!).inMilliseconds < 200) {
+          return;
+        }
         final Color color = _extractCenterColor(image);
         if (_realTimeColor != color) {
+          _lastColorExtractionTime = now;
           setState(() {
             _realTimeColor = color;
           });

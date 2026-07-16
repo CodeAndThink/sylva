@@ -66,6 +66,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   bool _isRealTimeColorPickerEnabled = false;
   Color? _realTimeColor;
   bool _isStreamingImage = false;
+  DateTime? _lastColorExtractionTime;
   late final HomeCubit _cubit;
   late ThemeData _theme;
   late S _l10n;
@@ -334,6 +335,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
       _stopImageStream();
       setState(() {
         _realTimeColor = null;
+        _lastColorExtractionTime = null;
       });
     }
   }
@@ -350,8 +352,14 @@ class __HomeChildPageState extends State<_HomeChildPage>
         if (!mounted || !_isRealTimeColorPickerEnabled) {
           return;
         }
+        final now = DateTime.now();
+        if (_lastColorExtractionTime != null &&
+            now.difference(_lastColorExtractionTime!).inMilliseconds < 500) {
+          return;
+        }
         final Color color = _extractCenterColor(image);
         if (_realTimeColor != color) {
+          _lastColorExtractionTime = now;
           setState(() {
             _realTimeColor = color;
           });
@@ -382,12 +390,13 @@ class __HomeChildPageState extends State<_HomeChildPage>
       final int centerY = height ~/ 2;
 
       if (image.format.group == ImageFormatGroup.yuv420) {
+        final int yBytesPerPixel = image.planes[0].bytesPerPixel ?? 1;
+        final int uvBytesPerPixel = image.planes[1].bytesPerPixel ?? 1;
         final int yIndex =
-            centerY * image.planes[0].bytesPerRow +
-            centerX * image.planes[0].bytesPerPixel!;
+            centerY * image.planes[0].bytesPerRow + centerX * yBytesPerPixel;
         final int uvIndex =
             (centerY ~/ 2) * image.planes[1].bytesPerRow +
-            (centerX ~/ 2) * image.planes[1].bytesPerPixel!;
+            (centerX ~/ 2) * uvBytesPerPixel;
 
         final int y = image.planes[0].bytes[yIndex];
         final int u = image.planes[1].bytes[uvIndex];
@@ -402,9 +411,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
         return Color.fromARGB(255, r, g, b);
       } else if (image.format.group == ImageFormatGroup.bgra8888) {
+        final int bytesPerPixel = image.planes[0].bytesPerPixel ?? 4;
         final int index =
-            centerY * image.planes[0].bytesPerRow +
-            centerX * image.planes[0].bytesPerPixel!;
+            centerY * image.planes[0].bytesPerRow + centerX * bytesPerPixel;
         final int b = image.planes[0].bytes[index];
         final int g = image.planes[0].bytes[index + 1];
         final int r = image.planes[0].bytes[index + 2];

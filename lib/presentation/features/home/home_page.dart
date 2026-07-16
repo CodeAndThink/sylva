@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/constants/app_assets.dart';
@@ -62,6 +63,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
   int _countdownSeconds = 0;
   IconData? _centerIcon;
   Timer? _centerIconTimer;
+  bool _isRealTimeColorPickerEnabled = false;
+  Color? _realTimeColor;
+  bool _isStreamingImage = false;
   late final HomeCubit _cubit;
   late ThemeData _theme;
   late S _l10n;
@@ -119,6 +123,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
         setState(() {
           _isCameraInitialized = _controller!.value.isInitialized;
         });
+        if (_isRealTimeColorPickerEnabled) {
+          _startImageStream();
+        }
       }
     } catch (e) {
       debugPrint('Error initializing camera controller: $e');
@@ -189,6 +196,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
   void dispose() {
     _centerIconTimer?.cancel();
     WidgetsBinding.instance.removeObserver(this);
+    if (_isStreamingImage) {
+      _controller?.stopImageStream();
+    }
     _controller?.dispose();
     super.dispose();
   }
@@ -226,8 +236,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
-  void _switchCamera() {
+  void _switchCamera() async {
     if (_cameras.length > 1) {
+      if (_isRealTimeColorPickerEnabled) await _stopImageStream();
       _selectedCameraIndex = (_selectedCameraIndex + 1) % _cameras.length;
       _setCamera(_cameras[_selectedCameraIndex]);
     }
@@ -293,6 +304,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     });
 
     try {
+      if (_isRealTimeColorPickerEnabled) await _stopImageStream();
       final XFile file = await _controller!.takePicture();
       if (mounted) {
         _cubit.navigator.goToPhotoPreview(imagePath: file.path);
@@ -304,8 +316,104 @@ class __HomeChildPageState extends State<_HomeChildPage>
         setState(() {
           _isCapturing = false;
         });
+        if (_isRealTimeColorPickerEnabled) {
+          _startImageStream();
+        }
       }
     }
+  }
+
+  void _toggleRealTimeColorPicker() {
+    AppFeedback.playInteract(context);
+    setState(() {
+      _isRealTimeColorPickerEnabled = !_isRealTimeColorPickerEnabled;
+    });
+    if (_isRealTimeColorPickerEnabled) {
+      _startImageStream();
+    } else {
+      _stopImageStream();
+      setState(() {
+        _realTimeColor = null;
+      });
+    }
+  }
+
+  void _startImageStream() {
+    if (_controller == null ||
+        !_controller!.value.isInitialized ||
+        _isStreamingImage) {
+      return;
+    }
+    _isStreamingImage = true;
+    try {
+      _controller!.startImageStream((CameraImage image) {
+        if (!mounted || !_isRealTimeColorPickerEnabled) {
+          return;
+        }
+        final Color color = _extractCenterColor(image);
+        if (_realTimeColor != color) {
+          setState(() {
+            _realTimeColor = color;
+          });
+        }
+      });
+    } catch (e) {
+      debugPrint('Error starting image stream: $e');
+      _isStreamingImage = false;
+    }
+  }
+
+  Future<void> _stopImageStream() async {
+    if (_controller != null && _isStreamingImage) {
+      _isStreamingImage = false;
+      try {
+        await _controller!.stopImageStream();
+      } catch (e) {
+        debugPrint('Error stopping image stream: $e');
+      }
+    }
+  }
+
+  Color _extractCenterColor(CameraImage image) {
+    try {
+      final int width = image.width;
+      final int height = image.height;
+      final int centerX = width ~/ 2;
+      final int centerY = height ~/ 2;
+
+      if (image.format.group == ImageFormatGroup.yuv420) {
+        final int yIndex =
+            centerY * image.planes[0].bytesPerRow +
+            centerX * image.planes[0].bytesPerPixel!;
+        final int uvIndex =
+            (centerY ~/ 2) * image.planes[1].bytesPerRow +
+            (centerX ~/ 2) * image.planes[1].bytesPerPixel!;
+
+        final int y = image.planes[0].bytes[yIndex];
+        final int u = image.planes[1].bytes[uvIndex];
+        final int v = image.planes[2].bytes[uvIndex];
+
+        int r = (y + 1.402 * (v - 128)).round().clamp(0, 255);
+        int g = (y - 0.344136 * (u - 128) - 0.714136 * (v - 128)).round().clamp(
+          0,
+          255,
+        );
+        int b = (y + 1.772 * (u - 128)).round().clamp(0, 255);
+
+        return Color.fromARGB(255, r, g, b);
+      } else if (image.format.group == ImageFormatGroup.bgra8888) {
+        final int index =
+            centerY * image.planes[0].bytesPerRow +
+            centerX * image.planes[0].bytesPerPixel!;
+        final int b = image.planes[0].bytes[index];
+        final int g = image.planes[0].bytes[index + 1];
+        final int r = image.planes[0].bytes[index + 2];
+        return Color.fromARGB(255, r, g, b);
+      }
+    } catch (e) {
+      debugPrint('Error extracting color: $e');
+    }
+    return Colors.transparent;
   }
 
   @override
@@ -365,36 +473,100 @@ class __HomeChildPageState extends State<_HomeChildPage>
             padding: 8.paddingBottom,
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: 25.borderRadius,
-                  onTap: () {
-                    if (_controller == null || !_isCameraInitialized) return;
-                    setState(() {
-                      _currentScale = 1.0;
-                      _baseScale = 1.0;
-                    });
-                    _controller!.setZoomLevel(1.0);
-                  },
-                  child: Container(
-                    width: 50,
-                    padding: 5.paddingAll,
-                    decoration: BoxDecoration(
-                      color: Colors.black38,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
                       borderRadius: 25.borderRadius,
-                    ),
-                    child: Text(
-                      '${_currentScale.toStringAsFixed(1)}x',
-                      textAlign: TextAlign.center,
-                      style: _theme.textTheme.titleSmall?.copyWith(
-                        color: _currentScale > 1.0
-                            ? Colors.amber
-                            : Colors.white,
+                      onTap: () {
+                        if (_controller == null || !_isCameraInitialized) {
+                          return;
+                        }
+                        setState(() {
+                          _currentScale = 1.0;
+                          _baseScale = 1.0;
+                        });
+                        _controller!.setZoomLevel(1.0);
+                      },
+                      child: Container(
+                        width: 50,
+                        padding: 5.paddingAll,
+                        decoration: BoxDecoration(
+                          color: Colors.black38,
+                          borderRadius: 25.borderRadius,
+                        ),
+                        child: Text(
+                          '${_currentScale.toStringAsFixed(1)}x',
+                          textAlign: TextAlign.center,
+                          style: _theme.textTheme.titleSmall?.copyWith(
+                            color: _currentScale > 1.0
+                                ? Colors.amber
+                                : Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  if (_isRealTimeColorPickerEnabled &&
+                      _realTimeColor != null) ...[
+                    const SizedBox(width: 8),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: 25.borderRadius,
+                        onTap: () {
+                          final hex =
+                              '#${_realTimeColor!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+                          Clipboard.setData(ClipboardData(text: hex));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(_l10n.colorCopiedSuccess(hex)),
+                              duration: const Duration(seconds: 1),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                          AppFeedback.playInteract(context);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black38,
+                            borderRadius: 25.borderRadius,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 14,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  color: _realTimeColor,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                '#${_realTimeColor!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}',
+                                style: _theme.textTheme.titleSmall?.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
           ),
@@ -429,6 +601,27 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     offset: Offset(2.0, 2.0),
                   ),
                 ],
+              ),
+            ),
+          if (_isRealTimeColorPickerEnabled)
+            Center(
+              child: Container(
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                ),
+                child: Center(
+                  child: Container(
+                    width: 4,
+                    height: 4,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.amber,
+                    ),
+                  ),
+                ),
               ),
             ),
         ],
@@ -549,10 +742,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   key: _keyRealTimeColorPicker,
                   icon: Icon(
                     Icons.my_location,
-                    color: _theme.colorScheme.onSurface,
+                    color: _isRealTimeColorPickerEnabled
+                        ? Colors.amber
+                        : _theme.colorScheme.onSurface,
                     size: 24,
                   ),
-                  onPressed: _switchCamera,
+                  onPressed: _toggleRealTimeColorPicker,
                 ),
               ),
               Tooltip(

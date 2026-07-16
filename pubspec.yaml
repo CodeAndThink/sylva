@@ -1,7 +1,7 @@
 name: sylva
 description: "An offline-first camera application to instantly capture and extract beautiful color palettes."
 publish_to: 'none'
-version: 0.3.10+18
+version: 0.4.0+19
 
 environment:
   sdk: ^3.11.4

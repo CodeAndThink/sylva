@@ -553,5 +553,11 @@
   "deleteBtn": "Delete",
   "@deleteBtn": {},
   "allRecords": "All Records",
-  "@allRecords": {}
+  "@allRecords": {},
+  "realTimeColorPicker": "Real-time color picker",
+  "@realTimeColorPicker": {},
+  "tutorialRealTimeColorPickerTitle": "Real-time Color Picker",
+  "@tutorialRealTimeColorPickerTitle": {},
+  "tutorialRealTimeColorPickerDesc": "Extract colors directly from your camera in real-time.",
+  "@tutorialRealTimeColorPickerDesc": {}
 }

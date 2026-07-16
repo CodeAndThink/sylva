@@ -39,6 +39,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   final GlobalKey _keySettings = GlobalKey();
   final GlobalKey _keyFlash = GlobalKey();
   final GlobalKey _keyTimer = GlobalKey();
+  final GlobalKey _keyRealTimeColorPicker = GlobalKey();
   final GlobalKey _keySwitchCamera = GlobalKey();
   final GlobalKey _keyHistory = GlobalKey();
   final GlobalKey _keyCapture = GlobalKey();
@@ -150,6 +151,12 @@ class __HomeChildPageState extends State<_HomeChildPage>
         key: _keyTimer,
         title: _l10n.tutorialTimerTitle,
         desc: _l10n.tutorialTimerDesc,
+      ),
+      AppTutorialHelper.buildTarget(
+        context: context,
+        key: _keyRealTimeColorPicker,
+        title: _l10n.tutorialRealTimeColorPickerTitle,
+        desc: _l10n.tutorialRealTimeColorPickerDesc,
       ),
       AppTutorialHelper.buildTarget(
         context: context,
@@ -536,7 +543,18 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   _buildTimerMenuItem(value: 10, icon: Icons.timer_10),
                 ],
               ),
-
+              Tooltip(
+                message: _l10n.realTimeColorPicker,
+                child: IconButton(
+                  key: _keyRealTimeColorPicker,
+                  icon: Icon(
+                    Icons.my_location,
+                    color: _theme.colorScheme.onSurface,
+                    size: 24,
+                  ),
+                  onPressed: _switchCamera,
+                ),
+              ),
               Tooltip(
                 message: _l10n.switchCamera,
                 child: IconButton(

@@ -8,7 +8,6 @@ import 'package:sylva/core/navigation/app_router.dart';
 import 'package:sylva/presentation/app/app_cubit.dart';
 import 'package:sylva/presentation/app/interaction_cubit.dart';
 import 'package:sylva/presentation/app/locale_cubit.dart';
-import 'package:sylva/presentation/app/subscription_cubit.dart';
 import 'package:sylva/presentation/app/theme_cubit.dart';
 import 'package:sylva/presentation/app/theme_state.dart';
 import 'package:sylva/presentation/theme/app_theme.dart';
@@ -68,7 +67,6 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => locator<ThemeCubit>()),
         BlocProvider(create: (context) => locator<InteractionCubit>()),
         BlocProvider(create: (context) => locator<LocaleCubit>()),
-        BlocProvider(create: (context) => locator<SubscriptionCubit>()..init()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         buildWhen: (previous, current) =>

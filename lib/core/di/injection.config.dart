@@ -22,10 +22,8 @@ import '../../domain/usecases/submit_contact_usecase.dart' as _i460;
 import '../../presentation/app/app_cubit.dart' as _i503;
 import '../../presentation/app/interaction_cubit.dart' as _i89;
 import '../../presentation/app/locale_cubit.dart' as _i687;
-import '../../presentation/app/subscription_cubit.dart' as _i151;
 import '../../presentation/app/theme_cubit.dart' as _i980;
 import '../services/connection_service.dart' as _i727;
-import '../services/iap_service.dart' as _i1;
 import '../services/permission_service.dart' as _i165;
 import 'register_module.dart' as _i291;
 
@@ -46,11 +44,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i727.ConnectionService>(() => _i727.ConnectionService());
-    gh.lazySingleton<_i1.IapService>(() => _i1.IapService());
     gh.lazySingleton<_i165.PermissionService>(() => _i165.PermissionService());
-    gh.lazySingleton<_i151.SubscriptionCubit>(
-      () => _i151.SubscriptionCubit(gh<_i1.IapService>()),
-    );
     gh.lazySingleton<_i482.ContactRepository>(
       () => _i133.ContactRepositoryImpl(),
     );

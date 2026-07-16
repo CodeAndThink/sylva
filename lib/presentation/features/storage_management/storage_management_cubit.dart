@@ -21,7 +21,6 @@ class StorageManagementCubit extends BaseCubit<StorageManagementState> {
       return;
     }
     safeEmit(state.copyWith(status: LoadStatus.loading));
-    await Future.delayed(const Duration(seconds: 5));
     try {
       final targetDir = Directory(
         p.join(FileUtils.appDocDirPath, 'sylva_images'),

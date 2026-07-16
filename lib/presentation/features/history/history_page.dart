@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:isar_community/isar.dart';
 import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/di/injection.dart';
@@ -16,6 +15,7 @@ import 'package:sylva/presentation/features/history/widgets/history_grid_item.da
 import 'package:sylva/presentation/features/history/widgets/history_shimmer_list.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
+import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/data/entities/history_record.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
@@ -215,11 +215,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                             SliverToBoxAdapter(
                               child: Padding(
                                 padding: 16.paddingAll,
-                                child: Center(
-                                  child: SpinKitRipple(
-                                    color: _theme.colorScheme.primary,
-                                  ),
-                                ),
+                                child: AppLoading(),
                               ),
                             ),
                           SliverToBoxAdapter(child: 100.height),
@@ -240,11 +236,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                           if (index == state.groupedItems.length) {
                             return Padding(
                               padding: 16.paddingAll,
-                              child: Center(
-                                child: SpinKitRipple(
-                                  color: _theme.colorScheme.primary,
-                                ),
-                              ),
+                              child: AppLoading(),
                             );
                           }
 

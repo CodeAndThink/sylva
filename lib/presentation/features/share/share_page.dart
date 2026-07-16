@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:share_plus/share_plus.dart';
@@ -13,6 +12,7 @@ import 'package:sylva/presentation/features/share/widgets/share_image_preview.da
 import 'package:sylva/presentation/features/share/share_cubit.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
+import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
@@ -41,7 +41,6 @@ class _ShareChildPage extends StatefulWidget {
 class __ShareChildPageState extends State<_ShareChildPage> {
   late final ShareCubit _cubit;
   late S _l10n;
-  late ThemeData _theme;
   final GlobalKey _keyBack = GlobalKey();
   final GlobalKey _keyTune = GlobalKey();
   final GlobalKey _keyLibrary = GlobalKey();
@@ -59,12 +58,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (c) => Center(
-        child: SpinKitRipple(
-          color: _theme.colorScheme.primary,
-          size: MediaQuery.sizeOf(context).width * 0.5,
-        ),
-      ),
+      builder: (c) => Center(child: AppLoading()),
     );
 
     final file = await ImageExporterUtils.exportImageWithOverlay(
@@ -104,12 +98,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (c) => Center(
-        child: SpinKitRipple(
-          color: _theme.colorScheme.primary,
-          size: MediaQuery.sizeOf(context).width * 0.5,
-        ),
-      ),
+      builder: (c) => AppLoading(),
     );
 
     final file = await ImageExporterUtils.exportImageWithOverlay(
@@ -177,7 +166,6 @@ class __ShareChildPageState extends State<_ShareChildPage> {
   @override
   Widget build(BuildContext context) {
     _l10n = S.of(context);
-    _theme = Theme.of(context);
     return AppScaffold(body: _buildBody());
   }
 

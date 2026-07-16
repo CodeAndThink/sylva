@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/file_utils.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/storage_management/storage_management_navigator.dart';
 import 'package:sylva/presentation/widgets/dialogs/app_dialog.dart';
+import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'storage_management_cubit.dart';
 import 'storage_management_state.dart';
@@ -50,101 +50,97 @@ class __StorageManagementChildPageState
     _theme = Theme.of(context);
     _l10n = S.of(context);
 
-    return AppScaffold(
-      title: _l10n.storageManagement,
-      body: BlocBuilder<StorageManagementCubit, StorageManagementState>(
-        buildWhen: (previous, current) =>
-            previous.status != current.status ||
-            previous.totalSizeInBytes != current.totalSizeInBytes,
-        builder: (context, state) {
-          if (state.status.isLoading && state.totalSizeInBytes == 0) {
-            return Center(
-              child: SpinKitRipple(
-                color: _theme.colorScheme.primary,
-                size: MediaQuery.sizeOf(context).width * 0.5,
-              ),
-            );
-          }
+    return AppScaffold(title: _l10n.storageManagement, body: _buildBody());
+  }
 
-          final formattedSize = FileUtils.formatBytes(state.totalSizeInBytes);
+  Widget _buildBody() {
+    return BlocBuilder<StorageManagementCubit, StorageManagementState>(
+      buildWhen: (previous, current) =>
+          previous.status != current.status ||
+          previous.totalSizeInBytes != current.totalSizeInBytes,
+      builder: (context, state) {
+        if (state.status.isLoading && state.totalSizeInBytes == 0) {
+          return const AppLoading();
+        }
 
-          return ListView(
-            padding: EdgeInsets.fromLTRB(
-              24,
-              MediaQuery.of(context).padding.top + 72,
-              24,
-              MediaQuery.of(context).padding.bottom + 24,
-            ),
-            children: [
-              Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: _theme.colorScheme.primary.withValues(alpha: 0.2),
-                    width: 12,
-                  ),
+        final formattedSize = FileUtils.formatBytes(state.totalSizeInBytes);
+
+        return ListView(
+          padding: EdgeInsets.fromLTRB(
+            24,
+            MediaQuery.of(context).padding.top + 72,
+            24,
+            MediaQuery.of(context).padding.bottom + 24,
+          ),
+          children: [
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: _theme.colorScheme.primary.withValues(alpha: 0.2),
+                  width: 12,
                 ),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.storage_rounded,
-                        size: 48,
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.storage_rounded,
+                      size: 48,
+                      color: _theme.colorScheme.primary,
+                    ),
+                    8.height,
+                    Text(
+                      formattedSize,
+                      style: _theme.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
                         color: _theme.colorScheme.primary,
                       ),
-                      8.height,
-                      Text(
-                        formattedSize,
-                        style: _theme.textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: _theme.colorScheme.primary,
+                    ),
+                    4.height,
+                    Text(
+                      _l10n.savedImagesStorage,
+                      style: _theme.textTheme.bodyMedium?.copyWith(
+                        color: _theme.colorScheme.onSurface.withValues(
+                          alpha: 0.6,
                         ),
                       ),
-                      4.height,
-                      Text(
-                        _l10n.savedImagesStorage,
-                        style: _theme.textTheme.bodyMedium?.copyWith(
-                          color: _theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              48.height,
-              _buildActionButton(
-                title: _l10n.clearUnfavoritedHistory,
-                subtitle: _l10n.clearUnfavoritedHistorySubtitle,
-                icon: Icons.heart_broken_rounded,
-                color: _theme.colorScheme.secondary,
-                onTap: () => _showConfirmDialog(
-                  context,
-                  title: _l10n.confirmDeletion,
-                  content: _l10n.confirmDeleteUnfavoritedDesc,
-                  onConfirm: () => _cubit.clearUnfavorited(),
-                ),
+            ),
+            48.height,
+            _buildActionButton(
+              title: _l10n.clearUnfavoritedHistory,
+              subtitle: _l10n.clearUnfavoritedHistorySubtitle,
+              icon: Icons.heart_broken_rounded,
+              color: _theme.colorScheme.secondary,
+              onTap: () => _showConfirmDialog(
+                context,
+                title: _l10n.confirmDeletion,
+                content: _l10n.confirmDeleteUnfavoritedDesc,
+                onConfirm: () => _cubit.clearUnfavorited(),
               ),
-              16.height,
-              _buildActionButton(
-                title: _l10n.clearAllHistory,
-                subtitle: _l10n.clearAllHistorySubtitle,
-                icon: Icons.delete_forever_rounded,
-                color: _theme.colorScheme.error,
-                onTap: () => _showConfirmDialog(
-                  context,
-                  title: _l10n.confirmClearAll,
-                  content: _l10n.confirmClearAllDesc,
-                  onConfirm: () => _cubit.clearAll(),
-                ),
+            ),
+            16.height,
+            _buildActionButton(
+              title: _l10n.clearAllHistory,
+              subtitle: _l10n.clearAllHistorySubtitle,
+              icon: Icons.delete_forever_rounded,
+              color: _theme.colorScheme.error,
+              onTap: () => _showConfirmDialog(
+                context,
+                title: _l10n.confirmClearAll,
+                content: _l10n.confirmClearAllDesc,
+                onConfirm: () => _cubit.clearAll(),
               ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 

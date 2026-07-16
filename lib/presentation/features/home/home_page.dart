@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
@@ -11,6 +10,7 @@ import 'package:sylva/presentation/features/home/home_cubit.dart';
 import 'package:sylva/presentation/features/home/home_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
+import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
@@ -427,14 +427,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
         ],
       );
     } else {
-      return AppTransparentContainer(
-        child: Center(
-          child: SpinKitRipple(
-            color: _theme.colorScheme.primary,
-            size: MediaQuery.sizeOf(context).width * 0.5,
-          ),
-        ),
-      );
+      return AppTransparentContainer(child: Center(child: AppLoading()));
     }
   }
 
@@ -590,11 +583,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     width: 70,
                     height: 70,
                     child: _isCapturing
-                        ? Center(
-                            child: SpinKitRipple(
-                              color: _theme.colorScheme.primary,
-                            ),
-                          )
+                        ? AppLoading()
                         : Center(
                             child: AppAssetImage(
                               path: AppAssets.icCamera,

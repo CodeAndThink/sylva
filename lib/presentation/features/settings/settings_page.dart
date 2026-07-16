@@ -19,6 +19,7 @@ import 'package:sylva/presentation/features/settings/settings_navigator.dart';
 import 'package:sylva/presentation/features/settings/widgets/theme_color_button.dart';
 import 'package:sylva/presentation/widgets/buttons/app_radio_tile.dart';
 import 'package:sylva/presentation/widgets/buttons/app_switch_tile.dart';
+import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/core/utils/file_utils.dart';
@@ -425,82 +426,78 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
       children: [
         AppTitleText(title: _l10n.storageManagement),
         10.height,
-        Material(
-          color: _theme.colorScheme.surfaceContainerHighest.withValues(
-            alpha: 0.3,
+        AppTransparentContainer(
+          borderRadius: 24,
+          padding: 16.paddingAll,
+          backgroundColor: _theme.colorScheme.primaryContainer.withValues(
+            alpha: 0.15,
           ),
-          borderRadius: 24.borderRadius,
-          child: InkWell(
-            borderRadius: 24.borderRadius,
-            onTap: () async {
-              await _settingsCubit.navigator.goToStorageManagement();
-              _fetchStorage();
-            },
-            child: Padding(
-              padding: 16.paddingAll,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          borderColor: _theme.colorScheme.primaryContainer,
+          onTap: () async {
+            await _settingsCubit.navigator.goToStorageManagement();
+            _fetchStorage();
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.storage_rounded,
-                        color: _theme.colorScheme.onSurface,
-                      ),
-                      16.width,
-                      Expanded(
-                        child: Text(
-                          _l10n.storageManagement,
-                          style: _theme.textTheme.titleMedium?.copyWith(),
-                        ),
-                      ),
-                      Text(
-                        '$percentStr%',
-                        style: _theme.textTheme.titleMedium?.copyWith(
-                          color: _theme.colorScheme.primary,
-                        ),
-                      ),
-                    ],
+                  Icon(
+                    Icons.storage_rounded,
+                    color: _theme.colorScheme.onSurface,
                   ),
-                  16.height,
-                  ClipRRect(
-                    borderRadius: 8.borderRadius,
-                    child: LinearProgressIndicator(
-                      value: percent,
-                      minHeight: 8,
-                      backgroundColor: _theme.colorScheme.onSurface.withValues(
-                        alpha: 0.1,
-                      ),
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        _theme.colorScheme.primary,
-                      ),
+                  16.width,
+                  Expanded(
+                    child: Text(
+                      _l10n.storageManagement,
+                      style: _theme.textTheme.titleSmall?.copyWith(),
                     ),
                   ),
-                  8.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        FileUtils.formatBytes(_totalSize),
-                        style: _theme.textTheme.bodySmall?.copyWith(
-                          color: _theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        FileUtils.formatBytes(_deviceSize),
-                        style: _theme.textTheme.bodySmall?.copyWith(
-                          color: _theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    '$percentStr%',
+                    style: _theme.textTheme.titleMedium?.copyWith(
+                      color: _theme.colorScheme.primary,
+                    ),
                   ),
                 ],
               ),
-            ),
+              16.height,
+              ClipRRect(
+                borderRadius: 8.borderRadius,
+                child: LinearProgressIndicator(
+                  value: percent,
+                  minHeight: 8,
+                  backgroundColor: _theme.colorScheme.onSurface.withValues(
+                    alpha: 0.1,
+                  ),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    _theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+              8.height,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    FileUtils.formatBytes(_totalSize),
+                    style: _theme.textTheme.bodySmall?.copyWith(
+                      color: _theme.colorScheme.onSurface.withValues(
+                        alpha: 0.6,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    FileUtils.formatBytes(_deviceSize),
+                    style: _theme.textTheme.bodySmall?.copyWith(
+                      color: _theme.colorScheme.onSurface.withValues(
+                        alpha: 0.6,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],

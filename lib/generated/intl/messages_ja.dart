@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
     ),
+    "allRecords": MessageLookupByLibrary.simpleMessage("すべての記録"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("色を自動検出"),
@@ -66,12 +67,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "カメラの権限が必要です",
     ),
     "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+    "cancelBtn": MessageLookupByLibrary.simpleMessage("キャンセル"),
     "circle": MessageLookupByLibrary.simpleMessage("円"),
-    "clearAllHistory": MessageLookupByLibrary.simpleMessage("すべての履歴を消去"),
+    "clearAllHistory": MessageLookupByLibrary.simpleMessage("すべての履歴をクリア"),
     "clearAllHistoryConfirm": MessageLookupByLibrary.simpleMessage(
       "すべての履歴を消去してもよろしいですか？この操作は元に戻せません。",
     ),
+    "clearAllHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "保存されたすべての画像とデータを削除する",
+    ),
     "clearColor": MessageLookupByLibrary.simpleMessage("色をクリア"),
+    "clearUnfavoritedHistory": MessageLookupByLibrary.simpleMessage(
+      "お気に入り以外の履歴をクリア",
+    ),
+    "clearUnfavoritedHistorySubtitle": MessageLookupByLibrary.simpleMessage(
+      "お気に入りを維持し、空き容量を増やす",
+    ),
     "color": MessageLookupByLibrary.simpleMessage("色"),
     "colorCopiedFailure": MessageLookupByLibrary.simpleMessage("色のコピーに失敗しました"),
     "colorCopiedSuccess": m0,
@@ -80,6 +91,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "colorPickerSelectShade": MessageLookupByLibrary.simpleMessage("色の濃淡を選択"),
     "colorPickerShades": MessageLookupByLibrary.simpleMessage("選択した色とその濃淡"),
     "colorsIcon": MessageLookupByLibrary.simpleMessage("カラーアイコン"),
+    "confirmClearAll": MessageLookupByLibrary.simpleMessage("すべてクリアの確認"),
+    "confirmClearAllDesc": MessageLookupByLibrary.simpleMessage(
+      "すべてのデータが削除され、復元することはできません。本当によろしいですか？",
+    ),
+    "confirmDeleteUnfavoritedDesc": MessageLookupByLibrary.simpleMessage(
+      "お気に入り以外の履歴を削除してもよろしいですか？この操作は元に戻せません。",
+    ),
+    "confirmDeletion": MessageLookupByLibrary.simpleMessage("削除の確認"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("パスワードの確認"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "パスワードの確認が必要です",
@@ -124,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "createTime": MessageLookupByLibrary.simpleMessage("時間"),
     "days": MessageLookupByLibrary.simpleMessage("日"),
     "delete": MessageLookupByLibrary.simpleMessage("削除"),
+    "deleteBtn": MessageLookupByLibrary.simpleMessage("削除"),
     "deletePhoto": MessageLookupByLibrary.simpleMessage("写真の削除"),
     "delete_confirm_message": MessageLookupByLibrary.simpleMessage(
       "最後にもう一度確認してください！\nこの操作は元に戻せません。",
@@ -284,11 +304,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "saveAsNew": MessageLookupByLibrary.simpleMessage("新しく保存"),
     "saveColor": MessageLookupByLibrary.simpleMessage("色を保存"),
     "saveToLibrary": MessageLookupByLibrary.simpleMessage("ライブラリに保存"),
+    "savedImagesStorage": MessageLookupByLibrary.simpleMessage("保存された画像のストレージ"),
     "scanLimit": MessageLookupByLibrary.simpleMessage("スキャン制限"),
     "seedColor": MessageLookupByLibrary.simpleMessage("アプリカラー"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
     "soundEffects": MessageLookupByLibrary.simpleMessage("サウンド効果"),
+    "storageManagement": MessageLookupByLibrary.simpleMessage("ストレージ管理"),
     "submit": MessageLookupByLibrary.simpleMessage("送信"),
     "success": MessageLookupByLibrary.simpleMessage("成功"),
     "switchCamera": MessageLookupByLibrary.simpleMessage("カメラ切り替え"),

@@ -2068,6 +2068,111 @@ class S {
   String get zoomMode {
     return Intl.message('Zoom Mode', name: 'zoomMode', desc: '', args: []);
   }
+
+  /// `Storage Management`
+  String get storageManagement {
+    return Intl.message(
+      'Storage Management',
+      name: 'storageManagement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved images storage`
+  String get savedImagesStorage {
+    return Intl.message(
+      'Saved images storage',
+      name: 'savedImagesStorage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear unfavorited history`
+  String get clearUnfavoritedHistory {
+    return Intl.message(
+      'Clear unfavorited history',
+      name: 'clearUnfavoritedHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free up space, keep your favorite items`
+  String get clearUnfavoritedHistorySubtitle {
+    return Intl.message(
+      'Free up space, keep your favorite items',
+      name: 'clearUnfavoritedHistorySubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm deletion`
+  String get confirmDeletion {
+    return Intl.message(
+      'Confirm deletion',
+      name: 'confirmDeletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete unfavorited history? This action cannot be undone.`
+  String get confirmDeleteUnfavoritedDesc {
+    return Intl.message(
+      'Are you sure you want to delete unfavorited history? This action cannot be undone.',
+      name: 'confirmDeleteUnfavoritedDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete all saved images and data`
+  String get clearAllHistorySubtitle {
+    return Intl.message(
+      'Delete all saved images and data',
+      name: 'clearAllHistorySubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm clear all`
+  String get confirmClearAll {
+    return Intl.message(
+      'Confirm clear all',
+      name: 'confirmClearAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All data will be deleted and cannot be recovered. Are you sure?`
+  String get confirmClearAllDesc {
+    return Intl.message(
+      'All data will be deleted and cannot be recovered. Are you sure?',
+      name: 'confirmClearAllDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancelBtn {
+    return Intl.message('Cancel', name: 'cancelBtn', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get deleteBtn {
+    return Intl.message('Delete', name: 'deleteBtn', desc: '', args: []);
+  }
+
+  /// `All Records`
+  String get allRecords {
+    return Intl.message('All Records', name: 'allRecords', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

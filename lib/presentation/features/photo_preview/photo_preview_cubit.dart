@@ -230,7 +230,9 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
   Future<void> saveHistory({required String imagePath}) async {
     try {
       final isar = locator<Isar>();
-      final localImagePath = await FileUtils.saveImageToAppDirectory(imagePath);
+      final localImagePath = await FileUtils.saveCompressedImageToAppDirectory(
+        imagePath,
+      );
       final userColors = state.userColors.map((c) => c.toARGB32()).toList();
       final record = HistoryRecord(
         imagePath: localImagePath,
@@ -307,8 +309,8 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
           extension: ext,
         );
       } else {
-        final file = File(imagePath);
-        final bytes = await file.readAsBytes();
+        final compressedBytes = await FileUtils.compressImageToBytes(imagePath);
+        final bytes = compressedBytes ?? await File(imagePath).readAsBytes();
         success = await FileUtils.saveImageToLibrary(
           bytes: bytes,
           titlePrefix: 'sylva',

@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/utils/color_utils.dart';
@@ -19,6 +18,7 @@ import 'package:sylva/presentation/features/photo_preview/widgets/full_screen_ph
 import 'package:sylva/presentation/widgets/buttons/app_circle_icon_button.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
+import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 import 'package:sylva/presentation/widgets/text/app_title_text.dart';
 import 'package:sylva/presentation/widgets/tutorial/app_tutorial_helper.dart';
@@ -851,12 +851,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
           return Positioned.fill(
             child: Container(
               color: Colors.black45,
-              child: Center(
-                child: SpinKitRipple(
-                  color: _theme.colorScheme.primary,
-                  size: MediaQuery.sizeOf(context).width * 0.5,
-                ),
-              ),
+              child: Center(child: AppLoading()),
             ),
           );
         }

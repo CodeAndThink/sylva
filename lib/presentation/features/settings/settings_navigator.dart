@@ -19,4 +19,8 @@ class SettingsNavigator extends BaseNavigator {
   void goToThanksAndReference() {
     pushNamed(AppRouter.acknowledgements);
   }
+
+  Future<void> goToStorageManagement() {
+    return pushNamed(AppRouter.storageManagement);
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
@@ -182,10 +183,13 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
     ThemeData theme,
   ) {
     if (isDownloading) {
-      return const SizedBox(
+      return SizedBox(
         width: 24,
         height: 24,
-        child: CircularProgressIndicator(strokeWidth: 2),
+        child: SpinKitRipple(
+          color: theme.colorScheme.primary,
+          size: MediaQuery.sizeOf(context).width * 0.5,
+        ),
       );
     }
     if (!isDownloaded) {

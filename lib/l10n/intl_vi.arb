@@ -553,5 +553,11 @@
   "deleteBtn": "Xóa",
   "@deleteBtn": {},
   "allRecords": "Tất cả bản ghi",
-  "@allRecords": {}
+  "@allRecords": {},
+  "realTimeColorPicker": "Lấy màu thời gian thực",
+  "@realTimeColorPicker": {},
+  "tutorialRealTimeColorPickerTitle": "Lấy màu qua camera",
+  "@tutorialRealTimeColorPickerTitle": {},
+  "tutorialRealTimeColorPickerDesc": "Trích xuất màu sắc trực tiếp từ camera của bạn theo thời gian thực.",
+  "@tutorialRealTimeColorPickerDesc": {}
 }

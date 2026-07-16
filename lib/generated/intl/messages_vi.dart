@@ -341,6 +341,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hình nền chấm màu cầu vồng",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("Tỷ lệ"),
+    "realTimeColorPicker": MessageLookupByLibrary.simpleMessage(
+      "Lấy màu thời gian thực",
+    ),
     "rectangle": MessageLookupByLibrary.simpleMessage("Hình chữ nhật"),
     "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
@@ -488,6 +491,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Chạm vào màu để lọc, nhấn giữ để copy mã hex.",
     ),
     "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage("Bảng màu"),
+    "tutorialRealTimeColorPickerDesc": MessageLookupByLibrary.simpleMessage(
+      "Trích xuất màu sắc trực tiếp từ camera của bạn theo thời gian thực.",
+    ),
+    "tutorialRealTimeColorPickerTitle": MessageLookupByLibrary.simpleMessage(
+      "Lấy màu qua camera",
+    ),
     "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
       "Lưu ảnh và bảng màu vào lịch sử của ứng dụng.",
     ),

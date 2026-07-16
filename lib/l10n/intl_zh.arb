@@ -547,5 +547,11 @@
   "deleteBtn": "删除",
   "@deleteBtn": {},
   "allRecords": "所有记录",
-  "@allRecords": {}
+  "@allRecords": {},
+  "realTimeColorPicker": "实时取色器",
+  "@realTimeColorPicker": {},
+  "tutorialRealTimeColorPickerTitle": "实时取色器",
+  "@tutorialRealTimeColorPickerTitle": {},
+  "tutorialRealTimeColorPickerDesc": "实时从相机中提取颜色。",
+  "@tutorialRealTimeColorPickerDesc": {}
 }

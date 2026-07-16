@@ -287,6 +287,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "虹色のハーフトーンドット背景",
     ),
     "ratio": MessageLookupByLibrary.simpleMessage("比率"),
+    "realTimeColorPicker": MessageLookupByLibrary.simpleMessage(
+      "リアルタイムカラーピッカー",
+    ),
     "rectangle": MessageLookupByLibrary.simpleMessage("長方形"),
     "register": MessageLookupByLibrary.simpleMessage("登録"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
@@ -407,6 +410,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "色をタップしてフィルター、長押しで16進数コードをコピーします。",
     ),
     "tutorialPaletteTitle": MessageLookupByLibrary.simpleMessage("カラーパレット"),
+    "tutorialRealTimeColorPickerDesc": MessageLookupByLibrary.simpleMessage(
+      "カメラからリアルタイムで色を抽出します。",
+    ),
+    "tutorialRealTimeColorPickerTitle": MessageLookupByLibrary.simpleMessage(
+      "リアルタイムカラーピッカー",
+    ),
     "tutorialSaveDesc": MessageLookupByLibrary.simpleMessage(
       "この写真と色をアプリの履歴に保存します。",
     ),

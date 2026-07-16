@@ -6,6 +6,7 @@ import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/core/enums/load_status.dart';
 import 'package:sylva/core/utils/file_utils.dart';
 import 'package:sylva/data/entities/history_record.dart';
+import 'package:sylva/presentation/features/storage_management/record_storage_info.dart';
 import 'package:sylva/presentation/widgets/cubit/base_cubit.dart';
 import 'storage_management_navigator.dart';
 import 'storage_management_state.dart';
@@ -31,8 +32,37 @@ class StorageManagementCubit extends BaseCubit<StorageManagementState> {
           }
         }
       }
+
+      // Load all records and calculate per-file sizes
+      final isar = locator<Isar>();
+      final allRecords = await isar.historyRecords.where().findAll();
+
+      final List<RecordStorageInfo> recordInfos = [];
+      for (var record in allRecords) {
+        int fileSize = 0;
+        try {
+          final fullPath = p.isAbsolute(record.imagePath)
+              ? record.imagePath
+              : FileUtils.getFullImagePath(record.imagePath);
+          final file = File(fullPath);
+          if (await file.exists()) {
+            fileSize = await file.length();
+          }
+        } catch (_) {}
+        recordInfos.add(
+          RecordStorageInfo(record: record, sizeInBytes: fileSize),
+        );
+      }
+
+      // Sort by size descending
+      recordInfos.sort((a, b) => b.sizeInBytes.compareTo(a.sizeInBytes));
+
       safeEmit(
-        state.copyWith(status: LoadStatus.success, totalSizeInBytes: dirSize),
+        state.copyWith(
+          status: LoadStatus.success,
+          totalSizeInBytes: dirSize,
+          records: recordInfos,
+        ),
       );
     } catch (e) {
       debugPrint('Error calculating storage: $e');

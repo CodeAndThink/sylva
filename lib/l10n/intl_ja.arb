@@ -545,5 +545,7 @@
   "cancelBtn": "キャンセル",
   "@cancelBtn": {},
   "deleteBtn": "削除",
-  "@deleteBtn": {}
+  "@deleteBtn": {},
+  "allRecords": "すべての記録",
+  "@allRecords": {}
 }

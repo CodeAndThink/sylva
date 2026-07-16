@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "We would like to thank the following creators for their assets used in this application:",
     ),
+    "allRecords": MessageLookupByLibrary.simpleMessage("All Records"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Arrow"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(

@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "このアプリケーションで使用されているアセットの作成者に感謝いたします：",
     ),
+    "allRecords": MessageLookupByLibrary.simpleMessage("すべての記録"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("矢印"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage("色を自動検出"),

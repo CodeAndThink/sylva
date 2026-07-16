@@ -545,5 +545,7 @@
   "cancelBtn": "取消",
   "@cancelBtn": {},
   "deleteBtn": "删除",
-  "@deleteBtn": {}
+  "@deleteBtn": {},
+  "allRecords": "所有记录",
+  "@allRecords": {}
 }

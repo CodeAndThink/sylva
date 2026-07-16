@@ -2168,6 +2168,11 @@ class S {
   String get deleteBtn {
     return Intl.message('Delete', name: 'deleteBtn', desc: '', args: []);
   }
+
+  /// `All Records`
+  String get allRecords {
+    return Intl.message('All Records', name: 'allRecords', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

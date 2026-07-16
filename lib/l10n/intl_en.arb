@@ -551,5 +551,7 @@
   "cancelBtn": "Cancel",
   "@cancelBtn": {},
   "deleteBtn": "Delete",
-  "@deleteBtn": {}
+  "@deleteBtn": {},
+  "allRecords": "All Records",
+  "@allRecords": {}
 }

@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "acknowledgementsIntro": MessageLookupByLibrary.simpleMessage(
       "Chúng tôi xin chân thành cảm ơn những nhà sáng tạo sau đây vì các tài nguyên được sử dụng trong ứng dụng này:",
     ),
+    "allRecords": MessageLookupByLibrary.simpleMessage("Tất cả bản ghi"),
     "appName": MessageLookupByLibrary.simpleMessage("Sylva"),
     "arrow": MessageLookupByLibrary.simpleMessage("Mũi tên"),
     "autoDetectColors": MessageLookupByLibrary.simpleMessage(

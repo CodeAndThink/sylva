@@ -551,5 +551,7 @@
   "cancelBtn": "Hủy",
   "@cancelBtn": {},
   "deleteBtn": "Xóa",
-  "@deleteBtn": {}
+  "@deleteBtn": {},
+  "allRecords": "Tất cả bản ghi",
+  "@allRecords": {}
 }

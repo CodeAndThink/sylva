@@ -4,6 +4,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'dart:io';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class FileUtils {
   static late String appDocDirPath;
@@ -25,6 +26,59 @@ class FileUtils {
     if (sourcePath != targetPath) {
       if (await file.exists()) {
         await file.copy(targetPath);
+      }
+    }
+    return p.join('sylva_images', filename);
+  }
+
+  static Future<Uint8List?> compressImageToBytes(
+    String sourcePath, {
+    int quality = 80,
+  }) async {
+    final ext = p.extension(sourcePath).toLowerCase();
+    CompressFormat format = CompressFormat.jpeg;
+    if (ext == '.png') {
+      format = CompressFormat.png;
+    } else if (ext == '.webp') {
+      format = CompressFormat.webp;
+    } else if (ext == '.heic') {
+      format = CompressFormat.heic;
+    }
+
+    return await FlutterImageCompress.compressWithFile(
+      sourcePath,
+      quality: quality,
+      format: format,
+      // Keep original resolution, only reduce quality
+    );
+  }
+
+  static Future<String> saveCompressedImageToAppDirectory(
+    String sourcePath, {
+    int quality = 80,
+  }) async {
+    final filename = p.basename(sourcePath);
+    final targetDir = Directory(p.join(appDocDirPath, 'sylva_images'));
+    if (!await targetDir.exists()) {
+      await targetDir.create(recursive: true);
+    }
+
+    final targetPath = p.join(targetDir.path, filename);
+
+    if (sourcePath != targetPath) {
+      final compressedBytes = await compressImageToBytes(
+        sourcePath,
+        quality: quality,
+      );
+      if (compressedBytes != null) {
+        final targetFile = File(targetPath);
+        await targetFile.writeAsBytes(compressedBytes);
+      } else {
+        // Fallback: copy original file if compression fails
+        final file = File(sourcePath);
+        if (await file.exists()) {
+          await file.copy(targetPath);
+        }
       }
     }
     return p.join('sylva_images', filename);

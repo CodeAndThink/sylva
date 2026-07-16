@@ -12,6 +12,7 @@ import 'package:sylva/presentation/features/contact/contact_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/privacy_policy_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/terms_of_service_page.dart';
 import 'package:sylva/presentation/features/settings/widgets/acknowledgements_page.dart';
+import 'package:sylva/presentation/features/storage_management/storage_management_page.dart';
 import 'package:sylva/presentation/features/splash/splash_page.dart';
 
 class AppRouter {
@@ -47,6 +48,9 @@ class AppRouter {
 
   static const String acknowledgements = 'acknowledgements';
   static const String acknowledgementsPath = '/acknowledgements';
+
+  static const String storageManagement = 'storageManagement';
+  static const String storageManagementPath = '/storageManagement';
 
   static const String photoPreview = 'photoPreview';
   static const String photoPreviewPath = '/photoPreview';
@@ -107,6 +111,11 @@ class AppRouter {
         path: acknowledgementsPath,
         name: acknowledgements,
         builder: (context, state) => const AcknowledgementsPage(),
+      ),
+      GoRoute(
+        path: storageManagementPath,
+        name: storageManagement,
+        builder: (context, state) => const StorageManagementPage(),
       ),
       GoRoute(
         path: photoPreviewPath,

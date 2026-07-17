@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
+import 'package:sylva/presentation/widgets/images/app_asset_image.dart';
 import 'package:sylva/presentation/widgets/scaffold/app_scaffold.dart';
 
 class AcknowledgementsPage extends StatelessWidget {
@@ -24,28 +26,16 @@ class AcknowledgementsPage extends StatelessWidget {
           20.height,
           _buildCreditItem(
             context: context,
-            title: l10n.roadBlockIcon,
-            attribution: S
-                .of(context)
-                .designedByAuthorFromFlaticon('Aranagraphics'),
-          ),
-          12.height,
-          _buildCreditItem(
-            context: context,
+            path: AppAssets.icColors,
             title: l10n.colorsIcon,
             attribution: l10n.designedByAuthorFromFlaticon('Freepik'),
           ),
           12.height,
           _buildCreditItem(
             context: context,
+            path: AppAssets.icCamera,
             title: l10n.cameraIcon,
             attribution: l10n.designedByAuthorFromFlaticon('Freepik'),
-          ),
-          12.height,
-          _buildCreditItem(
-            context: context,
-            title: l10n.rainbowHalftoneDotsBackground,
-            attribution: l10n.designedByAuthorMagnific('kjpargeter'),
           ),
         ],
       ),
@@ -56,28 +46,40 @@ class AcknowledgementsPage extends StatelessWidget {
     required BuildContext context,
     required String title,
     required String attribution,
+    required String path,
   }) {
     final theme = Theme.of(context);
     return Container(
       padding: 12.paddingAll,
       decoration: BoxDecoration(
-        color: theme.colorScheme.secondaryContainer,
+        color: theme.colorScheme.secondaryContainer.withValues(alpha: 0.6),
         borderRadius: 16.borderRadius,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        spacing: 12,
         children: [
-          Text(
-            title,
-            style: theme.textTheme.titleSmall?.copyWith(
-              color: theme.colorScheme.onSecondaryContainer,
-            ),
-          ),
-          8.height,
-          Text(
-            attribution,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSecondaryContainer,
+          SizedBox(width: 48, height: 48, child: AppAssetImage(path: path)),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                  overflow: TextOverflow.clip,
+                ),
+                8.height,
+                Text(
+                  attribution,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                  overflow: TextOverflow.clip,
+                ),
+              ],
             ),
           ),
         ],

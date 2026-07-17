@@ -243,7 +243,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                           final item = state.groupedItems[index];
                           if (item is TimeGroup) {
                             return Padding(
-                              padding: 4.paddingTop.copyWith(bottom: 8),
+                              padding: 4.paddingTop,
                               child: AppTitleText(title: item.title),
                             );
                           } else if (item is HistoryRecord) {
@@ -333,7 +333,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
         addGridSliver();
         slivers.add(
           SliverPadding(
-            padding: 4.paddingTop.copyWith(bottom: 8),
+            padding: 4.paddingTop,
             sliver: SliverToBoxAdapter(child: AppTitleText(title: item.title)),
           ),
         );

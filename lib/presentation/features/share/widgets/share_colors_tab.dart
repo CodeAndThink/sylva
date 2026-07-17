@@ -48,9 +48,8 @@ class _ShareColorsTabState extends State<ShareColorsTab> {
         return Column(
           children: [
             if (widget.genColors.isEmpty && widget.userColors.isEmpty)
-              const SizedBox(height: 55)
+              55.height
             else ...[
-              // Page 1: Auto-detected colors
               if (widget.genColors.isNotEmpty)
                 Column(
                   children: [
@@ -75,7 +74,7 @@ class _ShareColorsTabState extends State<ShareColorsTab> {
                     ),
                   ],
                 ),
-              // Page 2: User-picked colors
+              8.height,
               if (widget.userColors.isNotEmpty)
                 Column(
                   children: [

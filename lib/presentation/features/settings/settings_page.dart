@@ -425,7 +425,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppTitleText(title: _l10n.storageManagement),
-        10.height,
         AppTransparentContainer(
           borderRadius: 24,
           padding: 16.paddingAll,
@@ -507,7 +506,6 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
   Widget _buildOtherSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
       children: [
         AppTitleText(title: _l10n.informationAndSupport),
         Container(
@@ -556,6 +554,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
             ),
           ),
         ),
+        12.height,
 
         _buildSettingFilledButton(
           title: _l10n.termsOfService,
@@ -608,6 +607,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     required IconData icon,
   }) {
     return Container(
+      margin: 12.paddingBottom,
       decoration: BoxDecoration(
         color: _theme.colorScheme.secondaryContainer.withValues(alpha: 0.5),
         borderRadius: 16.borderRadius,

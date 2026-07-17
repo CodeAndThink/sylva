@@ -5,5 +5,4 @@ class AppAssets {
   static const String icColors = '${iconPath}ic_colors.png';
   static const String icCamera = '${iconPath}ic_camera.png';
   static const String icAppIcon = '${iconPath}ic_app_icon.png';
-  static const String icContruction = '${iconPath}ic_construction.png';
 }

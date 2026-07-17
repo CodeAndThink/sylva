@@ -26,16 +26,17 @@ class ShareEditBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppTransparentContainer(
       border: 28.borderRadiusTop,
+      padding: 5.paddingAll,
       child: SafeArea(
         top: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildFeatureActions(context),
-            8.height,
+            5.height,
             AppTransparentContainer(
               padding: 8.paddingAll,
-              borderRadius: 12,
+              borderRadius: 18,
               child: AnimatedSize(
                 duration: 300.milliseconds,
                 curve: Curves.easeInOutCubic,

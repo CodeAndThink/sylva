@@ -24,14 +24,6 @@ class AcknowledgementsPage extends StatelessWidget {
           20.height,
           _buildCreditItem(
             context: context,
-            title: l10n.roadBlockIcon,
-            attribution: S
-                .of(context)
-                .designedByAuthorFromFlaticon('Aranagraphics'),
-          ),
-          12.height,
-          _buildCreditItem(
-            context: context,
             title: l10n.colorsIcon,
             attribution: l10n.designedByAuthorFromFlaticon('Freepik'),
           ),
@@ -40,12 +32,6 @@ class AcknowledgementsPage extends StatelessWidget {
             context: context,
             title: l10n.cameraIcon,
             attribution: l10n.designedByAuthorFromFlaticon('Freepik'),
-          ),
-          12.height,
-          _buildCreditItem(
-            context: context,
-            title: l10n.rainbowHalftoneDotsBackground,
-            attribution: l10n.designedByAuthorMagnific('kjpargeter'),
           ),
         ],
       ),

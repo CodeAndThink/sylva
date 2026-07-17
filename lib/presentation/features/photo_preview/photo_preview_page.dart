@@ -437,7 +437,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             right: 8,
             child: AppCircleIconButton(
               tooltipMessage: _l10n.cancel,
-              backgroundColor: _theme.colorScheme.error.withValues(alpha: 0.8),
+              backgroundColor: _theme.colorScheme.error,
               onTap: () {
                 if (state.filteredColor != null) {
                   _cubit.filterColor(
@@ -464,7 +464,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                 children: [
                   AppCircleIconButton(
                     tooltipMessage: _l10n.saveColor,
-                    backgroundColor: Colors.green.withValues(alpha: 0.8),
+                    backgroundColor: Colors.green,
                     onTap: () {
                       AppFeedback.playInteract(context);
                       if (_cubit.state.selectedColor != null) {
@@ -484,9 +484,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                   ),
                   AppCircleIconButton(
                     tooltipMessage: _l10n.cancel,
-                    backgroundColor: _theme.colorScheme.error.withValues(
-                      alpha: 0.8,
-                    ),
+                    backgroundColor: _theme.colorScheme.error,
                     onTap: () {
                       AppFeedback.playInteract(context);
                       _showMagnifier.value = false;
@@ -636,6 +634,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                                 if (state.filteredColor !=
                                                     null) {
                                                   _cubit.clearSelectedColor();
+                                                  _cubit.clearFilterColor();
                                                 }
                                               },
                                               child: Container(
@@ -650,9 +649,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                                   Icons
                                                       .cleaning_services_rounded,
                                                   color: isDeleteMode
-                                                      ? _theme
-                                                            .colorScheme
-                                                            .onError
+                                                      ? Colors.white
                                                       : _theme
                                                             .colorScheme
                                                             .error,
@@ -740,10 +737,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                                                       decoration: BoxDecoration(
                                                         color: _theme
                                                             .colorScheme
-                                                            .error
-                                                            .withValues(
-                                                              alpha: 0.8,
-                                                            ),
+                                                            .error,
                                                         shape: BoxShape.circle,
                                                       ),
                                                       padding: 4.paddingAll,

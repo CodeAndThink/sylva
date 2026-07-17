@@ -276,11 +276,11 @@ class __ContactChildPageState extends State<_ContactChildPage> {
     Color getSelectedColor() {
       switch (type) {
         case ContactType.bug:
-          return theme.colorScheme.errorContainer;
+          return Colors.red;
         case ContactType.suggestion:
-          return theme.colorScheme.primaryContainer;
+          return Colors.green;
         case ContactType.other:
-          return theme.colorScheme.surfaceContainerHighest;
+          return Colors.blue;
       }
     }
 

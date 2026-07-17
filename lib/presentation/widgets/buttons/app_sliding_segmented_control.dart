@@ -34,6 +34,7 @@ class AppSlidingSegmentedControl<T> extends StatelessWidget {
       height: height,
       width: width,
       padding: 4.paddingAll,
+      borderRadius: 22,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final double tabWidth;

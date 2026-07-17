@@ -100,7 +100,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                             TextSpan(
                               text: 'A',
                               style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface,
+                                color: _theme.colorScheme.onSurface,
                               ),
                             ),
                           ],
@@ -112,8 +112,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
               ],
             ),
 
-            if (state.textOption != ShareTextOption.none &&
-                state.selectedShape != PaletteShape.none) ...[
+            if (!state.textOption.isNone && !state.selectedShape.isNone) ...[
               8.height,
               // Position Segmented Control
               AppSlidingSegmentedControl<ShareTextPosition>(

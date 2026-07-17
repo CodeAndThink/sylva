@@ -58,6 +58,16 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     safeEmit(state.copyWith(clearSelectedColor: true));
   }
 
+  void clearFilterColor() {
+    safeEmit(
+      state.copyWith(
+        filteredColor: null,
+        filteredImageBytes: null,
+        filterColorStatus: LoadStatus.initial,
+      ),
+    );
+  }
+
   void deleteUserColor({required Color color}) {
     final updatedUserColors = List<Color>.from(state.userColors);
     updatedUserColors.remove(color);
@@ -148,13 +158,7 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
 
     // Toggle off if the same color is tapped
     if (state.filteredColor == targetColor) {
-      safeEmit(
-        state.copyWith(
-          filteredColor: null,
-          filteredImageBytes: null,
-          filterColorStatus: LoadStatus.initial,
-        ),
-      );
+      clearFilterColor();
       return;
     }
 

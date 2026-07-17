@@ -23,6 +23,7 @@ class ColorUtils {
     required Color initialColor,
     ValueChanged<Color>? onColorPicked,
   }) async {
+    final theme = Theme.of(context);
     Color newColor = initialColor;
     final bool confirmed =
         await ColorPicker(
@@ -38,15 +39,15 @@ class ColorUtils {
           wheelDiameter: 155,
           heading: Text(
             S.of(context).colorPickerSelectColor,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: theme.textTheme.titleSmall,
           ),
           subheading: Text(
             S.of(context).colorPickerSelectShade,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: theme.textTheme.titleSmall,
           ),
           wheelSubheading: Text(
             S.of(context).colorPickerShades,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: theme.textTheme.titleSmall,
           ),
           showMaterialName: true,
           showColorName: true,

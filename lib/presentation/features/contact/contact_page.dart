@@ -276,11 +276,11 @@ class __ContactChildPageState extends State<_ContactChildPage> {
     Color getSelectedColor() {
       switch (type) {
         case ContactType.bug:
-          return theme.colorScheme.errorContainer;
+          return Colors.red;
         case ContactType.suggestion:
-          return theme.colorScheme.primaryContainer;
+          return Colors.green;
         case ContactType.other:
-          return theme.colorScheme.surfaceContainerHighest;
+          return Colors.blue;
       }
     }
 
@@ -307,7 +307,7 @@ class __ContactChildPageState extends State<_ContactChildPage> {
       showCheckmark: false,
       labelStyle: _theme.textTheme.titleSmall?.copyWith(
         color: isSelected ? getOnSelectedColor() : theme.colorScheme.onSurface,
-        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        fontWeight: isSelected ? null : FontWeight.normal,
       ),
       shape: RoundedRectangleBorder(borderRadius: 20.borderRadius),
     );

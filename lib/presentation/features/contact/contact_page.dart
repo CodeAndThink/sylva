@@ -307,7 +307,7 @@ class __ContactChildPageState extends State<_ContactChildPage> {
       showCheckmark: false,
       labelStyle: _theme.textTheme.titleSmall?.copyWith(
         color: isSelected ? getOnSelectedColor() : theme.colorScheme.onSurface,
-        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        fontWeight: isSelected ? null : FontWeight.normal,
       ),
       shape: RoundedRectangleBorder(borderRadius: 20.borderRadius),
     );

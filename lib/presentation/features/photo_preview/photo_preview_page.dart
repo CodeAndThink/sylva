@@ -242,7 +242,7 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
             children: [
               Expanded(
                 child: Padding(
-                  padding: 12.paddingHorizontal,
+                  padding: 12.paddingHorizontal.copyWith(bottom: 8),
                   child: _buildPhotoWidget(),
                 ),
               ),

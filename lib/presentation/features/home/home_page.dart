@@ -358,7 +358,24 @@ class __HomeChildPageState extends State<_HomeChildPage>
           return;
         }
         final Color color = _extractCenterColor(image);
-        if (_realTimeColor != color) {
+        bool shouldUpdate = false;
+        if (_realTimeColor == null) {
+          shouldUpdate = true;
+        } else {
+          final int oldColor = _realTimeColor!.toARGB32();
+          final int newColor = color.toARGB32();
+          final int rDiff =
+              (((oldColor >> 16) & 0xFF) - ((newColor >> 16) & 0xFF)).abs();
+          final int gDiff =
+              (((oldColor >> 8) & 0xFF) - ((newColor >> 8) & 0xFF)).abs();
+          final int bDiff = ((oldColor & 0xFF) - (newColor & 0xFF)).abs();
+
+          if (rDiff + gDiff + bDiff > 12) {
+            shouldUpdate = true;
+          }
+        }
+
+        if (shouldUpdate) {
           _lastColorExtractionTime = now;
           setState(() {
             _realTimeColor = color;
@@ -389,35 +406,79 @@ class __HomeChildPageState extends State<_HomeChildPage>
       final int centerX = width ~/ 2;
       final int centerY = height ~/ 2;
 
+      const int sampleRadius = 15;
+      int rSum = 0;
+      int gSum = 0;
+      int bSum = 0;
+      int pixelCount = 0;
+
       if (image.format.group == ImageFormatGroup.yuv420) {
         final int yBytesPerPixel = image.planes[0].bytesPerPixel ?? 1;
         final int uvBytesPerPixel = image.planes[1].bytesPerPixel ?? 1;
-        final int yIndex =
-            centerY * image.planes[0].bytesPerRow + centerX * yBytesPerPixel;
-        final int uvIndex =
-            (centerY ~/ 2) * image.planes[1].bytesPerRow +
-            (centerX ~/ 2) * uvBytesPerPixel;
+        final int yBytesPerRow = image.planes[0].bytesPerRow;
+        final int uvBytesPerRow = image.planes[1].bytesPerRow;
 
-        final int y = image.planes[0].bytes[yIndex];
-        final int u = image.planes[1].bytes[uvIndex];
-        final int v = image.planes[2].bytes[uvIndex];
+        for (int x = centerX - sampleRadius; x <= centerX + sampleRadius; x++) {
+          for (
+            int y = centerY - sampleRadius;
+            y <= centerY + sampleRadius;
+            y++
+          ) {
+            if (x < 0 || x >= width || y < 0 || y >= height) continue;
 
-        int r = (y + 1.402 * (v - 128)).round().clamp(0, 255);
-        int g = (y - 0.344136 * (u - 128) - 0.714136 * (v - 128)).round().clamp(
-          0,
-          255,
-        );
-        int b = (y + 1.772 * (u - 128)).round().clamp(0, 255);
+            final int yIndex = y * yBytesPerRow + x * yBytesPerPixel;
+            final int uvIndex =
+                (y ~/ 2) * uvBytesPerRow + (x ~/ 2) * uvBytesPerPixel;
 
-        return Color.fromARGB(255, r, g, b);
+            final int yValue = image.planes[0].bytes[yIndex];
+            final int uValue = image.planes[1].bytes[uvIndex];
+            final int vValue = image.planes[2].bytes[uvIndex];
+
+            int r = (yValue + 1.402 * (vValue - 128)).round().clamp(0, 255);
+            int g =
+                (yValue - 0.344136 * (uValue - 128) - 0.714136 * (vValue - 128))
+                    .round()
+                    .clamp(0, 255);
+            int b = (yValue + 1.772 * (uValue - 128)).round().clamp(0, 255);
+
+            rSum += r;
+            gSum += g;
+            bSum += b;
+            pixelCount++;
+          }
+        }
       } else if (image.format.group == ImageFormatGroup.bgra8888) {
         final int bytesPerPixel = image.planes[0].bytesPerPixel ?? 4;
-        final int index =
-            centerY * image.planes[0].bytesPerRow + centerX * bytesPerPixel;
-        final int b = image.planes[0].bytes[index];
-        final int g = image.planes[0].bytes[index + 1];
-        final int r = image.planes[0].bytes[index + 2];
-        return Color.fromARGB(255, r, g, b);
+        final int bytesPerRow = image.planes[0].bytesPerRow;
+
+        for (int x = centerX - sampleRadius; x <= centerX + sampleRadius; x++) {
+          for (
+            int y = centerY - sampleRadius;
+            y <= centerY + sampleRadius;
+            y++
+          ) {
+            if (x < 0 || x >= width || y < 0 || y >= height) continue;
+
+            final int index = y * bytesPerRow + x * bytesPerPixel;
+            final int bValue = image.planes[0].bytes[index];
+            final int gValue = image.planes[0].bytes[index + 1];
+            final int rValue = image.planes[0].bytes[index + 2];
+
+            rSum += rValue;
+            gSum += gValue;
+            bSum += bValue;
+            pixelCount++;
+          }
+        }
+      }
+
+      if (pixelCount > 0) {
+        return Color.fromARGB(
+          255,
+          rSum ~/ pixelCount,
+          gSum ~/ pixelCount,
+          bSum ~/ pixelCount,
+        );
       }
     } catch (e) {
       debugPrint('Error extracting color: $e');

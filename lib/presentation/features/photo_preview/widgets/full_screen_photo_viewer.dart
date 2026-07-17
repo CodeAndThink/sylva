@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/presentation/widgets/images/app_file_image.dart';
 
@@ -156,7 +157,7 @@ class _FullScreenPhotoViewerState extends State<FullScreenPhotoViewer>
                               textAlign: TextAlign.center,
                               style: theme.textTheme.titleSmall?.copyWith(
                                 color: currentScale > 1.0
-                                    ? Colors.amber
+                                    ? AppColors.iconSelectionColor
                                     : Colors.white,
                               ),
                             ),

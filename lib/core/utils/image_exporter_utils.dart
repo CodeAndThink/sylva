@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sylva/core/enums/template_enums.dart';
 
+/// Utility class for exporting images with drawn overlays (shapes and text).
 class ImageExporterUtils {
+  /// Exports an image by drawing an overlay (shape, colors, and text) based on the provided configuration.
   static Future<File?> exportImageWithOverlay({
     required String imagePath,
     required PaletteShape shape,

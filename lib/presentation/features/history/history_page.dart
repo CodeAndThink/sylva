@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:isar_community/isar.dart';
 import 'package:sylva/core/constants/app_assets.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/core/enums/time_group.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
@@ -441,7 +442,7 @@ class __HistoryChildPageState extends State<_HistoryChildPage> {
                     ? Icons.bookmark
                     : Icons.bookmark_outline_rounded,
                 color: state.isFavoriteOnly
-                    ? Colors.amber
+                    ? AppColors.iconSelectionColor
                     : _theme.colorScheme.onSurfaceVariant,
                 size: 24,
               );

@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/utils/color_utils.dart';
@@ -895,7 +896,9 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
                     '${currentScale.toStringAsFixed(1)}x',
                     textAlign: TextAlign.center,
                     style: _theme.textTheme.titleSmall?.copyWith(
-                      color: currentScale > 1.0 ? Colors.amber : Colors.white,
+                      color: currentScale > 1.0
+                          ? AppColors.iconSelectionColor
+                          : Colors.white,
                     ),
                   ),
                 ),

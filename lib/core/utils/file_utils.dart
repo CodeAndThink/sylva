@@ -6,14 +6,18 @@ import 'package:path/path.dart' as p;
 import 'dart:io';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
+/// Utility class for managing files, compressing images, and saving to the device.
 class FileUtils {
+  /// The path to the application's document directory.
   static late String appDocDirPath;
 
+  /// Initializes the file utility by setting the application document directory path.
   static Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
     appDocDirPath = dir.path;
   }
 
+  /// Saves an image from the given [sourcePath] to the app's internal image directory.
   static Future<String> saveImageToAppDirectory(String sourcePath) async {
     final file = File(sourcePath);
     final filename = p.basename(sourcePath);
@@ -31,6 +35,7 @@ class FileUtils {
     return p.join('sylva_images', filename);
   }
 
+  /// Compresses an image file from the given [sourcePath] and returns its bytes.
   static Future<Uint8List?> compressImageToBytes(
     String sourcePath, {
     int quality = 80,
@@ -53,6 +58,7 @@ class FileUtils {
     );
   }
 
+  /// Compresses an image and saves it to the app's internal image directory.
   static Future<String> saveCompressedImageToAppDirectory(
     String sourcePath, {
     int quality = 80,
@@ -84,6 +90,7 @@ class FileUtils {
     return p.join('sylva_images', filename);
   }
 
+  /// Resolves the full path of an image, falling back to the app directory if it's a relative path.
   static String getFullImagePath(String path) {
     if (p.isAbsolute(path)) {
       if (File(path).existsSync()) {
@@ -94,6 +101,7 @@ class FileUtils {
     return p.join(appDocDirPath, path);
   }
 
+  /// Formats byte sizes into human-readable strings (e.g., KB, MB, GB).
   static String formatBytes(int bytes, {int decimals = 1}) {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
@@ -101,6 +109,7 @@ class FileUtils {
     return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
   }
 
+  /// Saves an image (as bytes) to the device's public photo library.
   static Future<bool> saveImageToLibrary({
     required Uint8List bytes,
     String titlePrefix = 'sylva',

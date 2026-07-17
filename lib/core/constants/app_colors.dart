@@ -5,6 +5,7 @@ class AppColors {
   static const Color placeholderBackground = Color(0x1A9BFFF0);
   static const Color placeholderText = Color(0xFF8EA7B2);
   static const Color aboutPrimary = Color(0xFFFF5E5B);
+  static const Color iconSelectionColor = Colors.amber;
 
   static const List<Color> presetColors = [
     Color(0xFF00DE6B), // Green (default)

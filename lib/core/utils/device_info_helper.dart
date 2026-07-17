@@ -3,11 +3,13 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
 
+/// Helper class to retrieve device-specific information and unique identifiers.
 class DeviceInfoHelper {
   static final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
   static const _storage = FlutterSecureStorage();
   static const _uuidKey = 'device_uuid';
 
+  /// Retrieves a persistent unique device identifier (UUID), generating one if not found.
   static Future<String> getDeviceUuid() async {
     try {
       String? uuid = await _storage.read(key: _uuidKey);
@@ -21,6 +23,7 @@ class DeviceInfoHelper {
     }
   }
 
+  /// Retrieves basic device information such as OS, brand, and model.
   static Future<String> getBasicDeviceInfo() async {
     try {
       if (Platform.isAndroid) {

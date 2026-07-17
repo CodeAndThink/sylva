@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/extensions/date_time_extension.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
@@ -156,7 +157,7 @@ class _HistoryGridItemState extends State<HistoryGridItem> {
                                       ? Icons.bookmark
                                       : Icons.bookmark_outline_rounded,
                                   color: widget.isFavorite
-                                      ? Colors.amber
+                                      ? AppColors.iconSelectionColor
                                       : theme.colorScheme.onSurfaceVariant,
                                 ),
                               ),

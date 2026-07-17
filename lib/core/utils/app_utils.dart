@@ -5,11 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// General utility functions for the application.
 class AppUtils {
   AppUtils._();
 
+  /// Returns a singleton instance of [AppUtils].
   static AppUtils get instance => AppUtils._();
 
+  /// Formats byte sizes into human-readable strings (e.g., KB, MB, GB).
   static String formatBytes(int bytes, {int decimals = 2}) {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB"];
@@ -17,6 +20,7 @@ class AppUtils {
     return "${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}";
   }
 
+  /// Opens the device's gallery and allows the user to pick an image.
   static Future<XFile?> pickImage() async {
     try {
       return await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -26,6 +30,7 @@ class AppUtils {
     }
   }
 
+  /// Detects the file extension (jpg, png, gif, webp) based on the image's magic bytes.
   static String detectExtension(Uint8List bytes) {
     if (bytes.length >= 3 &&
         bytes[0] == 0xFF &&
@@ -64,6 +69,7 @@ class AppUtils {
     return '.png';
   }
 
+  /// Opens a URL using the appropriate launcher (in-app browser or external app).
   Future<void> openLink(String url) async {
     final uri = Uri.parse(url);
     try {

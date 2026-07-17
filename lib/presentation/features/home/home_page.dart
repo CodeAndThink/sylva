@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/constants/app_colors.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:sylva/core/constants/app_assets.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
@@ -57,6 +58,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
   double _maxAvailableZoom = 1.0;
   double _currentScale = 1.0;
   double _baseScale = 1.0;
+  bool _isFlashSupported = false;
   bool _isCapturing = false;
   int _timerSeconds = 0; // 0 (off), 3, 10
   bool _isCountingDown = false;
@@ -79,6 +81,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     _initCamera();
   }
 
+  /// Fetches available cameras and initializes the selected one.
   Future<void> _initCamera() async {
     try {
       _cameras = await availableCameras();
@@ -90,6 +93,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Configures and starts the given [cameraDescription].
+  ///
+  /// Disposes the previous controller if one exists.
   Future<void> _setCamera(CameraDescription cameraDescription) async {
     if (_controller != null) {
       if (mounted) {
@@ -115,7 +121,22 @@ class __HomeChildPageState extends State<_HomeChildPage>
 
     try {
       await _controller!.initialize();
-      await _controller!.setFlashMode(_flashMode);
+      try {
+        await _controller!.setFlashMode(_flashMode);
+        if (mounted) {
+          setState(() {
+            _isFlashSupported = true;
+          });
+        }
+      } catch (e) {
+        debugPrint('Flash not supported: $e');
+        if (mounted) {
+          setState(() {
+            _isFlashSupported = false;
+            _flashMode = FlashMode.off;
+          });
+        }
+      }
       _minAvailableZoom = await _controller!.getMinZoomLevel();
       _maxAvailableZoom = await _controller!.getMaxZoomLevel();
       _currentScale = 1.0;
@@ -133,6 +154,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Displays the interactive tutorial coach marks to guide the user.
   void _showTutorial() {
     tutorialCoachMark = AppTutorialHelper.showTutorial(
       context: context,
@@ -140,6 +162,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     );
   }
 
+  /// Generates the list of focus targets for the tutorial.
   List<TargetFocus> _createTargets() {
     return [
       AppTutorialHelper.buildTarget(
@@ -148,12 +171,13 @@ class __HomeChildPageState extends State<_HomeChildPage>
         title: _l10n.tutorialSettingsTitle,
         desc: _l10n.tutorialSettingsDesc,
       ),
-      AppTutorialHelper.buildTarget(
-        context: context,
-        key: _keyFlash,
-        title: _l10n.tutorialFlashTitle,
-        desc: _l10n.tutorialFlashDesc,
-      ),
+      if (_isFlashSupported)
+        AppTutorialHelper.buildTarget(
+          context: context,
+          key: _keyFlash,
+          title: _l10n.tutorialFlashTitle,
+          desc: _l10n.tutorialFlashDesc,
+        ),
       AppTutorialHelper.buildTarget(
         context: context,
         key: _keyTimer,
@@ -193,17 +217,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     ];
   }
 
-  @override
-  void dispose() {
-    _centerIconTimer?.cancel();
-    WidgetsBinding.instance.removeObserver(this);
-    if (_isStreamingImage) {
-      _controller?.stopImageStream();
-    }
-    _controller?.dispose();
-    super.dispose();
-  }
-
+  /// Temporarily displays a center icon (e.g., when toggling flash) and hides it after a delay.
   void _showCenterIcon(IconData icon) {
     _centerIconTimer?.cancel();
     setState(() {
@@ -218,25 +232,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     });
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = _controller;
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
-
-    if (state == AppLifecycleState.inactive) {
-      if (mounted) {
-        setState(() {
-          _isCameraInitialized = false;
-        });
-      }
-      cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      _initCamera();
-    }
-  }
-
+  /// Toggles between the front and back cameras.
   void _switchCamera() async {
     if (_cameras.length > 1) {
       if (_isRealTimeColorPickerEnabled) await _stopImageStream();
@@ -245,6 +241,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Cycles through available flash modes: Off, Always, and Auto.
   void _toggleFlash() async {
     if (_controller == null || !_isCameraInitialized) return;
     AppFeedback.playInteract(context);
@@ -271,9 +268,18 @@ class __HomeChildPageState extends State<_HomeChildPage>
       await _controller!.setFlashMode(_flashMode);
     } catch (e) {
       debugPrint('Error setting flash mode: $e');
+      if (mounted) {
+        setState(() {
+          _isFlashSupported = false;
+          _flashMode = FlashMode.off;
+        });
+      }
     }
   }
 
+  /// Captures a photo and navigates to the photo preview page.
+  ///
+  /// If a timer is set, it performs a countdown before capturing.
   Future<void> _takePicture() async {
     if (_controller == null || !_controller!.value.isInitialized) return;
     if (_controller!.value.isTakingPicture || _isCapturing || _isCountingDown) {
@@ -324,6 +330,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Toggles the real-time color extraction feature.
   void _toggleRealTimeColorPicker() {
     AppFeedback.playInteract(context);
     setState(() {
@@ -340,6 +347,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Starts streaming camera frames to extract the center color in real-time.
   void _startImageStream() {
     if (_controller == null ||
         !_controller!.value.isInitialized ||
@@ -388,6 +396,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Stops the active camera image stream.
   Future<void> _stopImageStream() async {
     if (_controller != null && _isStreamingImage) {
       _isStreamingImage = false;
@@ -399,6 +408,9 @@ class __HomeChildPageState extends State<_HomeChildPage>
     }
   }
 
+  /// Extracts the average color from the center area of a [CameraImage].
+  ///
+  /// Processes both YUV420 and BGRA8888 image formats.
   Color _extractCenterColor(CameraImage image) {
     try {
       final int width = image.width;
@@ -487,6 +499,36 @@ class __HomeChildPageState extends State<_HomeChildPage>
   }
 
   @override
+  void dispose() {
+    _centerIconTimer?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
+    if (_isStreamingImage) {
+      _controller?.stopImageStream();
+    }
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = _controller;
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      if (mounted) {
+        setState(() {
+          _isCameraInitialized = false;
+        });
+      }
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      _initCamera();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
     _l10n = S.of(context);
@@ -507,35 +549,33 @@ class __HomeChildPageState extends State<_HomeChildPage>
     );
   }
 
+  /// Builds the camera preview widget including zoom controls and color picker overlay.
   Widget _buildCameraPreview() {
     if (_isCameraInitialized && _controller != null) {
       return Stack(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: AppTransparentContainer(
-                padding: EdgeInsets.zero,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onScaleStart: (details) {
-                    _baseScale = _currentScale;
-                  },
-                  onScaleUpdate: (details) {
-                    if (_controller == null || !_isCameraInitialized) {
-                      return;
-                    }
-                    setState(() {
-                      _currentScale = (_baseScale * details.scale).clamp(
-                        _minAvailableZoom,
-                        _maxAvailableZoom,
-                      );
-                    });
-                    _controller!.setZoomLevel(_currentScale);
-                  },
-                  child: CameraPreview(_controller!),
-                ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: AppTransparentContainer(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onScaleStart: (details) {
+                  _baseScale = _currentScale;
+                },
+                onScaleUpdate: (details) {
+                  if (_controller == null || !_isCameraInitialized) {
+                    return;
+                  }
+                  setState(() {
+                    _currentScale = (_baseScale * details.scale).clamp(
+                      _minAvailableZoom,
+                      _maxAvailableZoom,
+                    );
+                  });
+                  _controller!.setZoomLevel(_currentScale);
+                },
+                child: CameraPreview(_controller!),
               ),
             ),
           ),
@@ -546,95 +586,11 @@ class __HomeChildPageState extends State<_HomeChildPage>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: 25.borderRadius,
-                      onTap: () {
-                        if (_controller == null || !_isCameraInitialized) {
-                          return;
-                        }
-                        setState(() {
-                          _currentScale = 1.0;
-                          _baseScale = 1.0;
-                        });
-                        _controller!.setZoomLevel(1.0);
-                      },
-                      child: Container(
-                        width: 50,
-                        padding: 5.paddingAll,
-                        decoration: BoxDecoration(
-                          color: Colors.black38,
-                          borderRadius: 25.borderRadius,
-                        ),
-                        child: Text(
-                          '${_currentScale.toStringAsFixed(1)}x',
-                          textAlign: TextAlign.center,
-                          style: _theme.textTheme.titleSmall?.copyWith(
-                            color: _currentScale > 1.0
-                                ? Colors.amber
-                                : Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildZoomButton(),
                   if (_isRealTimeColorPickerEnabled &&
                       _realTimeColor != null) ...[
-                    const SizedBox(width: 8),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: 25.borderRadius,
-                        onTap: () {
-                          final hex =
-                              '#${_realTimeColor!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
-                          Clipboard.setData(ClipboardData(text: hex));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(_l10n.colorCopiedSuccess(hex)),
-                              duration: const Duration(seconds: 1),
-                              behavior: SnackBarBehavior.floating,
-                            ),
-                          );
-                          AppFeedback.playInteract(context);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 5,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.black38,
-                            borderRadius: 25.borderRadius,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                width: 14,
-                                height: 14,
-                                decoration: BoxDecoration(
-                                  color: _realTimeColor,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 1,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                '#${_realTimeColor!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}',
-                                style: _theme.textTheme.titleSmall?.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    8.width,
+                    _buildRealtimeColorResult(),
                   ],
                 ],
               ),
@@ -647,7 +603,6 @@ class __HomeChildPageState extends State<_HomeChildPage>
                 style: _theme.textTheme.titleLarge?.copyWith(
                   color: Colors.white,
                   fontSize: 100,
-                  fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(
                       blurRadius: 10.0,
@@ -688,7 +643,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                     height: 4,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.amber,
+                      color: AppColors.iconSelectionColor,
                     ),
                   ),
                 ),
@@ -697,10 +652,99 @@ class __HomeChildPageState extends State<_HomeChildPage>
         ],
       );
     } else {
-      return AppTransparentContainer(child: Center(child: AppLoading()));
+      return AppTransparentContainer(
+        child: Center(
+          child: AppLoading(size: MediaQuery.sizeOf(context).width / 2),
+        ),
+      );
     }
   }
 
+  /// Builds the button to reset the camera zoom level.
+  Widget _buildZoomButton() {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: 25.borderRadius,
+        onTap: () {
+          if (_controller == null || !_isCameraInitialized) {
+            return;
+          }
+          setState(() {
+            _currentScale = 1.0;
+            _baseScale = 1.0;
+          });
+          _controller!.setZoomLevel(1.0);
+        },
+        child: Container(
+          width: 50,
+          padding: 5.paddingAll,
+          decoration: BoxDecoration(
+            color: Colors.black38,
+            borderRadius: 25.borderRadius,
+          ),
+          child: Text(
+            '${_currentScale.toStringAsFixed(1)}x',
+            textAlign: TextAlign.center,
+            style: _theme.textTheme.titleSmall?.copyWith(
+              color: _currentScale > 1.0
+                  ? AppColors.iconSelectionColor
+                  : Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Builds the widget that displays the real-time extracted color and allows copying its hex value.
+  Widget _buildRealtimeColorResult() {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: 25.borderRadius,
+        onTap: () {
+          final hex =
+              '#${_realTimeColor!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+          Clipboard.setData(ClipboardData(text: hex));
+          _cubit.navigator.flushBar.showSuccess(
+            message: _l10n.colorCopiedSuccess(hex),
+          );
+          AppFeedback.playInteract(context);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.black38,
+            borderRadius: 25.borderRadius,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: _realTimeColor,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 1),
+                ),
+              ),
+              6.width,
+              Text(
+                '#${_realTimeColor!.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}',
+                style: _theme.textTheme.titleSmall?.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Builds the bottom action bar containing settings, flash, timer, capture button, etc.
   Widget _buildBottomActions() {
     return AbsorbPointer(
       absorbing: _isCapturing || _isCountingDown,
@@ -735,37 +779,38 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   },
                 ),
               ),
-              Tooltip(
-                message: _l10n.flashMode,
-                child: IconButton(
-                  key: _keyFlash,
-                  icon: AnimatedSwitcher(
-                    duration: 150.milliseconds,
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                          return ScaleTransition(
-                            scale: animation,
-                            child: child,
-                          );
-                        },
-                    child: Icon(
-                      _flashMode == FlashMode.always
-                          ? Icons.flash_on_outlined
-                          : _flashMode == FlashMode.auto
-                          ? Icons.flash_auto_outlined
-                          : Icons.flash_off_outlined,
-                      key: ValueKey<FlashMode>(_flashMode),
-                      color:
-                          _flashMode == FlashMode.always ||
-                              _flashMode == FlashMode.auto
-                          ? Colors.amber
-                          : _theme.colorScheme.onSurface,
-                      size: 24,
+              if (_isFlashSupported)
+                Tooltip(
+                  message: _l10n.flashMode,
+                  child: IconButton(
+                    key: _keyFlash,
+                    icon: AnimatedSwitcher(
+                      duration: 150.milliseconds,
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                            return ScaleTransition(
+                              scale: animation,
+                              child: child,
+                            );
+                          },
+                      child: Icon(
+                        _flashMode == FlashMode.always
+                            ? Icons.flash_on_outlined
+                            : _flashMode == FlashMode.auto
+                            ? Icons.flash_auto_outlined
+                            : Icons.flash_off_outlined,
+                        key: ValueKey<FlashMode>(_flashMode),
+                        color:
+                            _flashMode == FlashMode.always ||
+                                _flashMode == FlashMode.auto
+                            ? AppColors.iconSelectionColor
+                            : _theme.colorScheme.onSurface,
+                        size: 24,
+                      ),
                     ),
+                    onPressed: _toggleFlash,
                   ),
-                  onPressed: _toggleFlash,
                 ),
-              ),
               PopupMenuButton<int>(
                 key: _keyTimer,
                 tooltip: _l10n.timer,
@@ -796,7 +841,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                         : Icons.timer_10,
                     color: _timerSeconds == 0
                         ? _theme.colorScheme.onSurface
-                        : Colors.amber,
+                        : AppColors.iconSelectionColor,
                     size: 24,
                   ),
                 ),
@@ -813,7 +858,7 @@ class __HomeChildPageState extends State<_HomeChildPage>
                   icon: Icon(
                     Icons.my_location,
                     color: _isRealTimeColorPickerEnabled
-                        ? Colors.amber
+                        ? AppColors.iconSelectionColor
                         : _theme.colorScheme.onSurface,
                     size: 24,
                   ),
@@ -927,7 +972,10 @@ class __HomeChildPageState extends State<_HomeChildPage>
             borderRadius: 10.borderRadius,
           ),
           child: Center(
-            child: Icon(icon, color: isSelected ? Colors.amber : Colors.white),
+            child: Icon(
+              icon,
+              color: isSelected ? AppColors.iconSelectionColor : Colors.white,
+            ),
           ),
         ),
       ),

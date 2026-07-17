@@ -20,7 +20,7 @@ class ShareImagePreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShareCubit, ShareState>(
       builder: (context, state) {
-        if (state.selectedShape == PaletteShape.none) {
+        if (state.selectedShape.isNone) {
           return Center(
             child: AppFileImage(path: imagePath, fit: BoxFit.contain),
           );
@@ -76,7 +76,7 @@ class ShareImagePreview extends StatelessWidget {
     }
 
     // Determine direction layout
-    final isVertical = state.selectedDirection == PaletteDirection.vertical;
+    final isVertical = state.selectedDirection.isVertical;
 
     return LayoutBuilder(
       builder: (context, constraints) {

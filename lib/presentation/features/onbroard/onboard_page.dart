@@ -189,32 +189,30 @@ class __OnboardingChildPageState extends State<_OnboardingChildPage>
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:
-                  (MediaQuery.of(context).padding.bottom + 12).paddingBottom,
-              child: SafeArea(
-                child: ScaleTransition(
-                  scale: _scaleAnimation,
-                  child: Material(
-                    color: _theme.colorScheme.primary,
-                    shape: const CircleBorder(),
-                    clipBehavior: Clip.hardEdge,
-                    child: InkWell(
-                      onTap: () {
-                        _cubit.navigateToHome();
-                      },
-                      borderRadius: 50.borderRadius,
-                      child: Padding(
-                        padding: 2.paddingAll,
-                        child: AppTransparentContainer(
-                          padding: 16.paddingAll,
-                          borderRadius: 50,
-                          backgroundColor: _theme.colorScheme.surface
-                              .withValues(alpha: 0.3),
-                          child: Icon(
-                            Icons.navigate_next_outlined,
-                            color: _theme.colorScheme.onPrimary,
-                            size: 36,
-                          ),
+              padding: (MediaQuery.of(context).size.height * 0.1).paddingBottom,
+              child: ScaleTransition(
+                scale: _scaleAnimation,
+                child: Material(
+                  color: _theme.colorScheme.primary,
+                  shape: const CircleBorder(),
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    onTap: () {
+                      _cubit.navigateToHome();
+                    },
+                    borderRadius: 50.borderRadius,
+                    child: Padding(
+                      padding: 2.paddingAll,
+                      child: AppTransparentContainer(
+                        padding: 16.paddingAll,
+                        borderRadius: 50,
+                        backgroundColor: _theme.colorScheme.surface.withValues(
+                          alpha: 0.3,
+                        ),
+                        child: Icon(
+                          Icons.navigate_next_outlined,
+                          color: _theme.colorScheme.onPrimary,
+                          size: 36,
                         ),
                       ),
                     ),

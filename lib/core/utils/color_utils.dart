@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:sylva/generated/l10n.dart';
 
+/// Utility class for working with colors, color conversions, and color pickers.
 class ColorUtils {
   ColorUtils._();
 
+  /// Converts a Flutter [Color] object to a Hexadecimal string.
   static String colorToHex({required Color color}) {
     return '#${color.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
   }
 
+  /// Converts a Flutter [Color] object to an RGBA string format.
   static String colorToRgba({required Color color}) {
     final r = (color.r * 255.0).round().clamp(0, 255);
     final g = (color.g * 255.0).round().clamp(0, 255);
@@ -18,6 +21,7 @@ class ColorUtils {
     return 'rgba($r, $g, $b, $aStr)';
   }
 
+  /// Shows a color picker dialog and returns the picked [Color].
   static Future<Color?> showColorPicker(
     BuildContext context, {
     required Color initialColor,

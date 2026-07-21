@@ -20,6 +20,8 @@ abstract class AppPreferencesRepository {
   Future<void> setSeedColorValue(int value);
   int? get customSeedColorValue;
   Future<void> setCustomSeedColorValue(int value);
+  bool get isCustomSeedColor;
+  Future<void> setIsCustomSeedColor(bool value);
 
   // Share Fonts
   List<String> get downloadedFonts;

@@ -34,6 +34,7 @@ class ColorUtils {
           color: initialColor,
           onColorChanged: (Color color) {
             newColor = color;
+            onColorPicked?.call(color);
           },
           width: 40,
           height: 40,

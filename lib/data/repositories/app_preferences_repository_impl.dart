@@ -64,6 +64,14 @@ class AppPreferencesRepositoryImpl implements AppPreferencesRepository {
       _prefs.setInt(KeyConstants.customSeedColor, value);
 
   @override
+  bool get isCustomSeedColor =>
+      _prefs.getBool(KeyConstants.isCustomSeedColor) ?? false;
+
+  @override
+  Future<void> setIsCustomSeedColor(bool value) =>
+      _prefs.setBool(KeyConstants.isCustomSeedColor, value);
+
+  @override
   List<String> get downloadedFonts =>
       _prefs.getStringList(KeyConstants.downloadedFonts) ?? ['Nunito'];
 

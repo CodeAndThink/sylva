@@ -184,11 +184,10 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
     return BlocBuilder<ThemeCubit, ThemeState>(
       buildWhen: (previous, current) =>
           previous.seedColor != current.seedColor ||
-          previous.customSeedColor != current.customSeedColor,
+          previous.customSeedColor != current.customSeedColor ||
+          previous.isCustomSeedColor != current.isCustomSeedColor,
       builder: (context, state) {
-        final isCustomColorSelected = !AppColors.presetColors.any(
-          (c) => c.toARGB32() == state.seedColor.toARGB32(),
-        );
+        final isCustomColorSelected = state.isCustomSeedColor;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,6 +202,7 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                 children: [
                   ...AppColors.presetColors.map((color) {
                     final isSelected =
+                        !isCustomColorSelected &&
                         state.seedColor.toARGB32() == color.toARGB32();
                     return SizedBox(
                       height: 38,
@@ -242,23 +242,28 @@ class __SettingsChildPageState extends State<_SettingsChildPage> {
                                   ? 1
                                   : 0,
                               duration: 300.milliseconds,
-                              child: InkWell(
-                                customBorder: const CircleBorder(),
-                                onTap: () {
-                                  ColorUtils.showColorPicker(
-                                    context,
-                                    initialColor: state.customSeedColor!,
-                                    onColorPicked: (color) {
-                                      _themeCubit.updateSeedColor(
-                                        color: color,
-                                        isCustom: true,
-                                      );
-                                    },
-                                  );
-                                },
-                                child: Icon(
-                                  Icons.sync_rounded,
-                                  color: _theme.colorScheme.primary,
+                              child: IgnorePointer(
+                                ignoring:
+                                    !isCustomColorSelected ||
+                                    state.customSeedColor == null,
+                                child: InkWell(
+                                  customBorder: const CircleBorder(),
+                                  onTap: () {
+                                    ColorUtils.showColorPicker(
+                                      context,
+                                      initialColor: state.customSeedColor!,
+                                      onColorPicked: (color) {
+                                        _themeCubit.updateSeedColor(
+                                          color: color,
+                                          isCustom: true,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.sync_rounded,
+                                    color: _theme.colorScheme.primary,
+                                  ),
                                 ),
                               ),
                             ),

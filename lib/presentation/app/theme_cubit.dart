@@ -23,10 +23,13 @@ class ThemeCubit extends BaseCubit<ThemeState> {
         ? Color(customSeedColorValue)
         : null;
 
+    final isCustomSeedColor = prefs.isCustomSeedColor;
+
     return ThemeState(
       themeMode: ThemeMode.values[themeIndex],
       seedColor: seedColor,
       customSeedColor: customSeedColor,
+      isCustomSeedColor: isCustomSeedColor,
     );
   }
 
@@ -37,11 +40,18 @@ class ThemeCubit extends BaseCubit<ThemeState> {
 
   void updateSeedColor({required Color color, bool isCustom = false}) {
     _appPrefs.setSeedColorValue(color.toARGB32());
+    _appPrefs.setIsCustomSeedColor(isCustom);
     if (isCustom) {
       _appPrefs.setCustomSeedColorValue(color.toARGB32());
-      safeEmit(state.copyWith(seedColor: color, customSeedColor: color));
+      safeEmit(
+        state.copyWith(
+          seedColor: color,
+          customSeedColor: color,
+          isCustomSeedColor: true,
+        ),
+      );
     } else {
-      safeEmit(state.copyWith(seedColor: color));
+      safeEmit(state.copyWith(seedColor: color, isCustomSeedColor: false));
     }
   }
 

@@ -115,10 +115,11 @@ class ShareCubit extends BaseCubit<ShareState> {
     } else {
       set.add(color);
     }
-    final selectedShape =
-        state.selectedColors.isNotEmpty && state.selectedShape.isNone
-        ? PaletteShape.circle
-        : state.selectedShape;
+    final selectedShape = set.isEmpty
+        ? PaletteShape.none
+        : (state.selectedShape.isNone
+              ? PaletteShape.circle
+              : state.selectedShape);
     _emitWithHistory(
       newState: state.copyWith(
         selectedColors: set,

@@ -20,12 +20,16 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
   late final List<String> _allGoogleFonts;
   List<String> _displayFonts = [];
   final TextEditingController _searchController = TextEditingController();
+  late final ShareCubit _cubit;
+  late ThemeData _theme;
+  late S _l10n;
 
   @override
   void initState() {
     super.initState();
     _allGoogleFonts = GoogleFonts.asMap().keys.toList();
     _displayFonts = AppConfigs.defaultFonts;
+    _cubit = context.read<ShareCubit>();
   }
 
   @override
@@ -56,8 +60,8 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = S.of(context);
+    _theme = Theme.of(context);
+    _l10n = S.of(context);
 
     final double bottomInset = MediaQuery.of(context).viewInsets.bottom;
 
@@ -69,12 +73,12 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(l10n.fontSelection, style: theme.textTheme.titleMedium),
+          Text(_l10n.fontSelection, style: _theme.textTheme.titleMedium),
           12.height,
           Padding(
             padding: 16.paddingHorizontal,
             child: AppTextField(
-              hintText: l10n.searchFont,
+              hintText: _l10n.searchFont,
               controller: _searchController,
               onChanged: _onSearchChanged,
               prefixIcon: Icons.search,
@@ -91,7 +95,7 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
                 if (_displayFonts.isEmpty) {
                   return Padding(
                     padding: 16.paddingAll,
-                    child: Center(child: Text(l10n.noFontsFound)),
+                    child: Center(child: Text(_l10n.noFontsFound)),
                   );
                 }
                 return ListView.builder(
@@ -111,13 +115,10 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
                     return ListTile(
                       onTap: () {
                         if (isDownloaded) {
-                          final cubit = context.read<ShareCubit>();
-                          cubit.changeTextFontFamily(font: fontName);
-                          cubit.navigator.safePop();
+                          _cubit.changeTextFontFamily(font: fontName);
+                          _cubit.navigator.safePop();
                         } else if (!isDownloading) {
-                          context.read<ShareCubit>().downloadAndApplyFont(
-                            font: fontName,
-                          );
+                          _cubit.downloadAndApplyFont(font: fontName);
                         }
                       },
                       leading: Icon(
@@ -125,14 +126,14 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
                             ? Icons.radio_button_checked
                             : Icons.radio_button_unchecked,
                         color: isSelected
-                            ? theme.colorScheme.primary
-                            : theme.colorScheme.onSurfaceVariant,
+                            ? _theme.colorScheme.primary
+                            : _theme.colorScheme.onSurfaceVariant,
                       ),
                       title: Text(
                         fontName,
                         style: GoogleFonts.getFont(
                           fontName,
-                          textStyle: theme.textTheme.bodyLarge?.copyWith(
+                          textStyle: _theme.textTheme.bodyLarge?.copyWith(
                             fontWeight: isSelected
                                 ? FontWeight.bold
                                 : FontWeight.normal,
@@ -140,9 +141,8 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
                         ),
                       ),
                       trailing: _buildTrailingIcon(
-                        isDownloaded,
-                        isDownloading,
-                        theme,
+                        isDownloaded: isDownloaded,
+                        isDownloading: isDownloading,
                       ),
                     );
                   },
@@ -155,23 +155,22 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
     );
   }
 
-  Widget? _buildTrailingIcon(
-    bool isDownloaded,
-    bool isDownloading,
-    ThemeData theme,
-  ) {
+  Widget? _buildTrailingIcon({
+    required bool isDownloaded,
+    required bool isDownloading,
+  }) {
     if (isDownloading) {
       return SizedBox(
         width: 24,
         height: 24,
         child: SpinKitRipple(
-          color: theme.colorScheme.primary,
+          color: _theme.colorScheme.primary,
           size: MediaQuery.sizeOf(context).width * 0.5,
         ),
       );
     }
     if (!isDownloaded) {
-      return Icon(Icons.download, color: theme.colorScheme.primary);
+      return Icon(Icons.download, color: _theme.colorScheme.primary);
     }
     return null;
   }

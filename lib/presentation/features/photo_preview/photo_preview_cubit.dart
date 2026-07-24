@@ -231,7 +231,10 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
     }
   }
 
-  Future<void> saveHistory({required String imagePath}) async {
+  /// Returns true if save succeeded, false otherwise.
+  Future<bool> saveHistory({required String imagePath}) async {
+    if (state.saveStatus.isLoading) return false;
+    safeEmit(state.copyWith(saveStatus: LoadStatus.loading));
     try {
       final isar = locator<Isar>();
       final localImagePath = await FileUtils.saveCompressedImageToAppDirectory(
@@ -249,29 +252,34 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
         await isar.historyRecords.put(record);
       });
 
+      safeEmit(state.copyWith(saveStatus: LoadStatus.success));
       navigator.flushBar.showSuccess(message: S.current.success);
+      return true;
     } catch (e) {
       debugPrint('Error saving history: $e');
+      safeEmit(state.copyWith(saveStatus: LoadStatus.failure));
       navigator.flushBar.showError(
         message: AppFailures.mapErrorToMessage(e: e),
       );
+      return false;
     }
   }
 
-  Future<void> updateHistory({
+  /// Returns true if update succeeded, false otherwise.
+  Future<bool> updateHistory({
     required String imagePath,
     required int id,
   }) async {
+    if (state.saveStatus.isLoading) return false;
+    safeEmit(state.copyWith(saveStatus: LoadStatus.loading));
     try {
       final isar = locator<Isar>();
       final userColors = state.userColors.map((c) => c.toARGB32()).toList();
       final originalRecord = await isar.historyRecords.get(id);
 
-      // We don't save to App Directory again if it's already there, but since we are updating history
-      // wait, we only want to update the colors and selectedColor.
-      // But if imagePath is a new image, we'd save it. The imagePath passed to updateHistory is the same one loaded from DB.
-      // However, if the old one was absolute, it might need saving. But since it's just an update of an existing record, we shouldn't copy it again unless the path changed.
-      // We will just use the passed imagePath (which might be the relative one now, or absolute one).
+      // Reuse the existing image path from the original record to avoid
+      // re-copying the file. Only fall back to the passed-in path if
+      // the original record is missing.
       final record = HistoryRecord(
         imagePath: originalRecord?.imagePath ?? imagePath,
         userColors: userColors,
@@ -284,16 +292,22 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
         await isar.historyRecords.put(record);
       });
 
+      safeEmit(state.copyWith(saveStatus: LoadStatus.success));
       navigator.flushBar.showSuccess(message: S.current.success);
+      return true;
     } catch (e) {
       debugPrint('Error updating history: $e');
+      safeEmit(state.copyWith(saveStatus: LoadStatus.failure));
       navigator.flushBar.showError(
         message: AppFailures.mapErrorToMessage(e: e),
       );
+      return false;
     }
   }
 
   Future<void> saveToLibrary({required String imagePath}) async {
+    if (state.saveStatus.isLoading) return;
+
     final permissionService = locator<PermissionService>();
     final hasPermission = await permissionService.requestPhotoPermission(
       navigator.context,
@@ -301,13 +315,13 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
 
     if (!hasPermission) return;
 
+    safeEmit(state.copyWith(saveStatus: LoadStatus.loading));
     try {
-      bool success = false;
       final extension = p.extension(imagePath);
       final ext = extension.isNotEmpty ? extension : '.jpg';
 
       if (state.filteredImageBytes != null) {
-        success = await FileUtils.saveImageToLibrary(
+        await FileUtils.saveImageToLibrary(
           bytes: state.filteredImageBytes!,
           titlePrefix: 'sylva_filter',
           extension: ext,
@@ -315,24 +329,18 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       } else {
         final compressedBytes = await FileUtils.compressImageToBytes(imagePath);
         final bytes = compressedBytes ?? await File(imagePath).readAsBytes();
-        success = await FileUtils.saveImageToLibrary(
+        await FileUtils.saveImageToLibrary(
           bytes: bytes,
           titlePrefix: 'sylva',
           extension: ext,
         );
       }
 
-      if (success) {
-        navigator.flushBar.showSuccess(message: S.current.imageSaved);
-      } else {
-        navigator.flushBar.showError(
-          message: AppFailures.mapErrorToMessage(
-            e: Exception('Failed to save image'),
-          ),
-        );
-      }
+      safeEmit(state.copyWith(saveStatus: LoadStatus.success));
+      navigator.flushBar.showSuccess(message: S.current.imageSaved);
     } catch (e) {
       debugPrint('Error saving to library: $e');
+      safeEmit(state.copyWith(saveStatus: LoadStatus.failure));
       navigator.flushBar.showError(
         message: AppFailures.mapErrorToMessage(e: e),
       );

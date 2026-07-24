@@ -345,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Lấy màu thời gian thực",
     ),
     "rectangle": MessageLookupByLibrary.simpleMessage("Hình chữ nhật"),
+    "redo": MessageLookupByLibrary.simpleMessage("Làm lại"),
     "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
       "Thay thế bản ghi cũ",
@@ -528,6 +529,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sử dụng các nút này để phóng to hoặc thu nhỏ ảnh chính xác.",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("Thu phóng"),
+    "undo": MessageLookupByLibrary.simpleMessage("Hoàn tác"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Sử dụng kính lúp để lấy màu",
     ),

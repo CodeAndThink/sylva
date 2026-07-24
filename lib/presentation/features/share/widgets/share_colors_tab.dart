@@ -23,11 +23,13 @@ class ShareColorsTab extends StatefulWidget {
 
 class _ShareColorsTabState extends State<ShareColorsTab> {
   late final ScrollController _scrollController;
+  late final ShareCubit _cubit;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    _cubit = context.read<ShareCubit>();
   }
 
   @override
@@ -39,7 +41,7 @@ class _ShareColorsTabState extends State<ShareColorsTab> {
   @override
   Widget build(BuildContext context) {
     final l10n = S.of(context);
-    final cubit = context.read<ShareCubit>();
+
     return BlocBuilder<ShareCubit, ShareState>(
       buildWhen: (previous, current) {
         return previous.selectedColors != current.selectedColors;
@@ -66,7 +68,7 @@ class _ShareColorsTabState extends State<ShareColorsTab> {
                             color: color,
                             isSelected: state.selectedColors.contains(color),
                             onTap: () {
-                              cubit.toggleSelectedColor(color: color);
+                              _cubit.toggleSelectedColor(color: color);
                             },
                           );
                         },
@@ -97,7 +99,7 @@ class _ShareColorsTabState extends State<ShareColorsTab> {
                                   color,
                                 ),
                                 onTap: () {
-                                  cubit.toggleSelectedColor(color: color);
+                                  _cubit.toggleSelectedColor(color: color);
                                 },
                               ),
                             ],

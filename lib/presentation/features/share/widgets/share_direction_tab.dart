@@ -29,7 +29,7 @@ class ShareDirectionTab extends StatelessWidget {
 
             return InkWell(
               onTap: () {
-                cubit.selectDirection(direction);
+                cubit.selectDirection(direction: direction);
               },
               borderRadius: 10.borderRadius,
               child: Container(

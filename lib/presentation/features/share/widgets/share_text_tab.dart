@@ -50,7 +50,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
             // Option Segmented Control
             AppSlidingSegmentedControl<ShareTextOption>(
               selectedValue: state.textOption,
-              onValueChanged: _cubit.changeTextOption,
+              onValueChanged: (v) => _cubit.changeTextOption(option: v),
               segments: [
                 (
                   ShareTextOption.none,
@@ -118,7 +118,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
               AppSlidingSegmentedControl<ShareTextPosition>(
                 isFlexible: true,
                 selectedValue: state.textPosition,
-                onValueChanged: _cubit.changeTextPosition,
+                onValueChanged: (v) => _cubit.changeTextPosition(position: v),
                 segments: [
                   (
                     ShareTextPosition.top,
@@ -198,7 +198,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                         context,
                         initialColor: initialColor,
                         onColorPicked: (color) {
-                          _cubit.changeTextColor(color);
+                          _cubit.changeTextColor(color: color);
                         },
                       );
                     },
@@ -221,7 +221,7 @@ class _ShareTextTabState extends State<ShareTextTab> {
                     Tooltip(
                       message: _l10n.clearColor,
                       child: InkWell(
-                        onTap: () => _cubit.changeTextColor(null),
+                        onTap: () => _cubit.changeTextColor(color: null),
                         borderRadius: 20.borderRadius,
                         child: Container(
                           width: 40,
@@ -249,7 +249,9 @@ class _ShareTextTabState extends State<ShareTextTab> {
                       value: state.textSize,
                       min: 0.1,
                       max: 1.0,
-                      onChanged: (v) => _cubit.changeTextSize(v),
+                      onChanged: (v) => _cubit.changeTextSize(size: v),
+                      onChangeStart: (_) => _cubit.beginSliderChange(),
+                      onChangeEnd: (_) => _cubit.commitSliderChange(),
                     ),
                   ),
                   4.width,

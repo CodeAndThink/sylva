@@ -553,5 +553,9 @@
   "tutorialRealTimeColorPickerTitle": "实时取色器",
   "@tutorialRealTimeColorPickerTitle": {},
   "tutorialRealTimeColorPickerDesc": "实时从相机中提取颜色。",
-  "@tutorialRealTimeColorPickerDesc": {}
+  "@tutorialRealTimeColorPickerDesc": {},
+  "undo": "撤销",
+  "@undo": {},
+  "redo": "重做",
+  "@redo": {}
 }

@@ -559,5 +559,9 @@
   "tutorialRealTimeColorPickerTitle": "Lấy màu qua camera",
   "@tutorialRealTimeColorPickerTitle": {},
   "tutorialRealTimeColorPickerDesc": "Trích xuất màu sắc trực tiếp từ camera của bạn theo thời gian thực.",
-  "@tutorialRealTimeColorPickerDesc": {}
+  "@tutorialRealTimeColorPickerDesc": {},
+  "undo": "Hoàn tác",
+  "@undo": {},
+  "redo": "Làm lại",
+  "@redo": {}
 }

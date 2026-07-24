@@ -250,6 +250,8 @@ class _ShareTextTabState extends State<ShareTextTab> {
                       min: 0.1,
                       max: 1.0,
                       onChanged: (v) => _cubit.changeTextSize(v),
+                      onChangeStart: (_) => _cubit.beginSliderChange(),
+                      onChangeEnd: (_) => _cubit.commitSliderChange(),
                     ),
                   ),
                   4.width,

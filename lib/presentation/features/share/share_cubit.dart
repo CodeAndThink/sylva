@@ -13,14 +13,101 @@ class ShareCubit extends BaseCubit<ShareState> {
   final AppPreferencesRepository _appPrefs =
       locator<AppPreferencesRepository>();
 
+  static const int _maxHistorySize = 50;
+
+  final List<ShareState> _undoStack = [];
+  final List<ShareState> _redoStack = [];
+
+  /// Holds the state snapshot taken when a slider drag begins.
+  ShareState? _sliderStartState;
+
   ShareCubit({required this.navigator}) : super(const ShareState()) {
     _loadDownloadedFonts();
   }
+
+  bool get canUndo => _undoStack.isNotEmpty;
+  bool get canRedo => _redoStack.isNotEmpty;
+
+  // ---------------------------------------------------------------------------
+  // History helpers
+  // ---------------------------------------------------------------------------
+
+  /// Pushes current state onto the undo stack, clears redo, then emits [newState].
+  /// Used for discrete (non-slider) changes.
+  void _emitWithHistory(ShareState newState) {
+    if (_undoStack.length >= _maxHistorySize) {
+      _undoStack.removeAt(0);
+    }
+    _undoStack.add(state);
+    _redoStack.clear();
+    emit(newState);
+  }
+
+  /// Call from the UI's `onChangeStart` to snapshot state before a slider drag.
+  void beginSliderChange() {
+    _sliderStartState = state;
+  }
+
+  /// Call from the UI's `onChangeEnd` to commit the slider drag as a single
+  /// undo entry. The snapshot captured in [beginSliderChange] is pushed onto
+  /// the undo stack.
+  void commitSliderChange() {
+    if (_sliderStartState != null) {
+      if (_undoStack.length >= _maxHistorySize) {
+        _undoStack.removeAt(0);
+      }
+      _undoStack.add(_sliderStartState!);
+      _redoStack.clear();
+      _sliderStartState = null;
+    }
+  }
+
+  void undo() {
+    if (!canUndo) return;
+    final previous = _undoStack.removeLast();
+    _redoStack.add(state);
+    // Preserve transient / non-undoable properties
+    emit(
+      previous.copyWith(
+        currentTab: state.currentTab,
+        downloadedFonts: state.downloadedFonts,
+        downloadingFonts: state.downloadingFonts,
+      ),
+    );
+  }
+
+  void redo() {
+    if (!canRedo) return;
+    final next = _redoStack.removeLast();
+    _undoStack.add(state);
+    // Preserve transient / non-undoable properties
+    emit(
+      next.copyWith(
+        currentTab: state.currentTab,
+        downloadedFonts: state.downloadedFonts,
+        downloadingFonts: state.downloadingFonts,
+      ),
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Non-undoable actions (tab, font loading)
+  // ---------------------------------------------------------------------------
 
   void _loadDownloadedFonts() {
     final List<String> fonts = _appPrefs.downloadedFonts;
     emit(state.copyWith(downloadedFonts: fonts));
   }
+
+  void changeTab(ShareFeatureTab tab) {
+    if (state.currentTab != tab) {
+      emit(state.copyWith(currentTab: tab));
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Discrete edit actions (undoable)
+  // ---------------------------------------------------------------------------
 
   void toggleSelectedColor({required Color color}) {
     final Set<Color> set = state.selectedColors.toSet();
@@ -33,26 +120,56 @@ class ShareCubit extends BaseCubit<ShareState> {
         state.selectedColors.isNotEmpty && state.selectedShape.isNone
         ? PaletteShape.circle
         : state.selectedShape;
-    emit(state.copyWith(selectedColors: set, selectedShape: selectedShape));
-  }
-
-  void changeTab(ShareFeatureTab tab) {
-    if (state.currentTab != tab) {
-      emit(state.copyWith(currentTab: tab));
-    }
+    _emitWithHistory(
+      state.copyWith(selectedColors: set, selectedShape: selectedShape),
+    );
   }
 
   void selectShape(PaletteShape shape) {
-    emit(state.copyWith(selectedShape: shape));
+    _emitWithHistory(state.copyWith(selectedShape: shape));
   }
 
   void selectPosition(PalettePosition position) {
-    emit(state.copyWith(selectedPosition: position));
+    _emitWithHistory(state.copyWith(selectedPosition: position));
   }
 
   void selectDirection(PaletteDirection direction) {
-    emit(state.copyWith(selectedDirection: direction));
+    _emitWithHistory(state.copyWith(selectedDirection: direction));
   }
+
+  void changeTextOption(ShareTextOption option) {
+    _emitWithHistory(state.copyWith(textOption: option));
+  }
+
+  void changeTextPosition(ShareTextPosition position) {
+    _emitWithHistory(state.copyWith(textPosition: position));
+  }
+
+  void toggleTextBold() {
+    _emitWithHistory(state.copyWith(isTextBold: !state.isTextBold));
+  }
+
+  void toggleTextItalic() {
+    _emitWithHistory(state.copyWith(isTextItalic: !state.isTextItalic));
+  }
+
+  void toggleTextUnderline() {
+    _emitWithHistory(state.copyWith(isTextUnderline: !state.isTextUnderline));
+  }
+
+  void changeTextColor(Color? color) {
+    _emitWithHistory(
+      state.copyWith(textColor: color, clearTextColor: color == null),
+    );
+  }
+
+  void changeTextFontFamily(String font) {
+    _emitWithHistory(state.copyWith(textFontFamily: font));
+  }
+
+  // ---------------------------------------------------------------------------
+  // Slider-bound actions (live preview only, no history per tick)
+  // ---------------------------------------------------------------------------
 
   void changeShapeSize(double size) {
     emit(state.copyWith(shapeSize: size));
@@ -66,37 +183,13 @@ class ShareCubit extends BaseCubit<ShareState> {
     emit(state.copyWith(shapeMargin: margin));
   }
 
-  void changeTextOption(ShareTextOption option) {
-    emit(state.copyWith(textOption: option));
-  }
-
-  void changeTextPosition(ShareTextPosition position) {
-    emit(state.copyWith(textPosition: position));
-  }
-
   void changeTextSize(double size) {
     emit(state.copyWith(textSize: size));
   }
 
-  void toggleTextBold() {
-    emit(state.copyWith(isTextBold: !state.isTextBold));
-  }
-
-  void toggleTextItalic() {
-    emit(state.copyWith(isTextItalic: !state.isTextItalic));
-  }
-
-  void toggleTextUnderline() {
-    emit(state.copyWith(isTextUnderline: !state.isTextUnderline));
-  }
-
-  void changeTextColor(Color? color) {
-    emit(state.copyWith(textColor: color, clearTextColor: color == null));
-  }
-
-  void changeTextFontFamily(String font) {
-    emit(state.copyWith(textFontFamily: font));
-  }
+  // ---------------------------------------------------------------------------
+  // Font download (mixed: downloading state is non-undoable, font apply is)
+  // ---------------------------------------------------------------------------
 
   Future<void> downloadAndApplyFont(String font) async {
     final downloading = Set<String>.from(state.downloadingFonts)..add(font);
@@ -114,7 +207,9 @@ class ShareCubit extends BaseCubit<ShareState> {
 
       final newDownloading = Set<String>.from(state.downloadingFonts)
         ..remove(font);
-      emit(
+
+      // Apply font is an undoable edit; downloading state update is kept in sync.
+      _emitWithHistory(
         state.copyWith(
           downloadingFonts: newDownloading,
           downloadedFonts: downloaded,

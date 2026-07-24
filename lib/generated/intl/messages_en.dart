@@ -342,6 +342,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Real-time color picker",
     ),
     "rectangle": MessageLookupByLibrary.simpleMessage("Rectangle"),
+    "redo": MessageLookupByLibrary.simpleMessage("Redo"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
       "Replace existing record",
@@ -525,6 +526,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Use these buttons to zoom in or out precisely.",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("Zoom"),
+    "undo": MessageLookupByLibrary.simpleMessage("Undo"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "Use magnifier to pick colors",
     ),

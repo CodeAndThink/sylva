@@ -10,6 +10,7 @@ import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/widgets/share_edit_bottom_sheet.dart';
 import 'package:sylva/presentation/features/share/widgets/share_image_preview.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
+import 'package:sylva/presentation/features/share/share_state.dart';
 import 'package:sylva/presentation/features/share/share_navigator.dart';
 import 'package:sylva/presentation/widgets/containers/app_transparent_container.dart';
 import 'package:sylva/presentation/widgets/loadings/app_loading.dart';
@@ -176,18 +177,81 @@ class __ShareChildPageState extends State<_ShareChildPage> {
         child: Column(
           children: [
             Expanded(
-              child: AppTransparentContainer(
-                padding: 8.paddingAll,
-                child: Center(
-                  child: ShareImagePreview(imagePath: widget.args.imagePath),
-                ),
+              child: Stack(
+                children: [
+                  AppTransparentContainer(
+                    padding: 8.paddingAll,
+                    child: Center(
+                      child: ShareImagePreview(
+                        imagePath: widget.args.imagePath,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: 8.paddingAll,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: _buildStateManagerActions(),
+                    ),
+                  ),
+                ],
               ),
             ),
-            12.height,
+            8.height,
             _buildBottomActions(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStateManagerActions() {
+    return BlocBuilder<ShareCubit, ShareState>(
+      builder: (context, state) {
+        if (_cubit.canRedo || _cubit.canUndo) {
+          return AppTransparentContainer(
+            padding: 4.paddingAll,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedOpacity(
+                  duration: 200.milliseconds,
+                  opacity: _cubit.canUndo ? 1.0 : 0.4,
+                  child: Tooltip(
+                    message: _l10n.undo,
+                    child: IconButton(
+                      onPressed: _cubit.canUndo
+                          ? () {
+                              AppFeedback.playInteract(context);
+                              _cubit.undo();
+                            }
+                          : null,
+                      icon: const Icon(Icons.undo_rounded, size: 26),
+                    ),
+                  ),
+                ),
+                AnimatedOpacity(
+                  duration: 200.milliseconds,
+                  opacity: _cubit.canRedo ? 1.0 : 0.4,
+                  child: Tooltip(
+                    message: _l10n.redo,
+                    child: IconButton(
+                      onPressed: _cubit.canRedo
+                          ? () {
+                              AppFeedback.playInteract(context);
+                              _cubit.redo();
+                            }
+                          : null,
+                      icon: const Icon(Icons.redo_rounded, size: 26),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 

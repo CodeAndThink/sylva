@@ -291,6 +291,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "リアルタイムカラーピッカー",
     ),
     "rectangle": MessageLookupByLibrary.simpleMessage("長方形"),
+    "redo": MessageLookupByLibrary.simpleMessage("やり直し"),
     "register": MessageLookupByLibrary.simpleMessage("登録"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage(
       "既存の記録を置き換える",
@@ -443,6 +444,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "これらのボタンを使用して、正確にズームインまたはズームアウトします。",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("ズーム"),
+    "undo": MessageLookupByLibrary.simpleMessage("元に戻す"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "虫眼鏡を使って色を選択",
     ),

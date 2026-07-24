@@ -66,27 +66,29 @@ class ContactCubit extends BaseCubit<ContactState> {
   }
 
   void clearDeviceInfo() {
-    emit(state.copyWith(getDeviceStatus: LoadStatus.initial, deviceInfo: ''));
+    safeEmit(
+      state.copyWith(getDeviceStatus: LoadStatus.initial, deviceInfo: ''),
+    );
   }
 
   void changeSelectedType({required ContactType type}) {
-    emit(state.copyWith(selectedType: type));
+    safeEmit(state.copyWith(selectedType: type));
   }
 
   void changeTitle({required String value}) {
-    emit(state.copyWith(title: value));
+    safeEmit(state.copyWith(title: value));
   }
 
   void changeDescription({required String value}) {
-    emit(state.copyWith(description: value));
+    safeEmit(state.copyWith(description: value));
   }
 
   void changeDeviceInfo({required String value}) {
-    emit(state.copyWith(deviceInfo: value));
+    safeEmit(state.copyWith(deviceInfo: value));
   }
 
   void toggleAttachDeviceInfo() {
-    emit(state.copyWith(isAttached: !state.isAttached));
+    safeEmit(state.copyWith(isAttached: !state.isAttached));
   }
 
   Future<void> submitContact() async {
@@ -100,7 +102,7 @@ class ContactCubit extends BaseCubit<ContactState> {
       return;
     }
 
-    emit(state.copyWith(summitStatus: LoadStatus.loading));
+    safeEmit(state.copyWith(summitStatus: LoadStatus.loading));
 
     try {
       final uuid = await DeviceInfoHelper.getDeviceUuid();
@@ -120,7 +122,7 @@ class ContactCubit extends BaseCubit<ContactState> {
         DateTime.now().millisecondsSinceEpoch,
       );
 
-      emit(
+      safeEmit(
         state.copyWith(
           summitStatus: LoadStatus.success,
           title: '',
@@ -131,7 +133,7 @@ class ContactCubit extends BaseCubit<ContactState> {
       _startCooldownTimer(_cooldownDuration);
       navigator.flushBar.showSuccess(message: S.current.contactSuccessMessage);
     } catch (e) {
-      emit(state.copyWith(summitStatus: LoadStatus.failure));
+      safeEmit(state.copyWith(summitStatus: LoadStatus.failure));
       navigator.flushBar.showError(message: S.current.contactErrorMessage);
     }
   }

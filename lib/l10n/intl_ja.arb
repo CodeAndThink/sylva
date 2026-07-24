@@ -553,5 +553,9 @@
   "tutorialRealTimeColorPickerTitle": "リアルタイムカラーピッカー",
   "@tutorialRealTimeColorPickerTitle": {},
   "tutorialRealTimeColorPickerDesc": "カメラからリアルタイムで色を抽出します。",
-  "@tutorialRealTimeColorPickerDesc": {}
+  "@tutorialRealTimeColorPickerDesc": {},
+  "undo": "元に戻す",
+  "@undo": {},
+  "redo": "やり直し",
+  "@redo": {}
 }

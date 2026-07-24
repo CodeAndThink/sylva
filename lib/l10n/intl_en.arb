@@ -559,5 +559,9 @@
   "tutorialRealTimeColorPickerTitle": "Real-time Color Picker",
   "@tutorialRealTimeColorPickerTitle": {},
   "tutorialRealTimeColorPickerDesc": "Extract colors directly from your camera in real-time.",
-  "@tutorialRealTimeColorPickerDesc": {}
+  "@tutorialRealTimeColorPickerDesc": {},
+  "undo": "Undo",
+  "@undo": {},
+  "redo": "Redo",
+  "@redo": {}
 }

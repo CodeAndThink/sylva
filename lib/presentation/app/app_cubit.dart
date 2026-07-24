@@ -21,12 +21,12 @@ class AppCubit extends BaseCubit<AppState> {
     _connectionService.init();
 
     final isFirstTime = _appPrefs.isFirstTime;
-    emit(state.copyWith(isFirstTime: isFirstTime));
+    safeEmit(state.copyWith(isFirstTime: isFirstTime));
   }
 
   Future<void> completeOnboarding() async {
     await _appPrefs.setFirstTime(false);
-    emit(state.copyWith(isFirstTime: false));
+    safeEmit(state.copyWith(isFirstTime: false));
   }
 
   @override

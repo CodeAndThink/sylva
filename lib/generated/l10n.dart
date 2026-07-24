@@ -2203,6 +2203,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Undo`
+  String get undo {
+    return Intl.message('Undo', name: 'undo', desc: '', args: []);
+  }
+
+  /// `Redo`
+  String get redo {
+    return Intl.message('Redo', name: 'redo', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -265,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ratio": MessageLookupByLibrary.simpleMessage("比例"),
     "realTimeColorPicker": MessageLookupByLibrary.simpleMessage("实时取色器"),
     "rectangle": MessageLookupByLibrary.simpleMessage("矩形"),
+    "redo": MessageLookupByLibrary.simpleMessage("重做"),
     "register": MessageLookupByLibrary.simpleMessage("注册"),
     "replaceExistingRecord": MessageLookupByLibrary.simpleMessage("替换现有记录"),
     "replaceOriginal": MessageLookupByLibrary.simpleMessage("替换原图"),
@@ -397,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "使用这些按钮精确放大或缩小图像。",
     ),
     "tutorialZoomTitle": MessageLookupByLibrary.simpleMessage("缩放"),
+    "undo": MessageLookupByLibrary.simpleMessage("撤销"),
     "useMagnifierToPickColors": MessageLookupByLibrary.simpleMessage(
       "使用放大镜选择颜色",
     ),

@@ -6,6 +6,7 @@ import 'package:sylva/core/enums/load_status.dart';
 class PhotoPreviewState extends Equatable {
   final LoadStatus getColorStatus;
   final LoadStatus filterColorStatus;
+  final LoadStatus saveStatus;
   final List<Color> paletteColors;
   final List<Color> userColors;
   final Color? selectedColor;
@@ -19,6 +20,7 @@ class PhotoPreviewState extends Equatable {
     this.userColors = const [],
     this.getColorStatus = LoadStatus.initial,
     this.filterColorStatus = LoadStatus.initial,
+    this.saveStatus = LoadStatus.initial,
     this.selectedColor,
     this.filteredColor,
     this.filteredImageBytes,
@@ -31,6 +33,7 @@ class PhotoPreviewState extends Equatable {
     List<Color>? userColors,
     LoadStatus? getColorStatus,
     LoadStatus? filterColorStatus,
+    LoadStatus? saveStatus,
     Color? selectedColor,
     bool clearSelectedColor = false,
     Color? filteredColor,
@@ -43,6 +46,7 @@ class PhotoPreviewState extends Equatable {
       userColors: userColors ?? this.userColors,
       getColorStatus: getColorStatus ?? this.getColorStatus,
       filterColorStatus: filterColorStatus ?? this.filterColorStatus,
+      saveStatus: saveStatus ?? this.saveStatus,
       selectedColor: clearSelectedColor
           ? null
           : (selectedColor ?? this.selectedColor),
@@ -63,6 +67,7 @@ class PhotoPreviewState extends Equatable {
     userColors,
     getColorStatus,
     filterColorStatus,
+    saveStatus,
     selectedColor,
     filteredColor,
     filteredImageBytes,

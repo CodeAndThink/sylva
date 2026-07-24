@@ -110,19 +110,14 @@ class FileUtils {
   }
 
   /// Saves an image (as bytes) to the device's public photo library.
-  static Future<bool> saveImageToLibrary({
+  /// Throws on failure so the caller can map the error message accurately.
+  static Future<void> saveImageToLibrary({
     required Uint8List bytes,
     String titlePrefix = 'sylva',
     String extension = '.jpg',
   }) async {
-    try {
-      final filename =
-          '${titlePrefix}_${DateTime.now().millisecondsSinceEpoch}$extension';
-      await PhotoManager.editor.saveImage(bytes, filename: filename);
-      return true;
-    } catch (e) {
-      debugPrint('Error saving image to library: $e');
-      return false;
-    }
+    final filename =
+        '${titlePrefix}_${DateTime.now().millisecondsSinceEpoch}$extension';
+    await PhotoManager.editor.saveImage(bytes, filename: filename);
   }
 }

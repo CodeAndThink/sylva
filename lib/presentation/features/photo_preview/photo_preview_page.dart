@@ -119,25 +119,25 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
     if (widget.args.historyRecordId != null) {
       await SaveOptionsBottomSheet.show(
         context: context,
-        onSaveAsNew: () {
-          _cubit.saveHistory(imagePath: widget.args.imagePath).then((_) {
-            _cubit.navigator.safePop();
-          });
+        onSaveAsNew: () async {
+          final success = await _cubit.saveHistory(
+            imagePath: widget.args.imagePath,
+          );
+          if (success) _cubit.navigator.safePop();
         },
-        onReplaceExisting: () {
-          _cubit
-              .updateHistory(
-                imagePath: widget.args.imagePath,
-                id: widget.args.historyRecordId!,
-              )
-              .then((_) {
-                _cubit.navigator.safePop();
-              });
+        onReplaceExisting: () async {
+          final success = await _cubit.updateHistory(
+            imagePath: widget.args.imagePath,
+            id: widget.args.historyRecordId!,
+          );
+          if (success) _cubit.navigator.safePop();
         },
       );
     } else {
-      await _cubit.saveHistory(imagePath: widget.args.imagePath);
-      _cubit.navigator.safePop();
+      final success = await _cubit.saveHistory(
+        imagePath: widget.args.imagePath,
+      );
+      if (success) _cubit.navigator.safePop();
     }
   }
 
@@ -1110,27 +1110,47 @@ class __PhotoPreviewChildPageState extends State<_PhotoPreviewChildPage>
               icon: const Icon(Icons.navigate_before_rounded, size: 36),
             ),
           ),
-          Tooltip(
-            message: _l10n.save,
-            child: IconButton(
-              key: _keySave,
-              onPressed: () async {
-                AppFeedback.playInteract(context);
-                handleSavePress();
-              },
-              icon: const Icon(Icons.data_saver_on_outlined, size: 25),
-            ),
+          BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+            buildWhen: (previous, current) =>
+                previous.saveStatus != current.saveStatus,
+            builder: (context, state) {
+              final isSaving = state.saveStatus.isLoading;
+              return Tooltip(
+                message: _l10n.save,
+                child: IconButton(
+                  key: _keySave,
+                  onPressed: isSaving
+                      ? null
+                      : () async {
+                          AppFeedback.playInteract(context);
+                          handleSavePress();
+                        },
+                  icon: const Icon(Icons.data_saver_on_outlined, size: 25),
+                ),
+              );
+            },
           ),
-          Tooltip(
-            message: _l10n.saveToLibrary,
-            child: IconButton(
-              key: _keyLibrary,
-              onPressed: () {
-                AppFeedback.playInteract(context);
-                _cubit.saveToLibrary(imagePath: widget.args.imagePath);
-              },
-              icon: Icon(Icons.download_rounded, size: 30),
-            ),
+          BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
+            buildWhen: (previous, current) =>
+                previous.saveStatus != current.saveStatus,
+            builder: (context, state) {
+              final isSaving = state.saveStatus.isLoading;
+              return Tooltip(
+                message: _l10n.saveToLibrary,
+                child: IconButton(
+                  key: _keyLibrary,
+                  onPressed: isSaving
+                      ? null
+                      : () {
+                          AppFeedback.playInteract(context);
+                          _cubit.saveToLibrary(
+                            imagePath: widget.args.imagePath,
+                          );
+                        },
+                  icon: Icon(Icons.download_rounded, size: 30),
+                ),
+              );
+            },
           ),
           BlocBuilder<PhotoPreviewCubit, PhotoPreviewState>(
             buildWhen: (previous, current) =>

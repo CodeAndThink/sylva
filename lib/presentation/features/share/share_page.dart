@@ -212,6 +212,7 @@ class __ShareChildPageState extends State<_ShareChildPage> {
           return AppTransparentContainer(
             padding: 4.paddingAll,
             child: Row(
+              spacing: 8,
               mainAxisSize: MainAxisSize.min,
               children: [
                 AnimatedOpacity(

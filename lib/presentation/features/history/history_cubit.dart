@@ -62,7 +62,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
 
   Future<void> loadHistory({bool isRefresh = false}) async {
     if (state.status.isLoading && !isRefresh) return;
-    emit(state.copyWith(status: LoadStatus.loading, hasReachedMax: false));
+    safeEmit(state.copyWith(status: LoadStatus.loading, hasReachedMax: false));
     try {
       final newRecords = await _fetchPage(0);
 
@@ -72,7 +72,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         isFavoriteOnly: state.isFavoriteOnly,
       );
 
-      emit(
+      safeEmit(
         state.copyWith(
           status: LoadStatus.success,
           records: newRecords,
@@ -82,7 +82,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       );
     } catch (e) {
       debugPrint('Error loading history: $e');
-      emit(state.copyWith(status: LoadStatus.failure));
+      safeEmit(state.copyWith(status: LoadStatus.failure));
     }
   }
 
@@ -93,13 +93,13 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       return;
     }
 
-    emit(state.copyWith(isLoadingMore: true));
+    safeEmit(state.copyWith(isLoadingMore: true));
     try {
       final offset = state.records.length;
       final newRecords = await _fetchPage(offset);
 
       if (newRecords.isEmpty) {
-        emit(state.copyWith(hasReachedMax: true, isLoadingMore: false));
+        safeEmit(state.copyWith(hasReachedMax: true, isLoadingMore: false));
         return;
       }
 
@@ -112,7 +112,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         isFavoriteOnly: state.isFavoriteOnly,
       );
 
-      emit(
+      safeEmit(
         state.copyWith(
           records: updatedRecords,
           groupedItems: groupedItems,
@@ -122,7 +122,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
       );
     } catch (e) {
       debugPrint('Error loading more history: $e');
-      emit(state.copyWith(isLoadingMore: false));
+      safeEmit(state.copyWith(isLoadingMore: false));
     }
   }
 
@@ -159,7 +159,9 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         isFavoriteOnly: state.isFavoriteOnly,
       );
 
-      emit(state.copyWith(records: updatedRecords, groupedItems: groupedItems));
+      safeEmit(
+        state.copyWith(records: updatedRecords, groupedItems: groupedItems),
+      );
     } catch (e) {
       debugPrint('Error deleting record: $e');
     }
@@ -179,7 +181,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         dir.deleteSync(recursive: true);
       }
 
-      emit(state.copyWith(records: [], groupedItems: []));
+      safeEmit(state.copyWith(records: [], groupedItems: []));
     } catch (e) {
       debugPrint('Error clearing history: $e');
     }
@@ -253,16 +255,18 @@ class HistoryCubit extends BaseCubit<HistoryState> {
         isFavoriteOnly: state.isFavoriteOnly,
       );
 
-      emit(state.copyWith(records: currentRecords, groupedItems: groupedItems));
+      safeEmit(
+        state.copyWith(records: currentRecords, groupedItems: groupedItems),
+      );
     }
   }
 
   void toggleView() {
-    emit(state.copyWith(isGridView: !state.isGridView));
+    safeEmit(state.copyWith(isGridView: !state.isGridView));
   }
 
   void toggleSort() {
-    emit(state.copyWith(isSortAscending: !state.isSortAscending));
+    safeEmit(state.copyWith(isSortAscending: !state.isSortAscending));
     loadHistory(isRefresh: true);
   }
 
@@ -312,7 +316,7 @@ class HistoryCubit extends BaseCubit<HistoryState> {
   }
 
   void toggleFavoriteOnly() {
-    emit(state.copyWith(isFavoriteOnly: !state.isFavoriteOnly));
+    safeEmit(state.copyWith(isFavoriteOnly: !state.isFavoriteOnly));
     loadHistory(isRefresh: true);
   }
 

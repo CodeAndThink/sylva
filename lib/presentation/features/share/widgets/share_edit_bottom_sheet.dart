@@ -107,7 +107,7 @@ class ShareEditBottomSheet extends StatelessWidget {
 
         return AppSlidingSegmentedControl<ShareFeatureTab>(
           selectedValue: currentTab,
-          onValueChanged: cubit.changeTab,
+          onValueChanged: (v) => cubit.changeTab(tab: v),
           segments: tabs,
         );
       },

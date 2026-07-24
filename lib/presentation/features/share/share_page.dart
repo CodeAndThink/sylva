@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sylva/core/di/injection.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/core/utils/app_feedback.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:sylva/core/utils/image_exporter_utils.dart';
 import 'package:sylva/data/models/process_image_model.dart';
+import 'package:sylva/domain/repositories/app_preferences_repository.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/widgets/share_edit_bottom_sheet.dart';
 import 'package:sylva/presentation/features/share/widgets/share_image_preview.dart';
@@ -25,7 +27,10 @@ class SharePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ShareCubit(navigator: ShareNavigator(context)),
+      create: (_) => ShareCubit(
+        navigator: ShareNavigator(context),
+        appPrefs: locator<AppPreferencesRepository>(),
+      ),
       child: _ShareChildPage(args: args),
     );
   }

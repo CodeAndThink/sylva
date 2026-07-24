@@ -51,7 +51,7 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
                     value: state.shapeSize,
                     min: 0.1,
                     max: 0.5,
-                    onChanged: (v) => cubit.changeShapeSize(v),
+                    onChanged: (v) => cubit.changeShapeSize(size: v),
                     onChangeStart: (_) => cubit.beginSliderChange(),
                     onChangeEnd: (_) => cubit.commitSliderChange(),
                   ),
@@ -66,7 +66,7 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
                     value: state.shapeSpacing,
                     min: 0.0,
                     max: 1.0,
-                    onChanged: (v) => cubit.changeShapeSpacing(v),
+                    onChanged: (v) => cubit.changeShapeSpacing(spacing: v),
                     onChangeStart: (_) => cubit.beginSliderChange(),
                     onChangeEnd: (_) => cubit.commitSliderChange(),
                   ),
@@ -81,7 +81,7 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
                     value: state.shapeMargin,
                     min: 0.0,
                     max: 1.0,
-                    onChanged: (v) => cubit.changeShapeMargin(v),
+                    onChanged: (v) => cubit.changeShapeMargin(margin: v),
                     onChangeStart: (_) => cubit.beginSliderChange(),
                     onChangeEnd: (_) => cubit.commitSliderChange(),
                   ),
@@ -107,7 +107,7 @@ class _ShareShapesTabState extends State<ShareShapesTab> {
                       shape: shape,
                       isSelected: isSelected,
                       onTap: () {
-                        cubit.selectShape(shape);
+                        cubit.selectShape(shape: shape);
                       },
                     );
                   },

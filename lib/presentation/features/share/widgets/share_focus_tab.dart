@@ -77,7 +77,7 @@ class _ShareFocusTabState extends State<ShareFocusTab> {
 
               return InkWell(
                 onTap: () {
-                  cubit.selectPosition(position);
+                  cubit.selectPosition(position: position);
                 },
                 borderRadius: 10.borderRadius,
                 child: Container(

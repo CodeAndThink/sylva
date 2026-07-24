@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sylva/core/configs/app_configs.dart';
 import 'package:sylva/core/extensions/num_extensions.dart';
 import 'package:sylva/generated/l10n.dart';
 import 'package:sylva/presentation/features/share/share_cubit.dart';
@@ -16,29 +17,6 @@ class ShareFontBottomSheet extends StatefulWidget {
 }
 
 class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
-  static const List<String> defaultFonts = [
-    'Nunito',
-    'Roboto',
-    'Open Sans',
-    'Lato',
-    'Montserrat',
-    'Poppins',
-    'Inter',
-    'Raleway',
-    'Playfair Display',
-    'Oswald',
-    'Merriweather',
-    'Noto Sans',
-    'Ubuntu',
-    'Mukta',
-    'PT Sans',
-    'Rubik',
-    'Work Sans',
-    'Fira Sans',
-    'Quicksand',
-    'Barlow',
-  ];
-
   late final List<String> _allGoogleFonts;
   List<String> _displayFonts = [];
   final TextEditingController _searchController = TextEditingController();
@@ -47,7 +25,7 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
   void initState() {
     super.initState();
     _allGoogleFonts = GoogleFonts.asMap().keys.toList();
-    _displayFonts = defaultFonts;
+    _displayFonts = AppConfigs.defaultFonts;
   }
 
   @override
@@ -59,7 +37,7 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
   void _onSearchChanged(String query) {
     if (query.trim().isEmpty) {
       setState(() {
-        _displayFonts = defaultFonts;
+        _displayFonts = AppConfigs.defaultFonts;
       });
     } else {
       final lowercaseQuery = query.toLowerCase();
@@ -134,11 +112,11 @@ class _ShareFontBottomSheetState extends State<ShareFontBottomSheet> {
                       onTap: () {
                         if (isDownloaded) {
                           final cubit = context.read<ShareCubit>();
-                          cubit.changeTextFontFamily(fontName);
+                          cubit.changeTextFontFamily(font: fontName);
                           cubit.navigator.safePop();
                         } else if (!isDownloading) {
                           context.read<ShareCubit>().downloadAndApplyFont(
-                            fontName,
+                            font: fontName,
                           );
                         }
                       },

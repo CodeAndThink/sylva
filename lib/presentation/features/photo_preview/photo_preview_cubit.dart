@@ -129,7 +129,30 @@ class PhotoPreviewCubit extends BaseCubit<PhotoPreviewState> {
       uniqueColors.sort((a, b) {
         final hsvA = HSVColor.fromColor(a);
         final hsvB = HSVColor.fromColor(b);
-        return hsvA.hue.compareTo(hsvB.hue);
+
+        final bool isGrayA = hsvA.saturation < 0.15;
+        final bool isGrayB = hsvB.saturation < 0.15;
+
+        if (isGrayA && !isGrayB) return 1;
+        if (!isGrayA && isGrayB) return -1;
+
+        if (isGrayA && isGrayB) {
+          return hsvA.value.compareTo(hsvB.value);
+        }
+
+        final int hueBucketA = (hsvA.hue / 15).round();
+        final int hueBucketB = (hsvB.hue / 15).round();
+
+        if (hueBucketA != hueBucketB) {
+          return hueBucketA.compareTo(hueBucketB);
+        }
+
+        final int valueCompare = hsvA.value.compareTo(hsvB.value);
+        if (valueCompare != 0) {
+          return valueCompare;
+        }
+
+        return hsvA.saturation.compareTo(hsvB.saturation);
       });
 
       if (uniqueColors.isEmpty) {

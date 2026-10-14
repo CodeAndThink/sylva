@@ -54,6 +54,15 @@ lib/generated_plugin_registrant.dart
 .env
 .env.*
 
+# Jenkins / Fastlane local outputs
+.ci/
+.bundle/
+vendor/bundle/
+fastlane/report.xml
+fastlane/README.md
+fastlane/Preview.html
+__pycache__/
+
 # Additional build/platform folders
 ios/Pods/
 ios/.symlinks/

@@ -1,0 +1,2 @@
+package_name('com.truongngo.sylva')
+json_key_file(ENV['PLAY_JSON'])

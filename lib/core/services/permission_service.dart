@@ -10,7 +10,16 @@ class PermissionService {
   /// Request photo library permission using photo_manager
   /// Returns true if permission is granted or limited, false otherwise.
   Future<bool> requestPhotoPermission(BuildContext context) async {
-    final PermissionState ps = await PhotoManager.requestPermissionExtend();
+    // Sylva only reads and saves images; don't request video library access.
+    const requestOption = PermissionRequestOption(
+      androidPermission: AndroidPermission(
+        type: RequestType.image,
+        mediaLocation: false,
+      ),
+    );
+    final PermissionState ps = await PhotoManager.requestPermissionExtend(
+      requestOption: requestOption,
+    );
 
     // For iOS 14+, 'limited' is also considered a success since we can scan the allowed photos.
     if (ps.isAuth || ps.hasAccess) {
@@ -41,7 +50,14 @@ class PermissionService {
 
   /// Check current permission status
   Future<PermissionState> checkPermissionStatus() async {
-    return await PhotoManager.requestPermissionExtend();
+    return PhotoManager.getPermissionState(
+      requestOption: const PermissionRequestOption(
+        androidPermission: AndroidPermission(
+          type: RequestType.image,
+          mediaLocation: false,
+        ),
+      ),
+    );
   }
 
   /// Request camera permission

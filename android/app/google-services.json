@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:912691573071:android:6d0c75ace1781b366f153a",
+        "mobilesdk_app_id": "1:912691573071:android:9065b3d3dc82f52e6f153a",
         "android_client_info": {
-          "package_name": "com.truongngo.sylva"
+          "package_name": "vn.truongngo.sylva"
         }
       },
       "oauth_client": [],

@@ -62,6 +62,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '912691573071',
     projectId: 'sylva-c5669',
     storageBucket: 'sylva-c5669.firebasestorage.app',
-    iosBundleId: 'com.truongngo.sylva',
+    iosBundleId: 'vn.truongngo.sylva',
   );
 }
